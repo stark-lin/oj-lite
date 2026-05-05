@@ -57,7 +57,10 @@
       <section class="column column--scope">
         <div class="column__header">
           <div class="column__title">Class Scope</div>
-          <span class="pane-meta" id="scopeMeta"></span>
+          <div class="header-actions">
+            <span class="pane-meta" id="scopeMeta"></span>
+            <button class="action-button" id="deleteClassBtn" type="button" disabled>DELETE</button>
+          </div>
         </div>
         <div class="column__body column__body--scope scroll-frame">
           <div id="studentManagementEntryMount"></div>
@@ -400,6 +403,13 @@
           return normalizeClassroom(data?.classroom || {});
         },
 
+        async deleteClassroom(classroomId) {
+          const data = await apiRequest(`/api/teacher/classrooms/${classroomId}`, {
+            method: 'DELETE'
+          });
+          return Boolean(data?.ok);
+        },
+
         async createStudent(classroomId, username, password) {
           const data = await apiRequest(`/api/teacher/classrooms/${classroomId}/students`, {
             method: 'POST',
@@ -512,6 +522,7 @@
       studentManagementMeta: document.getElementById('studentManagementMeta'),
       studentManagementEntry: document.getElementById('studentManagementEntry'),
       createClassBtn: document.getElementById('createClassBtn'),
+      deleteClassBtn: document.getElementById('deleteClassBtn'),
       createStudentBtn: document.getElementById('createStudentBtn'),
       lessonMeta: document.getElementById('lessonMeta'),
       lessonList: document.getElementById('lessonList'),
@@ -718,6 +729,7 @@
       el.scopeMeta.textContent = classItem
         ? `${classStudentCount(classItem)} students · ${classItem.currentLessonTitle || 'No current lesson'}`
         : 'No class selected';
+      el.deleteClassBtn.disabled = !classItem;
       el.browserMeta.textContent = state.ui.browserMode === 'students'
         ? `${classItem?.students?.length || 0} items`
         : `${getLessonQuestions().length} items`;
@@ -1025,6 +1037,20 @@
       renderAll();
     }
 
+    async function deleteClassroomAction() {
+      const classItem = getSelectedClass();
+      if (!classItem) return;
+      if (!window.confirm(`Delete class ${classItem.name}?`)) return;
+      await api.deleteClassroom(classItem.id);
+      state.ui.selectedStudentId = null;
+      state.ui.selectedSubmissionId = null;
+      state.ui.browserMode = 'questions';
+      state.ui.inspectorMode = 'reference';
+      state.data.submissionDetailsById = {};
+      await refreshData();
+      renderAll();
+    }
+
     async function createStudentAction() {
       const classItem = getSelectedClass();
       if (!classItem) {
@@ -1215,6 +1241,16 @@
         } catch (error) {
           console.error(error);
           window.alert(error?.message || 'Failed to create class.');
+        }
+      });
+
+      el.deleteClassBtn.addEventListener('click', async (event) => {
+        event.stopPropagation();
+        try {
+          await deleteClassroomAction();
+        } catch (error) {
+          console.error(error);
+          window.alert(error?.message || 'Failed to delete class.');
         }
       });
 
