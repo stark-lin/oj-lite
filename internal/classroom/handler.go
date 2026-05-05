@@ -39,6 +39,10 @@ func (module *Module) GetClassroom(c *gin.Context) {
 	module.handler.GetClassroom(c)
 }
 
+func (module *Module) DeleteClassroom(c *gin.Context) {
+	module.handler.DeleteClassroom(c)
+}
+
 func (module *Module) CreateStudent(c *gin.Context) {
 	module.handler.CreateStudent(c)
 }
@@ -157,6 +161,35 @@ func (handler *handler) GetClassroom(c *gin.Context) {
 
 	httpx.OK(c, gin.H{
 		"classroom": newClassroomDTO(classroom),
+	})
+}
+
+func (handler *handler) DeleteClassroom(c *gin.Context) {
+	currentUser, ok := auth.GetCurrentUser(c)
+	if !ok {
+		httpx.AbortUnauthorized(c, "missing authenticated user in request context")
+		return
+	}
+
+	classroomID, ok := httpx.PathParamInt64OrNotFound(c, "classroomId")
+	if !ok {
+		return
+	}
+
+	err := handler.service.DeleteClassroom(c.Request.Context(), currentUser.ID, classroomID)
+	if err != nil {
+		if errs.IsUnavailable(err) {
+			httpx.AbortNotFound(c, "classroom not found")
+			return
+		}
+
+		handler.log.Errorf("delete classroom failed: teacher_id=%d classroom_id=%d err=%v", currentUser.ID, classroomID, err)
+		httpx.AbortInternal(c, err)
+		return
+	}
+
+	httpx.OK(c, gin.H{
+		"ok": true,
 	})
 }
 

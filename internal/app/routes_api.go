@@ -24,6 +24,7 @@ func (app *App) registerAPIRoutes(router gin.IRouter) {
 	teacher.POST("/classrooms", app.classroomModule.CreateClassroom)
 	teacher.GET("/classrooms", app.classroomModule.ListClassrooms)
 	teacher.GET("/classrooms/:classroomId", app.classroomModule.GetClassroom)
+	teacher.DELETE("/classrooms/:classroomId", app.classroomModule.DeleteClassroom)
 	teacher.POST("/classrooms/:classroomId/students", app.classroomModule.CreateStudent)
 	teacher.GET("/classrooms/:classroomId/students", app.classroomModule.ListStudents)
 	teacher.GET("/classrooms/:classroomId/students/:studentId", app.classroomModule.GetStudent)
