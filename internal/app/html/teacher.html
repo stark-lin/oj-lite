@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OJ Lite · Teacher Workspace</title>
+  <link rel="stylesheet" href="/assets/app.css" />
+  <style>
+    :root {
+      --editor-line-height: 1.6;
+      --editor-font-size: 13px;
+      --editor-padding-y: 14px;
+      --editor-padding-x: 16px;
+      --gutter-width: 48px;
+    }
+
+    .column__body--scope {
+      overflow-y: auto;
+      overflow-x: hidden;
+      grid-auto-rows: max-content;
+      align-content: start;
+    }
+
+    #studentManagementEntry {
+      gap: 8px;
+      padding: 12px;
+    }
+
+    #detailTitle { color: var(--text-muted); }
+
+    #detailMeta {
+      font-size: var(--text-md);
+      color: var(--text);
+      font-weight: var(--weight-semibold);
+    }
+
+  </style>
+</head>
+<body class="dashboard-page teacher-page">
+  <div class="app">
+    <main class="workspace" id="workspace">
+      <section class="column column--classes">
+        <div class="column__header">
+          <div class="column__title">Classes</div>
+          <div class="header-actions">
+            <span class="pane-meta" id="classCountMeta"></span>
+            <button class="action-button" id="createClassBtn" type="button">Create Class</button>
+          </div>
+        </div>
+        <div class="column__body">
+          <div class="stack" id="classList"></div>
+        </div>
+      </section>
+
+      <div class="divider" data-divider="1" title="Drag to resize columns"></div>
+
+      <section class="column column--scope">
+        <div class="column__header">
+          <div class="column__title">Class Scope</div>
+          <span class="pane-meta" id="scopeMeta"></span>
+        </div>
+        <div class="column__body column__body--scope scroll-frame">
+          <div id="studentManagementEntryMount"></div>
+          <section id="lessonScopeMount"></section>
+        </div>
+      </section>
+
+      <div class="divider" data-divider="2" title="Drag to resize columns"></div>
+
+      <section class="column column--browser">
+        <div class="column__header">
+          <div class="column__title" id="browserColumnTitle">Questions</div>
+          <div class="header-actions">
+            <span class="pane-meta" id="browserMeta"></span>
+          </div>
+        </div>
+        <div class="column__body">
+          <div class="stack" id="browserList"></div>
+        </div>
+      </section>
+
+      <div class="divider" data-divider="3" title="Drag to resize columns"></div>
+
+      <section class="column column--detail">
+        <div class="column__header">
+          <div class="column__title" id="detailTitle"></div>
+          <div class="pane-meta" id="detailMeta"></div>
+        </div>
+        <div class="column__body scroll-frame" id="detailBody"></div>
+      </section>
+    </main>
+
+    <footer class="statusbar">
+      <div class="statusbar__left">
+        <span class="status-pill" id="statusLeft"></span>
+        <span class="status-pill" id="statusMiddle"></span>
+      </div>
+      <div class="statusbar__right">
+        <span class="status-pill" id="statusRight"></span>
+      </div>
+    </footer>
+  </div>
+
+  <script src="/assets/app.js"></script>
+  <script>
+    const {
+      createApiRequest,
+      createColumnResizer,
+      deepClone,
+      escapeHtml,
+      formatDateTime,
+      formatQuestionDescriptionValue,
+      formatStdoutBuffer,
+      latestVerdictLabel,
+      latestVerdictPillClass,
+      normalizeJudgeReport,
+      normalizeStdoutBuffer,
+      renderJudgeReportTerminal,
+      sortByIDAsc,
+      sortBySortOrder,
+      statusPillClass,
+      verdictLabel,
+      verdictPillClass,
+      ui
+    } = window.OJLite;
+    const apiRequest = createApiRequest({ onUnauthorized: () => { window.location.href = '/'; } });
+    const formatTimestamp = formatDateTime;
+
+    function solvedProgressLabel(student) {
+      const accepted = Number(student?.lessonProgress?.accepted) || 0;
+      const total = Number(student?.lessonProgress?.total) || 0;
+      return `Solved ${accepted} / ${total}`;
+    }
+
+    function nextClassName(existingClasses) {
+      const nextIndex = existingClasses.length + 1;
+      const letterCode = 64 + nextIndex;
+      const letter = letterCode <= 90 ? String.fromCharCode(letterCode) : String(nextIndex);
+      return `Class ${letter}`;
+    }
+
+    function generateTempPassword(length = 10) {
+      const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789';
+      let result = '';
+      for (let i = 0; i < length; i += 1) {
+        result += chars[Math.floor(Math.random() * chars.length)];
+      }
+      return result;
+    }
+
+    const DEFAULT_SELECTION = {
+      selectedClassId: null,
+      selectedLessonId: null,
+      selectedQuestionId: null,
+      selectedStudentId: null,
+      browserMode: 'questions',
+      inspectorMode: 'reference'
+    };
+
+    const DEFAULT_WIDTHS = {
+      1: 220,
+      2: 320,
+      3: 320
+    };
+
+    function normalizeQuestionDescription(value) {
+      if (!value) return {};
+
+      if (typeof value === 'string') {
+        const trimmed = value.trim();
+        if (!trimmed) return {};
+        try {
+          const parsed = JSON.parse(trimmed);
+          if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) {
+            return parsed;
+          }
+        } catch (error) {
+          void error;
+        }
+        return { Description: value };
+      }
+
+      if (typeof value === 'object' && !Array.isArray(value)) {
+        return value;
+      }
+
+      return {};
+    }
+
+    function renderQuestionDescriptionBlocks(description) {
+      const entries = Object.entries(normalizeQuestionDescription(description));
+      if (!entries.length) {
+        return ui.detailBlock('Description', '—', { prose: true });
+      }
+
+      return entries.map(([title, value]) => {
+        return ui.detailBlock(
+          title,
+          escapeHtml(formatQuestionDescriptionValue(value)),
+          { prose: typeof value === 'string' }
+        );
+      }).join('');
+    }
+
+    function normalizeClassroom(item) {
+      return {
+        id: Number(item?.id) || null,
+        name: item?.name || 'Untitled class',
+        createdAt: item?.created_at || '',
+        currentLessonId: null,
+        currentLessonTitle: '',
+        students: [],
+        lessons: [],
+        submissions: []
+      };
+    }
+
+    function normalizeLesson(item) {
+      const sortOrder = Number(item?.sort_order) || 0;
+      const description = String(item?.description || '').trim();
+      return {
+        id: Number(item?.id) || null,
+        title: item?.title || 'Untitled lesson',
+        description,
+        sortOrder,
+        createdAt: item?.created_at || '',
+        summary: description || `Sort order #${sortOrder || '—'}`,
+        isCurrent: Boolean(item?.is_current)
+      };
+    }
+
+    function normalizeQuestion(item) {
+      const testCases = Array.isArray(item?.test_cases) ? item.test_cases : [];
+      return {
+        id: Number(item?.id) || null,
+        title: item?.title || 'Untitled question',
+        description: normalizeQuestionDescription(item?.description),
+        starterCode: item?.starter_code || '',
+        referenceCode: item?.reference_code || '',
+        testCases,
+        createdAt: item?.created_at || '',
+        coverageText: `${testCases.length} test cases`
+      };
+    }
+
+    function normalizeStudent(item) {
+      return {
+        id: Number(item?.id) || null,
+        username: item?.username || 'student',
+        role: item?.role || 'student',
+        status: item?.status || 'active',
+        createdAt: item?.created_at || '',
+        currentLesson: {
+          id: 0,
+          title: '—'
+        },
+        lessonProgress: {
+          accepted: 0,
+          total: 0
+        },
+        latest: null
+      };
+    }
+
+    function normalizeSubmission(item) {
+      return {
+        id: Number(item?.id) || null,
+        enrollmentId: Number(item?.enrollment_id) || 0,
+        studentId: Number(item?.student_id) || 0,
+        studentUsername: item?.student_username || 'student',
+        lessonId: Number(item?.lesson_id) || 0,
+        lessonQuestionId: Number(item?.lesson_question_id) || 0,
+        questionId: Number(item?.question_id) || 0,
+        questionTitle: item?.question_title || 'Untitled question',
+        status: item?.status || 'pending',
+        verdict: item?.verdict || '',
+        sourceCode: item?.source_code || '',
+        stdoutBuffer: normalizeStdoutBuffer(item?.stdout_buffer),
+        errorMessage: item?.error_message || '',
+        judgeReport: normalizeJudgeReport(item?.judge_report),
+        submittedAt: item?.submitted_at || '',
+        finishedAt: item?.finished_at || ''
+      };
+    }
+
+    function normalizeLessonQuestion(item) {
+      return {
+        id: Number(item?.id) || null,
+        lessonId: Number(item?.lesson_id) || 0,
+        questionId: Number(item?.question_id) || 0,
+        title: item?.title || 'Untitled question',
+        sortOrder: Number(item?.sort_order) || 0,
+        createdAt: item?.created_at || ''
+      };
+    }
+
+    function mergeStudents(students, progressStudents) {
+      const byID = new Map();
+
+      students.forEach((student) => {
+        byID.set(student.id, { ...student });
+      });
+
+      progressStudents.forEach((item) => {
+        const current = byID.get(Number(item?.id) || 0) || normalizeStudent(item);
+        const latest = item?.latest_submission ? normalizeSubmission(item.latest_submission) : current.latest;
+        byID.set(current.id, {
+          ...current,
+          username: item?.username || current.username,
+          role: item?.role || current.role,
+          status: item?.status || current.status,
+          createdAt: item?.created_at || current.createdAt,
+          currentLesson: {
+            id: Number(item?.current_lesson?.id) || 0,
+            title: item?.current_lesson?.title || '—'
+          },
+          lessonProgress: {
+            accepted: Number(item?.lesson_progress?.accepted) || 0,
+            total: Number(item?.lesson_progress?.total) || 0
+          },
+          latest
+        });
+      });
+
+      return Array.from(byID.values()).sort((a, b) => a.username.localeCompare(b.username, 'zh-CN'));
+    }
+
+    function sortSubmissions(items) {
+      return items.slice().sort((a, b) => {
+        const left = Date.parse(a?.submittedAt || '') || 0;
+        const right = Date.parse(b?.submittedAt || '') || 0;
+        return right - left;
+      });
+    }
+
+    function makeStudentUsernameSeed(classItem) {
+      const prefix = (classItem?.name || 'class')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '_')
+        .replace(/^_+|_+$/g, '')
+        .slice(0, 16) || 'student';
+      return `${prefix}_${String(Date.now()).slice(-4)}`;
+    }
+
+    function createApi() {
+      return {
+        async getBootstrap() {
+          const [meData, classroomsData, lessonsData, questionsData] = await Promise.all([
+            apiRequest('/api/me'),
+            apiRequest('/api/teacher/classrooms'),
+            apiRequest('/api/teacher/lessons'),
+            apiRequest('/api/teacher/questions')
+          ]);
+
+          return {
+            session: {
+              teacherName: meData?.user?.username || 'Teacher'
+            },
+            classes: sortByIDAsc((classroomsData?.classrooms || []).map(normalizeClassroom)),
+            lessons: (lessonsData?.lessons || []).map(normalizeLesson),
+            questions: sortByIDAsc((questionsData?.questions || []).map(normalizeQuestion))
+          };
+        },
+
+        async getClassroomStudents(classroomId) {
+          const data = await apiRequest(`/api/teacher/classrooms/${classroomId}/students`);
+          return sortByIDAsc((data?.students || []).map(normalizeStudent));
+        },
+
+        async getClassroomLessons(classroomId) {
+          const data = await apiRequest(`/api/teacher/classrooms/${classroomId}/lessons`);
+          return sortBySortOrder((data?.lessons || []).map(normalizeLesson));
+        },
+
+        async getClassroomProgress(classroomId) {
+          const data = await apiRequest(`/api/teacher/classrooms/${classroomId}/progress`);
+          return data?.progress?.students || [];
+        },
+
+        async getClassroomSubmissions(classroomId) {
+          const data = await apiRequest(`/api/teacher/classrooms/${classroomId}/submissions`);
+          return sortSubmissions((data?.submissions || []).map(normalizeSubmission));
+        },
+
+        async getLessonQuestions(lessonId) {
+          const data = await apiRequest(`/api/teacher/lessons/${lessonId}/questions`);
+          return (data?.questions || []).map(normalizeLessonQuestion).sort((a, b) => a.sortOrder - b.sortOrder || a.id - b.id);
+        },
+
+        async getSubmission(classroomId, submissionId) {
+          const data = await apiRequest(`/api/teacher/classrooms/${classroomId}/submissions/${submissionId}`);
+          return normalizeSubmission(data?.submission || {});
+        },
+
+        async createClass(name) {
+          const data = await apiRequest('/api/teacher/classrooms', {
+            method: 'POST',
+            body: JSON.stringify({ name })
+          });
+          return normalizeClassroom(data?.classroom || {});
+        },
+
+        async createStudent(classroomId, username, password) {
+          const data = await apiRequest(`/api/teacher/classrooms/${classroomId}/students`, {
+            method: 'POST',
+            body: JSON.stringify({ username, password })
+          });
+          return normalizeStudent(data?.student || {});
+        },
+
+        async renameStudent(classroomId, studentId, username) {
+          const data = await apiRequest(`/api/teacher/classrooms/${classroomId}/students/${studentId}/name`, {
+            method: 'PATCH',
+            body: JSON.stringify({ username })
+          });
+          return normalizeStudent(data?.student || {});
+        },
+
+        async resetStudentPassword(classroomId, studentId, password) {
+          const data = await apiRequest(`/api/teacher/classrooms/${classroomId}/students/${studentId}/reset-password`, {
+            method: 'POST',
+            body: JSON.stringify({ password })
+          });
+          return Boolean(data?.ok);
+        },
+
+        async removeStudent(classroomId, studentId) {
+          const data = await apiRequest(`/api/teacher/classrooms/${classroomId}/students/${studentId}`, {
+            method: 'DELETE'
+          });
+          return Boolean(data?.ok);
+        },
+
+        async setCurrentLesson(classroomId, lessonId) {
+          const data = await apiRequest(`/api/teacher/classrooms/${classroomId}/current-lesson`, {
+            method: 'POST',
+            body: JSON.stringify({ lesson_id: lessonId })
+          });
+          return Boolean(data?.ok);
+        },
+
+        async deleteSubmission(classroomId, submissionId) {
+          const data = await apiRequest(`/api/teacher/classrooms/${classroomId}/submissions/${submissionId}`, {
+            method: 'DELETE'
+          });
+          return Boolean(data?.ok);
+        }
+      };
+    }
+
+    const api = createApi();
+
+    const state = {
+      data: {
+        session: null,
+        classes: [],
+        lessons: [],
+        questions: [],
+        lessonQuestionsByLessonId: {},
+        submissionDetailsById: {}
+      },
+      ui: {
+        selectedClassId: DEFAULT_SELECTION.selectedClassId,
+        selectedLessonId: DEFAULT_SELECTION.selectedLessonId,
+        selectedQuestionId: DEFAULT_SELECTION.selectedQuestionId,
+        selectedStudentId: DEFAULT_SELECTION.selectedStudentId,
+        selectedSubmissionId: null,
+        browserMode: DEFAULT_SELECTION.browserMode,
+        inspectorMode: DEFAULT_SELECTION.inspectorMode,
+        widths: deepClone(DEFAULT_WIDTHS)
+      }
+    };
+
+    const MIN_WIDTHS = { 1: 180, 2: 240, 3: 240, 4: 380 };
+
+    function mountClassScopeControls() {
+      const studentMount = document.getElementById('studentManagementEntryMount');
+      const lessonMount = document.getElementById('lessonScopeMount');
+
+      if (studentMount) {
+        studentMount.outerHTML = ui.listItem({
+          tag: 'div',
+          className: 'list-button section',
+          attrs: { id: 'studentManagementEntry', role: 'button', tabindex: '0' },
+          bodyHtml: `
+            ${ui.listRow(
+              ui.listTitle('Students'),
+              ui.headerActions(ui.actionButton('Create Student', { id: 'createStudentBtn' }))
+            )}
+            ${ui.listMeta('', { id: 'studentManagementMeta' })}
+          `
+        });
+      }
+
+      if (lessonMount) {
+        lessonMount.outerHTML = ui.contentSection({
+          title: 'Lessons',
+          contentCount: 0,
+          metaHtml: ui.headerActions(ui.paneMeta('', { id: 'lessonMeta' })),
+          body: ui.stack('', { id: 'lessonList' })
+        });
+      }
+    }
+
+    mountClassScopeControls();
+
+    const el = {
+      workspace: document.getElementById('workspace'),
+      classCountMeta: document.getElementById('classCountMeta'),
+      scopeMeta: document.getElementById('scopeMeta'),
+      classList: document.getElementById('classList'),
+      studentManagementMeta: document.getElementById('studentManagementMeta'),
+      studentManagementEntry: document.getElementById('studentManagementEntry'),
+      createClassBtn: document.getElementById('createClassBtn'),
+      createStudentBtn: document.getElementById('createStudentBtn'),
+      lessonMeta: document.getElementById('lessonMeta'),
+      lessonList: document.getElementById('lessonList'),
+      browserColumnTitle: document.getElementById('browserColumnTitle'),
+      browserMeta: document.getElementById('browserMeta'),
+      browserList: document.getElementById('browserList'),
+      detailTitle: document.getElementById('detailTitle'),
+      detailMeta: document.getElementById('detailMeta'),
+      detailBody: document.getElementById('detailBody'),
+      statusLeft: document.getElementById('statusLeft'),
+      statusMiddle: document.getElementById('statusMiddle'),
+      statusRight: document.getElementById('statusRight'),
+      dividers: Array.from(document.querySelectorAll('.divider'))
+    };
+
+    const columns = createColumnResizer({
+      workspace: el.workspace,
+      dividers: el.dividers,
+      widths: state.ui.widths,
+      defaultWidths: DEFAULT_WIDTHS,
+      minWidths: MIN_WIDTHS,
+      columnCount: 4
+    });
+
+    function getClasses() {
+      return state.data.classes;
+    }
+
+    function getLessons() {
+      return state.data.lessons;
+    }
+
+    function getQuestions() {
+      return state.data.questions;
+    }
+
+    function getSelectedClass() {
+      return getClasses().find((item) => item.id === state.ui.selectedClassId) || null;
+    }
+
+    function getClassLessons(classItem = getSelectedClass()) {
+      if (classItem?.lessons?.length) return classItem.lessons;
+      return sortBySortOrder(getLessons());
+    }
+
+    function getSelectedLesson() {
+      return getClassLessons().find((item) => item.id === state.ui.selectedLessonId) || null;
+    }
+
+    function getLessonQuestions() {
+      return state.data.lessonQuestionsByLessonId[state.ui.selectedLessonId] || [];
+    }
+
+    function getSelectedQuestion() {
+      return getQuestions().find((item) => item.id === state.ui.selectedQuestionId) || null;
+    }
+
+    function getSelectedStudent() {
+      const classItem = getSelectedClass();
+      return classItem?.students.find((item) => item.id === state.ui.selectedStudentId) || null;
+    }
+
+    function classStudentCount(classItem) {
+      return classItem?.students?.length || 0;
+    }
+
+    function lessonOrderText() {
+      const lessons = getClassLessons();
+      if (!lessons.length) return 'Lesson 0 / 0';
+      const index = lessons.findIndex((item) => item.id === state.ui.selectedLessonId);
+      return `Lesson ${Math.max(index + 1, 1)} / ${lessons.length}`;
+    }
+
+    function getAttentionStudents(classItem) {
+      return (classItem?.students || []).filter((student) => {
+        const verdict = student.latest?.verdict;
+        const status = student.latest?.status;
+        return ['wrong_answer', 'runtime_error', 'pending'].includes(verdict) || status === 'pending';
+      });
+    }
+
+    function getQuestionPendingCount(questionId) {
+      const classItem = getSelectedClass();
+      return (classItem?.submissions || []).filter((item) => item.questionId === questionId && item.status !== 'finished').length;
+    }
+
+    function getSelectedStudentSubmissions() {
+      const classItem = getSelectedClass();
+      if (!classItem || !state.ui.selectedStudentId) return [];
+      return (classItem.submissions || []).filter((item) => item.studentId === state.ui.selectedStudentId);
+    }
+
+    function getSelectedSubmissionSummary() {
+      return getSelectedStudentSubmissions().find((item) => item.id === state.ui.selectedSubmissionId) || null;
+    }
+
+    function getSelectedSubmissionDetail() {
+      return state.data.submissionDetailsById[state.ui.selectedSubmissionId] || getSelectedSubmissionSummary();
+    }
+
+    function ensureSelections() {
+      if (!getClasses().some((item) => item.id === state.ui.selectedClassId)) {
+        state.ui.selectedClassId = getClasses()[0]?.id || null;
+      }
+
+      const lessons = getClassLessons();
+      const selectedClass = getSelectedClass();
+      const currentLesson = selectedClass?.currentLessonId
+        ? lessons.find((item) => item.id === selectedClass.currentLessonId)
+        : null;
+      if (!lessons.some((item) => item.id === state.ui.selectedLessonId)) {
+        state.ui.selectedLessonId = currentLesson?.id || lessons[0]?.id || null;
+      }
+
+      const lessonQuestions = getLessonQuestions();
+      if (!lessonQuestions.some((item) => item.questionId === state.ui.selectedQuestionId)) {
+        state.ui.selectedQuestionId = lessonQuestions[0]?.questionId || null;
+      }
+
+      if (!selectedClass?.students.some((item) => item.id === state.ui.selectedStudentId)) {
+        state.ui.selectedStudentId = selectedClass?.students[0]?.id || null;
+      }
+
+      const studentSubmissions = getSelectedStudentSubmissions();
+      if (!studentSubmissions.some((item) => item.id === state.ui.selectedSubmissionId)) {
+        state.ui.selectedSubmissionId = studentSubmissions[0]?.id || null;
+      }
+    }
+
+    async function loadClassroomState(classroomId) {
+      if (!classroomId) return;
+
+      const [students, lessons, progressStudents, submissions] = await Promise.all([
+        api.getClassroomStudents(classroomId),
+        api.getClassroomLessons(classroomId),
+        api.getClassroomProgress(classroomId),
+        api.getClassroomSubmissions(classroomId)
+      ]);
+
+      state.data.classes = state.data.classes.map((classItem) => {
+        if (classItem.id !== classroomId) return classItem;
+        const currentLesson = lessons.find((item) => item.isCurrent);
+        return {
+          ...classItem,
+          students: mergeStudents(students, progressStudents),
+          lessons,
+          submissions,
+          currentLessonId: currentLesson?.id || null,
+          currentLessonTitle: currentLesson?.title || ''
+        };
+      });
+    }
+
+    async function loadLessonQuestions(lessonId, options = {}) {
+      if (!lessonId) return;
+      if (!options.force && state.data.lessonQuestionsByLessonId[lessonId]) return;
+      state.data.lessonQuestionsByLessonId[lessonId] = await api.getLessonQuestions(lessonId);
+    }
+
+    async function loadSubmissionDetail(classroomId, submissionId, options = {}) {
+      if (!classroomId || !submissionId) return null;
+      if (!options.force && state.data.submissionDetailsById[submissionId]) {
+        return state.data.submissionDetailsById[submissionId];
+      }
+      const detail = await api.getSubmission(classroomId, submissionId);
+      state.data.submissionDetailsById[submissionId] = detail;
+      return detail;
+    }
+
+    async function refreshData(preferredSelection = {}) {
+      const bootstrap = await api.getBootstrap();
+      state.data.session = bootstrap.session;
+      state.data.classes = bootstrap.classes;
+      state.data.lessons = bootstrap.lessons;
+      state.data.questions = bootstrap.questions;
+      if (preferredSelection.selectedClassId != null) state.ui.selectedClassId = preferredSelection.selectedClassId;
+      if (preferredSelection.selectedLessonId != null) state.ui.selectedLessonId = preferredSelection.selectedLessonId;
+      if (preferredSelection.selectedQuestionId != null) state.ui.selectedQuestionId = preferredSelection.selectedQuestionId;
+      if (preferredSelection.selectedStudentId != null) state.ui.selectedStudentId = preferredSelection.selectedStudentId;
+      if (preferredSelection.selectedSubmissionId != null) state.ui.selectedSubmissionId = preferredSelection.selectedSubmissionId;
+      ensureSelections();
+
+      if (state.ui.selectedClassId) {
+        await loadClassroomState(state.ui.selectedClassId);
+        ensureSelections();
+      }
+
+      if (state.ui.selectedLessonId) {
+        await loadLessonQuestions(state.ui.selectedLessonId, { force: true });
+        ensureSelections();
+      }
+
+      if (preferredSelection.loadSubmission && state.ui.selectedClassId && state.ui.selectedSubmissionId) {
+        await loadSubmissionDetail(state.ui.selectedClassId, state.ui.selectedSubmissionId, { force: true });
+      }
+
+      ensureSelections();
+    }
+
+    function renderTopMeta() {
+      const classItem = getSelectedClass();
+
+      el.classCountMeta.textContent = `${getClasses().length} classes`;
+      el.scopeMeta.textContent = classItem
+        ? `${classStudentCount(classItem)} students · ${classItem.currentLessonTitle || 'No current lesson'}`
+        : 'No class selected';
+      el.browserMeta.textContent = state.ui.browserMode === 'students'
+        ? `${classItem?.students?.length || 0} items`
+        : `${getLessonQuestions().length} items`;
+      el.statusLeft.textContent = classItem?.name || 'No class selected';
+      el.statusMiddle.textContent = lessonOrderText();
+      el.statusRight.textContent = state.ui.browserMode === 'students' ? 'Students' : 'Questions';
+    }
+
+    function renderClasses() {
+      const classes = getClasses();
+      if (!classes.length) {
+        el.classList.innerHTML = ui.emptyState('No classrooms yet. Use "Create Class" to create your first classroom.');
+        return;
+      }
+
+      el.classList.innerHTML = classes.map((classItem) => ui.listItem({
+        className: 'class-item',
+        active: classItem.id === state.ui.selectedClassId,
+        attrs: { 'data-id': classItem.id },
+        bodyHtml: `
+            <span>
+              ${ui.listTitle(classItem.name)}
+              ${ui.listMeta(`${classItem.currentLessonTitle || 'No current lesson'} · ${classStudentCount(classItem)} students`)}
+            </span>
+        `
+      })).join('');
+    }
+
+    function renderScope() {
+      const classItem = getSelectedClass();
+      const attention = getAttentionStudents(classItem);
+      const lessons = getClassLessons(classItem);
+
+      el.createStudentBtn.disabled = !classItem;
+      el.studentManagementMeta.textContent = classItem
+        ? (attention.length ? `${attention.length} need attention` : `All clear · ${classStudentCount(classItem)} students`)
+        : 'Select a class to inspect student tools.';
+      el.studentManagementEntry.classList.toggle('is-active', state.ui.browserMode === 'students');
+      el.lessonMeta.textContent = `${lessons.length} lessons`;
+      ui.applyContentSectionState(el.lessonList.closest('.content-section'), lessons.length);
+
+      if (!lessons.length) {
+        el.lessonList.innerHTML = ui.emptyState('No lessons yet. Create lessons through the teacher API first.');
+        return;
+      }
+
+      el.lessonList.innerHTML = lessons.map((lesson) => {
+        const buttonLabel = lesson.isCurrent ? 'Current' : 'Set Current';
+
+        return ui.listItem({
+          tag: 'div',
+          className: 'list-button',
+          active: state.ui.browserMode !== 'students' && lesson.id === state.ui.selectedLessonId,
+          attrs: { 'data-lesson-id': lesson.id, role: 'button', tabindex: '0' },
+          title: lesson.title,
+          rightHtml: ui.actionButton(buttonLabel, {
+            'data-set-current-lesson-id': lesson.id,
+            disabled: !classItem || lesson.isCurrent
+          }),
+          meta: `${lesson.summary}${lesson.isCurrent ? ' · Current lesson' : ''}`
+        });
+      }).join('');
+    }
+
+    function renderBrowser() {
+      const classItem = getSelectedClass();
+
+      if (state.ui.browserMode === 'students') {
+        el.browserColumnTitle.textContent = 'Students';
+        const students = classItem?.students || [];
+        if (!classItem) {
+          el.browserList.innerHTML = ui.emptyState('Select a class to view student tools.');
+          return;
+        }
+        if (!students.length) {
+          el.browserList.innerHTML = ui.emptyState('No students in this classroom yet. Use "Create Student" to add one.');
+          return;
+        }
+        el.browserList.innerHTML = students.map((student) => {
+          const latest = student.latest || {};
+          return ui.listItem({
+            active: student.id === state.ui.selectedStudentId,
+            attrs: { 'data-student-id': student.id },
+            title: student.username,
+            rightHtml: ui.pill(student.status, statusPillClass(student.status)),
+            metaHtml: `
+              <div>${escapeHtml(solvedProgressLabel(student))}</div>
+              <div>${student.latest ? `Latest: ${escapeHtml(latestVerdictLabel(latest))}` : 'No submission'}</div>
+            `
+          });
+        }).join('');
+        return;
+      }
+
+      const lesson = getSelectedLesson();
+      const lessonQuestions = getLessonQuestions();
+      el.browserColumnTitle.textContent = 'Questions';
+      if (!lesson) {
+        el.browserList.innerHTML = ui.emptyState('Select a lesson to view its question list.');
+        return;
+      }
+      if (!lessonQuestions.length) {
+        el.browserList.innerHTML = ui.emptyState('No questions are assigned to this lesson yet.');
+        return;
+      }
+      el.browserList.innerHTML = lessonQuestions.map((lessonQuestion) => {
+        const question = getQuestions().find((item) => item.id === lessonQuestion.questionId);
+        const title = question?.title || lessonQuestion.title;
+        const pendingCount = getQuestionPendingCount(lessonQuestion.questionId);
+        return ui.listItem({
+          active: lessonQuestion.questionId === state.ui.selectedQuestionId,
+          attrs: { 'data-question-id': lessonQuestion.questionId },
+          title,
+          meta: `Sort #${lessonQuestion.sortOrder} · ${question?.coverageText || '0 test cases'} · ${pendingCount} pending`
+        });
+      }).join('');
+    }
+
+    function renderQuestionDetail() {
+      const lesson = getSelectedLesson();
+      const question = getSelectedQuestion();
+
+      if (!question) {
+        el.detailTitle.textContent = 'Question Detail';
+        el.detailMeta.textContent = 'No selection';
+        el.detailBody.innerHTML = ui.emptyState('Select a question from the current lesson to inspect its prompt and code.');
+        return;
+      }
+
+      const content = state.ui.inspectorMode === 'reference' ? question.referenceCode : question.starterCode;
+
+      el.detailTitle.textContent = 'Question Detail';
+      el.detailMeta.textContent = question.title;
+      el.detailBody.innerHTML = `
+        ${ui.contentSection({
+          title: 'Prompt',
+          meta: lesson?.title || 'Question bank',
+          contentCount: Object.keys(normalizeQuestionDescription(question.description)).length + 3,
+          body: `
+            ${renderQuestionDescriptionBlocks(question.description)}
+            ${ui.detailGrid([
+              ['Coverage', escapeHtml(question.coverageText)],
+              ['Selected Lesson', escapeHtml(lesson?.title || '—')],
+              ['Created At', escapeHtml(question.createdAt || '—')]
+            ])}
+          `
+        })}
+
+        <section class="section question-code-section">
+          <div class="section__body">
+            <div class="code-toolbar">
+              ${ui.paneMeta(state.ui.inspectorMode === 'reference' ? 'Reference code' : 'Starter code')}
+              <button id="toggleCodeBtn" type="button">${state.ui.inspectorMode === 'reference' ? 'Show starter' : 'Show reference'}</button>
+            </div>
+            ${ui.luaCodeBlock(content, { padTrailingNewline: true })}
+          </div>
+        </section>
+      `;
+
+      document.getElementById('toggleCodeBtn')?.addEventListener('click', () => {
+        state.ui.inspectorMode = state.ui.inspectorMode === 'reference' ? 'starter' : 'reference';
+        renderQuestionDetail();
+      });
+    }
+
+    function renderStudentDetail() {
+      const classItem = getSelectedClass();
+      const student = getSelectedStudent();
+      const studentSubmissions = getSelectedStudentSubmissions();
+      const selectedSubmission = getSelectedSubmissionDetail();
+      const latestVerdict = latestVerdictLabel(student?.latest);
+      const latestVerdictClass = latestVerdictPillClass(student?.latest);
+
+      el.detailTitle.textContent = 'Student Detail';
+      el.detailMeta.textContent = student?.username || classItem?.name || 'Unavailable';
+
+      if (!classItem || !student) {
+        el.detailBody.innerHTML = ui.emptyState('Select a student to inspect classroom progress and recent submissions.');
+        return;
+      }
+
+      const submissionItemsHtml = studentSubmissions.map((submission) => ui.listItem({
+        active: submission.id === state.ui.selectedSubmissionId,
+        attrs: { 'data-submission-id': submission.id },
+        title: submission.questionTitle,
+        rightHtml: ui.pill(verdictLabel(submission.verdict), verdictPillClass(submission.verdict)),
+        meta: `${submission.status} · ${formatTimestamp(submission.submittedAt)}`
+      })).join('');
+      const submissionsHtml = studentSubmissions.length
+        ? ui.stack(submissionItemsHtml)
+        : ui.emptyState('No submissions for this student yet.');
+
+      const selectedSubmissionHtml = selectedSubmission ? `
+        <div class="detail-block">
+          <div class="detail-block__title">Selected Submission</div>
+          ${ui.stack(`
+            ${ui.detailGrid([
+              ['Question', escapeHtml(selectedSubmission.questionTitle)],
+              ['Verdict', escapeHtml(verdictLabel(selectedSubmission.verdict))],
+              ['Submitted', escapeHtml(formatTimestamp(selectedSubmission.submittedAt))]
+            ])}
+            ${ui.detailGrid([
+              ['Status', escapeHtml(selectedSubmission.status)],
+              ['Finished At', escapeHtml(formatTimestamp(selectedSubmission.finishedAt))],
+              ['Question ID', selectedSubmission.questionId || '—']
+            ])}
+            ${ui.detailBlock('Stdout', escapeHtml(formatStdoutBuffer(selectedSubmission.stdoutBuffer)))}
+            ${ui.detailBlock('Error Message', escapeHtml(selectedSubmission.errorMessage || '—'))}
+            ${ui.detailBlock('Judge Report', renderJudgeReportTerminal(selectedSubmission.judgeReport, selectedSubmission), { extraClass: 'detail-block__content--terminal' })}
+            <div class="code-toolbar">
+              ${ui.paneMeta('Source code')}
+              ${ui.actionButton('Delete Submission', { 'data-delete-submission-id': selectedSubmission.id })}
+            </div>
+            ${ui.luaCodeBlock(selectedSubmission.sourceCode || '')}
+          `)}
+        </div>
+      ` : '';
+
+      el.detailBody.innerHTML = `
+        ${ui.contentSection({
+          title: 'Overview',
+          metaHtml: ui.pill(latestVerdict, latestVerdictClass),
+          contentCount: 6,
+          body: ui.detailGrid([
+            ['Student', escapeHtml(student.username)],
+            ['Status', ui.pill(student.status, statusPillClass(student.status))],
+            ['Current Lesson', escapeHtml(student.currentLesson.title || '—')],
+            ['Progress/Solved', escapeHtml(solvedProgressLabel(student))],
+            ['Latest Verdict', ui.pill(latestVerdict, latestVerdictClass)],
+            ['Latest Submission', escapeHtml(student.latest?.questionTitle || '—')]
+          ])
+        })}
+
+        ${ui.contentSection({
+          title: 'Manage',
+          meta: classItem.name,
+          contentCount: 4,
+          body: `
+            <div class="form-grid">
+              ${ui.fieldActionRow({
+                label: 'Username',
+                inputAttrs: {
+                  id: 'renameStudentInput',
+                  name: 'username',
+                  autocomplete: 'username',
+                  value: student.username
+                },
+                actionHtml: ui.actionButton('Reset', { 'data-confirm-rename-student-id': student.id })
+              })}
+              ${ui.fieldActionRow({
+                label: 'Password',
+                password: true,
+                inputAttrs: {
+                  id: 'resetPasswordInput',
+                  name: 'password',
+                  autocomplete: 'new-password',
+                  placeholder: 'New password'
+                },
+                actionHtml: ui.actionButton('Reset', { 'data-confirm-reset-password-student-id': student.id })
+              })}
+            </div>
+            <div class="form-actions">
+              ${ui.actionButton('Remove Student', { 'data-remove-student-id': student.id })}
+            </div>
+          `
+        })}
+
+        ${ui.contentSection({
+          title: 'Submissions',
+          meta: `${studentSubmissions.length} items`,
+          contentCount: studentSubmissions.length + (selectedSubmission ? 1 : 0),
+          body: `${submissionsHtml}${selectedSubmissionHtml}`
+        })}
+      `;
+    }
+
+    function renderDetail() {
+      if (state.ui.browserMode === 'students') {
+        renderStudentDetail();
+        return;
+      }
+      renderQuestionDetail();
+    }
+
+    function renderAll() {
+      ensureSelections();
+      renderTopMeta();
+      renderClasses();
+      renderScope();
+      renderBrowser();
+      renderDetail();
+      columns.apply();
+    }
+
+    async function createClassAction() {
+      const className = nextClassName(getClasses());
+      const created = await api.createClass(className);
+      await refreshData({ selectedClassId: created.id });
+      if (!created) return;
+      state.ui.selectedClassId = created.id;
+      state.ui.selectedStudentId = null;
+      state.ui.selectedSubmissionId = null;
+      state.ui.browserMode = 'questions';
+      state.ui.inspectorMode = 'reference';
+      renderAll();
+    }
+
+    async function createStudentAction() {
+      const classItem = getSelectedClass();
+      if (!classItem) {
+        window.alert('Select a class first.');
+        return;
+      }
+
+      const username = window.prompt('Student username', makeStudentUsernameSeed(classItem));
+      if (username == null) return;
+
+      const trimmed = username.trim();
+      if (!trimmed) {
+        window.alert('Username is required.');
+        return;
+      }
+
+      const password = generateTempPassword();
+      const student = await api.createStudent(classItem.id, trimmed, password);
+      await loadClassroomState(classItem.id);
+      state.ui.browserMode = 'students';
+      state.ui.selectedStudentId = student.id;
+      state.ui.selectedSubmissionId = null;
+      ensureSelections();
+      renderAll();
+      window.alert(`Student created.\nusername: ${student.username}\npassword: ${password}`);
+    }
+
+    async function renameStudentAction(id, nextName) {
+      const classItem = getSelectedClass();
+      if (!classItem) return;
+      const trimmed = nextName.trim();
+      if (!trimmed) {
+        window.alert('Username is required.');
+        return;
+      }
+      await api.renameStudent(classItem.id, id, trimmed);
+      await loadClassroomState(classItem.id);
+      state.ui.selectedStudentId = id;
+      ensureSelections();
+      renderAll();
+    }
+
+    async function resetStudentPasswordAction(id, nextPassword) {
+      const classItem = getSelectedClass();
+      if (!classItem) return;
+      const trimmed = nextPassword.trim();
+      if (!trimmed) {
+        window.alert('Password is required.');
+        return;
+      }
+      await api.resetStudentPassword(classItem.id, id, trimmed);
+      window.alert(`Password updated for student #${id}.`);
+    }
+
+    async function setCurrentLessonAction(id) {
+      const classItem = getSelectedClass();
+      if (!classItem) {
+        window.alert('Select a class first.');
+        return;
+      }
+      await api.setCurrentLesson(classItem.id, id);
+      await loadClassroomState(classItem.id);
+      state.ui.selectedLessonId = id;
+      await loadLessonQuestions(id, { force: true });
+      ensureSelections();
+      renderAll();
+    }
+
+    async function removeStudentAction(id) {
+      const classItem = getSelectedClass();
+      if (!classItem) return;
+      const student = classItem.students.find((item) => item.id === id);
+      if (!student) return;
+      if (!window.confirm(`Remove ${student.username} from ${classItem.name}?`)) return;
+      await api.removeStudent(classItem.id, id);
+      await loadClassroomState(classItem.id);
+      state.ui.selectedStudentId = null;
+      state.ui.selectedSubmissionId = null;
+      ensureSelections();
+      renderAll();
+    }
+
+    async function deleteSubmissionAction(id) {
+      const classItem = getSelectedClass();
+      if (!classItem) return;
+      const submission = getSelectedStudentSubmissions().find((item) => item.id === id);
+      if (!submission) return;
+      if (!window.confirm(`Delete submission #${id} for ${submission.studentUsername}?`)) return;
+      await api.deleteSubmission(classItem.id, id);
+      delete state.data.submissionDetailsById[id];
+      await loadClassroomState(classItem.id);
+      ensureSelections();
+      if (state.ui.selectedSubmissionId) {
+        await loadSubmissionDetail(classItem.id, state.ui.selectedSubmissionId);
+      }
+      renderAll();
+    }
+
+    async function selectClass(id) {
+      const classItem = getClasses().find((item) => item.id === id);
+      if (!classItem) return;
+      state.ui.selectedClassId = id;
+      state.ui.selectedStudentId = null;
+      state.ui.selectedSubmissionId = null;
+      state.ui.browserMode = 'questions';
+      state.ui.inspectorMode = 'reference';
+      await loadClassroomState(id);
+      ensureSelections();
+      if (state.ui.selectedLessonId) {
+        await loadLessonQuestions(state.ui.selectedLessonId, { force: true });
+      }
+      renderAll();
+    }
+
+    async function selectLesson(id) {
+      const lesson = getClassLessons().find((item) => item.id === id);
+      if (!lesson) return;
+      state.ui.selectedLessonId = id;
+      state.ui.browserMode = 'questions';
+      state.ui.inspectorMode = 'reference';
+      await loadLessonQuestions(id, { force: true });
+      ensureSelections();
+      renderAll();
+    }
+
+    function selectQuestion(id) {
+      const question = getLessonQuestions().find((item) => item.questionId === id);
+      if (!question) return;
+      state.ui.selectedQuestionId = id;
+      state.ui.browserMode = 'questions';
+      state.ui.inspectorMode = 'reference';
+      renderAll();
+    }
+
+    async function selectStudent(id) {
+      const student = getSelectedClass()?.students.find((item) => item.id === id);
+      if (!student) return;
+      state.ui.selectedStudentId = id;
+      state.ui.browserMode = 'students';
+      ensureSelections();
+      if (state.ui.selectedSubmissionId) {
+        await loadSubmissionDetail(state.ui.selectedClassId, state.ui.selectedSubmissionId);
+      }
+      renderAll();
+    }
+
+    async function selectSubmission(id) {
+      const classItem = getSelectedClass();
+      if (!classItem) return;
+      state.ui.selectedSubmissionId = id;
+      await loadSubmissionDetail(classItem.id, id);
+      renderAll();
+    }
+
+    function bindSelectionEvents() {
+      el.classList.addEventListener('click', async (event) => {
+        const target = event.target.closest('.class-item');
+        if (target) {
+          try {
+            await selectClass(Number(target.dataset.id));
+          } catch (error) {
+            console.error(error);
+            window.alert(error?.message || 'Failed to load classroom.');
+          }
+        }
+      });
+
+      el.studentManagementEntry.addEventListener('click', async () => {
+        const classItem = getSelectedClass();
+        state.ui.selectedStudentId = classItem?.students[0]?.id || null;
+        state.ui.selectedSubmissionId = null;
+        state.ui.browserMode = 'students';
+        ensureSelections();
+        if (state.ui.selectedSubmissionId) {
+          try {
+            await loadSubmissionDetail(state.ui.selectedClassId, state.ui.selectedSubmissionId);
+          } catch (error) {
+            console.error(error);
+          }
+        }
+        renderAll();
+      });
+
+      el.createClassBtn.addEventListener('click', async (event) => {
+        event.stopPropagation();
+        try {
+          await createClassAction();
+        } catch (error) {
+          console.error(error);
+          window.alert(error?.message || 'Failed to create class.');
+        }
+      });
+
+      el.createStudentBtn.addEventListener('click', async (event) => {
+        event.stopPropagation();
+        try {
+          await createStudentAction();
+        } catch (error) {
+          console.error(error);
+          window.alert(error?.message || 'Failed to create student.');
+        }
+      });
+
+      el.lessonList.addEventListener('click', async (event) => {
+        const setCurrentTarget = event.target.closest('[data-set-current-lesson-id]');
+        if (setCurrentTarget) {
+          event.stopPropagation();
+          try {
+            await setCurrentLessonAction(Number(setCurrentTarget.dataset.setCurrentLessonId));
+          } catch (error) {
+            console.error(error);
+            window.alert(error?.message || 'Failed to set current lesson.');
+          }
+          return;
+        }
+
+        const target = event.target.closest('[data-lesson-id]');
+        if (target) {
+          try {
+            await selectLesson(Number(target.dataset.lessonId));
+          } catch (error) {
+            console.error(error);
+            window.alert(error?.message || 'Failed to load questions.');
+          }
+        }
+      });
+
+      el.browserList.addEventListener('click', async (event) => {
+        const questionTarget = event.target.closest('[data-question-id]');
+        const studentTarget = event.target.closest('[data-student-id]');
+        if (questionTarget) {
+          selectQuestion(Number(questionTarget.dataset.questionId));
+          return;
+        }
+        if (studentTarget) {
+          try {
+            await selectStudent(Number(studentTarget.dataset.studentId));
+          } catch (error) {
+            console.error(error);
+            window.alert(error?.message || 'Failed to load submission detail.');
+          }
+        }
+      });
+
+      el.detailBody.addEventListener('click', async (event) => {
+        const renameTarget = event.target.closest('[data-confirm-rename-student-id]');
+        if (renameTarget) {
+          event.stopPropagation();
+          const input = document.getElementById('renameStudentInput');
+          try {
+            await renameStudentAction(Number(renameTarget.dataset.confirmRenameStudentId), input?.value || '');
+          } catch (error) {
+            console.error(error);
+            window.alert(error?.message || 'Failed to rename student.');
+          }
+          return;
+        }
+
+        const resetTarget = event.target.closest('[data-confirm-reset-password-student-id]');
+        if (resetTarget) {
+          event.stopPropagation();
+          const input = document.getElementById('resetPasswordInput');
+          try {
+            await resetStudentPasswordAction(Number(resetTarget.dataset.confirmResetPasswordStudentId), input?.value || '');
+          } catch (error) {
+            console.error(error);
+            window.alert(error?.message || 'Failed to reset password.');
+          }
+          return;
+        }
+
+        const removeStudentTarget = event.target.closest('[data-remove-student-id]');
+        if (removeStudentTarget) {
+          event.stopPropagation();
+          try {
+            await removeStudentAction(Number(removeStudentTarget.dataset.removeStudentId));
+          } catch (error) {
+            console.error(error);
+            window.alert(error?.message || 'Failed to remove student.');
+          }
+          return;
+        }
+
+        const submissionTarget = event.target.closest('[data-submission-id]');
+        if (submissionTarget) {
+          event.stopPropagation();
+          try {
+            await selectSubmission(Number(submissionTarget.dataset.submissionId));
+          } catch (error) {
+            console.error(error);
+            window.alert(error?.message || 'Failed to load submission.');
+          }
+          return;
+        }
+
+        const deleteSubmissionTarget = event.target.closest('[data-delete-submission-id]');
+        if (deleteSubmissionTarget) {
+          event.stopPropagation();
+          try {
+            await deleteSubmissionAction(Number(deleteSubmissionTarget.dataset.deleteSubmissionId));
+          } catch (error) {
+            console.error(error);
+            window.alert(error?.message || 'Failed to delete submission.');
+          }
+          return;
+        }
+
+        const target = event.target.closest('[data-student-id]');
+        if (target) {
+          try {
+            await selectStudent(Number(target.dataset.studentId));
+          } catch (error) {
+            console.error(error);
+            window.alert(error?.message || 'Failed to load student.');
+          }
+        }
+      });
+    }
+
+    async function init() {
+      bindSelectionEvents();
+      columns.bind();
+
+      try {
+        await refreshData();
+        renderAll();
+      } catch (error) {
+        console.error(error);
+        el.classCountMeta.textContent = '0 classes';
+        el.scopeMeta.textContent = 'Load failed';
+        el.browserMeta.textContent = '0 items';
+        el.statusLeft.textContent = 'Error';
+        el.statusMiddle.textContent = 'Teacher workspace';
+        el.statusRight.textContent = 'Backend';
+        el.classList.innerHTML = ui.emptyState('Failed to load classrooms from backend.');
+        el.lessonList.innerHTML = ui.emptyState('Failed to load lessons from backend.');
+        el.browserList.innerHTML = ui.emptyState(error?.message || 'Failed to load question bank.');
+        el.detailTitle.textContent = 'Load Failed';
+        el.detailMeta.textContent = 'Backend';
+        el.detailBody.innerHTML = ui.emptyState(error?.message || 'Teacher workspace failed to load.');
+        columns.apply();
+      }
+    }
+
+    init();
+  </script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+.arch-go/
+
+# =========================
+# Go build outputs
+# =========================
+/bin/
+/build/
+/dist/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Go test / coverage
+coverage.out
+coverage.html
+*.coverprofile
+
+# Go workspace / local tool state
+go.work
+go.work.sum
+
+# =========================
+# Local database / runtime data
+# =========================
+data/*.db
+data/*.db-*
+data/*.sqlite
+data/*.sqlite3
+
+# Keep data directory if needed
+!data/.gitkeep
+
+# =========================
+# Logs
+# =========================
+*.log
+logs/
+
+# =========================
+# Environment / secrets
+# =========================
+.env
+.env.*
+!.env.example
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+Desktop.ini
+
+# =========================
+# Editor / IDE
+# =========================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# =========================
+# Temporary files
+# =========================
+tmp/
+temp/
+.cache/
+
+# =========================
+# Judge / sandbox runtime files
+# =========================
+sandbox/
+workdir/
+submissions_tmp/
+judge_tmp/

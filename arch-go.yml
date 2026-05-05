@@ -1,0 +1,165 @@
+version: 1
+threshold:
+  compliance: 100
+  coverage: 100
+dependenciesRules:
+  - package: "oj-lite/cmd/server"
+    shouldOnlyDependsOn:
+      internal:
+        - "oj-lite/internal/app"
+        - "oj-lite/internal/scheduler"
+
+  - package: "oj-lite/internal/app"
+    shouldOnlyDependsOn:
+      internal:
+        - "oj-lite/internal/admin"
+        - "oj-lite/internal/classroom"
+        - "oj-lite/internal/lesson"
+        - "oj-lite/internal/platform/auth"
+        - "oj-lite/internal/platform/config"
+        - "oj-lite/internal/platform/db"
+        - "oj-lite/internal/platform/httpx"
+        - "oj-lite/internal/platform/logger"
+        - "oj-lite/internal/platform/middleware"
+        - "oj-lite/internal/platform/session"
+        - "oj-lite/internal/platform/user"
+        - "oj-lite/internal/progress"
+        - "oj-lite/internal/question"
+        - "oj-lite/internal/seed"
+        - "oj-lite/internal/submission"
+
+  - package: "oj-lite/internal/admin"
+    shouldOnlyDependsOn:
+      internal:
+        - "oj-lite/internal/platform/errs"
+        - "oj-lite/internal/platform/httpx"
+        - "oj-lite/internal/platform/logger"
+        - "oj-lite/internal/platform/password"
+        - "oj-lite/internal/platform/user"
+
+  - package: "oj-lite/internal/classroom"
+    shouldOnlyDependsOn:
+      internal:
+        - "oj-lite/internal/platform/auth"
+        - "oj-lite/internal/platform/errs"
+        - "oj-lite/internal/platform/httpx"
+        - "oj-lite/internal/platform/logger"
+        - "oj-lite/internal/platform/password"
+
+  - package: "oj-lite/internal/lesson"
+    shouldOnlyDependsOn:
+      internal:
+        - "oj-lite/internal/platform/auth"
+        - "oj-lite/internal/platform/errs"
+        - "oj-lite/internal/platform/httpx"
+        - "oj-lite/internal/platform/logger"
+
+  - package: "oj-lite/internal/question"
+    shouldOnlyDependsOn:
+      internal:
+        - "oj-lite/internal/platform/auth"
+        - "oj-lite/internal/platform/errs"
+        - "oj-lite/internal/platform/httpx"
+        - "oj-lite/internal/platform/logger"
+
+  - package: "oj-lite/internal/progress"
+    shouldOnlyDependsOn:
+      internal:
+        - "oj-lite/internal/platform/auth"
+        - "oj-lite/internal/platform/errs"
+        - "oj-lite/internal/platform/httpx"
+        - "oj-lite/internal/platform/logger"
+
+  - package: "oj-lite/internal/submission"
+    shouldOnlyDependsOn:
+      internal:
+        - "oj-lite/internal/platform/auth"
+        - "oj-lite/internal/platform/errs"
+        - "oj-lite/internal/platform/httpx"
+        - "oj-lite/internal/platform/logger"
+
+  - package: "oj-lite/internal/seed"
+    shouldOnlyDependsOn:
+      internal:
+        - "oj-lite/internal/platform/password"
+        - "oj-lite/internal/platform/user"
+
+  - package: "oj-lite/internal/scheduler"
+    shouldOnlyDependsOn:
+      internal:
+        - "oj-lite/internal/judge"
+        - "oj-lite/internal/platform/config"
+        - "oj-lite/internal/platform/logger"
+
+  - package: "oj-lite/internal/judge"
+    shouldOnlyDependsOn:
+      internal:
+        - "oj-lite/internal/platform/logger"
+
+  - package: "oj-lite/internal/platform/auth"
+    shouldOnlyDependsOn:
+      internal:
+        - "oj-lite/internal/platform/errs"
+        - "oj-lite/internal/platform/httpx"
+        - "oj-lite/internal/platform/logger"
+        - "oj-lite/internal/platform/password"
+        - "oj-lite/internal/platform/session"
+        - "oj-lite/internal/platform/user"
+
+  - package: "oj-lite/internal/platform/config"
+    shouldNotDependsOn:
+      internal:
+        - "oj-lite.**"
+
+  - package: "oj-lite/internal/platform/db"
+    shouldOnlyDependsOn:
+      internal:
+        - "oj-lite/internal/platform/config"
+
+  - package: "oj-lite/internal/platform/errs"
+    shouldNotDependsOn:
+      internal:
+        - "oj-lite.**"
+
+  - package: "oj-lite/internal/platform/httpx"
+    shouldNotDependsOn:
+      internal:
+        - "oj-lite.**"
+
+  - package: "oj-lite/internal/platform/logger"
+    shouldNotDependsOn:
+      internal:
+        - "oj-lite.**"
+
+  - package: "oj-lite/internal/platform/middleware"
+    shouldOnlyDependsOn:
+      internal:
+        - "oj-lite/internal/platform/auth"
+        - "oj-lite/internal/platform/httpx"
+        - "oj-lite/internal/platform/logger"
+        - "oj-lite/internal/platform/session"
+
+  - package: "oj-lite/internal/platform/password"
+    shouldNotDependsOn:
+      internal:
+        - "oj-lite.**"
+
+  - package: "oj-lite/internal/platform/session"
+    shouldNotDependsOn:
+      internal:
+        - "oj-lite.**"
+
+  - package: "oj-lite/internal/platform/user"
+    shouldOnlyDependsOn:
+      internal:
+        - "oj-lite/internal/platform/logger"
+
+  - package: "oj-lite/internal/platform/clock"
+    shouldNotDependsOn:
+      internal:
+        - "oj-lite.**"
+
+  - package: "oj-lite/internal/platform/ids"
+    shouldNotDependsOn:
+      internal:
+        - "oj-lite.**"

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OJ Lite · Login</title>
+  <link rel="stylesheet" href="/assets/app.css" />
+  <style>
+    body {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px 16px;
+      overflow: auto;
+    }
+
+    .auth {
+      width: 100%;
+      max-width: 320px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .auth__brand {
+      text-align: center;
+      font-size: 20px;
+      line-height: 1.3;
+      letter-spacing: 0.01em;
+      color: var(--text);
+      font-weight: var(--weight-semibold);
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface-1);
+      padding: 18px 20px;
+    }
+
+    .form {
+      display: grid;
+      gap: 16px;
+    }
+
+    .submit {
+      width: 100%;
+      height: 32px;
+      font-weight: var(--weight-semibold);
+    }
+
+    .notice {
+      min-height: 18px;
+      padding: 0 4px;
+      font-size: var(--text-sm);
+      line-height: var(--lh-base);
+      color: var(--text-faint);
+      text-align: center;
+    }
+
+    .notice--error { color: var(--error); }
+  </style>
+</head>
+<body>
+  <main class="auth">
+    <div class="auth__brand">OJ Lite</div>
+    <div class="card">
+      <form class="form" id="loginForm">
+        <div id="loginFieldsMount"></div>
+        <button class="submit primary" type="submit" id="submitBtn">Sign in</button>
+      </form>
+    </div>
+
+    <div class="notice" id="notice"></div>
+  </main>
+
+  <script src="/assets/app.js"></script>
+  <script>
+    const { parseJSONSafe, ui } = window.OJLite;
+
+    document.getElementById('loginFieldsMount').outerHTML = [
+      ui.loginField({
+        label: 'Username',
+        inputAttrs: { id: 'username', name: 'username', autocomplete: 'username', autofocus: true }
+      }),
+      ui.loginField({
+        label: 'Password',
+        password: true,
+        inputAttrs: { id: 'password', name: 'password', autocomplete: 'current-password' }
+      })
+    ].join('');
+
+    const form = document.getElementById('loginForm');
+    const username = document.getElementById('username');
+    const password = document.getElementById('password');
+    const submitBtn = document.getElementById('submitBtn');
+    const notice = document.getElementById('notice');
+
+    function setNotice(text, isError) {
+      notice.textContent = text;
+      notice.className = isError ? 'notice notice--error' : 'notice';
+    }
+
+    function setSubmitting(active) {
+      submitBtn.disabled = active;
+      submitBtn.textContent = active ? 'Signing in...' : 'Sign in';
+    }
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const user = username.value.trim();
+      const pass = password.value.trim();
+
+      if (!user || !pass) {
+        setNotice('Username and password are required.', true);
+        return;
+      }
+
+      setSubmitting(true);
+      setNotice('');
+
+      try {
+        const loginResponse = await fetch('/api/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          credentials: 'include',
+          body: JSON.stringify({
+            username: user,
+            password: pass
+          })
+        });
+
+        const loginPayload = await parseJSONSafe(loginResponse);
+        if (!loginResponse.ok) {
+          const message = loginPayload?.error?.message || 'Incorrect username or password.';
+          setNotice(message, true);
+          return;
+        }
+
+        const meResponse = await fetch('/api/me', {
+          method: 'GET',
+          credentials: 'include'
+        });
+
+        const mePayload = await parseJSONSafe(meResponse);
+        if (!meResponse.ok) {
+          setNotice('Login succeeded, but the session cookie was not accepted.', true);
+          return;
+        }
+
+        const me = mePayload?.data?.user;
+        if (!me) {
+          setNotice('Login succeeded.', false);
+          return;
+        }
+
+        if (me.role === 'student') {
+          setNotice('Login successful. Redirecting...', false);
+          window.location.assign('/student');
+          return;
+        }
+
+        if (me.role === 'teacher') {
+          setNotice('Login successful. Redirecting...', false);
+          window.location.assign('/teacher');
+          return;
+        }
+
+        setNotice(`Login successful. Signed in as ${me.username} (${me.role}).`, false);
+      } catch (error) {
+        setNotice('Network error. Please try again.', true);
+      } finally {
+        setSubmitting(false);
+      }
+    });
+  </script>
+</body>
+</html>
