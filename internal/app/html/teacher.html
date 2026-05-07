@@ -1025,7 +1025,15 @@
     }
 
     async function createClassAction() {
-      const className = nextClassName(getClasses());
+      const classNameInput = window.prompt('Class name', nextClassName(getClasses()));
+      if (classNameInput == null) return;
+
+      const className = classNameInput.trim();
+      if (!className) {
+        window.alert('Class name is required.');
+        return;
+      }
+
       const created = await api.createClass(className);
       await refreshData({ selectedClassId: created.id });
       if (!created) return;
