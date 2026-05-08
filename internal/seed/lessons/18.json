@@ -1,45 +1,35 @@
 {
   "title": "Week 09 - 查找与二分查找",
-  "description": "练习线性查找、位置查找和二分查找。",
+  "description": "练习线性查找、位置查找、查找次数统计和二分查找。",
   "sort_order": 18,
   "questions": [
     {
-      "title": "在号码牌中查找指定学生是否存在",
+      "title": "在号码牌数组中查找指定学生是否存在",
       "description": {
         "难度": "Simple",
-        "背景": "班级活动中，每位学生都有一个号码牌，所有号码按顺序保存在数组 numbers 中。老师想确认某个目标号码 target 是否出现在前 n 个号码牌里，以判断对应学生是否在名单中。",
-        "任务": "请从前往后检查 numbers 数组中的前 n 个号码，判断是否存在等于 target 的号码，并返回判断结果。",
-        "输入": "三个参数：号码数组 numbers、数量 n、目标 target。",
-        "输出": "存在返回 true，否则返回 false。",
-        "提示": "可以逐个比较数组中的号码。如果发现 numbers[i] == target，就立即返回 true。全部检查完仍未找到，则返回 false。"
+        "背景": "老师把参加活动的学生号码牌存在数组 numbers 中。现在需要确认 target 号学生是否在名单里。",
+        "任务": "请在数组中查找 target 是否存在。",
+        "输入": "一个数组 numbers，一个数字 n 和一个数字 target。",
+        "输出": "如果找到 target，返回 true；否则返回 false。",
+        "提示": "可以从第一个位置开始，一个一个检查。"
       },
       "starter_code": "function solution(numbers, n, target)\n    return false\nend",
       "reference_code": "function solution(numbers, n, target)\n    for i = 1, n do\n        if numbers[i] == target then\n            return true\n        end\n    end\n    return false\nend",
       "test_cases": [
         [
-          [
-            3,
-            8,
-            12
-          ],
-          3,
-          8
+          [3, 8, 12, 7, 9],
+          5,
+          12
         ],
         [
-          [
-            1,
-            2,
-            3
-          ],
+          [1, 2, 3],
           3,
-          4
+          5
         ],
         [
-          [
-            9
-          ],
+          [10],
           1,
-          9
+          10
         ]
       ],
       "sort_order": 1
@@ -48,75 +38,55 @@
       "title": "在成绩单中查找是否有人拿到满分",
       "description": {
         "难度": "Simple",
-        "背景": "一次考试结束后，老师把前 n 名学生的成绩按顺序保存在数组 scores 中。考试满分是 100 分，老师想快速确认这份成绩单中是否有人拿到了满分。",
-        "任务": "请遍历 scores 数组中的前 n 个成绩，判断是否存在等于 100 的分数，并返回判断结果。",
-        "输入": "两个参数：成绩数组 scores 和人数 n。",
-        "输出": "有 100 分返回 true，否则返回 false。",
-        "提示": "查找时不一定需要检查完整个数组。只要找到一个 100 分，就可以立即返回 true。"
+        "背景": "一次考试结束后，老师想知道成绩单 scores 中是否有人拿到了 100 分。",
+        "任务": "请查找数组中是否存在 100 分。",
+        "输入": "一个数组 scores 和一个数字 n。",
+        "输出": "如果有人拿到 100 分，返回 true；否则返回 false。",
+        "提示": "查找目标固定为满分。"
       },
       "starter_code": "function solution(scores, n)\n    return false\nend",
       "reference_code": "function solution(scores, n)\n    for i = 1, n do\n        if scores[i] == 100 then\n            return true\n        end\n    end\n    return false\nend",
       "test_cases": [
         [
-          [
-            80,
-            100,
-            90
-          ],
+          [80, 95, 100],
           3
         ],
         [
-          [
-            99,
-            98
-          ],
-          2
+          [60, 70, 90],
+          3
         ],
         [
-          [
-            100
-          ],
+          [100],
           1
         ]
       ],
       "sort_order": 2
     },
     {
-      "title": "在背包格子中查找目标物品数量",
+      "title": "在背包格子中查找目标物品数量的位置",
       "description": {
         "难度": "Simple",
-        "背景": "游戏背包有多个格子，每个格子中存放的物品数量按顺序记录在数组 items 中。玩家想找到第一个物品数量正好等于 target 的格子，用来确认目标数量最早出现的位置。",
-        "任务": "请从第 1 个格子开始依次查找，找到第一个数量等于 target 的格子，并返回它的位置；如果没有找到，则返回 0。",
-        "输入": "三个参数：物品数量数组 items、格子数 n、目标 target。",
-        "输出": "返回第一个位置；不存在返回 0。",
-        "提示": "可以从前往后检查 items[i] 是否等于 target。找到后立即返回当前位置 i；如果循环结束仍未找到，就返回 0。"
+        "背景": "游戏背包中每个格子存放一种物品的数量，所有数量保存在 items 数组中。玩家想找到第一个数量等于 target 的格子。",
+        "任务": "请返回第一个数量等于 target 的位置。",
+        "输入": "一个数组 items，一个数字 n 和一个数字 target。",
+        "输出": "如果找到，返回位置；如果没有找到，返回 0。",
+        "提示": "找到第一个目标后，可以直接返回位置。"
       },
       "starter_code": "function solution(items, n, target)\n    return 0\nend",
       "reference_code": "function solution(items, n, target)\n    for i = 1, n do\n        if items[i] == target then\n            return i\n        end\n    end\n    return 0\nend",
       "test_cases": [
         [
-          [
-            3,
-            0,
-            5,
-            2
-          ],
+          [5, 3, 8, 3],
           4,
-          5
+          3
         ],
         [
-          [
-            1,
-            1,
-            1
-          ],
+          [1, 2, 4],
           3,
-          2
+          9
         ],
         [
-          [
-            7
-          ],
+          [7],
           1,
           7
         ]
@@ -127,35 +97,29 @@
       "title": "在补考名单中找到第一个不及格学生的位置",
       "description": {
         "难度": "Normal",
-        "背景": "老师把前 n 名学生的考试成绩按顺序保存在数组 scores 中。成绩低于 60 分的学生需要参加补考。为了尽快整理名单，老师想知道成绩单中第一个需要补考的学生出现在第几个位置。",
-        "任务": "请从前往后检查 scores 数组中的前 n 个成绩，找出第一个低于 60 分的成绩位置，并返回这个位置；如果没有不及格成绩，则返回 0。",
-        "输入": "两个参数：成绩数组 scores 和人数 n。",
-        "输出": "返回第一个低于 60 的位置；没有则返回 0。",
-        "提示": "从前往后查找时，第一次发现 scores[i] < 60 的位置就是答案，可以直接返回 i。"
+        "背景": "老师把学生成绩保存在 scores 数组中。成绩低于 passLine 的学生需要参加补考，老师想找到第一个需要补考的学生。",
+        "任务": "请返回第一个低于 passLine 的成绩位置。",
+        "输入": "一个数组 scores，一个数字 n 和一个数字 passLine。",
+        "输出": "如果找到不及格学生，返回位置；如果没有，返回 0。",
+        "提示": "查找时要判断的是成绩是否低于分数线。"
       },
-      "starter_code": "function solution(scores, n)\n    return 0\nend",
-      "reference_code": "function solution(scores, n)\n    for i = 1, n do\n        if scores[i] < 60 then\n            return i\n        end\n    end\n    return 0\nend",
+      "starter_code": "function solution(scores, n, passLine)\n    return 0\nend",
+      "reference_code": "function solution(scores, n, passLine)\n    for i = 1, n do\n        if scores[i] < passLine then\n            return i\n        end\n    end\n    return 0\nend",
       "test_cases": [
         [
-          [
-            80,
-            59,
-            70
-          ],
-          3
+          [80, 55, 70],
+          3,
+          60
         ],
         [
-          [
-            60,
-            70
-          ],
-          2
+          [60, 70, 90],
+          3,
+          60
         ],
         [
-          [
-            10
-          ],
-          1
+          [40, 80, 50],
+          3,
+          60
         ]
       ],
       "sort_order": 4
@@ -164,115 +128,86 @@
       "title": "在比赛成绩中找到最后一个满分位置",
       "description": {
         "难度": "Normal",
-        "背景": "比赛结束后，选手成绩按顺序保存在数组 scores 中。由于可能有多名选手获得 100 分，裁判想知道最后一个满分成绩出现在第几个位置。如果没有选手获得满分，则返回 0。",
-        "任务": "请遍历 scores 数组中的前 n 个成绩，记录最后一次出现 100 分的位置，并返回这个位置。",
-        "输入": "两个参数：成绩数组 scores 和人数 n。",
-        "输出": "返回最后一个满分位置；没有则返回 0。",
-        "提示": "可以用 position 保存当前找到的满分位置，初始值为 0。每次发现 scores[i] == 100，就把 position 更新为 i。"
+        "背景": "比赛成绩保存在 scores 数组中。可能有多个选手拿到 100 分，裁判想知道最后一个满分出现在第几个位置。",
+        "任务": "请返回最后一个 100 分的位置。",
+        "输入": "一个数组 scores 和一个数字 n。",
+        "输出": "如果存在 100 分，返回最后一个满分位置；如果不存在，返回 0。",
+        "提示": "可以继续遍历完整个数组，并不断更新找到的位置。"
       },
       "starter_code": "function solution(scores, n)\n    return 0\nend",
-      "reference_code": "function solution(scores, n)\n    local position = 0\n    for i = 1, n do\n        if scores[i] == 100 then\n            position = i\n        end\n    end\n    return position\nend",
+      "reference_code": "function solution(scores, n)\n    local position = 0\n\n    for i = 1, n do\n        if scores[i] == 100 then\n            position = i\n        end\n    end\n\n    return position\nend",
       "test_cases": [
         [
-          [
-            100,
-            80,
-            100
-          ],
+          [100, 80, 100, 90],
+          4
+        ],
+        [
+          [70, 80, 90],
           3
         ],
         [
-          [
-            99,
-            98
-          ],
-          2
-        ],
-        [
-          [
-            100
-          ],
+          [100],
           1
         ]
       ],
       "sort_order": 5
     },
     {
-      "title": "在任务列表中查找第一个未完成任务编号",
+      "title": "查找目标分数并统计一共检查了多少次",
       "description": {
         "难度": "Normal",
-        "背景": "一组任务的完成状态按顺序保存在数组 tasks 中。数组里 1 表示任务已经完成，0 表示任务还没有完成。为了继续推进进度，需要找到第一个尚未完成的任务位置。",
-        "任务": "请从前往后检查 tasks 数组中的前 n 个任务状态，返回第一个值为 0 的位置；如果所有任务都已完成，则返回 0。",
-        "输入": "两个参数：任务状态数组 tasks 和任务数 n。",
-        "输出": "返回第一个 0 的位置；全部完成返回 0。",
-        "提示": "可以逐个检查 tasks[i] 是否等于 0。第一次找到 0 时直接返回当前位置 i。"
+        "背景": "老师在成绩单中查找 target 分数，同时想知道找到它之前一共检查了多少个成绩。",
+        "任务": "请查找 target 的第一个位置，并统计检查次数。",
+        "输入": "一个数组 scores，一个数字 n 和一个数字 target。",
+        "输出": "依次返回目标位置和检查次数。如果没有找到，目标位置返回 0，检查次数返回 n。",
+        "提示": "每检查一个位置，检查次数都要更新。"
       },
-      "starter_code": "function solution(tasks, n)\n    return 0\nend",
-      "reference_code": "function solution(tasks, n)\n    for i = 1, n do\n        if tasks[i] == 0 then\n            return i\n        end\n    end\n    return 0\nend",
+      "starter_code": "function solution(scores, n, target)\n    return 0, 0\nend",
+      "reference_code": "function solution(scores, n, target)\n    local position = 0\n    local checks = 0\n    local i = 1\n\n    while i <= n and position == 0 do\n        checks = checks + 1\n        if scores[i] == target then\n            position = i\n        end\n        i = i + 1\n    end\n\n    return position, checks\nend",
       "test_cases": [
         [
-          [
-            1,
-            1,
-            0,
-            1
-          ],
-          4
+          [80, 90, 70, 100],
+          4,
+          70
         ],
         [
-          [
-            1,
-            1
-          ],
-          2
+          [50, 60, 70],
+          3,
+          90
         ],
         [
-          [
-            0
-          ],
-          1
+          [88],
+          1,
+          88
         ]
       ],
       "sort_order": 6
     },
     {
-      "title": "在有序图书编号中快速找到目标图书",
+      "title": "在有序图书编号中用二分查找快速找到目标图书",
       "description": {
         "难度": "Challenge",
-        "背景": "图书馆中的图书编号已经按照从小到大的顺序保存在数组 books 中。管理员想查找目标编号 target 对应的图书是否存在。因为编号已经有序，可以使用二分查找来减少需要检查的次数。",
-        "任务": "请使用二分查找在 books 数组的前 n 个编号中寻找 target。如果找到目标编号，就返回它的位置；如果不存在，则返回 0。",
-        "输入": "三个参数：有序编号数组 books、数量 n、目标 target。",
-        "输出": "返回目标位置；不存在返回 0。",
-        "提示": "每次检查当前区间的中间位置。如果 target 比中间值小，就只保留左半部分；如果更大，就只保留右半部分。"
+        "背景": "图书馆的图书编号已经按从小到大的顺序保存在 books 数组中。管理员希望用更快的方法查找目标图书编号 target。",
+        "任务": "请使用二分查找返回目标图书的位置，并统计查找次数。",
+        "输入": "一个有序数组 books，一个数字 n 和一个数字 target。",
+        "输出": "依次返回目标位置和查找次数。如果没有找到，位置返回 0。",
+        "提示": "每次检查中间位置，然后缩小下一次查找的范围。"
       },
-      "starter_code": "function solution(books, n, target)\n    return 0\nend",
-      "reference_code": "function solution(books, n, target)\n    local left = 1\n    local right = n\n    while left <= right do\n        local mid = left\n        local gap = right - left\n        while gap >= 2 do\n            mid = mid + 1\n            gap = gap - 2\n        end\n        if books[mid] == target then\n            return mid\n        elseif target < books[mid] then\n            right = mid - 1\n        else\n            left = mid + 1\n        end\n    end\n    return 0\nend",
+      "starter_code": "function solution(books, n, target)\n    return 0, 0\nend",
+      "reference_code": "function solution(books, n, target)\n    local left = 1\n    local right = n\n    local position = 0\n    local checks = 0\n\n    while left <= right and position == 0 do\n        local mid = (left + right) / 2\n        if mid % 1 ~= 0 then\n            mid = mid - 0.5\n        end\n        checks = checks + 1\n\n        if books[mid] == target then\n            position = mid\n        elseif target < books[mid] then\n            right = mid - 1\n        else\n            left = mid + 1\n        end\n    end\n\n    return position, checks\nend",
       "test_cases": [
         [
-          [
-            1,
-            3,
-            5,
-            7,
-            9
-          ],
+          [2, 5, 8, 12, 18, 25],
+          6,
+          12
+        ],
+        [
+          [1, 3, 5, 7, 9],
           5,
-          7
+          4
         ],
         [
-          [
-            2,
-            4,
-            6,
-            8
-          ],
-          4,
-          5
-        ],
-        [
-          [
-            10
-          ],
+          [10],
           1,
           10
         ]
@@ -280,88 +215,63 @@
       "sort_order": 7
     },
     {
-      "title": "比较线性查找和二分查找需要检查多少次",
+      "title": "比较线性查找和二分查找分别需要检查多少次",
       "description": {
         "难度": "Challenge",
-        "背景": "同一个已经从小到大排序的数组 numbers，可以用线性查找，也可以用二分查找。线性查找会从第一个元素开始依次检查，二分查找则会不断缩小可能区间。现在需要比较两种方法在查找 target 时分别检查了多少次。",
-        "任务": "请分别模拟线性查找和二分查找，统计它们找到目标或确定目标不存在时各自检查了多少个位置，并返回两个检查次数。",
-        "输入": "三个参数：有序数组 numbers、数量 n、目标 target。",
-        "输出": "返回两个值：线性检查次数和二分检查次数。",
-        "提示": "线性查找每检查一个元素就计数一次；二分查找每检查一次中间位置就计数一次。找到目标或区间为空时停止。"
+        "背景": "同一组有序编号可以用线性查找，也可以用二分查找。老师想让学生比较两种方法在查找 target 时分别检查了多少次。",
+        "任务": "请分别使用线性查找和二分查找查找 target，并返回两种方法的检查次数。",
+        "输入": "一个有序数组 numbers，一个数字 n 和一个数字 target。",
+        "输出": "依次返回线性查找检查次数、二分查找检查次数、线性查找位置、二分查找位置。找不到时位置为 0。",
+        "提示": "两种方法要分开模拟，并各自记录检查次数。"
       },
-      "starter_code": "function solution(numbers, n, target)\n    return 0, 0\nend",
-      "reference_code": "function solution(numbers, n, target)\n    local linearChecks = 0\n    for i = 1, n do\n        linearChecks = linearChecks + 1\n        if numbers[i] == target then\n            break\n        end\n    end\n\n    local binaryChecks = 0\n    local left = 1\n    local right = n\n    while left <= right do\n        local mid = left\n        local gap = right - left\n        while gap >= 2 do\n            mid = mid + 1\n            gap = gap - 2\n        end\n        binaryChecks = binaryChecks + 1\n        if numbers[mid] == target then\n            break\n        elseif target < numbers[mid] then\n            right = mid - 1\n        else\n            left = mid + 1\n        end\n    end\n    return linearChecks, binaryChecks\nend",
+      "starter_code": "function solution(numbers, n, target)\n    return 0, 0, 0, 0\nend",
+      "reference_code": "function solution(numbers, n, target)\n    local linearChecks = 0\n    local linearPosition = 0\n    local i = 1\n\n    while i <= n and linearPosition == 0 do\n        linearChecks = linearChecks + 1\n        if numbers[i] == target then\n            linearPosition = i\n        end\n        i = i + 1\n    end\n\n    local left = 1\n    local right = n\n    local binaryChecks = 0\n    local binaryPosition = 0\n\n    while left <= right and binaryPosition == 0 do\n        local mid = (left + right) / 2\n        if mid % 1 ~= 0 then\n            mid = mid - 0.5\n        end\n        binaryChecks = binaryChecks + 1\n\n        if numbers[mid] == target then\n            binaryPosition = mid\n        elseif target < numbers[mid] then\n            right = mid - 1\n        else\n            left = mid + 1\n        end\n    end\n\n    return linearChecks, binaryChecks, linearPosition, binaryPosition\nend",
       "test_cases": [
         [
-          [
-            1,
-            3,
-            5,
-            7,
-            9
-          ],
+          [1, 3, 5, 7, 9, 11, 13],
+          7,
+          11
+        ],
+        [
+          [2, 4, 6, 8, 10],
           5,
-          9
+          3
         ],
         [
-          [
-            2,
-            4,
-            6,
-            8
-          ],
-          4,
-          5
-        ],
-        [
-          [
-            10
-          ],
+          [5],
           1,
-          10
+          5
         ]
       ],
       "sort_order": 8
     },
     {
-      "title": "在有序成绩表中查找目标分数的位置",
+      "title": "在有序成绩表中查找目标分数或插入位置",
       "description": {
         "难度": "Challenge",
-        "背景": "老师已经把一份成绩表按照从低到高的顺序保存在数组 scores 中。现在需要查找目标分数 target 是否出现在这份有序成绩表中。由于数据已经排序，可以使用二分查找提高查找效率。",
-        "任务": "请使用二分查找在 scores 数组的前 n 个成绩中查找 target。如果找到目标分数，就返回它的位置；如果没有找到，则返回 0。",
-        "输入": "三个参数：有序成绩数组 scores、人数 n、目标 target。",
-        "输出": "返回目标位置；不存在返回 0。",
-        "提示": "二分查找要求数组已经有序。每次比较中间位置的分数，再根据 target 的大小决定继续查找左半部分还是右半部分。"
+        "背景": "成绩表 scores 已经按从小到大排序。老师想查找 target 是否存在；如果不存在，还想知道 target 应该插入到第几个位置，才能保持成绩表有序。",
+        "任务": "请使用二分查找完成查找，并返回目标状态和位置。",
+        "输入": "一个有序数组 scores，一个数字 n 和一个数字 target。",
+        "输出": "如果找到 target，返回 true 和目标位置；如果找不到，返回 false 和应该插入的位置。",
+        "提示": "查找结束后，剩下的边界位置可以帮助判断插入位置。"
       },
-      "starter_code": "function solution(scores, n, target)\n    return 0\nend",
-      "reference_code": "function solution(scores, n, target)\n    local left = 1\n    local right = n\n    while left <= right do\n        local mid = left\n        local gap = right - left\n        while gap >= 2 do\n            mid = mid + 1\n            gap = gap - 2\n        end\n        if scores[mid] == target then\n            return mid\n        elseif target < scores[mid] then\n            right = mid - 1\n        else\n            left = mid + 1\n        end\n    end\n    return 0\nend",
+      "starter_code": "function solution(scores, n, target)\n    return false, 0\nend",
+      "reference_code": "function solution(scores, n, target)\n    local left = 1\n    local right = n\n    local position = 0\n\n    while left <= right and position == 0 do\n        local mid = (left + right) / 2\n        if mid % 1 ~= 0 then\n            mid = mid - 0.5\n        end\n\n        if scores[mid] == target then\n            position = mid\n        elseif target < scores[mid] then\n            right = mid - 1\n        else\n            left = mid + 1\n        end\n    end\n\n    if position > 0 then\n        return true, position\n    end\n\n    return false, left\nend",
       "test_cases": [
         [
-          [
-            50,
-            60,
-            70,
-            80,
-            90
-          ],
+          [50, 60, 70, 80, 90],
           5,
           70
         ],
         [
-          [
-            60,
-            75,
-            85
-          ],
-          3,
-          100
+          [50, 60, 70, 80, 90],
+          5,
+          75
         ],
         [
-          [
-            88
-          ],
-          1,
-          88
+          [10, 20, 30],
+          3,
+          5
         ]
       ],
       "sort_order": 9

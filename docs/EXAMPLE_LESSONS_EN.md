@@ -1,10 +1,10 @@
 # Lua Basic Algorithms Bilingual Course Teaching Document
 
-## Document Purpose
+## 1. Document Purpose
 
-This document defines a Lua basic algorithms course for students who have completed Scratch and are ready to move into text-based programming. The course is designed as a bilingual lesson set. For the same week, the English lesson uses an odd lesson number, and the Chinese lesson uses an even lesson number.
+This document plans a Lua basic algorithms course for students who have advanced beyond Scratch and are preparing to move into text-based programming. The course uses paired Chinese and English lessons. For the same week, the English lesson uses an odd lesson number, and the Chinese lesson uses an even lesson number.
 
-Each lesson number is fixed and should be used for ordering and reference. The lesson name should only contain the week number and the topic description. Language, difficulty, and question metadata should not be included in the lesson name.
+Each lesson number is fixed for ordering and reference. Lesson names use only the week number and topic description; language and difficulty metadata are not written into the lesson name.
 
 Numbering rule:
 
@@ -13,23 +13,25 @@ Lesson 01, 03, 05, ... 23: English lesson
 Lesson 02, 04, 06, ... 24: Chinese lesson
 ```
 
-## 1. Course Positioning
+---
 
-This course is for students who have finished Scratch and are preparing to learn text-based programming. Lua is used as a lightweight language for expressing algorithms. The main goal is to build foundational algorithmic thinking for later Python / C / C++ learning.
+## 2. Course Positioning
 
-Course principles:
+This course is for students who have finished Scratch and are preparing to learn text-based programming. Lua is used as a lightweight language for expressing algorithms. The focus is foundational algorithmic thinking that prepares students for later Python / C / C++ learning.
 
 | Principle | Description |
 | --- | --- |
-| Algorithm first | Lua is used as an expression tool. The course is not designed as a full Lua syntax course. |
-| Simple progression | Each lesson introduces only a small number of new ideas. Questions stay short, clear, and testable. |
-| Scenario-based | All questions are built from familiar student contexts such as games, school, shopping, sports, and scores. |
-| Bilingual pairing | Each week has one English lesson and one Chinese lesson with aligned structure and concepts. |
+| Algorithm first | Lua is only the expression tool; the course is not designed as a full Lua syntax course. |
+| Simple progression | Each lesson introduces only a few new ideas, and problems remain short, clear, and testable. |
+| Scenario-based | Problems come from familiar student contexts such as games, school, shopping, sports, and scores. |
+| Bilingual pairing | Each week has one Chinese lesson and one English lesson with aligned structure and concepts. |
 | Fixed structure | Each lesson is divided into Simple, Normal, and Challenge levels. |
 
-## 2. Technical Boundaries
+---
 
-Do not use:
+## 3. Technical Boundaries
+
+### Do Not Use
 
 ```lua
 io.read
@@ -41,9 +43,9 @@ ipairs
 math.*
 ```
 
-Only use:
+### Only Use
 
-```text
+```lua
 local variables
 if / elseif / else
 for
@@ -56,37 +58,34 @@ comparison operators
 logical operators
 ```
 
-## 3. Overall Structure
+---
 
-The course contains 12 weeks. Each week has 2 lessons. For the same topic, the English lesson is placed first, followed by the Chinese lesson:
+## 4. Overall Structure
 
-```text
-English lesson
-Chinese lesson
-```
-
-Total:
+The course has 12 weeks. Each week has 2 language lessons.
 
 ```text
 12 weeks x 2 language lessons = 24 lessons
 ```
 
-Each lesson contains 9 questions:
+Each lesson has exactly 9 questions:
 
 | Difficulty | Count | Purpose |
-| --- | ---: | --- |
-| Simple | 3 questions | Warm-up and concept confirmation |
-| Normal | 3 questions | Main practice for the core algorithm |
-| Challenge | 3 questions | Extension, integration, or homework |
+| --- | --: | --- |
+| Simple | 3 questions | Warm-up and confirmation of the week's core concept |
+| Normal | 3 questions | Main practice, with appropriate review of earlier knowledge |
+| Challenge | 3 questions | Integrated application with clearly higher difficulty |
 
 Total question count:
 
 ```text
-9 Chinese questions + 9 English questions per week = 18 questions per week
+9 Chinese questions + 9 English questions per week = 18 questions
 12 weeks = 108 Chinese questions + 108 English questions = 216 questions
 ```
 
-## 4. Lesson Numbering
+---
+
+## 5. Lesson Numbering Order
 
 | Lesson No. | Language | Lesson Name |
 | ---: | --- | --- |
@@ -115,519 +114,507 @@ Total question count:
 | 23 | EN | Week 12 - Integrated Math Algorithm Projects |
 | 24 | CN | Week 12 - 综合数学算法项目 |
 
-## 5. 12-Week Course Track
+---
+
+## 6. Question Difficulty Design Rules
+
+Starting from Week 02, difficulty progresses as:
+
+```text
+This week's practice -> previous knowledge combination -> integrated challenge
+```
+
+| Difficulty | Design Standard |
+| --- | --- |
+| Simple | Checks only the week's core concept and avoids introducing multiple old knowledge points at the same time. |
+| Normal | May combine variables, conditions, loops, counting, accumulation, or array operations from earlier weeks, but the goal still centers on the week's topic. |
+| Challenge | Must be integrated and usually requires 2 to 4 algorithm ideas at the same time. |
+| Hint | Gives only a direction, not key conditions, loop ranges, update formulas, or complete code. |
+
+---
+
+## 7. Hint Control Rules
+
+### Simple Hint
+
+May suggest which structure to use.
+
+```text
+Hint: Check the condition first, then use a variable to record the result.
+```
+
+Avoid giving the complete condition directly.
+
+### Normal Hint
+
+May suggest solution steps, but should not give the complete condition expression.
+
+```text
+Hint: Calculate the current state first, then classify it from that state.
+```
+
+### Challenge Hint
+
+Only suggests how to split the problem.
+
+```text
+Hint: Split the problem into enumerating plans, checking validity, and updating the best answer.
+```
+
+Avoid directly giving loop variables, conditions, or complete formulas.
+
+---
+
+## 8. 12-Week Course Track
 
 | Week | Topic | Core Algorithm Skills |
 | ---: | --- | --- |
-| Week 01 | Variables | Sequential calculation, variable updates, variable swapping |
-| Week 02 | Conditions and Loops | Conditional classification, loop counting, boundary checks |
-| Week 03 | Counting and Classification | Conditional counting, classification statistics |
-| Week 04 | Sum, Average, and Accumulation | Summation, conditional summation, averages, accumulation |
-| Week 05 | Factors, Multiples, and Prime Numbers | Enumeration, factor counting, prime checking |
-| Week 06 | Quantity Relations and Double Enumeration | Nested loops, solution search, combination counting |
-| Week 07 | Arrays and Table Data | Array access, modification, traversal, copying |
-| Week 08 | Array Statistics and Extremes | Array sum, array count, maximum, minimum, second largest value |
-| Week 09 | Search and Binary Search | Linear search, position search, binary search |
-| Week 10 | Sorting Algorithms I | Selection sort, bubble sort |
-| Week 11 | Sorting Algorithms II and Applications | Insertion sort, post-sort processing, merging sorted arrays |
-| Week 12 | Integrated Math Algorithm Projects | Statistics, search, sorting, enumeration, modeling |
+| Week 01 | Variables | Sequential calculation, variable swapping, state updates, multi-step settlement |
+| Week 02 | Conditions and Loops | Conditional classification, loop counting, boundary checks, state updates |
+| Week 03 | Counting and Classification | Counting algorithms, conditional counting, classification statistics |
+| Week 04 | Sum, Average, and Accumulation | Summation, conditional summation, averages, target accumulation |
+| Week 05 | Factors, Multiples, and Prime Numbers | Factor enumeration, factor counting, prime checks, greatest common factor enumeration, least common multiple enumeration |
+| Week 06 | Quantity Relations and Double Enumeration | Double-variable enumeration, combination counting, plan search, best-plan update |
+| Week 07 | Arrays and Table Data | Array access, array modification, array traversal, array copying, accumulated arrays |
+| Week 08 | Array Statistics and Extremes | Array summation, array counting, maximum value, minimum value, maximum-value position, second-largest value |
+| Week 09 | Search and Binary Search | Existence search, position search, first-position search, last-position search, binary search |
+| Week 10 | Sorting Algorithms I | Selection sort, bubble sort, swap-count statistics |
+| Week 11 | Sorting Algorithms II and Applications | Insertion sort, middle values, deduplication statistics, merging sorted arrays, tied ranks |
+| Week 12 | Integrated Math Algorithm Projects | Statistics, search, sorting, ranking, enumeration, best-plan search |
 
-## 6. Weekly Teaching Outline
+---
 
-### Week 01: Variables
+# 9. Detailed Weekly Outline
+
+---
+
+## Week 01: Variables
 
 | Item | Content |
 | --- | --- |
-| Core theme | A variable is a box that stores data. |
-| Math foundation | Four operations, area, perimeter, total price |
-| Programming content | `local`, assignment, variable updates, temporary variables |
-| Algorithm content | Sequential calculation, variable swapping, state updates |
-| Scenarios | Game health, playground area, stationery shopping, coin changes, seat swapping |
-| Goal | Students can use variables to express the calculation process of a concrete word problem. |
+| Core theme | Variables are boxes for storing data and intermediate results |
+| Math foundation | Arithmetic, area, total price, average, difference, change, modulo |
+| Programming content | `local`, assignment, variable updates, temporary variables, operator precedence |
+| Algorithm content | Sequential calculation, variable swapping, state updates, multi-step settlement |
+| Scenarios | Game health, playground area, stationery shopping, coin changes, running accumulation, seat swapping, bundle discount settlement |
+| Goal | Students can use variables to break down real word problems and express complete calculations with addition, subtraction, multiplication, division, and modulo. |
 
-Teaching task design:
+### Teaching Task Design
 
 | No. | Difficulty | Title |
-| ---: | --- | --- |
+| --: | --- | --- |
 | 01 | Simple | How Much Health Is Left After a Game Character Is Attacked |
 | 02 | Simple | How Much Do the Pencils Cost at the Stationery Store |
 | 03 | Simple | What Is the Area of the Rectangular Playground |
 | 04 | Normal | How Many Coins Are in the Bag After Defeating a Monster |
 | 05 | Normal | How Much Money Is Left After Buying Pencils and Erasers |
 | 06 | Normal | How Many Meters Have Been Run After Training |
-| 07 | Challenge | How Do Two Students Swap Seat Numbers |
-| 08 | Challenge | How Much Health Is Left After Damage and Healing |
-| 09 | Challenge | Calculate Total Price and Change for a Store Bundle |
+| 07 | Challenge | Update the Seat Statistics Card After Two Students Swap Seats |
+| 08 | Challenge | Final Health Settlement After Consecutive Battles |
+| 09 | Challenge | Store Bundle Discount, Packaging Fee, and Change Settlement |
 
-Core example:
+### Progression Notes
 
-```lua
-local hp = 100
-local damage = 25
-local remainHp = hp - damage
-```
+| Difficulty | Combination Method |
+| --- | --- |
+| Simple | Only practices direct variable calculation. |
+| Normal | Combines variable updates and multi-step arithmetic. |
+| Challenge | Combines swapping, state settlement, modulo, and multi-step calculation. |
 
-### Week 02: Conditions and Loops
+---
+
+## Week 02: Conditions and Loops
 
 | Item | Content |
 | --- | --- |
-| Core theme | Conditions choose branches, and loops handle repetition. |
-| Math foundation | Comparisons, odd and even numbers, multiples, boundary values |
+| Core theme | Conditions choose branches, and loops handle repetition |
+| Math foundation | Comparison, odd and even numbers, multiples, boundary values |
 | Programming content | `if`, `else`, `elseif`, `for`, `while` |
-| Algorithm content | Conditional classification, loop counting, boundary checks |
-| Scenarios | Temperature checks, student numbers, passing scores, monster health, leap years |
-| Goal | Students can write basic "if..." and "repeat..." algorithm structures. |
+| Algorithm content | Conditional classification, loop counting, boundary checks, state updates |
+| Scenarios | Exam passing, student numbers, game battles, shopping checks, vending machines, level star ratings |
+| Goal | Students can write the two basic algorithm structures: if something is true, do this; and repeat this process. |
 
-Teaching task design:
+### Teaching Task Design
 
 | No. | Difficulty | Title |
-| ---: | --- | --- |
+| --: | --- | --- |
 | 01 | Simple | Check Whether an Exam Score Reaches the Passing Line |
 | 02 | Simple | Check Whether a Student Number Is Odd or Even |
-| 03 | Simple | Check Whether the Temperature Is Good for Outdoor Sports |
-| 04 | Normal | How Many Rounds Until a Monster Is Defeated |
-| 05 | Normal | Count How Many Even Numbers There Are from 1 to n |
-| 06 | Normal | Check Whether a Number Is a Multiple of 3 |
-| 07 | Challenge | Check Whether the School Sports Day Falls in a Leap Year |
-| 08 | Challenge | Choose a Drink in a Vending Machine Based on Money |
-| 09 | Challenge | Decide How Many Stars a Game Level Gets Based on Score |
+| 03 | Simple | Use a Loop to Count All Numbers from 1 to n |
+| 04 | Normal | Check Whether a Game Character Is Still Alive After an Attack |
+| 05 | Normal | Calculate How Many Rounds Until a Monster Is Defeated |
+| 06 | Normal | Check Whether an Eraser Can Still Be Bought After Shopping |
+| 07 | Challenge | Rating Settlement After Consecutive Game Battles |
+| 08 | Challenge | Final Result After Consecutive Vending Machine Purchases |
+| 09 | Challenge | Star Rating After Consecutive Game Level Scores |
 
-Core example:
+### Progression Notes
 
-```lua
-local score = 75
-local passLine = 60
-local passed = false
+| Difficulty | Combination Method |
+| --- | --- |
+| Simple | Practices only condition checks, odd-even checks, and basic loops. |
+| Normal | Combines Week 01 variable calculation and variable updates. |
+| Challenge | Combines loops, state updates, multiple conditions, and final classification. |
 
-if score >= passLine then
-    passed = true
-else
-    passed = false
-end
-```
+---
 
-### Week 03: Counting and Classification
+## Week 03: Counting and Classification
 
 | Item | Content |
 | --- | --- |
-| Core theme | How many items meet a condition? |
+| Core theme | How many items satisfy a condition |
 | Math foundation | Counting, classification, multiples, remainders |
 | Programming content | Loop + condition + `count` |
-| Algorithm content | Counting algorithm, conditional counting, classification statistics |
-| Scenarios | Seat numbers, student numbers, task numbers, library levels, lottery numbers |
+| Algorithm content | Counting algorithms, conditional counting, classification statistics |
+| Scenarios | Seat numbers, student numbers, task numbers, book grouping, lottery numbers |
 | Goal | Students understand when to use `count = count + 1`. |
 
-Teaching task design:
+### Teaching Task Design
 
 | No. | Difficulty | Title |
-| ---: | --- | --- |
-| 01 | Simple | Count How Many Even Seat Numbers Are in a Class |
-| 02 | Simple | Count Multiples of 5 from 1 to 50 |
+| --: | --- | --- |
+| 01 | Simple | Count How Many Even Numbers There Are from 1 to n |
+| 02 | Simple | Count How Many Multiples of 5 There Are from 1 to n |
 | 03 | Simple | Count How Many Odd Task Numbers There Are |
-| 04 | Normal | Count How Many Lucky Lottery Numbers There Are |
-| 05 | Normal | Count Regular Books by Library Number |
-| 06 | Normal | Count Athletes Whose Numbers Are Divisible by 3 |
-| 07 | Challenge | Classify Library Books into Three Levels by Number |
-| 08 | Challenge | Count Game Tasks by Difficulty Number |
-| 09 | Challenge | Group Student Numbers by Remainder and Count Each Group |
+| 04 | Normal | Count Numbers That Are Even and Greater Than the Target |
+| 05 | Normal | Count Game Levels That Can Receive Reward Coins |
+| 06 | Normal | Count Numbers Divisible by 3 but Not Even |
+| 07 | Challenge | Split Student Numbers into Three Remainder Groups and Count Them |
+| 08 | Challenge | Count Normal, Hard, and Hidden Game Tasks by Number Rules |
+| 09 | Challenge | Compare How Many Numbers Two Reward Rules Select |
 
-Core example:
+### Progression Notes
 
-```lua
-local n = 100
-local k = 3
-local count = 0
+| Difficulty | Combination Method |
+| --- | --- |
+| Simple | Practices single-condition counting. |
+| Normal | Combines multiple conditions from Week 02. |
+| Challenge | Uses multiple counters, classification priority, and result comparison. |
 
-for i = 1, n do
-    if i % k == 0 then
-        count = count + 1
-    end
-end
-```
+---
 
-### Week 04: Sum, Average, and Accumulation
+## Week 04: Sum, Average, and Accumulation
 
 | Item | Content |
 | --- | --- |
-| Core theme | What is the total, what is the average, and where does the accumulation reach? |
+| Core theme | What is the total, what is the average, and when is the target reached |
 | Math foundation | Repeated addition, averages, accumulated quantities |
-| Programming content | `sum`, loop-based summation, early idea of accumulated arrays |
-| Algorithm content | Summation, conditional summation, average, accumulation table, prefix-sum foundation |
-| Scenarios | Stair numbers, level rewards, daily coins, saving goals |
-| Goal | Students can distinguish the use of `count` and `sum`. |
+| Programming content | `sum`, loop accumulation, accumulated variables |
+| Algorithm content | Summation, conditional summation, averages, target accumulation |
+| Scenarios | Stair numbers, level rewards, daily coins, savings goals |
+| Goal | Students can distinguish the roles of `count` and `sum`. |
 
-Teaching task design:
+### Teaching Task Design
 
 | No. | Difficulty | Title |
-| ---: | --- | --- |
-| 01 | Simple | Calculate the Total Coin Reward for One Week |
-| 02 | Simple | Calculate the Sum of Stair Numbers from 1 to n |
-| 03 | Simple | Calculate the Total Distance Run After Several Days |
-| 04 | Normal | Calculate the Average Score of Several Class Quizzes |
-| 05 | Normal | Calculate Total Savings on Day n |
-| 06 | Normal | Calculate Total and Average Coin Rewards from Game Levels |
-| 07 | Challenge | Find the First Day When Savings Reach the Toy Goal |
-| 08 | Challenge | Find the First Floor Where Total Steps Exceed a Target |
-| 09 | Challenge | Find the Day When Daily Game Rewards Reach an Upgrade Goal |
+| --: | --- | --- |
+| 01 | Simple | Calculate the Sum of Stair Numbers from 1 to n |
+| 02 | Simple | Calculate the Total Fixed Coin Reward Over Several Days |
+| 03 | Simple | Calculate the Total Distance Run Over Several Trainings |
+| 04 | Normal | Calculate the Sum of All Even Numbers from 1 to n |
+| 05 | Normal | Count Reward Levels and Calculate Total Reward Coins |
+| 06 | Normal | Calculate Quiz Total, Average, and Pass Status |
+| 07 | Challenge | Find the Earliest Day a Growing Daily Savings Plan Reaches the Target |
+| 08 | Challenge | Accumulate Coins Through Levels and Return the Level That Reaches the Upgrade Target |
+| 09 | Challenge | Count, Sum, and Average Numbers That Meet Conditions |
 
-Core example:
+### Progression Notes
 
-```lua
-local n = 100
-local sum = 0
+| Difficulty | Combination Method |
+| --- | --- |
+| Simple | Practices only `sum = sum + value`. |
+| Normal | Combines conditions, counting, and averages. |
+| Challenge | Combines accumulation, filtering, target checks, and loop stopping. |
 
-for i = 1, n do
-    sum = sum + i
-end
-```
+---
 
-### Week 05: Factors, Multiples, and Prime Numbers
+## Week 05: Factors, Multiples, and Prime Numbers
 
 | Item | Content |
 | --- | --- |
-| Core theme | Use enumeration to solve number property problems. |
+| Core theme | Use enumeration to solve number-property problems |
 | Math foundation | Factors, multiples, prime numbers, common factors, common multiples |
 | Programming content | `%`, loop enumeration, Boolean variables |
-| Algorithm content | Factor enumeration, factor counting, prime checking, greatest common factor enumeration, least common multiple enumeration |
-| Scenarios | Team grouping, puzzle blocks, special numbers, running meetups |
-| Goal | Students understand the algorithmic idea of trying possibilities one by one. |
+| Algorithm content | Factor enumeration, factor counting, prime checks, greatest common factor enumeration, least common multiple enumeration |
+| Scenarios | Group competitions, puzzle blocks, special numbers, running groups, alarm cycles |
+| Goal | Students understand the algorithmic idea of trying candidates one by one. |
 
-Teaching task design:
+### Teaching Task Design
 
 | No. | Difficulty | Title |
-| ---: | --- | --- |
-| 01 | Simple | Check Whether a Team Can Be Split into Equal Groups |
-| 02 | Simple | Check Whether One Number Is a Multiple of Another |
-| 03 | Simple | Check Whether Puzzle Blocks Can Be Shared Equally |
-| 04 | Normal | Find All Ways to Split a Set of Puzzle Blocks |
+| --: | --- | --- |
+| 01 | Simple | Check Whether One Number Is a Multiple of Another |
+| 02 | Simple | Check Whether a Team Can Be Split into Equal Groups |
+| 03 | Simple | Count Multiples of a Target Number from 1 to n |
+| 04 | Normal | Find How Many Equal-Sharing Methods a Puzzle Block Count Has |
 | 05 | Normal | Count How Many Factors a Special Number Has |
-| 06 | Normal | Find When Two Running Cycles Meet for the First Time |
+| 06 | Normal | Calculate the Count and Sum of All Factors of a Number |
 | 07 | Challenge | Check Whether a Special Number Is Prime |
 | 08 | Challenge | Find the Largest Common Group Size for Two Classes |
 | 09 | Challenge | Find the First Minute When Two Alarms Ring Together |
 
-Core example:
+### Progression Notes
 
-```lua
-local n = 17
-local factorCount = 0
+| Difficulty | Combination Method |
+| --- | --- |
+| Simple | Practices multiple and divisibility checks. |
+| Normal | Combines loops, counting, and accumulation. |
+| Challenge | Combines factor enumeration, prime checks, greatest common factors, and least common multiples. |
 
-for i = 1, n do
-    if n % i == 0 then
-        factorCount = factorCount + 1
-    end
-end
+---
 
-local isPrime = false
-
-if factorCount == 2 then
-    isPrime = true
-end
-```
-
-### Week 06: Quantity Relations and Double Enumeration
+## Week 06: Quantity Relations and Double Enumeration
 
 | Item | Content |
 | --- | --- |
-| Core theme | How can we find an answer when two variables change together? |
-| Math foundation | Sum and difference relations, multiplication relations, chicken and rabbit problems, shopping plans |
-| Programming content | Nested loops, conditional filtering |
-| Algorithm content | Double-variable enumeration, combination counting, solution search |
-| Scenarios | Candy buying, rectangle puzzles, dice games, stationery shopping, chicken and rabbit problems |
-| Goal | Students can use nested loops to solve simple word problems. |
+| Core theme | How to find answers when two variables change together |
+| Math foundation | Sum and difference relations, multiplication relations, chicken-and-rabbit problems, shopping plans |
+| Programming content | Nested loops, condition filtering |
+| Algorithm content | Double-variable enumeration, combination counting, plan search, best-plan update |
+| Scenarios | Candy sharing, rectangle puzzles, dice games, stationery purchases, chicken-and-rabbit problems |
+| Goal | Students can use nested loops to solve simple applied problems. |
 
-Teaching task design:
+### Teaching Task Design
 
 | No. | Difficulty | Title |
-| ---: | --- | --- |
-| 01 | Simple | How Many Ways Are There to Buy 20 Candies of Two Types |
-| 02 | Simple | How Many Dice Outcomes Have a Target Sum |
-| 03 | Simple | How Many Length and Width Pairs Match a Fixed Rectangle Perimeter |
-| 04 | Normal | Count Stationery Plans for Buying Pencils and Erasers with a Fixed Budget |
+| --: | --- | --- |
+| 01 | Simple | Count Ways to Buy total Candies from Two Candy Types |
+| 02 | Simple | Count Outcomes Where Two Dice Sum to the Target |
+| 03 | Simple | Count Length-Width Pairs for a Fixed Rectangle Perimeter |
+| 04 | Normal | Count Stationery Plans That Spend a Fixed Budget on Pencils and Erasers |
 | 05 | Normal | Count Game Shop Plans That Spend All Coins on Potions and Shields |
-| 06 | Normal | Count Ways to Split a Fixed Signup Quota Between Two Classes |
-| 07 | Challenge | Chicken and Rabbit Problem: Find Animal Counts from Heads and Legs |
-| 08 | Challenge | Buy Child and Adult Tickets with an Exact Budget |
-| 09 | Challenge | Find the Shopping Plan with the Most Items Under a Budget |
+| 06 | Normal | Find the Length and Width with Maximum Area for a Fixed Perimeter |
+| 07 | Challenge | Chicken and Rabbit Cage: Find Animal Counts from Heads and Legs |
+| 08 | Challenge | Spend the Exact Budget on Children's and Adult Tickets |
+| 09 | Challenge | Buy Two Products Within Budget and Maximize Quantity with Minimum Leftover |
 
-Core example:
+### Progression Notes
 
-```lua
-local target = 20
-local count = 0
+| Difficulty | Combination Method |
+| --- | --- |
+| Simple | Practices nested loops and plan counting. |
+| Normal | Combines price calculation, area calculation, and maximum updates. |
+| Challenge | Combines double-variable enumeration, validity checks, and best-plan updates. |
 
-for a = 1, target do
-    for b = 1, target do
-        if a + b == target then
-            count = count + 1
-        end
-    end
-end
-```
+---
 
-### Week 07: Arrays and Table Data
+## Week 07: Arrays and Table Data
 
 | Item | Content |
 | --- | --- |
-| Core theme | How can a group of data be stored and processed? |
+| Core theme | How to store and process a group of data |
 | Math foundation | Table data, sequence numbers, positions |
 | Programming content | Array tables, indexes, traversal, modification |
 | Algorithm content | Array access, array modification, array traversal, array copying, accumulated arrays |
-| Scenarios | Score sheets, fitness records, daily points, reversing a line, passing games |
-| Goal | Students understand an array as a row of numbered boxes. |
+| Scenarios | Score sheets, fitness records, daily points, line reversal, ball-passing games |
+| Goal | Students understand that an array is a row of numbered boxes. |
 
-Teaching task design:
+### Teaching Task Design
 
 | No. | Difficulty | Title |
-| ---: | --- | --- |
-| 01 | Simple | Read the Score of a Student from a Score Sheet |
-| 02 | Simple | Read a Student's Long Jump Result from a Fitness Table |
-| 03 | Simple | Check the Item Count in a Game Bag Slot |
-| 04 | Normal | Modify the Points for One Day in a Daily Points Table |
-| 05 | Normal | Swap the First and Last Students in a Line |
-| 06 | Normal | Copy a Class Score Sheet as a Backup |
-| 07 | Challenge | Record Who Holds the Ball in Each Round of a Passing Game |
-| 08 | Challenge | Output the New Order After a Team Turns Around |
-| 09 | Challenge | Generate an Accumulated Points Table for Upgrade Progress |
+| --: | --- | --- |
+| 01 | Simple | Read the Score of a Student at a Given Position |
+| 02 | Simple | Modify the Points for One Day in a Daily Points Table |
+| 03 | Simple | Swap the Data at Two Positions in a Student Line |
+| 04 | Normal | Traverse a Score Sheet and Count Passing Students |
+| 05 | Normal | Copy a Class Score Sheet as a Backup |
+| 06 | Normal | Add an Event Bonus to Every Item in a Daily Coin Table |
+| 07 | Challenge | Generate a Daily Accumulated Points Table for Upgrade Progress |
+| 08 | Challenge | Generate the New Line Order After a Team Turns Around |
+| 09 | Challenge | Record Who Has the Ball After Each Round in a Passing Game |
 
-Core example:
+### Progression Notes
 
-```lua
-local scores = {80, 95, 70, 60, 100}
-local n = 5
+| Difficulty | Combination Method |
+| --- | --- |
+| Simple | Practices array reading, modification, and swapping. |
+| Normal | Combines loops, conditions, and variable updates. |
+| Challenge | Combines accumulated arrays, reverse access, state simulation, and loop wraparound. |
 
-for i = 1, n do
-    local current = scores[i]
-end
-```
+---
 
-### Week 08: Array Statistics and Extremes
+## Week 08: Array Statistics and Extremes
 
 | Item | Content |
 | --- | --- |
-| Core theme | Analyze a group of data. |
+| Core theme | Analyze a group of data statistically |
 | Math foundation | Total score, average score, highest score, lowest score, range statistics |
-| Programming content | Array traversal + conditions + variable updates |
-| Algorithm content | Array sum, array count, maximum, minimum, maximum position, second largest value |
-| Scenarios | Class scores, long jump competition, score ranges, runner-up score |
+| Programming content | Array traversal + condition + variable update |
+| Algorithm content | Array summation, array counting, maximum value, minimum value, maximum-value position, second-largest value |
+| Scenarios | Class scores, long jump competitions, score ranges, runner-up scores |
 | Goal | Students master the pattern of assuming the first item is the answer, then comparing one by one. |
 
-Teaching task design:
+### Teaching Task Design
 
 | No. | Difficulty | Title |
-| ---: | --- | --- |
+| --: | --- | --- |
 | 01 | Simple | Calculate the Total Score of a Class Score Sheet |
-| 02 | Simple | Calculate the Average Daily Coin Reward |
-| 03 | Simple | Count How Many Students Passed |
-| 04 | Normal | Find the Best Player in a Long Jump Competition |
-| 05 | Normal | Find the Lowest Score and Its Position |
-| 06 | Normal | Count Game Scores Above a Target Line |
-| 07 | Challenge | Find the Runner-Up Score in a Score Ranking |
+| 02 | Simple | Count How Many Scores in a Score Sheet Are Passing |
+| 03 | Simple | Calculate the Average Reward in a Daily Coin Array |
+| 04 | Normal | Find the Best Athlete in a Long Jump Competition |
+| 05 | Normal | Find the Lowest Score and Its Position in a Score Sheet |
+| 06 | Normal | Count Game Scores Above a Target Line and Sum Them |
+| 07 | Challenge | Find the First and Second Place Scores in a Ranking |
 | 08 | Challenge | Find the Difference Between First and Second Place in Long Jump |
-| 09 | Challenge | Count Excellent, Passing, and Needs-Improvement Score Ranges |
+| 09 | Challenge | Count Score Ranges and Find the Highest Score Position |
 
-Core example:
+### Progression Notes
 
-```lua
-local numbers = {80, 95, 70, 60, 100}
-local n = 5
+| Difficulty | Combination Method |
+| --- | --- |
+| Simple | Practices array summation, array counting, and array averages. |
+| Normal | Combines maximum values, minimum values, and position recording. |
+| Challenge | Combines second-largest values, range statistics, position updates, and difference calculation. |
 
-local maxValue = numbers[1]
-local maxIndex = 1
+---
 
-for i = 2, n do
-    if numbers[i] > maxValue then
-        maxValue = numbers[i]
-        maxIndex = i
-    end
-end
-```
-
-### Week 09: Search and Binary Search
+## Week 09: Search and Binary Search
 
 | Item | Content |
 | --- | --- |
-| Core theme | Is the target present, where is it, and how can we find it faster? |
-| Math foundation | Number lines, intervals, comparison, narrowing a range |
+| Core theme | Whether a target exists, where it is, and how to find it faster |
+| Math foundation | Number lines, intervals, comparisons, range narrowing |
 | Programming content | Linear search, `found`, `position`, `left/right/mid` |
-| Algorithm content | Existence search, position search, first match, last match, binary search |
-| Scenarios | Number cards, full-score search, retake lists, book numbers, search efficiency comparison |
+| Algorithm content | Existence search, position search, first-position search, last-position search, binary search |
+| Scenarios | Number cards, perfect-score search, retake lists, book numbers, search-efficiency comparison |
 | Goal | Students understand the difference between linear search and binary search. |
 
-Teaching task design:
+### Teaching Task Design
 
 | No. | Difficulty | Title |
-| ---: | --- | --- |
-| 01 | Simple | Search for a Student in Number Cards |
-| 02 | Simple | Check Whether Anyone Got a Full Score |
-| 03 | Simple | Search for a Target Item Count in a Bag Slot |
+| --: | --- | --- |
+| 01 | Simple | Search a Number-Card Array for a Target Student |
+| 02 | Simple | Search a Score Sheet for a Perfect Score |
+| 03 | Simple | Find the Position of a Target Item Count in Backpack Slots |
 | 04 | Normal | Find the First Failing Student in a Retake List |
-| 05 | Normal | Find the Last Full-Score Position in Competition Results |
-| 06 | Normal | Find the First Unfinished Task Number |
-| 07 | Challenge | Quickly Find a Target Book in Sorted Book Numbers |
+| 05 | Normal | Find the Last Perfect-Score Position in Competition Results |
+| 06 | Normal | Search for a Target Score and Count How Many Checks Were Made |
+| 07 | Challenge | Use Binary Search to Quickly Find a Target Book in Sorted Book Numbers |
 | 08 | Challenge | Compare How Many Checks Linear Search and Binary Search Need |
-| 09 | Challenge | Find a Target Score in a Sorted Score Table |
+| 09 | Challenge | Search a Sorted Score Table for a Target Score or Insertion Position |
 
-Linear search:
+### Progression Notes
 
-```lua
-local numbers = {3, 8, 12, 7, 9}
-local n = 5
-local target = 12
+| Difficulty | Combination Method |
+| --- | --- |
+| Simple | Practices linear search and position return. |
+| Normal | Combines array traversal, conditions, and search-count statistics. |
+| Challenge | Combines sorted arrays, binary search, range narrowing, and insertion-position checks. |
 
-local position = 0
+---
 
-for i = 1, n do
-    if numbers[i] == target then
-        position = i
-    end
-end
-```
-
-Binary search:
-
-```lua
-local numbers = {1, 3, 5, 7, 9, 12, 18}
-local n = 7
-local target = 9
-
-local left = 1
-local right = n
-local position = 0
-
-while left <= right and position == 0 do
-    local mid = (left + right) // 2
-
-    if numbers[mid] == target then
-        position = mid
-    elseif target < numbers[mid] then
-        right = mid - 1
-    else
-        left = mid + 1
-    end
-end
-```
-
-### Week 10: Sorting Algorithms I
+## Week 10: Sorting Algorithms I
 
 | Item | Content |
 | --- | --- |
-| Core theme | Organize a group of data using comparison and swapping. |
-| Math foundation | Comparing size, ascending order, descending order, lining up |
+| Core theme | Organize a group of data with comparison and swapping |
+| Math foundation | Comparison, ascending order, descending order, lining up |
 | Programming content | Swapping array elements, nested loops |
-| Algorithm content | Selection sort, first round of bubble sort, full bubble sort as an extension |
-| Scenarios | Seat swapping, height ordering, score rankings, sorting workload |
-| Goal | Students understand the three actions of sorting: compare, record position, swap. |
+| Algorithm content | Selection sort, bubble sort, swap-count statistics |
+| Scenarios | Seat changes, height lines, score leaderboards, sorting workload |
+| Goal | Students understand the three sorting actions: compare, record a position, and swap. |
 
-Teaching task design:
+### Teaching Task Design
 
 | No. | Difficulty | Title |
-| ---: | --- | --- |
-| 01 | Simple | Line Up Students by Height from Short to Tall |
-| 02 | Simple | Organize Game Scores from Low to High |
-| 03 | Simple | Organize Running Results from Fast to Slow |
+| --: | --- | --- |
+| 01 | Simple | Swap Two Adjacent Height Values That Are Out of Order |
+| 02 | Simple | Find the Position of the Minimum Value in a Score List |
+| 03 | Simple | Complete the First Round of Selection Sort |
 | 04 | Normal | Use Selection Sort to Organize a Game Score Ranking |
 | 05 | Normal | Use Selection Sort to Sort Book Numbers from Small to Large |
-| 06 | Normal | Use Selection Sort to Find the Minimum in Each Remaining Round |
-| 07 | Challenge | Count Swaps When Bubble Sorting a Seat Table |
-| 08 | Challenge | Use Bubble Sort to Sort Scores from High to Low |
-| 09 | Challenge | Compare Swap Counts of Selection Sort and Bubble Sort |
+| 06 | Normal | Complete One Left-to-Right Pass of Bubble Sort |
+| 07 | Challenge | Use Bubble Sort to Arrange Scores from High to Low |
+| 08 | Challenge | Count Swaps When Bubble Sorting a Seat Table |
+| 09 | Challenge | Compare Selection Sort and Bubble Sort Swap Counts on the Same Data |
 
-Selection sort:
+### Progression Notes
 
-```lua
-local numbers = {5, 3, 8, 1, 2}
-local n = 5
+| Difficulty | Combination Method |
+| --- | --- |
+| Simple | Practices comparison, position recording, and swapping. |
+| Normal | Fully implements selection sort or part of bubble sort. |
+| Challenge | Combines full sorting, swap-count statistics, array copying, and algorithm comparison. |
 
-for i = 1, n - 1 do
-    local minIndex = i
+---
 
-    for j = i + 1, n do
-        if numbers[j] < numbers[minIndex] then
-            minIndex = j
-        end
-    end
-
-    local temp = numbers[i]
-    numbers[i] = numbers[minIndex]
-    numbers[minIndex] = temp
-end
-```
-
-### Week 11: Sorting Algorithms II and Applications
+## Week 11: Sorting Algorithms II and Applications
 
 | Item | Content |
 | --- | --- |
-| Core theme | The same sorting problem can be solved in different ways. |
-| Math foundation | Ranking, median, duplicate data, merging data |
-| Programming content | Insertion sort, post-sort processing |
-| Algorithm content | Insertion sort, median, unique counting, merging sorted arrays, tied ranking |
-| Scenarios | Joining a line, organizing playing cards, top three scores, merging two class score lists, tied ranks |
+| Core theme | The same sorting problem can be solved with different methods |
+| Math foundation | Ranks, middle values, duplicate data, merged data |
+| Programming content | Insertion sort, processing after sorting |
+| Algorithm content | Insertion sort, middle values, deduplication statistics, merging sorted arrays, tied ranks |
+| Scenarios | Line insertion, playing-card organization, top three, merging two class score sheets, tied ranks |
 | Goal | Students can distinguish the ideas behind selection sort, bubble sort, and insertion sort. |
 
-Teaching task design:
+### Teaching Task Design
 
 | No. | Difficulty | Title |
-| ---: | --- | --- |
-| 01 | Simple | Insert a New Score Like Organizing Playing Cards |
-| 02 | Simple | Insert a New Student into an Ordered Line |
-| 03 | Simple | Find the Middle Score After Sorting |
-| 04 | Normal | Merge Two Already Sorted Class Score Sheets |
-| 05 | Normal | Find the Top Three Scores After Sorting |
-| 06 | Normal | Count How Many Different Scores Remain After Sorting |
+| --: | --- | --- |
+| 01 | Simple | Insert a New Score into the Correct Position Like Organizing Playing Cards |
+| 02 | Simple | Find the Middle Score in a Sorted Score Sheet |
+| 03 | Simple | Count Adjacent Equal Scores After Sorting |
+| 04 | Normal | Use Insertion Sort to Organize Game Scores |
+| 05 | Normal | Merge Two Already Sorted Score Sheets |
+| 06 | Normal | Sort Scores and Count How Many Different Scores There Are |
 | 07 | Challenge | Handle Tied Ranks in a Score Ranking |
-| 08 | Challenge | Merge Two Sorted Book Number Lists and Keep Them Sorted |
-| 09 | Challenge | Remove Duplicate Numbers After Sorting and Count the Remaining Items |
+| 08 | Challenge | Merge Two Sorted Book Number Lists, Remove Duplicates, and Keep Order |
+| 09 | Challenge | Find the Top Three After Sorting and Check Whether a New Score Enters the Top Three |
 
-Insertion sort:
+### Progression Notes
 
-```lua
-local numbers = {5, 3, 8, 1, 2}
-local n = 5
+| Difficulty | Combination Method |
+| --- | --- |
+| Simple | Practices insertion ideas, positions after sorting, and adjacent comparison. |
+| Normal | Combines full insertion sort, merging sorted arrays, and deduplication statistics. |
+| Challenge | Combines sorting, deduplication, merging, tied ranking, and top-three checks. |
 
-for i = 2, n do
-    local key = numbers[i]
-    local j = i - 1
+---
 
-    while j >= 1 and numbers[j] > key do
-        numbers[j + 1] = numbers[j]
-        j = j - 1
-    end
-
-    numbers[j + 1] = key
-end
-```
-
-### Week 12: Integrated Math Algorithm Projects
+## Week 12: Integrated Math Algorithm Projects
 
 | Item | Content |
 | --- | --- |
-| Core theme | Put algorithms back into real math scenarios. |
+| Core theme | Put algorithms back into real math scenarios |
 | Math foundation | Statistics, sorting, search, quantity relations, geometric area |
-| Programming content | Combine variables, conditions, loops, arrays, and functions |
-| Algorithm content | Statistics, search, sorting, ranking, enumeration, optimal plans |
-| Scenarios | Score systems, leaderboards, shopping plans, dice possibilities, rectangle comparison |
+| Programming content | Integrated use of variables, conditions, loops, arrays, and functions |
+| Algorithm content | Statistics, search, sorting, ranking, enumeration, best-plan search |
+| Scenarios | Score systems, leaderboards, shopping plans, dice possibilities, book numbers, sports day results |
 | Goal | Students can complete a small integrated algorithm project. |
 
-Teaching task design:
+### Teaching Task Design
 
 | No. | Difficulty | Title |
-| ---: | --- | --- |
+| --: | --- | --- |
 | 01 | Simple | Class Score Analysis System: Total, Average, and Passing Count |
 | 02 | Simple | Game Points Analysis System: Highest, Lowest, and Average |
 | 03 | Simple | Daily Savings Record System: Total, Highest Day, and Goal Check |
 | 04 | Normal | Game Leaderboard System: Sorting, Top Three, and Entry Check |
 | 05 | Normal | Book Number Management System: Search, Sorting, and Classification |
 | 06 | Normal | Sports Day Results System: Best Result, Ranking, and Range Statistics |
-| 07 | Challenge | Shopping Plan System: Find the Best Plan Within a Budget |
-| 08 | Challenge | Chicken and Rabbit System: Enumerate and Verify All Possible Answers |
-| 09 | Challenge | Integrated Score Ranking System: Sorting, Tied Ranking, and Student Search |
+| 07 | Challenge | Shopping Plan System: Find the Most Items Within Budget with the Least Leftover |
+| 08 | Challenge | Dice Possibility System: Count All Sums and Find the Most Frequent Result |
+| 09 | Challenge | Integrated Score Ranking System: Sorting, Tied Ranking, and Student Rank Search |
 
-## 7. Week 12 Project Directions
+### Progression Notes
 
-### Project A: Score Analysis System
+| Difficulty | Combination Method |
+| --- | --- |
+| Simple | Each question reviews 2 to 3 foundational algorithms. |
+| Normal | Combines arrays, search, sorting, and classification statistics. |
+| Challenge | Combines enumeration, array statistics, sorting, tied ranking, search, and project modeling. |
 
-Fixed data:
+---
+
+---
+
+# 10. Week 12 Project Directions
+
+## Project A: Score Analysis System
+
+Fixed data example:
 
 ```lua
 local scores = {80, 95, 67, 100, 58, 72}
@@ -639,19 +626,21 @@ Functions:
 ```text
 Calculate total score
 Calculate average score
-Find the highest score
-Find the lowest score
+Find highest score
+Find lowest score
 Count passing students
 Count excellent students
-Check whether there is a full score
+Search whether there is a perfect score
 Sort from high to low
 Calculate the top three
-Handle tied ranks as an extension
+Handle tied ranks
 ```
 
-### Project B: Game Leaderboard System
+---
 
-Fixed data:
+## Project B: Game Leaderboard System
+
+Fixed data example:
 
 ```lua
 local points = {120, 300, 250, 180, 400}
@@ -661,18 +650,20 @@ local n = 5
 Functions:
 
 ```text
-Find the highest score
-Find the lowest score
-Count how many players exceed a score line
-Sort scores
+Find highest score
+Find lowest score
+Count players above a score line
+Sort
 Find the top three
 Check whether a score can enter the top three
 Find the rank of a score
 ```
 
-### Project C: Shopping Plan System
+---
 
-Fixed data:
+## Project C: Shopping Plan System
+
+Fixed data example:
 
 ```lua
 local priceA = 3
@@ -683,15 +674,17 @@ local budget = 30
 Functions:
 
 ```text
-Count plans that spend the exact budget
+Count plans that spend the budget exactly
 Count plans that do not exceed the budget
 Find the plan with the largest item count
-Find the plan with the smallest remaining money
+Find the plan with the least leftover money
 ```
 
-### Project D: Dice Possibility Statistics
+---
 
-Fixed data:
+## Project D: Dice Possibility Statistics
+
+Fixed data example:
 
 ```lua
 local diceMax = 6
@@ -706,79 +699,102 @@ Find the sum that appears most often
 Compare the possibilities of different sums
 ```
 
-### Project E: Rectangle Area Comparison
+---
 
-Fixed data:
+## Project E: Book Number Management System
+
+Fixed data example:
 
 ```lua
-local lengths = {5, 8, 6, 10}
-local widths = {4, 3, 7, 2}
+local books = {18, 5, 12, 3}
 local n = 4
 ```
 
 Functions:
 
 ```text
-Calculate each rectangle's area
-Find the rectangle with the largest area
-Find the rectangle with the smallest area
-Sort by area as an extension
+Search for a target number
+Count odd-numbered IDs
+Count even-numbered IDs
+Sort from small to large
+Merge two sorted ID lists
+Remove duplicate IDs
 ```
 
-## 8. Core Algorithm Coverage
+---
+
+# 11. Core Algorithm Coverage Checklist
 
 | No. | Algorithm |
-| ---: | --- |
+| --: | --- |
 | 01 | Sequential calculation |
 | 02 | Variable update |
-| 03 | Variable swapping |
+| 03 | Variable swap |
 | 04 | Conditional classification |
-| 05 | Odd and even checking |
-| 06 | Multiple checking |
-| 07 | Counting algorithm |
-| 08 | Classification statistics |
-| 09 | Summation algorithm |
-| 10 | Average value |
-| 11 | Accumulated array / prefix-sum foundation |
-| 12 | Factor enumeration |
-| 13 | Prime checking |
-| 14 | Greatest common factor enumeration |
-| 15 | Least common multiple enumeration |
-| 16 | Single-variable enumeration |
-| 17 | Double-variable enumeration |
-| 18 | Array traversal |
-| 19 | Array copying |
-| 20 | Array reversal |
-| 21 | Array right shift |
-| 22 | Array summation |
-| 23 | Array counting |
-| 24 | Maximum / minimum |
-| 25 | Maximum position |
-| 26 | Second largest value |
-| 27 | Linear search |
-| 28 | Binary search |
-| 29 | Selection sort |
-| 30 | Bubble sort |
-| 31 | Insertion sort |
-| 32 | Finding top three after sorting |
-| 33 | Removing duplicates after sorting |
-| 34 | Merging sorted arrays |
-| 35 | Tied ranking |
-| 36 | Integrated project modeling |
+| 05 | Odd-even check |
+| 06 | Multiple check |
+| 07 | Loop counting |
+| 08 | Multiple-condition check |
+| 09 | Conditional counting |
+| 10 | Classification statistics |
+| 11 | Accumulation algorithm |
+| 12 | Conditional summation |
+| 13 | Average |
+| 14 | Target accumulation |
+| 15 | Factor enumeration |
+| 16 | Factor counting |
+| 17 | Prime check |
+| 18 | Greatest common factor enumeration |
+| 19 | Least common multiple enumeration |
+| 20 | Single-variable enumeration |
+| 21 | Double-variable enumeration |
+| 22 | Plan counting |
+| 23 | Best-plan update |
+| 24 | Array access |
+| 25 | Array modification |
+| 26 | Array swap |
+| 27 | Array traversal |
+| 28 | Array copy |
+| 29 | Array reversal |
+| 30 | Accumulated array |
+| 31 | Array summation |
+| 32 | Array counting |
+| 33 | Maximum / minimum value |
+| 34 | Maximum-value position |
+| 35 | Second-largest value |
+| 36 | Linear search |
+| 37 | Find first position |
+| 38 | Find last position |
+| 39 | Search-count statistics |
+| 40 | Binary search |
+| 41 | Insertion-position check |
+| 42 | Selection sort |
+| 43 | Bubble sort |
+| 44 | Insertion sort |
+| 45 | Find top three after sorting |
+| 46 | Deduplicate after sorting |
+| 47 | Merge sorted arrays |
+| 48 | Tied ranking |
+| 49 | Linked array sorting |
+| 50 | Integrated project modeling |
 
-## 9. Primary Math Alignment
+---
 
-| Math Area | Course Alignment |
+# 12. Corresponding Elementary Math Content
+
+| Math Area | Course Content |
 | --- | --- |
-| Numbers and operations | Four operations, multiples, factors, prime numbers, remainders, averages |
-| Quantity relations | Candy sharing, shopping, chicken and rabbit problems, combination enumeration |
+| Numbers and operations | Arithmetic, multiples, factors, prime numbers, remainders, averages |
+| Quantity relations | Candy sharing, shopping, chicken-and-rabbit problems, combination enumeration, best plans |
 | Statistics and probability | Score statistics, range statistics, dice possibilities, frequencies |
-| Geometry | Rectangle area, perimeter, area comparison |
-| Integrated practice | Score systems, leaderboards, shopping plans, dice analysis |
+| Shapes and geometry | Rectangle area, perimeter, area comparison |
+| Integration and practice | Score systems, leaderboards, shopping plans, dice analysis, book number management |
 
-## 10. Lesson and Question Naming Rules
+---
 
-Lesson naming rule:
+# 13. Lesson and Question Naming Rules
+
+## Lesson Naming Rules
 
 ```text
 Lesson number: fixed number
@@ -795,7 +811,11 @@ Lesson 02
 Lesson name: Week 01 - 变量
 ```
 
-Question field rule:
+---
+
+## Question Field Rules
+
+Each question uses only these index fields:
 
 ```text
 No.
@@ -803,21 +823,20 @@ Difficulty
 Title
 ```
 
-Question example:
+Question details continue to use these fields:
 
-| No. | Difficulty | Title |
-| ---: | --- | --- |
-| 01 | Simple | How Much Health Is Left After a Game Character Is Attacked |
-| 02 | Simple | How Much Do the Pencils Cost at the Stationery Store |
-| 03 | Simple | What Is the Area of the Rectangular Playground |
-| 04 | Normal | How Many Coins Are in the Bag After Defeating a Monster |
-| 05 | Normal | How Much Money Is Left After Buying Pencils and Erasers |
-| 06 | Normal | How Many Meters Have Been Run After Training |
-| 07 | Challenge | How Do Two Students Swap Seat Numbers |
-| 08 | Challenge | How Much Health Is Left After Damage and Healing |
-| 09 | Challenge | Calculate Total Price and Change for a Store Bundle |
+```text
+Story / Background
+Task
+Input
+Output
+Hints
+Starter Code
+Reference Solution
+Test Cases
+```
 
-Each lesson uses this fixed structure:
+Each lesson has a fixed structure:
 
 ```text
 Simple 01-03
@@ -825,9 +844,11 @@ Normal 04-06
 Challenge 07-09
 ```
 
-## 11. Standard Template for Future Lesson Generation
+---
 
-Each lesson should contain these fields:
+# 14. Standard Template for Future Lesson Generation
+
+Each lesson is recommended to contain these fields:
 
 ```text
 Lesson Number
@@ -841,34 +862,37 @@ Questions
 Review
 ```
 
-Each question should use only these index fields:
+Each lesson is recommended to contain these sections:
 
 ```text
-No.
-Difficulty
-Title
+1. Lesson objectives
+2. Lesson limits
+3. Core concepts
+4. 9 scenario-based questions
+5. Lesson review
 ```
 
-Question details may be included under the index fields:
+---
+
+# 15. Course Progression Summary
 
 ```text
-Story
-Task
-Fixed Data
-Expected Output / Result
-Hints
-Starter Code
-Reference Solution
+Week 01: Build the foundation for variables and sequential calculation
+Week 02: Build condition, loop, and state-update skills
+Week 03: Move from loops to counting and classification statistics
+Week 04: Extend from counting to summation, averages, and target accumulation
+Week 05: Use enumeration to handle factors, multiples, and prime numbers
+Week 06: Use nested loops to handle problems where two variables change together
+Week 07: Introduce arrays and begin processing groups of data
+Week 08: Perform statistics and extreme-value analysis on arrays
+Week 09: Search for targets in arrays and understand binary search
+Week 10: Understand comparison and swapping through selection sort and bubble sort
+Week 11: Learn insertion sort, merging, deduplication, and ranking
+Week 12: Integrate statistics, search, sorting, enumeration, and modeling through projects
 ```
 
-Each lesson should contain these sections:
+Overall progression:
 
 ```text
-1. Lesson Objectives
-2. Lesson Limits
-3. Core Concepts
-4. 9 Scenario-Based Questions
-5. Lesson Review
+Variables -> Conditions and loops -> Counting -> Accumulation -> Enumeration -> Double enumeration -> Arrays -> Array statistics -> Search -> Sorting -> Sorting applications -> Integrated projects
 ```
-
-This teaching document can be used as the shared structure for generating all 24 lessons.

@@ -1,30 +1,24 @@
 {
   "title": "Week 06 - 数量关系与双变量枚举",
-  "description": "练习双重循环、方案搜索和组合计数。",
+  "description": "练习双重循环、方案计数、条件筛选和最优方案搜索。",
   "sort_order": 12,
   "questions": [
     {
-      "title": "两种糖果一共买指定颗数有多少种买法",
+      "title": "两种糖果一共买 total 颗有多少种买法",
       "description": {
         "难度": "Simple",
-        "背景": "商店里有水果糖和牛奶糖两种糖果。小明准备一共购买 total 颗糖果，水果糖可以买任意颗，牛奶糖也可以买任意颗，只要两种糖果的数量加起来正好等于 total 即可。某一种糖果买 0 颗也算一种买法。",
-        "任务": "请统计水果糖和牛奶糖一共买 total 颗时，一共有多少种不同的数量搭配方式。",
+        "背景": "学生可以买两种糖果：水果糖和巧克力糖。只关心两种糖果的数量之和是否等于 total。",
+        "任务": "请统计两种糖果数量加起来正好是 total 的买法数量。",
         "输入": "一个数字：total。",
-        "输出": "返回买法数量，允许某一种买 0 颗。",
-        "提示": "可以枚举第一种糖果的数量 a，再枚举第二种糖果的数量 b，检查 a + b 是否等于 total。"
+        "输出": "返回买法数量。",
+        "提示": "可以分别尝试第一种糖果和第二种糖果的数量。"
       },
       "starter_code": "function solution(total)\n    return 0\nend",
-      "reference_code": "function solution(total)\n    local count = 0\n    for a = 0, total do\n        for b = 0, total do\n            if a + b == total then\n                count = count + 1\n            end\n        end\n    end\n    return count\nend",
+      "reference_code": "function solution(total)\n    local count = 0\n\n    for a = 0, total do\n        for b = 0, total do\n            if a + b == total then\n                count = count + 1\n            end\n        end\n    end\n\n    return count\nend",
       "test_cases": [
-        [
-          20
-        ],
-        [
-          3
-        ],
-        [
-          0
-        ]
+        [3],
+        [5],
+        [20]
       ],
       "sort_order": 1
     },
@@ -32,49 +26,38 @@
       "title": "两个骰子的点数和等于目标有多少种情况",
       "description": {
         "难度": "Simple",
-        "背景": "游戏中同时投掷两个普通骰子，每个骰子的点数都可能是 1 到 6。因为第一个骰子和第二个骰子是有顺序的，所以点数为 1 和 6、点数为 6 和 1 会被看作两种不同情况。",
-        "任务": "请统计两个骰子的点数之和正好等于 target 时，一共有多少种有序情况。",
+        "背景": "两个普通骰子的点数都从 1 到 6。玩家想知道两个骰子的点数和等于 target 时有多少种可能。",
+        "任务": "请统计两个骰子点数和等于 target 的情况数量。",
         "输入": "一个数字：target。",
-        "输出": "返回情况数量。",
-        "提示": "可以使用双重循环枚举第一个骰子和第二个骰子的点数，再判断它们的和是否等于 target。"
+        "输出": "返回可能情况数量。",
+        "提示": "第一个骰子和第二个骰子都需要分别枚举。"
       },
       "starter_code": "function solution(target)\n    return 0\nend",
-      "reference_code": "function solution(target)\n    local count = 0\n    for a = 1, 6 do\n        for b = 1, 6 do\n            if a + b == target then\n                count = count + 1\n            end\n        end\n    end\n    return count\nend",
+      "reference_code": "function solution(target)\n    local count = 0\n\n    for a = 1, 6 do\n        for b = 1, 6 do\n            if a + b == target then\n                count = count + 1\n            end\n        end\n    end\n\n    return count\nend",
       "test_cases": [
-        [
-          7
-        ],
-        [
-          2
-        ],
-        [
-          13
-        ]
+        [2],
+        [7],
+        [12],
+        [13]
       ],
       "sort_order": 2
     },
     {
-      "title": "长方形拼图周长固定时有多少种长宽组合",
+      "title": "长方形周长固定时有多少种长宽组合",
       "description": {
         "难度": "Simple",
-        "背景": "手工课上，学生要用小方块拼出一个长方形拼图。老师给出了这个长方形的周长 perimeter，要求长和宽都必须是正整数。现在需要统计有多少种长宽搭配可以拼出符合周长要求的长方形。",
-        "任务": "请枚举可能的 length 和 width，统计满足 2 * (length + width) == perimeter 的组合数量。",
+        "背景": "一个长方形的长和宽都是正整数。现在给定 perimeter，老师想知道有多少种长宽组合能组成这个周长。",
+        "任务": "请统计满足周长等于 perimeter 的长宽组合数量。",
         "输入": "一个数字：perimeter。",
-        "输出": "返回满足 2 * (length + width) == perimeter 的组合数。",
-        "提示": "可以用双重循环分别枚举 length 和 width，再检查计算出的周长是否等于 perimeter。"
+        "输出": "返回长宽组合数量。",
+        "提示": "长和宽都可以一个个尝试。"
       },
       "starter_code": "function solution(perimeter)\n    return 0\nend",
-      "reference_code": "function solution(perimeter)\n    local count = 0\n    for length = 1, perimeter do\n        for width = 1, perimeter do\n            if (length + width) * 2 == perimeter then\n                count = count + 1\n            end\n        end\n    end\n    return count\nend",
+      "reference_code": "function solution(perimeter)\n    local count = 0\n\n    for length = 1, perimeter do\n        for width = 1, perimeter do\n            if 2 * (length + width) == perimeter then\n                count = count + 1\n            end\n        end\n    end\n\n    return count\nend",
       "test_cases": [
-        [
-          10
-        ],
-        [
-          12
-        ],
-        [
-          3
-        ]
+        [10],
+        [12],
+        [7]
       ],
       "sort_order": 3
     },
@@ -82,30 +65,18 @@
       "title": "文具店用固定预算买铅笔和橡皮的方案数",
       "description": {
         "难度": "Normal",
-        "背景": "小明带着 budget 元去文具店购物。铅笔每支 pencilPrice 元，橡皮每块 eraserPrice 元。他希望购买若干支铅笔和若干块橡皮，并且刚好把预算全部花完。铅笔或橡皮都可以买 0 个。",
-        "任务": "请统计在刚好花完 budget 元的情况下，一共有多少种购买铅笔和橡皮的数量方案。",
-        "输入": "三个数字：budget、pencilPrice、eraserPrice。",
-        "输出": "返回刚好花完预算的方案数，数量可以为 0。",
-        "提示": "可以枚举铅笔数量 pencils 和橡皮数量 erasers，计算总价后检查是否正好等于 budget。"
+        "背景": "文具店中，铅笔每支 pencilPrice 元，橡皮每块 eraserPrice 元。学生希望刚好花完 budget 元。",
+        "任务": "请统计购买铅笔和橡皮后刚好花完预算的方案数量。",
+        "输入": "三个数字：budget、pencilPrice 和 eraserPrice。",
+        "输出": "返回刚好花完预算的方案数量。",
+        "提示": "每一种购买数量都需要计算总价后再判断。"
       },
       "starter_code": "function solution(budget, pencilPrice, eraserPrice)\n    return 0\nend",
-      "reference_code": "function solution(budget, pencilPrice, eraserPrice)\n    local count = 0\n    for pencils = 0, budget do\n        for erasers = 0, budget do\n            local cost = pencils * pencilPrice + erasers * eraserPrice\n            if cost == budget then\n                count = count + 1\n            end\n        end\n    end\n    return count\nend",
+      "reference_code": "function solution(budget, pencilPrice, eraserPrice)\n    local count = 0\n\n    for pencil = 0, budget do\n        for eraser = 0, budget do\n            local total = pencil * pencilPrice + eraser * eraserPrice\n            if total == budget then\n                count = count + 1\n            end\n        end\n    end\n\n    return count\nend",
       "test_cases": [
-        [
-          10,
-          2,
-          3
-        ],
-        [
-          12,
-          4,
-          6
-        ],
-        [
-          5,
-          2,
-          4
-        ]
+        [10, 2, 3],
+        [12, 3, 4],
+        [5, 6, 2]
       ],
       "sort_order": 4
     },
@@ -113,55 +84,37 @@
       "title": "游戏商店买药水和盾牌刚好花完金币的方案数",
       "description": {
         "难度": "Normal",
-        "背景": "玩家进入游戏商店后，有 coins 枚金币可以使用。商店里药水每瓶 potionPrice 枚金币，盾牌每个 shieldPrice 枚金币。玩家希望购买若干瓶药水和若干个盾牌，并且刚好把金币全部花完。",
-        "任务": "请统计购买药水和盾牌时，能够刚好花完 coins 枚金币的方案数量。",
-        "输入": "三个数字：coins、potionPrice、shieldPrice。",
+        "背景": "游戏商店里，药水每瓶 potionPrice 个金币，盾牌每个 shieldPrice 个金币。玩家有 coins 个金币，希望刚好花完。",
+        "任务": "请统计买药水和盾牌后刚好花完金币的方案数量。",
+        "输入": "三个数字：coins、potionPrice 和 shieldPrice。",
         "输出": "返回刚好花完金币的方案数量。",
-        "提示": "可以使用双变量枚举，分别枚举 potions 和 shields 的数量，再判断总花费是否等于 coins。"
+        "提示": "不同物品数量组合可能产生相同或不同的总花费。"
       },
       "starter_code": "function solution(coins, potionPrice, shieldPrice)\n    return 0\nend",
-      "reference_code": "function solution(coins, potionPrice, shieldPrice)\n    local count = 0\n    for potions = 0, coins do\n        for shields = 0, coins do\n            if potions * potionPrice + shields * shieldPrice == coins then\n                count = count + 1\n            end\n        end\n    end\n    return count\nend",
+      "reference_code": "function solution(coins, potionPrice, shieldPrice)\n    local count = 0\n\n    for potion = 0, coins do\n        for shield = 0, coins do\n            local total = potion * potionPrice + shield * shieldPrice\n            if total == coins then\n                count = count + 1\n            end\n        end\n    end\n\n    return count\nend",
       "test_cases": [
-        [
-          20,
-          5,
-          8
-        ],
-        [
-          15,
-          3,
-          6
-        ],
-        [
-          7,
-          4,
-          5
-        ]
+        [20, 4, 6],
+        [15, 3, 5],
+        [7, 4, 6]
       ],
       "sort_order": 5
     },
     {
-      "title": "两个班合报名额固定时有多少种分配方案",
+      "title": "找出长方形周长固定时面积最大的长宽组合",
       "description": {
         "难度": "Normal",
-        "背景": "学校活动一共有 total 个报名名额，需要分配给一班和二班。为了保证两个班都能参加活动，要求每个班至少分到 1 个名额。现在需要统计这 total 个名额分给两个班时，一共有多少种分配方案。",
-        "任务": "请枚举一班和二班分别分到的名额数量，统计两个班名额相加正好等于 total 且两个班都至少有 1 个名额的方案数。",
-        "输入": "一个数字：total。",
-        "输出": "返回分配方案数量。",
-        "提示": "可以枚举 classA 和 classB 的名额数量，再检查 classA + classB 是否等于 total。"
+        "背景": "一个长方形的周长固定为 perimeter。老师想知道在所有整数长宽组合中，哪一种组合的面积最大。",
+        "任务": "请找出面积最大的长和宽，并返回最大面积。",
+        "输入": "一个数字：perimeter。",
+        "输出": "依次返回最佳长、最佳宽和最大面积。",
+        "提示": "枚举所有合法组合，并不断更新当前最优答案。"
       },
-      "starter_code": "function solution(total)\n    return 0\nend",
-      "reference_code": "function solution(total)\n    local count = 0\n    for classA = 1, total do\n        for classB = 1, total do\n            if classA + classB == total then\n                count = count + 1\n            end\n        end\n    end\n    return count\nend",
+      "starter_code": "function solution(perimeter)\n    return 0, 0, 0\nend",
+      "reference_code": "function solution(perimeter)\n    local bestLength = 0\n    local bestWidth = 0\n    local bestArea = 0\n\n    for length = 1, perimeter do\n        for width = 1, perimeter do\n            if 2 * (length + width) == perimeter then\n                local area = length * width\n                if area > bestArea then\n                    bestArea = area\n                    bestLength = length\n                    bestWidth = width\n                end\n            end\n        end\n    end\n\n    return bestLength, bestWidth, bestArea\nend",
       "test_cases": [
-        [
-          5
-        ],
-        [
-          2
-        ],
-        [
-          1
-        ]
+        [12],
+        [20],
+        [6]
       ],
       "sort_order": 6
     },
@@ -169,27 +122,18 @@
       "title": "鸡兔同笼：根据头数和脚数找动物数量",
       "description": {
         "难度": "Challenge",
-        "背景": "一个笼子里关着若干只鸡和兔。每只鸡有 1 个头和 2 条腿，每只兔有 1 个头和 4 条腿。现在已知笼子里一共有 heads 个头和 legs 条腿，需要推算鸡和兔分别有多少只。",
-        "任务": "请根据头数和脚数，找出符合条件的鸡和兔数量，并返回这两个数量；如果不存在符合条件的组合，则返回 -1, -1。",
+        "背景": "笼子里有鸡和兔。鸡有 2 只脚，兔有 4 只脚。现在知道总头数 heads 和总脚数 legs，需要找出鸡和兔各有多少只。",
+        "任务": "请枚举可能的鸡和兔数量，找出符合条件的答案。",
         "输入": "两个数字：heads 和 legs。",
-        "输出": "返回两个值：鸡的数量和兔的数量；无解时返回 -1, -1。",
-        "提示": "可以枚举鸡的数量 chickens，兔的数量 rabbits 由总头数 heads - chickens 得到，再检查腿数是否匹配。"
+        "输出": "如果找到答案，依次返回鸡的数量和兔的数量；如果没有答案，返回 -1 和 -1。",
+        "提示": "两个数量都在变化，需要同时满足头数和脚数两个条件。"
       },
       "starter_code": "function solution(heads, legs)\n    return -1, -1\nend",
-      "reference_code": "function solution(heads, legs)\n    for chickens = 0, heads do\n        local rabbits = heads - chickens\n        if chickens * 2 + rabbits * 4 == legs then\n            return chickens, rabbits\n        end\n    end\n    return -1, -1\nend",
+      "reference_code": "function solution(heads, legs)\n    for chickens = 0, heads do\n        for rabbits = 0, heads do\n            if chickens + rabbits == heads and chickens * 2 + rabbits * 4 == legs then\n                return chickens, rabbits\n            end\n        end\n    end\n\n    return -1, -1\nend",
       "test_cases": [
-        [
-          5,
-          14
-        ],
-        [
-          8,
-          26
-        ],
-        [
-          3,
-          5
-        ]
+        [10, 28],
+        [5, 14],
+        [3, 7]
       ],
       "sort_order": 7
     },
@@ -197,61 +141,37 @@
       "title": "游乐园买儿童票和成人票刚好用完预算",
       "description": {
         "难度": "Challenge",
-        "背景": "一家人去游乐园买票，儿童票每张 childPrice 元，成人票每张 adultPrice 元。他们准备了 budget 元购票预算，希望购买若干张儿童票和若干张成人票，并且刚好把预算全部用完。",
-        "任务": "请统计在刚好用完 budget 元的情况下，一共有多少种儿童票和成人票的购买方案。",
-        "输入": "三个数字：budget、childPrice、adultPrice。",
-        "输出": "返回方案数量。",
-        "提示": "可以枚举儿童票数量 children 和成人票数量 adults，计算总票价后判断是否等于 budget。"
+        "背景": "游乐园儿童票每张 childPrice 元，成人票每张 adultPrice 元。现在有 budget 元，希望刚好用完。",
+        "任务": "请统计儿童票和成人票的购买方案数量，并找出其中总票数最多的方案。",
+        "输入": "三个数字：budget、childPrice 和 adultPrice。",
+        "输出": "依次返回方案数量、最多儿童票数量、最多成人票数量。",
+        "提示": "先判断方案是否合法，再考虑它是否比当前记录的方案更好。"
       },
-      "starter_code": "function solution(budget, childPrice, adultPrice)\n    return 0\nend",
-      "reference_code": "function solution(budget, childPrice, adultPrice)\n    local count = 0\n    for children = 0, budget do\n        for adults = 0, budget do\n            if children * childPrice + adults * adultPrice == budget then\n                count = count + 1\n            end\n        end\n    end\n    return count\nend",
+      "starter_code": "function solution(budget, childPrice, adultPrice)\n    return 0, 0, 0\nend",
+      "reference_code": "function solution(budget, childPrice, adultPrice)\n    local count = 0\n    local bestChild = 0\n    local bestAdult = 0\n    local bestTickets = -1\n\n    for child = 0, budget do\n        for adult = 0, budget do\n            local total = child * childPrice + adult * adultPrice\n            if total == budget then\n                count = count + 1\n                local tickets = child + adult\n                if tickets > bestTickets then\n                    bestTickets = tickets\n                    bestChild = child\n                    bestAdult = adult\n                end\n            end\n        end\n    end\n\n    return count, bestChild, bestAdult\nend",
       "test_cases": [
-        [
-          30,
-          5,
-          10
-        ],
-        [
-          25,
-          4,
-          7
-        ],
-        [
-          3,
-          5,
-          8
-        ]
+        [20, 3, 5],
+        [30, 4, 7],
+        [5, 6, 8]
       ],
       "sort_order": 8
     },
     {
-      "title": "找出购买数量最多且不超过预算的购物方案",
+      "title": "在预算内买两种商品，找出数量最多且剩余最少的方案",
       "description": {
         "难度": "Challenge",
-        "背景": "商店里有 A、B 两种商品，A 商品单价是 priceA，B 商品单价是 priceB。顾客有 budget 元预算，希望在不超过预算的前提下，购买尽可能多的商品。如果有多个方案的总数量相同，就选择剩余金额更少的方案。",
-        "任务": "请枚举 A 商品和 B 商品的购买数量，找出总数量最多的购物方案，并返回 A 数量、B 数量、总数量和剩余金额。",
-        "输入": "三个数字：budget、priceA、priceB。",
-        "输出": "返回四个值：A 数量、B 数量、总数量、剩余金额。",
-        "提示": "可以用双重循环枚举 countA 和 countB。只考虑总花费不超过 budget 的方案，并在总数量更多或剩余金额更少时更新最佳答案。"
+        "背景": "商店里有两种商品，价格分别是 priceA 和 priceB。学生有 budget 元，不一定要刚好花完，但希望买到的商品总数量尽可能多；如果数量相同，则希望剩余金额尽可能少。",
+        "任务": "请找出最优购买方案。",
+        "输入": "三个数字：priceA、priceB 和 budget。",
+        "输出": "依次返回商品 A 数量、商品 B 数量和剩余金额。",
+        "提示": "可以把问题拆成枚举方案、判断是否合法、更新最优答案三步。"
       },
-      "starter_code": "function solution(budget, priceA, priceB)\n    return 0, 0, 0, budget\nend",
-      "reference_code": "function solution(budget, priceA, priceB)\n    local bestA = 0\n    local bestB = 0\n    local bestTotal = 0\n    local bestRemain = budget\n    for countA = 0, budget do\n        for countB = 0, budget do\n            local cost = countA * priceA + countB * priceB\n            if cost <= budget then\n                local total = countA + countB\n                local remain = budget - cost\n                if total > bestTotal or (total == bestTotal and remain < bestRemain) then\n                    bestA = countA\n                    bestB = countB\n                    bestTotal = total\n                    bestRemain = remain\n                end\n            end\n        end\n    end\n    return bestA, bestB, bestTotal, bestRemain\nend",
+      "starter_code": "function solution(priceA, priceB, budget)\n    return 0, 0, budget\nend",
+      "reference_code": "function solution(priceA, priceB, budget)\n    local bestA = 0\n    local bestB = 0\n    local bestCount = -1\n    local bestLeft = budget\n\n    for a = 0, budget do\n        for b = 0, budget do\n            local cost = a * priceA + b * priceB\n            if cost <= budget then\n                local count = a + b\n                local left = budget - cost\n\n                if count > bestCount then\n                    bestCount = count\n                    bestLeft = left\n                    bestA = a\n                    bestB = b\n                elseif count == bestCount and left < bestLeft then\n                    bestLeft = left\n                    bestA = a\n                    bestB = b\n                end\n            end\n        end\n    end\n\n    return bestA, bestB, bestLeft\nend",
       "test_cases": [
-        [
-          10,
-          3,
-          4
-        ],
-        [
-          20,
-          6,
-          9
-        ],
-        [
-          5,
-          7,
-          8
-        ]
+        [3, 5, 20],
+        [4, 7, 30],
+        [6, 10, 5]
       ],
       "sort_order": 9
     }

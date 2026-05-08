@@ -1,20 +1,20 @@
 {
   "title": "Week 07 - Arrays and Table Data",
-  "description": "Practice array access, modification, copying, reversing, and accumulated arrays.",
+  "description": "Practice array reading, modification, swapping, traversal, copying, and state recording.",
   "sort_order": 13,
   "questions": [
     {
-      "title": "Read the Score of a Student from a Score Sheet",
+      "title": "Read the Score of a Student at a Given Position",
       "description": {
         "difficulty": "Simple",
-        "background": "The teacher stores a score sheet in the array scores in student order. Position 1 in the array is the score of student 1, position 2 is the score of student 2, and so on. Use the given position index to find the matching student score.",
-        "task": "Read the score of the index-th student from the score array scores, then return that score.",
-        "input": "Two parameters: the score array scores and the position index.",
-        "output": "Return scores[index].",
-        "hint": "Lua array indexes start from 1. You can directly use scores[index] to access the element at the specified position."
+        "background": "The teacher stores student scores in an array scores. Each position corresponds to one student's score.",
+        "task": "Return the score of the student at position index.",
+        "input": "One array scores and one number index.",
+        "output": "Return the value at position index in scores.",
+        "hint": "Each position in an array can be accessed by its index."
       },
       "starter_code": "function solution(scores, index)\n    return 0\nend",
-      "reference_code": "function solution(scores, index)\n    local score = scores[index]\n    return score\nend",
+      "reference_code": "function solution(scores, index)\n    return scores[index]\nend",
       "test_cases": [
         [
           [
@@ -27,13 +27,15 @@
         [
           [
             60,
-            75
+            75,
+            90,
+            100
           ],
-          1
+          4
         ],
         [
           [
-            100
+            88
           ],
           1
         ]
@@ -41,92 +43,17 @@
       "sort_order": 1
     },
     {
-      "title": "Read a Student's Long Jump Result from a Fitness Table",
-      "description": {
-        "difficulty": "Simple",
-        "background": "The PE teacher records students' long jump results by number order in the array jumps. The first value is student 1's result, and the second value is student 2's result. Use the specified position index to read one student's long jump result.",
-        "task": "Read the result of the index-th student from the long jump result array jumps, then return the value.",
-        "input": "Two parameters: the long jump array jumps and the position index.",
-        "output": "Return jumps[index].",
-        "hint": "Array access only needs an index. Put index inside brackets to get the value at that position."
-      },
-      "starter_code": "function solution(jumps, index)\n    return 0\nend",
-      "reference_code": "function solution(jumps, index)\n    local result = jumps[index]\n    return result\nend",
-      "test_cases": [
-        [
-          [
-            120,
-            135,
-            128
-          ],
-          3
-        ],
-        [
-          [
-            150,
-            140
-          ],
-          2
-        ],
-        [
-          [
-            99
-          ],
-          1
-        ]
-      ],
-      "sort_order": 2
-    },
-    {
-      "title": "Check the Item Count in a Game Bag Slot",
-      "description": {
-        "difficulty": "Simple",
-        "background": "A game bag is divided into multiple slots, and each slot may contain a different number of items. The item counts are stored by slot order in the array items. The player wants to see how many items are in slot index.",
-        "task": "Read the item count from slot index in the item count array items, then return that count.",
-        "input": "Two parameters: the item count array items and the position index.",
-        "output": "Return items[index].",
-        "hint": "Think of the array as a row of numbered boxes. The count in box index is items[index]."
-      },
-      "starter_code": "function solution(items, index)\n    return 0\nend",
-      "reference_code": "function solution(items, index)\n    local count = items[index]\n    return count\nend",
-      "test_cases": [
-        [
-          [
-            3,
-            0,
-            5,
-            2
-          ],
-          3
-        ],
-        [
-          [
-            9,
-            1
-          ],
-          1
-        ],
-        [
-          [
-            4
-          ],
-          1
-        ]
-      ],
-      "sort_order": 3
-    },
-    {
       "title": "Modify the Points for One Day in a Daily Points Table",
       "description": {
-        "difficulty": "Normal",
-        "background": "A player's daily points are stored by day order in the array points. Later, the record for the day represented by day is found to be incorrect and needs to be changed to the new value newPoints. After the change, return the updated points table.",
-        "task": "Change the points value for the day represented by day in the points array to newPoints, then return the modified points array.",
-        "input": "Three parameters: the points array points, the day number day, and the new points newPoints.",
-        "output": "Return the modified points array.",
-        "hint": "Assign a new value directly to points[day] to replace the old value at the specified position."
+        "difficulty": "Simple",
+        "background": "The points a player earns each day are stored in the array points. One day's point record is wrong and needs to be changed to newValue.",
+        "task": "Change the points for day day to newValue, then return the updated points for that day.",
+        "input": "One array points and two numbers: day and newValue.",
+        "output": "Return the updated points for day day.",
+        "hint": "After finding the matching position, you can directly update the data there."
       },
-      "starter_code": "function solution(points, day, newPoints)\n    return points\nend",
-      "reference_code": "function solution(points, day, newPoints)\n    points[day] = newPoints\n    return points\nend",
+      "starter_code": "function solution(points, day, newValue)\n    return 0\nend",
+      "reference_code": "function solution(points, day, newValue)\n    points[day] = newValue\n    return points[day]\nend",
       "test_cases": [
         [
           [
@@ -135,79 +62,124 @@
             30
           ],
           2,
-          25
+          50
         ],
         [
           [
-            1,
-            2,
-            3,
-            4
+            5,
+            5,
+            5,
+            5
           ],
           4,
           9
         ],
         [
           [
-            5
+            100
           ],
           1,
-          8
+          80
         ]
       ],
-      "sort_order": 4
+      "sort_order": 2
     },
     {
-      "title": "Swap the First and Last Students in a Line",
+      "title": "Swap the Data at Two Positions in a Student Line",
       "description": {
-        "difficulty": "Normal",
-        "background": "A line of students is stored in the array line, with n students in total. The teacher asks the first student and the last student to swap places, while the middle students keep their original order.",
-        "task": "Swap the first element and the n-th element in the array line, then return the swapped line array.",
-        "input": "Two parameters: the line array line and the number of students n.",
-        "output": "Return the swapped line array.",
-        "hint": "When swapping two positions, use a temporary variable to save one value so the original content is not overwritten."
+        "difficulty": "Simple",
+        "background": "Student numbers in a line are stored in the array students. The teacher wants to swap the students at positions a and b.",
+        "task": "Swap the data at two positions in the array and return the swapped array.",
+        "input": "One array students and two numbers: a and b.",
+        "output": "Return the students array after the swap.",
+        "hint": "When swapping two positions, you can use a temporary variable."
       },
-      "starter_code": "function solution(line, n)\n    return line\nend",
-      "reference_code": "function solution(line, n)\n    local temp = line[1]\n    line[1] = line[n]\n    line[n] = temp\n    return line\nend",
+      "starter_code": "function solution(students, a, b)\n    return students\nend",
+      "reference_code": "function solution(students, a, b)\n    local temp = students[a]\n    students[a] = students[b]\n    students[b] = temp\n    return students\nend",
       "test_cases": [
         [
           [
-            "A",
-            "B",
-            "C"
+            1,
+            2,
+            3
+          ],
+          1,
+          3
+        ],
+        [
+          [
+            4,
+            5,
+            6,
+            7
+          ],
+          2,
+          4
+        ],
+        [
+          [
+            9,
+            8
+          ],
+          1,
+          2
+        ]
+      ],
+      "sort_order": 3
+    },
+    {
+      "title": "Traverse a Score Sheet and Count Passing Students",
+      "description": {
+        "difficulty": "Normal",
+        "background": "The teacher stores the scores of n students in the array scores. A score of 60 or above is passing.",
+        "task": "Traverse the score sheet and count how many students pass.",
+        "input": "One array scores and one number n.",
+        "output": "Return the number of passing students.",
+        "hint": "When traversing the array, check the score at one position each time."
+      },
+      "starter_code": "function solution(scores, n)\n    return 0\nend",
+      "reference_code": "function solution(scores, n)\n    local count = 0\n\n    for i = 1, n do\n        if scores[i] >= 60 then\n            count = count + 1\n        end\n    end\n\n    return count\nend",
+      "test_cases": [
+        [
+          [
+            80,
+            55,
+            60
           ],
           3
         ],
         [
           [
-            1,
-            2,
-            3,
-            4
+            40,
+            50,
+            59
           ],
-          4
+          3
         ],
         [
           [
-            7
+            100,
+            90,
+            70,
+            65
           ],
-          1
+          4
         ]
       ],
-      "sort_order": 5
+      "sort_order": 4
     },
     {
       "title": "Copy a Class Score Sheet as a Backup",
       "description": {
         "difficulty": "Normal",
-        "background": "The teacher wants to organize the score sheet but does not want to directly modify the original score data. To avoid changing the original table, copy the first n scores from the array scores into a new array copy as an independent backup.",
-        "task": "Create a new array copy, copy the first n scores from scores into it in original order, and return copy.",
-        "input": "Two parameters: the score array scores and the count n.",
-        "output": "Return the new array copy.",
-        "hint": "Create an empty array copy first, then use a loop from position 1 to n to copy each value."
+        "background": "The teacher wants to copy the score sheet scores so the original data will not be lost if the original score sheet is modified later.",
+        "task": "Generate a new array backup that stores the same data as scores.",
+        "input": "One array scores and one number n.",
+        "output": "Return the copied backup array.",
+        "hint": "To copy an array, put each position's data into the new array one by one."
       },
-      "starter_code": "function solution(scores, n)\n    return {}\nend",
-      "reference_code": "function solution(scores, n)\n    local copy = {}\n    for i = 1, n do\n        copy[i] = scores[i]\n    end\n    return copy\nend",
+      "starter_code": "function solution(scores, n)\n    local backup = {}\n    return backup\nend",
+      "reference_code": "function solution(scores, n)\n    local backup = {}\n\n    for i = 1, n do\n        backup[i] = scores[i]\n    end\n\n    return backup\nend",
       "test_cases": [
         [
           [
@@ -220,9 +192,11 @@
         [
           [
             1,
-            2
+            2,
+            3,
+            4
           ],
-          2
+          4
         ],
         [
           [
@@ -231,66 +205,116 @@
           1
         ]
       ],
-      "sort_order": 6
+      "sort_order": 5
     },
     {
-      "title": "Record Who Holds the Ball in Each Round of a Passing Game",
+      "title": "Add an Event Bonus to Every Item in a Daily Coin Table",
       "description": {
-        "difficulty": "Challenge",
-        "background": "Students stand in a circle and play a passing game. There are playerCount students, numbered from 1 to playerCount. The ball starts with startPlayer. At the end of each round, the ball passes to the next student; after the last student, it returns to student 1.",
-        "task": "Simulate the number of passing rounds represented by rounds, record the student number holding the ball after each round, and return an array of those numbers.",
-        "input": "Three numbers: startPlayer, rounds, and playerCount.",
-        "output": "Return an array of length rounds.",
-        "hint": "Increase current by 1 each round. If current becomes greater than playerCount, reset current to 1."
+        "difficulty": "Normal",
+        "background": "A game holds an event, and each day's coin reward increases by bonus. The original coin records are stored in the array coins.",
+        "task": "Increase every day's coin value in coins by bonus and return the updated array.",
+        "input": "One array coins, one number n, and one number bonus.",
+        "output": "Return the updated coins array.",
+        "hint": "Apply the same update to every position in the array."
       },
-      "starter_code": "function solution(startPlayer, rounds, playerCount)\n    return {}\nend",
-      "reference_code": "function solution(startPlayer, rounds, playerCount)\n    local result = {}\n    local current = startPlayer\n    for round = 1, rounds do\n        current = current + 1\n        if current > playerCount then\n            current = 1\n        end\n        result[round] = current\n    end\n    return result\nend",
+      "starter_code": "function solution(coins, n, bonus)\n    return coins\nend",
+      "reference_code": "function solution(coins, n, bonus)\n    for i = 1, n do\n        coins[i] = coins[i] + bonus\n    end\n\n    return coins\nend",
       "test_cases": [
         [
-          1,
+          [
+            10,
+            20,
+            30
+          ],
           3,
           5
         ],
         [
+          [
+            1,
+            1,
+            1,
+            1
+          ],
           4,
-          4,
-          4
+          2
         ],
         [
-          2,
-          0,
-          3
+          [
+            100
+          ],
+          1,
+          50
         ]
       ],
-      "sort_order": 7
+      "sort_order": 6
     },
     {
-      "title": "Output the New Order After a Team Turns Around",
+      "title": "Generate a Daily Accumulated Points Table for Upgrade Progress",
       "description": {
         "difficulty": "Challenge",
-        "background": "The current order of a line is stored in the array line, with n members in total. The line needs to turn around, so the original last member becomes the new first member, the original second-last becomes the new second, and so on.",
-        "task": "Generate a new array reversed from the original line order, storing the turned-around order, then return this new array.",
-        "input": "Two parameters: the line array line and the number of members n.",
-        "output": "Return the new array reversed.",
-        "hint": "The i-th position in the new array comes from position n - i + 1 in the original array."
+        "background": "The points a player earns each day are stored in the array points. To view upgrade progress, a new accumulated points table needs to be generated.",
+        "task": "Generate the array totals, where totals[i] is the sum of points from day 1 through day i.",
+        "input": "One array points and one number n.",
+        "output": "Return the accumulated points array totals.",
+        "hint": "Traverse the daily points while recording the total points so far."
       },
-      "starter_code": "function solution(line, n)\n    return {}\nend",
-      "reference_code": "function solution(line, n)\n    local reversed = {}\n    for i = 1, n do\n        reversed[i] = line[n - i + 1]\n    end\n    return reversed\nend",
+      "starter_code": "function solution(points, n)\n    local totals = {}\n    return totals\nend",
+      "reference_code": "function solution(points, n)\n    local totals = {}\n    local sum = 0\n\n    for i = 1, n do\n        sum = sum + points[i]\n        totals[i] = sum\n    end\n\n    return totals\nend",
       "test_cases": [
         [
           [
-            "A",
-            "B",
-            "C"
+            10,
+            20,
+            30
           ],
           3
         ],
         [
           [
+            5,
+            5,
+            5,
+            5
+          ],
+          4
+        ],
+        [
+          [
+            100
+          ],
+          1
+        ]
+      ],
+      "sort_order": 7
+    },
+    {
+      "title": "Generate the New Line Order After a Team Turns Around",
+      "description": {
+        "difficulty": "Challenge",
+        "background": "Student numbers in a line are stored in the array students. After the teacher says to turn around, the original last student becomes first, and the original first student becomes last.",
+        "task": "Generate the new array after the team turns around.",
+        "input": "One array students and one number n.",
+        "output": "Return the reversed line array.",
+        "hint": "The front positions of the new array can come from the back positions of the original array."
+      },
+      "starter_code": "function solution(students, n)\n    local result = {}\n    return result\nend",
+      "reference_code": "function solution(students, n)\n    local result = {}\n\n    for i = 1, n do\n        result[i] = students[n - i + 1]\n    end\n\n    return result\nend",
+      "test_cases": [
+        [
+          [
             1,
             2,
-            3,
-            4
+            3
+          ],
+          3
+        ],
+        [
+          [
+            4,
+            5,
+            6,
+            7
           ],
           4
         ],
@@ -304,39 +328,35 @@
       "sort_order": 8
     },
     {
-      "title": "Generate an Accumulated Points Table for Upgrade Progress",
+      "title": "Record Who Has the Ball After Each Round in a Passing Game",
       "description": {
         "difficulty": "Challenge",
-        "background": "A player's newly earned points each day are stored in the array points. To check upgrade progress, the player wants to know not only the points earned each day but also the accumulated points owned at the end of each day, so an accumulated points table is needed.",
-        "task": "Starting from day 1, add the daily points one by one and generate an array totals, where totals[day] is the accumulated points at the end of that day.",
-        "input": "Two parameters: the daily points array points and the number of days n.",
-        "output": "Return the accumulated array totals.",
-        "hint": "Use total to store the current accumulated value. For each day, add points[day] to total, then save total into totals[day]."
+        "background": "n students stand in a circle and play a passing game. The ball starts with student start. Each round, the ball is passed forward by steps positions, and we need to record who has the ball after each round.",
+        "task": "Simulate rounds rounds of passing and return an array recording the student number holding the ball after each round.",
+        "input": "Four numbers: n, start, steps, and rounds.",
+        "output": "Return an array recording which student has the ball after each round.",
+        "hint": "When the position passes the last student, it needs to wrap back to the start of the line."
       },
-      "starter_code": "function solution(points, n)\n    return {}\nend",
-      "reference_code": "function solution(points, n)\n    local totals = {}\n    local total = 0\n    for day = 1, n do\n        total = total + points[day]\n        totals[day] = total\n    end\n    return totals\nend",
+      "starter_code": "function solution(n, start, steps, rounds)\n    local record = {}\n    return record\nend",
+      "reference_code": "function solution(n, start, steps, rounds)\n    local record = {}\n    local position = start\n\n    for i = 1, rounds do\n        position = position + steps\n        while position > n do\n            position = position - n\n        end\n        record[i] = position\n    end\n\n    return record\nend",
       "test_cases": [
         [
-          [
-            1,
-            2,
-            3
-          ],
-          3
+          5,
+          1,
+          2,
+          4
         ],
         [
-          [
-            5,
-            5,
-            10
-          ],
-          3
+          4,
+          3,
+          1,
+          5
         ],
         [
-          [
-            7
-          ],
-          1
+          6,
+          6,
+          3,
+          3
         ]
       ],
       "sort_order": 9

@@ -1,20 +1,20 @@
 {
   "title": "Week 08 - Array Statistics and Extremes",
-  "description": "Practice array summation, counting, maximums, minimums, and second-largest values.",
+  "description": "Practice array sums, array counts, maximum values, minimum values, position tracking, and second-largest values.",
   "sort_order": 15,
   "questions": [
     {
       "title": "Calculate the Total Score of a Class Score Sheet",
       "description": {
         "difficulty": "Simple",
-        "background": "The teacher stores the first n students' scores in order in the array scores. To summarize the exam, the total score of these students should be calculated first as the basis for later average or score distribution analysis.",
-        "task": "Traverse the first n scores in scores, add each student's score, and return the final total score.",
-        "input": "Two parameters: the score array scores and the number of students n.",
+        "background": "The teacher stores the scores of n students in the array scores. Now the total class score needs to be calculated.",
+        "task": "Traverse scores and calculate the sum of all scores.",
+        "input": "One array scores and one number n.",
         "output": "Return the total score.",
-        "hint": "Prepare a total variable starting from 0. Each time you visit a score, add it to total."
+        "hint": "You can add the score at each position into a total-score variable."
       },
       "starter_code": "function solution(scores, n)\n    return 0\nend",
-      "reference_code": "function solution(scores, n)\n    local total = 0\n    for i = 1, n do\n        total = total + scores[i]\n    end\n    return total\nend",
+      "reference_code": "function solution(scores, n)\n    local sum = 0\n\n    for i = 1, n do\n        sum = sum + scores[i]\n    end\n\n    return sum\nend",
       "test_cases": [
         [
           [
@@ -26,34 +26,71 @@
         ],
         [
           [
+            100,
             100
           ],
-          1
+          2
         ],
         [
           [
-            60,
-            60,
-            60,
             60
           ],
-          4
+          1
         ]
       ],
       "sort_order": 1
     },
     {
-      "title": "Calculate the Average Daily Coin Reward",
+      "title": "Count How Many Scores in a Score Sheet Are Passing",
       "description": {
         "difficulty": "Simple",
-        "background": "The game system gives the player coin rewards each day, stored in order in the array coins. The player wants to know the average daily coins earned over the first n days to judge whether the rewards are stable.",
-        "task": "First add up the coin total for the first n days in coins, then divide by n to calculate and return the average daily reward.",
-        "input": "Two parameters: the coin array coins and the number of days n.",
-        "output": "Return the average value.",
-        "hint": "Use a loop to calculate the coin total first, then return total / n."
+        "background": "A score of 60 or above is passing. The teacher wants to know how many scores in the score sheet are passing.",
+        "task": "Count the number of passing scores in scores.",
+        "input": "One array scores and one number n.",
+        "output": "Return the number of passing students.",
+        "hint": "When traversing the array, check only whether the current score reaches the line."
+      },
+      "starter_code": "function solution(scores, n)\n    return 0\nend",
+      "reference_code": "function solution(scores, n)\n    local count = 0\n\n    for i = 1, n do\n        if scores[i] >= 60 then\n            count = count + 1\n        end\n    end\n\n    return count\nend",
+      "test_cases": [
+        [
+          [
+            80,
+            55,
+            60
+          ],
+          3
+        ],
+        [
+          [
+            40,
+            50
+          ],
+          2
+        ],
+        [
+          [
+            100,
+            90,
+            70
+          ],
+          3
+        ]
+      ],
+      "sort_order": 2
+    },
+    {
+      "title": "Calculate the Average Reward in a Daily Coin Array",
+      "description": {
+        "difficulty": "Simple",
+        "background": "The number of coins a player earns each day is stored in the array coins. The system needs to calculate how many coins are earned per day on average.",
+        "task": "Calculate the total number of coins and the average reward, then return the average.",
+        "input": "One array coins and one number n.",
+        "output": "Return the average coin count.",
+        "hint": "To calculate an average, get the sum first, then divide by the number of data items."
       },
       "starter_code": "function solution(coins, n)\n    return 0\nend",
-      "reference_code": "function solution(coins, n)\n    local total = 0\n    for i = 1, n do\n        total = total + coins[i]\n    end\n    return total / n\nend",
+      "reference_code": "function solution(coins, n)\n    local sum = 0\n\n    for i = 1, n do\n        sum = sum + coins[i]\n    end\n\n    return sum / n\nend",
       "test_cases": [
         [
           [
@@ -66,122 +103,11 @@
         [
           [
             5,
-            15
+            5,
+            5,
+            5
           ],
-          2
-        ],
-        [
-          [
-            8
-          ],
-          1
-        ]
-      ],
-      "sort_order": 2
-    },
-    {
-      "title": "Count How Many Students Passed",
-      "description": {
-        "difficulty": "Simple",
-        "background": "The teacher has stored the first n students' exam scores in the array scores. The school rule says that a score of 60 or above is passing. Count how many students in this score sheet reached the passing line.",
-        "task": "Traverse the first n scores in scores, count scores greater than or equal to 60, and return the number of passing students.",
-        "input": "Two parameters: the score array scores and the number of students n.",
-        "output": "Return the number of passing students.",
-        "hint": "Use count to record passing students. Whenever scores[i] >= 60, add 1 to count."
-      },
-      "starter_code": "function solution(scores, n)\n    return 0\nend",
-      "reference_code": "function solution(scores, n)\n    local count = 0\n    for i = 1, n do\n        if scores[i] >= 60 then\n            count = count + 1\n        end\n    end\n    return count\nend",
-      "test_cases": [
-        [
-          [
-            80,
-            50,
-            70
-          ],
-          3
-        ],
-        [
-          [
-            59,
-            60,
-            61
-          ],
-          3
-        ],
-        [
-          [
-            10
-          ],
-          1
-        ]
-      ],
-      "sort_order": 3
-    },
-    {
-      "title": "Find the Best Player in a Long Jump Competition",
-      "description": {
-        "difficulty": "Normal",
-        "background": "After a long jump competition, each athlete's result is stored in competition order in the array jumps. A larger long jump result means the athlete jumped farther and ranks higher. The judge needs to find the best athlete among the first n athletes and that athlete's result.",
-        "task": "Traverse the first n results in jumps, find the maximum result and its athlete position, and return the position and result in order.",
-        "input": "Two parameters: the long jump result array jumps and the number of athletes n.",
-        "output": "Return two values: the best athlete position and the best result.",
-        "hint": "Assume athlete 1 is best at first, then compare from athlete 2 onward. If you find a larger result, update both the best result and position."
-      },
-      "starter_code": "function solution(jumps, n)\n    return 0, 0\nend",
-      "reference_code": "function solution(jumps, n)\n    local bestIndex = 1\n    local bestValue = jumps[1]\n    for i = 2, n do\n        if jumps[i] > bestValue then\n            bestValue = jumps[i]\n            bestIndex = i\n        end\n    end\n    return bestIndex, bestValue\nend",
-      "test_cases": [
-        [
-          [
-            120,
-            135,
-            128
-          ],
-          3
-        ],
-        [
-          [
-            150,
-            140
-          ],
-          2
-        ],
-        [
-          [
-            99
-          ],
-          1
-        ]
-      ],
-      "sort_order": 4
-    },
-    {
-      "title": "Find the Lowest Score and Its Position",
-      "description": {
-        "difficulty": "Normal",
-        "background": "When reviewing a score sheet, the teacher wants to know not only the lowest score but also the student position where it appears. The first n student scores are stored in order in scores, and the minimum needs to be found by comparison.",
-        "task": "Traverse the first n scores in scores, find the lowest score and its position, and return the position and lowest score in order.",
-        "input": "Two parameters: the score array scores and the number of students n.",
-        "output": "Return two values: the lowest score position and the lowest score.",
-        "hint": "Assume the first score is the lowest at first. Then compare one by one; if a smaller score is found, update both the lowest score and its position."
-      },
-      "starter_code": "function solution(scores, n)\n    return 0, 0\nend",
-      "reference_code": "function solution(scores, n)\n    local minIndex = 1\n    local minValue = scores[1]\n    for i = 2, n do\n        if scores[i] < minValue then\n            minValue = scores[i]\n            minIndex = i\n        end\n    end\n    return minIndex, minValue\nend",
-      "test_cases": [
-        [
-          [
-            80,
-            50,
-            70
-          ],
-          3
-        ],
-        [
-          [
-            59,
-            60,
-            61
-          ],
-          3
+          4
         ],
         [
           [
@@ -190,100 +116,20 @@
           1
         ]
       ],
-      "sort_order": 5
+      "sort_order": 3
     },
     {
-      "title": "Count Game Scores Above a Target Line",
+      "title": "Find the Best Athlete in a Long Jump Competition",
       "description": {
         "difficulty": "Normal",
-        "background": "After a game activity, player scores are stored in order in the array points. The activity sets a target line target, and only scores strictly greater than target are counted as meeting the goal. Count how many of the first n players exceeded the target line.",
-        "task": "Traverse the first n scores in points, count all scores greater than target, and return the number of players above the target line.",
-        "input": "Three parameters: the score array points, the number of players n, and the target line target.",
-        "output": "Return the count of scores greater than target.",
-        "hint": "The problem requires exceeding target, so scores equal to target are not counted. Only increase the count when points[i] > target."
+        "background": "In a long jump competition, each athlete's result is stored in the array jumps. A larger result means a better rank.",
+        "task": "Find the highest jump result and the matching athlete position.",
+        "input": "One array jumps and one number n.",
+        "output": "Return the highest result and the athlete position in order.",
+        "hint": "You can first assume the first data item is the best result, then compare each item."
       },
-      "starter_code": "function solution(points, n, target)\n    return 0\nend",
-      "reference_code": "function solution(points, n, target)\n    local count = 0\n    for i = 1, n do\n        if points[i] > target then\n            count = count + 1\n        end\n    end\n    return count\nend",
-      "test_cases": [
-        [
-          [
-            100,
-            80,
-            120
-          ],
-          3,
-          90
-        ],
-        [
-          [
-            50,
-            50
-          ],
-          2,
-          50
-        ],
-        [
-          [
-            99
-          ],
-          1,
-          10
-        ]
-      ],
-      "sort_order": 6
-    },
-    {
-      "title": "Find the Runner-Up Score in a Score Ranking",
-      "description": {
-        "difficulty": "Challenge",
-        "background": "After a competition, all athlete scores are stored in the array scores. The highest distinct score on the leaderboard is the champion score, and the second-highest distinct score is the runner-up score. Find the runner-up score among the first n scores.",
-        "task": "First find the highest score, then find the largest score among all scores smaller than the highest score, and return it as the runner-up score.",
-        "input": "Two parameters: the score array scores and the number of athletes n.",
-        "output": "Return the runner-up score.",
-        "hint": "Traverse the array twice: first find maxValue, then find the largest score less than maxValue."
-      },
-      "starter_code": "function solution(scores, n)\n    return 0\nend",
-      "reference_code": "function solution(scores, n)\n    local maxValue = scores[1]\n    for i = 2, n do\n        if scores[i] > maxValue then\n            maxValue = scores[i]\n        end\n    end\n    local second = scores[1]\n    for i = 1, n do\n        if scores[i] < maxValue then\n            if second == maxValue or scores[i] > second then\n                second = scores[i]\n            end\n        end\n    end\n    return second\nend",
-      "test_cases": [
-        [
-          [
-            90,
-            100,
-            80
-          ],
-          3
-        ],
-        [
-          [
-            70,
-            95,
-            88,
-            60
-          ],
-          4
-        ],
-        [
-          [
-            5,
-            1
-          ],
-          2
-        ]
-      ],
-      "sort_order": 7
-    },
-    {
-      "title": "Find the Difference Between First and Second Place in Long Jump",
-      "description": {
-        "difficulty": "Challenge",
-        "background": "In a long jump competition, a larger result means a farther jump. After the competition, all athlete results are stored in the array jumps. The judge wants to know the difference between first place and second place, so the highest result and the second-highest distinct result must be found.",
-        "task": "First find the highest result in jumps, then find the largest result below the highest result, and finally return the highest result minus the second-highest result.",
-        "input": "Two parameters: the long jump array jumps and the number of athletes n.",
-        "output": "Return first place result minus second place result.",
-        "hint": "Reuse the second-largest-value method. First find best, then find the largest value second below best, and finally return best - second."
-      },
-      "starter_code": "function solution(jumps, n)\n    return 0\nend",
-      "reference_code": "function solution(jumps, n)\n    local best = jumps[1]\n    for i = 2, n do\n        if jumps[i] > best then\n            best = jumps[i]\n        end\n    end\n    local second = jumps[1]\n    for i = 1, n do\n        if jumps[i] < best then\n            if second == best or jumps[i] > second then\n                second = jumps[i]\n            end\n        end\n    end\n    return best - second\nend",
+      "starter_code": "function solution(jumps, n)\n    return 0, 0\nend",
+      "reference_code": "function solution(jumps, n)\n    local maxValue = jumps[1]\n    local maxIndex = 1\n\n    for i = 2, n do\n        if jumps[i] > maxValue then\n            maxValue = jumps[i]\n            maxIndex = i\n        end\n    end\n\n    return maxValue, maxIndex\nend",
       "test_cases": [
         [
           [
@@ -296,15 +142,177 @@
         [
           [
             200,
-            150,
-            180
+            180,
+            190,
+            210
+          ],
+          4
+        ],
+        [
+          [
+            99
+          ],
+          1
+        ]
+      ],
+      "sort_order": 4
+    },
+    {
+      "title": "Find the Lowest Score and Its Position in a Score Sheet",
+      "description": {
+        "difficulty": "Normal",
+        "background": "The teacher wants to find the lowest score in the score sheet and know which position contains that score.",
+        "task": "Return the lowest score in scores and its position.",
+        "input": "One array scores and one number n.",
+        "output": "Return the lowest score and its position in order.",
+        "hint": "The idea is similar to maximum value search, but the comparison direction is different."
+      },
+      "starter_code": "function solution(scores, n)\n    return 0, 0\nend",
+      "reference_code": "function solution(scores, n)\n    local minValue = scores[1]\n    local minIndex = 1\n\n    for i = 2, n do\n        if scores[i] < minValue then\n            minValue = scores[i]\n            minIndex = i\n        end\n    end\n\n    return minValue, minIndex\nend",
+      "test_cases": [
+        [
+          [
+            80,
+            55,
+            70
           ],
           3
         ],
         [
           [
-            9,
-            1
+            100,
+            90,
+            90,
+            60
+          ],
+          4
+        ],
+        [
+          [
+            88
+          ],
+          1
+        ]
+      ],
+      "sort_order": 5
+    },
+    {
+      "title": "Count Game Scores Above a Target Line and Sum Them",
+      "description": {
+        "difficulty": "Normal",
+        "background": "After a game competition, the system needs to count how many players scored above target and calculate the total score of those players.",
+        "task": "Traverse scores, count scores above the target line, and sum those scores.",
+        "input": "One array scores, one number n, and one number target.",
+        "output": "Return the count above the target line and the total score in order.",
+        "hint": "After filtering the data that meets the condition, you can count and accumulate at the same time."
+      },
+      "starter_code": "function solution(scores, n, target)\n    return 0, 0\nend",
+      "reference_code": "function solution(scores, n, target)\n    local count = 0\n    local sum = 0\n\n    for i = 1, n do\n        if scores[i] > target then\n            count = count + 1\n            sum = sum + scores[i]\n        end\n    end\n\n    return count, sum\nend",
+      "test_cases": [
+        [
+          [
+            80,
+            95,
+            60
+          ],
+          3,
+          70
+        ],
+        [
+          [
+            50,
+            40,
+            30
+          ],
+          3,
+          60
+        ],
+        [
+          [
+            100,
+            90,
+            80
+          ],
+          3,
+          85
+        ]
+      ],
+      "sort_order": 6
+    },
+    {
+      "title": "Find the First and Second Place Scores in a Ranking",
+      "description": {
+        "difficulty": "Challenge",
+        "background": "The score ranking has not been sorted yet, and all scores are stored in the array scores. The teacher wants to directly find the highest score and second-highest score.",
+        "task": "Traverse the array and find the first-place and second-place scores.",
+        "input": "One array scores and one number n. n is guaranteed to be at least 2.",
+        "output": "Return the highest score and second-highest score in order.",
+        "hint": "When comparing a new score, consider that it may affect first place or only affect second place."
+      },
+      "starter_code": "function solution(scores, n)\n    return 0, 0\nend",
+      "reference_code": "function solution(scores, n)\n    local first = scores[1]\n    local second = scores[2]\n\n    if second > first then\n        local temp = first\n        first = second\n        second = temp\n    end\n\n    for i = 3, n do\n        if scores[i] > first then\n            second = first\n            first = scores[i]\n        elseif scores[i] > second then\n            second = scores[i]\n        end\n    end\n\n    return first, second\nend",
+      "test_cases": [
+        [
+          [
+            80,
+            95,
+            70
+          ],
+          3
+        ],
+        [
+          [
+            100,
+            60,
+            90,
+            85
+          ],
+          4
+        ],
+        [
+          [
+            50,
+            40
+          ],
+          2
+        ]
+      ],
+      "sort_order": 7
+    },
+    {
+      "title": "Find the Difference Between First and Second Place in Long Jump",
+      "description": {
+        "difficulty": "Challenge",
+        "background": "After a long jump competition, the teacher wants to know how many centimeters farther first place jumped than second place.",
+        "task": "Find the highest result and second-highest result, then return their difference.",
+        "input": "One array jumps and one number n. n is guaranteed to be at least 2.",
+        "output": "Return the difference between first-place and second-place results.",
+        "hint": "Maintain the two best results first, then calculate the difference."
+      },
+      "starter_code": "function solution(jumps, n)\n    return 0\nend",
+      "reference_code": "function solution(jumps, n)\n    local first = jumps[1]\n    local second = jumps[2]\n\n    if second > first then\n        local temp = first\n        first = second\n        second = temp\n    end\n\n    for i = 3, n do\n        if jumps[i] > first then\n            second = first\n            first = jumps[i]\n        elseif jumps[i] > second then\n            second = jumps[i]\n        end\n    end\n\n    return first - second\nend",
+      "test_cases": [
+        [
+          [
+            120,
+            135,
+            128
+          ],
+          3
+        ],
+        [
+          [
+            200,
+            180,
+            190,
+            210
+          ],
+          4
+        ],
+        [
+          [
+            100,
+            90
           ],
           2
         ]
@@ -312,40 +320,42 @@
       "sort_order": 8
     },
     {
-      "title": "Count Excellent, Passing, and Needs-Improvement Score Ranges",
+      "title": "Count Score Ranges and Find the Highest Score Position",
       "description": {
         "difficulty": "Challenge",
-        "background": "The teacher needs to classify students by score range. Scores of 85 or above are excellent, scores from 60 to 84 are passing, and scores below 60 need improvement. The first n student scores are stored in scores.",
-        "task": "Traverse the first n scores in scores, count the excellent, passing, and needs-improvement students separately, and return the three counts in order.",
-        "input": "Two parameters: the score array scores and the number of students n.",
-        "output": "Return three values: excellent, passing, and needs-improvement counts.",
-        "hint": "Prepare three count variables: excellent, pass, and improve. Check for >= 85 first, then >= 60, and the remaining scores need improvement."
+        "background": "The teacher wants to do a comprehensive analysis of a score sheet. Scores of 90 or above are excellent, scores of 60 or above but below 90 are passing, and scores below 60 need improvement. The teacher also wants to know the position of the highest score.",
+        "task": "Count excellent, passing, and needs-improvement students, and find the highest score position.",
+        "input": "One array scores and one number n.",
+        "output": "Return the excellent count, passing count, needs-improvement count, and highest-score position in order.",
+        "hint": "One traversal can complete both range counting and maximum-position updates."
       },
-      "starter_code": "function solution(scores, n)\n    return 0, 0, 0\nend",
-      "reference_code": "function solution(scores, n)\n    local excellent = 0\n    local pass = 0\n    local improve = 0\n    for i = 1, n do\n        if scores[i] >= 85 then\n            excellent = excellent + 1\n        elseif scores[i] >= 60 then\n            pass = pass + 1\n        else\n            improve = improve + 1\n        end\n    end\n    return excellent, pass, improve\nend",
+      "starter_code": "function solution(scores, n)\n    return 0, 0, 0, 0\nend",
+      "reference_code": "function solution(scores, n)\n    local excellent = 0\n    local pass = 0\n    local needImprove = 0\n    local maxValue = scores[1]\n    local maxIndex = 1\n\n    for i = 1, n do\n        if scores[i] >= 90 then\n            excellent = excellent + 1\n        elseif scores[i] >= 60 then\n            pass = pass + 1\n        else\n            needImprove = needImprove + 1\n        end\n\n        if scores[i] > maxValue then\n            maxValue = scores[i]\n            maxIndex = i\n        end\n    end\n\n    return excellent, pass, needImprove, maxIndex\nend",
       "test_cases": [
         [
           [
-            90,
+            95,
             80,
-            50
-          ],
-          3
-        ],
-        [
-          [
-            60,
-            85,
-            100,
-            59
+            55,
+            100
           ],
           4
         ],
         [
           [
-            10
+            60,
+            70,
+            80
           ],
-          1
+          3
+        ],
+        [
+          [
+            40,
+            50,
+            30
+          ],
+          3
         ]
       ],
       "sort_order": 9

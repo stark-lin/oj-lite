@@ -1,252 +1,181 @@
 {
   "title": "Week 11 - 排序算法二与排序应用",
-  "description": "练习插入排序思想、合并有序数组、去重和并列名次。",
+  "description": "练习插入排序、合并有序数组、排序后去重、前三名和并列排名。",
   "sort_order": 22,
   "questions": [
     {
-      "title": "像整理扑克牌一样插入一个新分数",
+      "title": "像整理扑克牌一样把一个新分数插入到合适位置",
       "description": {
         "难度": "Simple",
-        "背景": "老师已经把一组分数按照从小到大的顺序整理好，并保存在数组 scores 中。现在又收到一个新的分数 newScore，需要把它插入到原来的有序成绩单里，同时保证插入后的成绩单仍然保持从小到大的顺序。",
-        "任务": "请根据插入排序的思想，把 newScore 插入到有序数组 scores 的合适位置，并返回插入后的新数组。",
-        "输入": "三个参数：有序数组 scores、原数量 n、新分数 newScore。",
+        "背景": "scores 数组已经按从小到大排好序。老师收到一个新分数 newScore，需要把它放到合适位置，保持数组有序。",
+        "任务": "请生成插入新分数后的有序数组。",
+        "输入": "一个有序数组 scores，一个数字 n 和一个数字 newScore。",
         "输出": "返回插入后的新数组。",
-        "提示": "可以先把小于 newScore 的元素复制到结果数组中，再放入 newScore，最后复制剩下的元素。"
+        "提示": "找到新分数应该放在哪个位置，再把其他分数按顺序放入新数组。"
       },
-      "starter_code": "function solution(scores, n, newScore)\n    return {}\nend",
-      "reference_code": "function solution(scores, n, newScore)\n    local result = {}\n    local position = 1\n    while position <= n and scores[position] < newScore do\n        result[position] = scores[position]\n        position = position + 1\n    end\n    result[position] = newScore\n    for i = position, n do\n        result[i + 1] = scores[i]\n    end\n    return result\nend",
+      "starter_code": "function solution(scores, n, newScore)\n    local result = {}\n    return result\nend",
+      "reference_code": "function solution(scores, n, newScore)\n    local result = {}\n    local inserted = false\n    local r = 1\n\n    for i = 1, n do\n        if inserted == false and newScore <= scores[i] then\n            result[r] = newScore\n            r = r + 1\n            inserted = true\n        end\n        result[r] = scores[i]\n        r = r + 1\n    end\n\n    if inserted == false then\n        result[r] = newScore\n    end\n\n    return result\nend",
       "test_cases": [
         [
-          [
-            60,
-            80,
-            100
-          ],
+          [60, 70, 90],
           3,
-          90
+          80
         ],
         [
-          [
-            1,
-            3,
-            5
-          ],
+          [10, 20, 30],
           3,
-          0
+          5
         ],
         [
-          [
-            2
-          ],
+          [50],
           1,
-          4
+          100
         ]
       ],
       "sort_order": 1
     },
     {
-      "title": "在已排好队伍中插入一名新同学",
+      "title": "找出排序后成绩单中的中间分数",
       "description": {
         "难度": "Simple",
-        "背景": "体育课上，队伍已经按照身高从矮到高排好，所有同学的身高保存在数组 heights 中。现在来了一名新同学，他的身高是 newHeight。老师需要把这名新同学插入到合适的位置，使队伍仍然保持从矮到高的顺序。",
-        "任务": "请把 newHeight 插入到已经有序的身高数组 heights 中，并返回插入后的新身高数组。",
-        "输入": "三个参数：身高数组 heights、原人数 n、新身高 newHeight。",
-        "输出": "返回插入后的身高数组。",
-        "提示": "可以从前往后查找第一个不小于 newHeight 的位置，把新身高放在这个位置，再把后面的身高依次后移。"
+        "背景": "scores 数组已经从小到大排好序，并且学生人数 n 是奇数。老师想找出正中间的分数。",
+        "任务": "请返回排序成绩单中的中间分数。",
+        "输入": "一个有序数组 scores 和一个奇数 n。",
+        "输出": "返回中间位置的分数。",
+        "提示": "中间位置和数组长度有关。"
       },
-      "starter_code": "function solution(heights, n, newHeight)\n    return {}\nend",
-      "reference_code": "function solution(heights, n, newHeight)\n    local result = {}\n    local position = 1\n    while position <= n and heights[position] < newHeight do\n        result[position] = heights[position]\n        position = position + 1\n    end\n    result[position] = newHeight\n    for i = position, n do\n        result[i + 1] = heights[i]\n    end\n    return result\nend",
+      "starter_code": "function solution(scores, n)\n    return 0\nend",
+      "reference_code": "function solution(scores, n)\n    local mid = (n + 1) / 2\n    return scores[mid]\nend",
       "test_cases": [
         [
-          [
-            120,
-            130,
-            150
-          ],
-          3,
-          140
+          [60, 70, 80],
+          3
         ],
         [
-          [
-            100,
-            110
-          ],
-          2,
-          90
+          [10, 20, 30, 40, 50],
+          5
         ],
         [
-          [
-            180
-          ],
-          1,
-          180
+          [88],
+          1
         ]
       ],
       "sort_order": 2
     },
     {
-      "title": "找出排序后成绩单中的中间分数",
+      "title": "统计排序后相邻分数相同的次数",
       "description": {
         "难度": "Simple",
-        "背景": "老师已经把成绩单按照从小到大的顺序排好，并保存在数组 scores 中。为了了解成绩的中间水平，需要读取位于中间位置的分数。如果学生人数是偶数，则按照题目规则返回靠左的那个中间分数。",
-        "任务": "请根据人数 n 找到成绩单的中间位置，并返回 scores 中对应位置的分数。",
-        "输入": "两个参数：有序成绩数组 scores 和人数 n。",
-        "输出": "返回中间分数；偶数人数返回靠左的中间分数。",
-        "提示": "可以用循环计算中间下标，避免使用 math 函数。每次让计数前进两个位置时，中间下标前进一步。"
+        "背景": "scores 数组已经从小到大排好序。相同分数会挨在一起，老师想知道有多少次相邻分数相同。",
+        "任务": "请统计相邻位置分数相同的次数。",
+        "输入": "一个有序数组 scores 和一个数字 n。",
+        "输出": "返回相邻相同的次数。",
+        "提示": "只需要比较当前位置和下一个位置。"
       },
       "starter_code": "function solution(scores, n)\n    return 0\nend",
-      "reference_code": "function solution(scores, n)\n    local mid = 1\n    local count = 1\n    while count + 2 <= n do\n        mid = mid + 1\n        count = count + 2\n    end\n    return scores[mid]\nend",
+      "reference_code": "function solution(scores, n)\n    local count = 0\n\n    for i = 1, n - 1 do\n        if scores[i] == scores[i + 1] then\n            count = count + 1\n        end\n    end\n\n    return count\nend",
       "test_cases": [
         [
-          [
-            60,
-            70,
-            80
-          ],
-          3
-        ],
-        [
-          [
-            50,
-            60,
-            70,
-            80
-          ],
+          [60, 60, 70, 80],
           4
         ],
         [
-          [
-            99
-          ],
-          1
+          [1, 2, 3],
+          3
+        ],
+        [
+          [5, 5, 5],
+          3
         ]
       ],
       "sort_order": 3
     },
     {
-      "title": "合并两个班已经排好序的成绩单",
+      "title": "用插入排序整理一组游戏分数",
       "description": {
         "难度": "Normal",
-        "背景": "两个班分别整理好了自己的成绩单，两个数组 a 和 b 都已经按照从小到大的顺序排列。现在老师需要把两个班的成绩合并成一份总成绩单，并且合并后的成绩仍然保持从小到大的顺序。",
-        "任务": "请把两个已经有序的成绩数组 a 和 b 合并成一个新的有序数组，并返回合并结果。",
-        "输入": "四个参数：数组 a、数量 n、数组 b、数量 m。",
-        "输出": "返回合并后的数组。",
-        "提示": "可以用两个下标分别指向两个数组当前要比较的位置，每次把较小的元素放入结果数组。"
+        "背景": "玩家分数保存在 scores 数组中。老师想用插入排序模拟整理扑克牌的过程，把分数从小到大排好。",
+        "任务": "请使用插入排序整理 scores。",
+        "输入": "一个数组 scores 和一个数字 n。",
+        "输出": "返回从小到大排序后的 scores 数组。",
+        "提示": "每次把当前数据插入到前面已经排好序的部分。"
       },
-      "starter_code": "function solution(a, n, b, m)\n    return {}\nend",
-      "reference_code": "function solution(a, n, b, m)\n    local result = {}\n    local i = 1\n    local j = 1\n    local k = 1\n    while i <= n and j <= m do\n        if a[i] <= b[j] then\n            result[k] = a[i]\n            i = i + 1\n        else\n            result[k] = b[j]\n            j = j + 1\n        end\n        k = k + 1\n    end\n    while i <= n do\n        result[k] = a[i]\n        i = i + 1\n        k = k + 1\n    end\n    while j <= m do\n        result[k] = b[j]\n        j = j + 1\n        k = k + 1\n    end\n    return result\nend",
+      "starter_code": "function solution(scores, n)\n    return scores\nend",
+      "reference_code": "function solution(scores, n)\n    for i = 2, n do\n        local key = scores[i]\n        local j = i - 1\n\n        while j >= 1 and scores[j] > key do\n            scores[j + 1] = scores[j]\n            j = j - 1\n        end\n\n        scores[j + 1] = key\n    end\n\n    return scores\nend",
       "test_cases": [
         [
-          [
-            60,
-            80
-          ],
-          2,
-          [
-            70,
-            90
-          ],
-          2
+          [5, 3, 8, 1, 2],
+          5
         ],
         [
-          [
-            1,
-            3,
-            5
-          ],
-          3,
-          [
-            2,
-            4
-          ],
-          2
+          [4, 1, 3],
+          3
         ],
         [
-          [
-            5
-          ],
-          1,
-          [],
-          0
+          [9],
+          1
         ]
       ],
       "sort_order": 4
     },
     {
-      "title": "排序后找出成绩前三名",
+      "title": "合并两个已经排好序的成绩表",
       "description": {
         "难度": "Normal",
-        "背景": "一次比赛结束后，成绩已经按照从高到低的顺序排好，并保存在数组 scores 中。数组最前面的成绩就是排名最高的成绩。现在需要从这份已经排序的成绩单中取出前三名成绩，用于公布获奖名单。",
-        "任务": "请读取 scores 数组中的前 3 个成绩，并把它们按原顺序保存到新数组 top 中返回。",
-        "输入": "两个参数：降序成绩数组 scores 和人数 n。",
-        "输出": "返回前三名组成的数组。",
-        "提示": "题目保证 n 至少为 3。可以直接循环读取 scores[1]、scores[2] 和 scores[3]。"
+        "背景": "两个班的成绩表 classA 和 classB 都已经从小到大排好序。老师想把两个成绩表合并成一个新的有序成绩表。",
+        "任务": "请合并两个有序数组，并保持从小到大顺序。",
+        "输入": "两个有序数组 classA、classB，以及两个数字 n 和 m。",
+        "输出": "返回合并后的有序数组。",
+        "提示": "可以分别记录两个数组当前正在比较的位置。"
       },
-      "starter_code": "function solution(scores, n)\n    return {}\nend",
-      "reference_code": "function solution(scores, n)\n    local top = {}\n    for i = 1, 3 do\n        top[i] = scores[i]\n    end\n    return top\nend",
+      "starter_code": "function solution(classA, n, classB, m)\n    local result = {}\n    return result\nend",
+      "reference_code": "function solution(classA, n, classB, m)\n    local result = {}\n    local i = 1\n    local j = 1\n    local r = 1\n\n    while i <= n and j <= m do\n        if classA[i] <= classB[j] then\n            result[r] = classA[i]\n            i = i + 1\n        else\n            result[r] = classB[j]\n            j = j + 1\n        end\n        r = r + 1\n    end\n\n    while i <= n do\n        result[r] = classA[i]\n        i = i + 1\n        r = r + 1\n    end\n\n    while j <= m do\n        result[r] = classB[j]\n        j = j + 1\n        r = r + 1\n    end\n\n    return result\nend",
       "test_cases": [
         [
-          [
-            100,
-            90,
-            80,
-            70
-          ],
-          4
+          [60, 80],
+          2,
+          [70, 90],
+          2
         ],
         [
-          [
-            9,
-            8,
-            7
-          ],
-          3
+          [1, 3, 5],
+          3,
+          [2, 4],
+          2
         ],
         [
-          [
-            5,
-            4,
-            4,
-            1
-          ],
-          4
+          [10],
+          1,
+          [5, 20],
+          2
         ]
       ],
       "sort_order": 5
     },
     {
-      "title": "统计排序后有多少个不同的分数",
+      "title": "排序后统计有多少个不同的分数",
       "description": {
         "难度": "Normal",
-        "背景": "老师已经把成绩按照从小到大的顺序排好，并保存在数组 scores 中。由于数组已经有序，相同的分数一定会相邻出现。现在需要统计这份成绩单中一共有多少种不同的分数。",
-        "任务": "请遍历有序成绩数组 scores，统计不同分数的数量，并返回统计结果。",
-        "输入": "两个参数：有序成绩数组 scores 和人数 n。",
-        "输出": "返回不同分数数量。",
-        "提示": "如果 n 为 0，直接返回 0。否则先把第一个分数算作一种，之后只在当前分数和前一个分数不同时增加计数。"
+        "背景": "成绩数组 scores 原本顺序混乱。老师需要先把它排好序，再统计里面有多少种不同的分数。",
+        "任务": "请先对 scores 从小到大排序，再统计不同分数的数量。",
+        "输入": "一个数组 scores 和一个数字 n。",
+        "输出": "返回不同分数的数量。",
+        "提示": "排序后，相同分数会挨在一起。"
       },
       "starter_code": "function solution(scores, n)\n    return 0\nend",
-      "reference_code": "function solution(scores, n)\n    if n == 0 then\n        return 0\n    end\n    local count = 1\n    for i = 2, n do\n        if scores[i] ~= scores[i - 1] then\n            count = count + 1\n        end\n    end\n    return count\nend",
+      "reference_code": "function solution(scores, n)\n    for i = 2, n do\n        local key = scores[i]\n        local j = i - 1\n\n        while j >= 1 and scores[j] > key do\n            scores[j + 1] = scores[j]\n            j = j - 1\n        end\n\n        scores[j + 1] = key\n    end\n\n    if n == 0 then\n        return 0\n    end\n\n    local count = 1\n    for i = 2, n do\n        if scores[i] ~= scores[i - 1] then\n            count = count + 1\n        end\n    end\n\n    return count\nend",
       "test_cases": [
         [
-          [
-            60,
-            60,
-            70,
-            80
-          ],
+          [80, 60, 80, 90],
           4
         ],
         [
-          [
-            1,
-            1,
-            1
-          ],
+          [5, 5, 5],
           3
         ],
         [
-          [],
-          0
+          [1, 3, 2],
+          3
         ]
       ],
       "sort_order": 6
@@ -255,125 +184,91 @@
       "title": "处理成绩排行榜中的并列名次",
       "description": {
         "难度": "Challenge",
-        "背景": "比赛成绩已经按照从高到低的顺序排列，并保存在数组 scores 中。排行榜规则规定：相同成绩的同学名次相同，后面的名次要按照实际位置跳过。例如两个同学并列第 1 名，那么下一名就是第 3 名。",
-        "任务": "请根据降序成绩数组 scores 生成对应的名次数组 ranks，并返回这个数组。",
-        "输入": "两个参数：降序成绩数组 scores 和人数 n。",
-        "输出": "返回名次数组 ranks。",
-        "提示": "如果当前成绩等于前一个成绩，当前名次就等于前一个名次；否则当前名次等于当前位置 i。"
+        "背景": "成绩排行榜需要从高到低排序。如果两名学生分数相同，他们获得相同名次；后面的学生名次要跳过已经占用的位置。例如 100、100、90 的名次是 1、1、3。",
+        "任务": "请先把 scores 从高到低排序，再生成每个位置对应的并列名次数组。",
+        "输入": "一个数组 scores 和一个数字 n。",
+        "输出": "依次返回排序后的 scores 数组和 ranks 名次数组。",
+        "提示": "先排序，再根据相邻分数是否相同决定名次是否变化。"
       },
-      "starter_code": "function solution(scores, n)\n    return {}\nend",
-      "reference_code": "function solution(scores, n)\n    local ranks = {}\n    if n == 0 then\n        return ranks\n    end\n    ranks[1] = 1\n    for i = 2, n do\n        if scores[i] == scores[i - 1] then\n            ranks[i] = ranks[i - 1]\n        else\n            ranks[i] = i\n        end\n    end\n    return ranks\nend",
+      "starter_code": "function solution(scores, n)\n    local ranks = {}\n    return scores, ranks\nend",
+      "reference_code": "function solution(scores, n)\n    for i = 1, n - 1 do\n        for j = 1, n - i do\n            if scores[j] < scores[j + 1] then\n                local temp = scores[j]\n                scores[j] = scores[j + 1]\n                scores[j + 1] = temp\n            end\n        end\n    end\n\n    local ranks = {}\n    local currentRank = 1\n\n    for i = 1, n do\n        if i == 1 then\n            currentRank = 1\n        elseif scores[i] < scores[i - 1] then\n            currentRank = i\n        end\n        ranks[i] = currentRank\n    end\n\n    return scores, ranks\nend",
       "test_cases": [
         [
-          [
-            100,
-            100,
-            90,
-            80
-          ],
+          [100, 90, 100, 80],
           4
         ],
         [
-          [
-            9,
-            8,
-            8,
-            7
-          ],
-          4
+          [70, 70, 70],
+          3
         ],
         [
-          [
-            5
-          ],
-          1
+          [95, 85, 90],
+          3
         ]
       ],
       "sort_order": 7
     },
     {
-      "title": "合并两个有序图书编号表并保持有序",
+      "title": "合并两个有序图书编号表，去掉重复编号并保持有序",
       "description": {
         "难度": "Challenge",
-        "背景": "图书馆有两份图书编号表，数组 a 和数组 b 都已经按照从小到大的顺序排列。现在管理员需要把这两份编号表合并成一份完整编号表，并且合并后的编号仍然保持从小到大的顺序。",
-        "任务": "请合并两个有序图书编号数组 a 和 b，生成一个新的有序编号数组并返回。",
-        "输入": "四个参数：数组 a、数量 n、数组 b、数量 m。",
-        "输出": "返回合并后的编号数组。",
-        "提示": "这和合并两个有序成绩单的方法相同。可以用两个下标分别比较两个数组当前的编号，把较小的编号放入结果数组。"
+        "背景": "两个图书馆分别提供了已经从小到大排序的图书编号表。两个表中可能有重复编号，管理员想合并成一个没有重复编号的新表。",
+        "任务": "请合并两个有序数组，去掉重复编号，并保持从小到大顺序。",
+        "输入": "两个有序数组 booksA、booksB，以及两个数字 n 和 m。",
+        "输出": "依次返回去重后的编号数组和剩余编号数量。",
+        "提示": "可以先按顺序合并，同时只记录和上一次不同的编号。"
       },
-      "starter_code": "function solution(a, n, b, m)\n    return {}\nend",
-      "reference_code": "function solution(a, n, b, m)\n    local result = {}\n    local i = 1\n    local j = 1\n    local k = 1\n    while i <= n and j <= m do\n        if a[i] <= b[j] then\n            result[k] = a[i]\n            i = i + 1\n        else\n            result[k] = b[j]\n            j = j + 1\n        end\n        k = k + 1\n    end\n    while i <= n do\n        result[k] = a[i]\n        i = i + 1\n        k = k + 1\n    end\n    while j <= m do\n        result[k] = b[j]\n        j = j + 1\n        k = k + 1\n    end\n    return result\nend",
+      "starter_code": "function solution(booksA, n, booksB, m)\n    local result = {}\n    return result, 0\nend",
+      "reference_code": "function solution(booksA, n, booksB, m)\n    local result = {}\n    local i = 1\n    local j = 1\n    local r = 0\n    local last = 0\n    local hasLast = false\n\n    while i <= n or j <= m do\n        local value = 0\n\n        if j > m or (i <= n and booksA[i] <= booksB[j]) then\n            value = booksA[i]\n            i = i + 1\n        else\n            value = booksB[j]\n            j = j + 1\n        end\n\n        if hasLast == false or value ~= last then\n            r = r + 1\n            result[r] = value\n            last = value\n            hasLast = true\n        end\n    end\n\n    return result, r\nend",
       "test_cases": [
         [
-          [
-            1,
-            4,
-            7
-          ],
+          [1, 3, 5],
           3,
-          [
-            2,
-            3,
-            8
-          ],
+          [3, 4, 5],
           3
         ],
         [
-          [
-            10
-          ],
-          1,
-          [
-            1,
-            2
-          ],
+          [2, 2, 4],
+          3,
+          [2, 5],
           2
         ],
         [
-          [
-            5
-          ],
+          [10],
           1,
-          [],
-          0
+          [20],
+          1
         ]
       ],
       "sort_order": 8
     },
     {
-      "title": "排序后去掉重复编号并统计剩余数量",
+      "title": "排序后找出前三名，并判断新分数能否进入前三",
       "description": {
         "难度": "Challenge",
-        "背景": "一组编号已经按照从小到大的顺序排好，并保存在数组 ids 中。因为数组已经有序，所以重复编号一定会相邻出现。现在需要把重复编号去掉，只保留每种编号第一次出现的结果，并统计去重后还剩多少个编号。",
-        "任务": "请遍历有序编号数组 ids，生成去重后的数组 unique，并统计去重后的数量 count，最后同时返回 unique 和 count。",
-        "输入": "两个参数：有序编号数组 ids 和数量 n。",
-        "输出": "返回两个值：去重数组 unique 和剩余数量 count。",
-        "提示": "只在当前位置是第一个元素，或者当前编号和前一个编号不同时，才把当前编号加入 unique。"
+        "背景": "游戏排行榜需要先把分数从高到低排序，然后取出前三名。现在有一个新分数 newScore，系统还需要判断它能否进入前三名。",
+        "任务": "请排序 scores，返回前三名分数，并判断 newScore 是否能进入前三。",
+        "输入": "一个数组 scores，一个数字 n 和一个数字 newScore，保证 n 至少为 3。",
+        "输出": "依次返回第一名、第二名、第三名和 newScore 是否能进入前三。",
+        "提示": "先得到当前前三名，再用新分数和第三名比较。"
       },
-      "starter_code": "function solution(ids, n)\n    return {}, 0\nend",
-      "reference_code": "function solution(ids, n)\n    local unique = {}\n    local count = 0\n    for i = 1, n do\n        if i == 1 or ids[i] ~= ids[i - 1] then\n            count = count + 1\n            unique[count] = ids[i]\n        end\n    end\n    return unique, count\nend",
+      "starter_code": "function solution(scores, n, newScore)\n    return 0, 0, 0, false\nend",
+      "reference_code": "function solution(scores, n, newScore)\n    for i = 2, n do\n        local key = scores[i]\n        local j = i - 1\n\n        while j >= 1 and scores[j] < key do\n            scores[j + 1] = scores[j]\n            j = j - 1\n        end\n\n        scores[j + 1] = key\n    end\n\n    local canEnter = false\n    if newScore >= scores[3] then\n        canEnter = true\n    end\n\n    return scores[1], scores[2], scores[3], canEnter\nend",
       "test_cases": [
         [
-          [
-            1,
-            1,
-            2,
-            3,
-            3
-          ],
-          5
+          [100, 80, 90, 70],
+          4,
+          85
         ],
         [
-          [
-            7,
-            7,
-            7
-          ],
-          3
+          [50, 60, 70],
+          3,
+          40
         ],
         [
-          [],
-          0
+          [300, 200, 100, 400],
+          4,
+          250
         ]
       ],
       "sort_order": 9

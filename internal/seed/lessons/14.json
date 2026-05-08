@@ -1,343 +1,176 @@
 {
   "title": "Week 07 - 数组与表格数据",
-  "description": "练习数组访问、修改、复制、反转和累计数组。",
+  "description": "练习数组读取、修改、交换、遍历、复制和状态记录。",
   "sort_order": 14,
   "questions": [
     {
       "title": "读取成绩单中第几个学生的分数",
       "description": {
         "难度": "Simple",
-        "背景": "老师把一份成绩单按照学生顺序保存在数组 scores 中。数组中的第 1 个位置表示第 1 个学生的分数，第 2 个位置表示第 2 个学生的分数，依此类推。现在需要根据给定的位置 index，查出对应学生的成绩。",
-        "任务": "请从成绩数组 scores 中读取第 index 个学生的分数，并返回这个分数。",
-        "输入": "两个参数：成绩数组 scores 和位置 index。",
-        "输出": "返回 scores[index]。",
-        "提示": "Lua 数组下标从 1 开始。可以直接使用 scores[index] 访问指定位置的元素。"
+        "背景": "老师把学生成绩存在一个数组 scores 中。每个位置对应一名学生的成绩。",
+        "任务": "请返回第 index 个学生的分数。",
+        "输入": "一个数组 scores 和一个数字 index。",
+        "输出": "返回 scores 中第 index 个位置的值。",
+        "提示": "数组中的每个位置都可以通过下标访问。"
       },
       "starter_code": "function solution(scores, index)\n    return 0\nend",
-      "reference_code": "function solution(scores, index)\n    local score = scores[index]\n    return score\nend",
+      "reference_code": "function solution(scores, index)\n    return scores[index]\nend",
       "test_cases": [
-        [
-          [
-            80,
-            95,
-            70
-          ],
-          2
-        ],
-        [
-          [
-            60,
-            75
-          ],
-          1
-        ],
-        [
-          [
-            100
-          ],
-          1
-        ]
+        [[80, 95, 70], 2],
+        [[60, 75, 90, 100], 4],
+        [[88], 1]
       ],
       "sort_order": 1
     },
     {
-      "title": "读取体测表中第几个同学的跳远成绩",
+      "title": "修改每日积分表中某一天的积分",
       "description": {
         "难度": "Simple",
-        "背景": "体育老师把同学们的跳远成绩按编号顺序记录在数组 jumps 中。第 1 个数据表示第 1 个同学的跳远成绩，第 2 个数据表示第 2 个同学的跳远成绩。现在需要根据指定位置 index，读取某位同学的跳远成绩。",
-        "任务": "请从跳远成绩数组 jumps 中读取第 index 个同学的成绩，并返回读取到的结果。",
-        "输入": "两个参数：跳远数组 jumps 和位置 index。",
-        "输出": "返回 jumps[index]。",
-        "提示": "数组访问只需要使用下标。可以把 index 放在中括号里，直接取得对应位置的值。"
+        "背景": "玩家每天获得的积分保存在数组 points 中。某一天的积分记录有误，需要改成 newValue。",
+        "任务": "请把第 day 天的积分修改为 newValue，并返回修改后的该天积分。",
+        "输入": "一个数组 points，两个数字 day 和 newValue。",
+        "输出": "返回修改后第 day 天的积分。",
+        "提示": "找到对应位置后，可以直接更新该位置的数据。"
       },
-      "starter_code": "function solution(jumps, index)\n    return 0\nend",
-      "reference_code": "function solution(jumps, index)\n    local result = jumps[index]\n    return result\nend",
+      "starter_code": "function solution(points, day, newValue)\n    return 0\nend",
+      "reference_code": "function solution(points, day, newValue)\n    points[day] = newValue\n    return points[day]\nend",
       "test_cases": [
-        [
-          [
-            120,
-            135,
-            128
-          ],
-          3
-        ],
-        [
-          [
-            150,
-            140
-          ],
-          2
-        ],
-        [
-          [
-            99
-          ],
-          1
-        ]
+        [[10, 20, 30], 2, 50],
+        [[5, 5, 5, 5], 4, 9],
+        [[100], 1, 80]
       ],
       "sort_order": 2
     },
     {
-      "title": "查看游戏背包中第几个格子的物品数量",
+      "title": "交换一排学生中两个位置的数据",
       "description": {
         "难度": "Simple",
-        "背景": "游戏背包被分成多个格子，每个格子里都可能放着不同数量的物品。这些物品数量按格子顺序保存在数组 items 中。现在玩家想查看第 index 个格子里有多少个物品。",
-        "任务": "请从物品数量数组 items 中读取第 index 个格子的物品数量，并返回这个数量。",
-        "输入": "两个参数：物品数量数组 items 和位置 index。",
-        "输出": "返回 items[index]。",
-        "提示": "可以把数组想成一排有编号的盒子。第 index 个盒子里的数量就是 items[index]。"
+        "背景": "一排学生的编号保存在数组 students 中。老师想交换第 a 个位置和第 b 个位置的学生。",
+        "任务": "请交换数组中两个位置的数据，并返回交换后的数组。",
+        "输入": "一个数组 students，两个数字 a 和 b。",
+        "输出": "返回交换后的 students 数组。",
+        "提示": "交换两个位置时，可以借助一个临时变量。"
       },
-      "starter_code": "function solution(items, index)\n    return 0\nend",
-      "reference_code": "function solution(items, index)\n    local count = items[index]\n    return count\nend",
+      "starter_code": "function solution(students, a, b)\n    return students\nend",
+      "reference_code": "function solution(students, a, b)\n    local temp = students[a]\n    students[a] = students[b]\n    students[b] = temp\n    return students\nend",
       "test_cases": [
-        [
-          [
-            3,
-            0,
-            5,
-            2
-          ],
-          3
-        ],
-        [
-          [
-            9,
-            1
-          ],
-          1
-        ],
-        [
-          [
-            4
-          ],
-          1
-        ]
+        [[1, 2, 3], 1, 3],
+        [[4, 5, 6, 7], 2, 4],
+        [[9, 8], 1, 2]
       ],
       "sort_order": 3
     },
     {
-      "title": "修改每日积分表中某一天的积分",
+      "title": "遍历成绩单并统计及格人数",
       "description": {
         "难度": "Normal",
-        "背景": "玩家每天获得的积分按天数顺序保存在数组 points 中。后来发现第 day 天的积分记录有误，需要把这一天的积分改成新的数值 newPoints。修改完成后，需要返回更新后的积分表。",
-        "任务": "请把 points 数组中第 day 天的积分修改为 newPoints，并返回修改后的 points 数组。",
-        "输入": "三个参数：积分数组 points、天数 day、新积分 newPoints。",
-        "输出": "返回修改后的 points 数组。",
-        "提示": "可以直接给 points[day] 重新赋值，把指定位置的旧积分替换成 newPoints。"
+        "背景": "老师把 n 名学生的成绩保存在数组 scores 中。成绩达到 60 分或以上算及格。",
+        "任务": "请遍历成绩单，统计及格学生的人数。",
+        "输入": "一个数组 scores 和一个数字 n。",
+        "输出": "返回及格人数。",
+        "提示": "数组遍历时，每次检查一个位置上的成绩。"
       },
-      "starter_code": "function solution(points, day, newPoints)\n    return points\nend",
-      "reference_code": "function solution(points, day, newPoints)\n    points[day] = newPoints\n    return points\nend",
+      "starter_code": "function solution(scores, n)\n    return 0\nend",
+      "reference_code": "function solution(scores, n)\n    local count = 0\n\n    for i = 1, n do\n        if scores[i] >= 60 then\n            count = count + 1\n        end\n    end\n\n    return count\nend",
       "test_cases": [
-        [
-          [
-            10,
-            20,
-            30
-          ],
-          2,
-          25
-        ],
-        [
-          [
-            1,
-            2,
-            3,
-            4
-          ],
-          4,
-          9
-        ],
-        [
-          [
-            5
-          ],
-          1,
-          8
-        ]
+        [[80, 55, 60], 3],
+        [[40, 50, 59], 3],
+        [[100, 90, 70, 65], 4]
       ],
       "sort_order": 4
-    },
-    {
-      "title": "把一排学生的第一个和最后一个交换位置",
-      "description": {
-        "难度": "Normal",
-        "背景": "一排学生的站队顺序保存在数组 line 中，一共有 n 名学生。现在老师要求队伍中的第一个同学和最后一个同学交换位置，中间的同学保持原来的顺序不变。",
-        "任务": "请交换数组 line 中第 1 个元素和第 n 个元素，并返回交换后的 line 数组。",
-        "输入": "两个参数：队伍数组 line 和人数 n。",
-        "输出": "返回交换后的 line 数组。",
-        "提示": "交换两个位置的值时，可以使用临时变量保存其中一个值，避免原来的内容被覆盖。"
-      },
-      "starter_code": "function solution(line, n)\n    return line\nend",
-      "reference_code": "function solution(line, n)\n    local temp = line[1]\n    line[1] = line[n]\n    line[n] = temp\n    return line\nend",
-      "test_cases": [
-        [
-          [
-            "A",
-            "B",
-            "C"
-          ],
-          3
-        ],
-        [
-          [
-            1,
-            2,
-            3,
-            4
-          ],
-          4
-        ],
-        [
-          [
-            7
-          ],
-          1
-        ]
-      ],
-      "sort_order": 5
     },
     {
       "title": "复制一份班级成绩单作为备份",
       "description": {
         "难度": "Normal",
-        "背景": "老师准备对成绩单进行整理，但又不想直接修改原来的成绩数据。为了避免原表被改动，需要把数组 scores 中前 n 个成绩复制到一个新的数组 copy 中，作为一份独立备份。",
-        "任务": "请创建一个新数组 copy，并把 scores 中前 n 个成绩按原顺序逐个复制进去，最后返回 copy。",
-        "输入": "两个参数：成绩数组 scores 和数量 n。",
-        "输出": "返回新数组 copy。",
-        "提示": "可以先创建空数组 copy，再用循环从第 1 个位置到第 n 个位置逐个复制。"
+        "背景": "老师想把成绩单 scores 复制一份，防止之后修改原成绩单时丢失原始数据。",
+        "任务": "请生成一个新的数组 backup，使它保存和 scores 一样的数据。",
+        "输入": "一个数组 scores 和一个数字 n。",
+        "输出": "返回复制得到的 backup 数组。",
+        "提示": "复制数组时，需要逐个位置把数据放到新数组里。"
       },
-      "starter_code": "function solution(scores, n)\n    return {}\nend",
-      "reference_code": "function solution(scores, n)\n    local copy = {}\n    for i = 1, n do\n        copy[i] = scores[i]\n    end\n    return copy\nend",
+      "starter_code": "function solution(scores, n)\n    local backup = {}\n    return backup\nend",
+      "reference_code": "function solution(scores, n)\n    local backup = {}\n\n    for i = 1, n do\n        backup[i] = scores[i]\n    end\n\n    return backup\nend",
       "test_cases": [
-        [
-          [
-            80,
-            90,
-            70
-          ],
-          3
-        ],
-        [
-          [
-            1,
-            2
-          ],
-          2
-        ],
-        [
-          [
-            100
-          ],
-          1
-        ]
+        [[80, 90, 70], 3],
+        [[1, 2, 3, 4], 4],
+        [[100], 1]
+      ],
+      "sort_order": 5
+    },
+    {
+      "title": "把每日金币表中的每一项都加上活动奖励",
+      "description": {
+        "难度": "Normal",
+        "背景": "游戏举办活动，每一天的金币奖励都会额外增加 bonus。原始金币记录保存在 coins 数组中。",
+        "任务": "请把 coins 中每一天的金币都增加 bonus，并返回修改后的数组。",
+        "输入": "一个数组 coins，一个数字 n 和一个数字 bonus。",
+        "输出": "返回更新后的 coins 数组。",
+        "提示": "对数组中的每个位置做同样的更新。"
+      },
+      "starter_code": "function solution(coins, n, bonus)\n    return coins\nend",
+      "reference_code": "function solution(coins, n, bonus)\n    for i = 1, n do\n        coins[i] = coins[i] + bonus\n    end\n\n    return coins\nend",
+      "test_cases": [
+        [[10, 20, 30], 3, 5],
+        [[1, 1, 1, 1], 4, 2],
+        [[100], 1, 50]
       ],
       "sort_order": 6
-    },
-    {
-      "title": "传球游戏中记录每一轮球在谁手里",
-      "description": {
-        "难度": "Challenge",
-        "背景": "同学们围成一圈玩传球游戏，一共有 playerCount 名同学，编号从 1 到 playerCount。球一开始在 startPlayer 手里。每一轮结束时，球都会传给下一位同学；如果已经传到最后一名同学，再往后就回到 1 号同学。",
-        "任务": "请模拟 rounds 轮传球过程，记录每一轮结束后球所在的同学编号，并返回这些编号组成的数组。",
-        "输入": "三个数字：startPlayer、rounds、playerCount。",
-        "输出": "返回长度为 rounds 的数组。",
-        "提示": "每一轮都让 current 加 1。如果 current 超过 playerCount，就把 current 改回 1。"
-      },
-      "starter_code": "function solution(startPlayer, rounds, playerCount)\n    return {}\nend",
-      "reference_code": "function solution(startPlayer, rounds, playerCount)\n    local result = {}\n    local current = startPlayer\n    for round = 1, rounds do\n        current = current + 1\n        if current > playerCount then\n            current = 1\n        end\n        result[round] = current\n    end\n    return result\nend",
-      "test_cases": [
-        [
-          1,
-          3,
-          5
-        ],
-        [
-          4,
-          4,
-          4
-        ],
-        [
-          2,
-          0,
-          3
-        ]
-      ],
-      "sort_order": 7
-    },
-    {
-      "title": "队伍调头后输出新的排队顺序",
-      "description": {
-        "难度": "Challenge",
-        "背景": "一排队伍的当前顺序保存在数组 line 中，一共有 n 名成员。现在队伍需要整体调头，原来的最后一个成员会变成新的第一个，原来的倒数第二个会变成新的第二个，依此类推。",
-        "任务": "请根据原队伍顺序生成一个新的数组 reversed，保存调头后的排队顺序，并返回这个新数组。",
-        "输入": "两个参数：队伍数组 line 和人数 n。",
-        "输出": "返回新的数组 reversed。",
-        "提示": "新数组第 i 个位置的元素，来自原数组的第 n - i + 1 个位置。"
-      },
-      "starter_code": "function solution(line, n)\n    return {}\nend",
-      "reference_code": "function solution(line, n)\n    local reversed = {}\n    for i = 1, n do\n        reversed[i] = line[n - i + 1]\n    end\n    return reversed\nend",
-      "test_cases": [
-        [
-          [
-            "A",
-            "B",
-            "C"
-          ],
-          3
-        ],
-        [
-          [
-            1,
-            2,
-            3,
-            4
-          ],
-          4
-        ],
-        [
-          [
-            9
-          ],
-          1
-        ]
-      ],
-      "sort_order": 8
     },
     {
       "title": "生成每天累计积分表用于查看升级进度",
       "description": {
         "难度": "Challenge",
-        "背景": "玩家每天获得的新增积分保存在数组 points 中。为了查看升级进度，玩家不只想知道每天新增了多少积分，还想知道每一天结束后累计拥有多少积分，因此需要生成一张累计积分表。",
-        "任务": "请从第 1 天开始依次累加每日积分，生成一个数组 totals，其中 totals[day] 表示第 day 天结束后的累计积分。",
-        "输入": "两个参数：每日积分数组 points 和天数 n。",
-        "输出": "返回累计数组 totals。",
-        "提示": "可以用 total 保存目前的累计值。每处理一天，就把 points[day] 加到 total 中，再把 total 保存到 totals[day]。"
+        "背景": "玩家每天获得的积分保存在 points 数组中。为了查看升级进度，需要生成一个新的累计积分表。",
+        "任务": "请生成数组 totals，其中 totals[i] 表示第 1 天到第 i 天的积分总和。",
+        "输入": "一个数组 points 和一个数字 n。",
+        "输出": "返回累计积分数组 totals。",
+        "提示": "一边遍历每天积分，一边记录到目前为止的总积分。"
       },
-      "starter_code": "function solution(points, n)\n    return {}\nend",
-      "reference_code": "function solution(points, n)\n    local totals = {}\n    local total = 0\n    for day = 1, n do\n        total = total + points[day]\n        totals[day] = total\n    end\n    return totals\nend",
+      "starter_code": "function solution(points, n)\n    local totals = {}\n    return totals\nend",
+      "reference_code": "function solution(points, n)\n    local totals = {}\n    local sum = 0\n\n    for i = 1, n do\n        sum = sum + points[i]\n        totals[i] = sum\n    end\n\n    return totals\nend",
       "test_cases": [
-        [
-          [
-            1,
-            2,
-            3
-          ],
-          3
-        ],
-        [
-          [
-            5,
-            5,
-            10
-          ],
-          3
-        ],
-        [
-          [
-            7
-          ],
-          1
-        ]
+        [[10, 20, 30], 3],
+        [[5, 5, 5, 5], 4],
+        [[100], 1]
+      ],
+      "sort_order": 7
+    },
+    {
+      "title": "队伍调头后生成新的排队顺序",
+      "description": {
+        "难度": "Challenge",
+        "背景": "一队学生的编号保存在 students 数组中。老师喊“向后转”后，原来最后一个学生会变成第一个，原来第一个学生会变成最后一个。",
+        "任务": "请生成调头后的新数组。",
+        "输入": "一个数组 students 和一个数字 n。",
+        "输出": "返回调头后的新数组。",
+        "提示": "新数组的前面位置可以来自原数组的后面位置。"
+      },
+      "starter_code": "function solution(students, n)\n    local result = {}\n    return result\nend",
+      "reference_code": "function solution(students, n)\n    local result = {}\n\n    for i = 1, n do\n        result[i] = students[n - i + 1]\n    end\n\n    return result\nend",
+      "test_cases": [
+        [[1, 2, 3], 3],
+        [[4, 5, 6, 7], 4],
+        [[9], 1]
+      ],
+      "sort_order": 8
+    },
+    {
+      "title": "传球游戏中记录每一轮球在谁手里",
+      "description": {
+        "难度": "Challenge",
+        "背景": "n 名学生围成一圈玩传球游戏。球一开始在 start 号学生手里。每一轮球向后传 steps 个位置，需要记录每一轮传完后球在谁手里。",
+        "任务": "请模拟 rounds 轮传球，并返回每一轮结束后的持球学生编号数组。",
+        "输入": "四个数字：n、start、steps 和 rounds。",
+        "输出": "返回一个数组，记录每一轮结束后球所在的学生编号。",
+        "提示": "位置超过最后一名学生时，需要回到队伍开头继续数。"
+      },
+      "starter_code": "function solution(n, start, steps, rounds)\n    local record = {}\n    return record\nend",
+      "reference_code": "function solution(n, start, steps, rounds)\n    local record = {}\n    local position = start\n\n    for i = 1, rounds do\n        position = position + steps\n        while position > n do\n            position = position - n\n        end\n        record[i] = position\n    end\n\n    return record\nend",
+      "test_cases": [
+        [5, 1, 2, 4],
+        [4, 3, 1, 5],
+        [6, 6, 3, 3]
       ],
       "sort_order": 9
     }
