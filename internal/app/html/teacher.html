@@ -99,6 +99,7 @@
         <span class="status-pill" id="statusMiddle"></span>
       </div>
       <div class="statusbar__right">
+        <span class="status-pill" id="teacherName">Teacher: —</span>
         <span class="status-pill" id="statusRight"></span>
       </div>
     </footer>
@@ -534,6 +535,7 @@
       detailBody: document.getElementById('detailBody'),
       statusLeft: document.getElementById('statusLeft'),
       statusMiddle: document.getElementById('statusMiddle'),
+      teacherName: document.getElementById('teacherName'),
       statusRight: document.getElementById('statusRight'),
       dividers: Array.from(document.querySelectorAll('.divider'))
     };
@@ -735,6 +737,8 @@
         : `${getLessonQuestions().length} items`;
       el.statusLeft.textContent = classItem?.name || 'No class selected';
       el.statusMiddle.textContent = lessonOrderText();
+      el.teacherName.textContent = 'Teacher: ' + (state.data.session?.teacherName || '—');
+      el.teacherName.title = state.data.session?.teacherName || '';
       el.statusRight.textContent = state.ui.browserMode === 'students' ? 'Students' : 'Questions';
     }
 
@@ -1402,6 +1406,7 @@
         el.browserMeta.textContent = '0 items';
         el.statusLeft.textContent = 'Error';
         el.statusMiddle.textContent = 'Teacher workspace';
+        el.teacherName.textContent = 'Teacher: —';
         el.statusRight.textContent = 'Backend';
         el.classList.innerHTML = ui.emptyState('Failed to load classrooms from backend.');
         el.lessonList.innerHTML = ui.emptyState('Failed to load lessons from backend.');
