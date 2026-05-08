@@ -90,29 +90,29 @@ Total question count:
 | Lesson No. | Language | Lesson Name |
 | ---: | --- | --- |
 | 01 | EN | Week 01 - Variables |
-| 02 | CN | Week 01 - Variables |
+| 02 | CN | Week 01 - 变量 |
 | 03 | EN | Week 02 - Conditions and Loops |
-| 04 | CN | Week 02 - Conditions and Loops |
+| 04 | CN | Week 02 - 判断与循环 |
 | 05 | EN | Week 03 - Counting and Classification |
-| 06 | CN | Week 03 - Counting and Classification |
+| 06 | CN | Week 03 - 计数与分类统计 |
 | 07 | EN | Week 04 - Sum, Average, and Accumulation |
-| 08 | CN | Week 04 - Sum, Average, and Accumulation |
+| 08 | CN | Week 04 - 累加、平均与累计 |
 | 09 | EN | Week 05 - Factors, Multiples, and Prime Numbers |
-| 10 | CN | Week 05 - Factors, Multiples, and Prime Numbers |
+| 10 | CN | Week 05 - 因数、倍数与质数 |
 | 11 | EN | Week 06 - Quantity Relations and Double Enumeration |
-| 12 | CN | Week 06 - Quantity Relations and Double Enumeration |
+| 12 | CN | Week 06 - 数量关系与双变量枚举 |
 | 13 | EN | Week 07 - Arrays and Table Data |
-| 14 | CN | Week 07 - Arrays and Table Data |
+| 14 | CN | Week 07 - 数组与表格数据 |
 | 15 | EN | Week 08 - Array Statistics and Extremes |
-| 16 | CN | Week 08 - Array Statistics and Extremes |
+| 16 | CN | Week 08 - 数组统计与最值 |
 | 17 | EN | Week 09 - Search and Binary Search |
-| 18 | CN | Week 09 - Search and Binary Search |
+| 18 | CN | Week 09 - 查找与二分查找 |
 | 19 | EN | Week 10 - Sorting Algorithms I |
-| 20 | CN | Week 10 - Sorting Algorithms I |
+| 20 | CN | Week 10 - 排序算法一 |
 | 21 | EN | Week 11 - Sorting Algorithms II and Applications |
-| 22 | CN | Week 11 - Sorting Algorithms II and Applications |
+| 22 | CN | Week 11 - 排序算法二与排序应用 |
 | 23 | EN | Week 12 - Integrated Math Algorithm Projects |
-| 24 | CN | Week 12 - Integrated Math Algorithm Projects |
+| 24 | CN | Week 12 - 综合数学算法项目 |
 
 ---
 
@@ -808,7 +808,7 @@ Lesson 01
 Lesson name: Week 01 - Variables
 
 Lesson 02
-Lesson name: Week 01 - Variables
+Lesson name: Week 01 - 变量
 ```
 
 ---
