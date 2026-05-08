@@ -7,7 +7,7 @@
       "title": "How Much Health Is Left After a Game Character Is Attacked",
       "description": {
         "difficulty": "Simple",
-        "background": "A game character enters a level with some initial health. After battle starts, a monster attacks the character once and deals fixed damage. The system needs to update the character's current health after the attack so it can later decide whether the character can continue fighting.",
+        "background": "A game character enters a level with some initial health. After battle starts, a monster attacks the character once and deals fixed damage. The system needs to update the character's current health after the attack so it can later decide whether the character can keep fighting.",
         "task": "Calculate the remaining health after the attack from the character's original health and the damage taken this time.",
         "input": "Two numbers: hp and damage, representing the character's initial health and the damage taken this time.",
         "output": "Return the character's remaining health after the attack.",
@@ -35,7 +35,7 @@
       "title": "How Much Do the Pencils Cost at the Stationery Store",
       "description": {
         "difficulty": "Simple",
-        "background": "A stationery store sells one kind of pencil at the same price per pencil. A student plans to buy several pencils and needs to know how much to pay before checkout.",
+        "background": "A stationery store sells one kind of pencil at the same price per pencil. A student plans to buy several pencils and needs to know the total amount to pay before checkout.",
         "task": "Calculate the total cost of this pencil purchase from the unit price and quantity.",
         "input": "Two numbers: price and count, representing the price of each pencil and the quantity purchased.",
         "output": "Return the total amount to pay for these pencils.",
@@ -91,7 +91,7 @@
       "title": "How Many Coins Are in the Bag After Defeating a Monster",
       "description": {
         "difficulty": "Normal",
-        "background": "A game character originally has some coins in the bag. After defeating a monster, the character receives a new coin reward. The system needs to add this reward to the bag and update the character's current coin count.",
+        "background": "A game character originally has some coins in the bag. After defeating a monster, the character receives a new coin reward. The system needs to add this reward to the bag and update the current coin count.",
         "task": "Calculate the updated coin total from the original coin count and the reward earned this time.",
         "input": "Two numbers: coins and reward, representing the original coin count and the newly earned coin reward.",
         "output": "Return the total number of coins after receiving the reward.",
@@ -119,7 +119,7 @@
       "title": "How Much Money Is Left After Buying Pencils and Erasers",
       "description": {
         "difficulty": "Normal",
-        "background": "A student brings a fixed amount of money to a stationery store. The student plans to buy several pencils and several erasers. The unit prices and quantities for both items are already known, and the student needs to know how much money will be left after checkout.",
+        "background": "A student brings a fixed amount of money to a stationery store. The student plans to buy several pencils and several erasers. The unit prices and quantities for both items are known, and the student needs to know how much money will be left after checkout.",
         "task": "Calculate the cost of the pencils and the cost of the erasers separately, then calculate the remaining amount after shopping.",
         "input": "Five numbers: money, pencilPrice, pencilCount, eraserPrice, and eraserCount, representing the total money, pencil unit price, pencil quantity, eraser unit price, and eraser quantity.",
         "output": "Return the amount of money left after buying these stationery items.",
@@ -249,11 +249,11 @@
       "title": "Store Bundle Discount, Packaging Fee, and Change Settlement",
       "description": {
         "difficulty": "Challenge",
-        "background": "A store is selling one kind of bundle, and each bundle has the same price. A student brings some money and buys several bundles. At checkout, the cashier needs to calculate the original total price first, then calculate the promotion discount. The bundles are packed in fixed-size groups, and loose bundles that cannot make a complete group create an extra packaging fee. Finally, the cashier needs to calculate the change from the student's payment.",
+        "background": "A store is selling one kind of bundle, and each bundle has the same price. A student brings some money and buys several bundles. At checkout, the cashier needs to calculate the original total price first, then calculate the promotion discount. Bundles are packed in fixed-size groups, and loose bundles that cannot make a complete group create an extra packaging fee. Finally, the cashier needs to calculate the change from the student's payment.",
         "task": "Complete the full checkout process: calculate the original total, promotion discount, loose bundle count, packaging fee, discounted payable amount, and change.",
         "input": "Three numbers: money, packPrice, and packCount, representing the student's payment, bundle unit price, and purchase quantity.",
         "output": "Return four values: the discounted payable amount, the change, the average discounted amount per bundle, and the loose bundle count.",
-        "hint": "This problem uses addition, subtraction, multiplication, division, and modulo. You can handle unit price and quantity multiplication first, then division for the discount, then use % to find the loose bundle count, and finally calculate the payable amount and change. Pay attention to operator precedence."
+        "hint": "This problem uses addition, subtraction, multiplication, division, and modulo. Pay attention to operator precedence."
       },
       "starter_code": "function solution(money, packPrice, packCount)\n    return 0, 0, 0, 0\nend",
       "reference_code": "function solution(money, packPrice, packCount)\n    local total = packPrice * packCount\n    local discount = total / 10\n    local looseCount = packCount % 3\n    local packageFee = looseCount * 1\n    local finalTotal = total - discount + packageFee\n    local change = money - finalTotal\n    local average = finalTotal / packCount\n    return finalTotal, change, average, looseCount\nend",

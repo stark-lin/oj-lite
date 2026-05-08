@@ -1,298 +1,268 @@
 {
   "title": "Week 04 - Sum, Average, and Accumulation",
-  "description": "Practice summation, averages, conditional accumulation, and target checks.",
+  "description": "Practice summation, conditional summation, averages, and accumulating until a target is reached.",
   "sort_order": 7,
   "questions": [
     {
-      "title": "Calculate the Total Coin Reward for One Week",
+      "title": "Calculate the Sum of Stair Numbers from 1 to n",
       "description": {
         "difficulty": "Simple",
-        "background": "The game system gives the player different coin rewards each day, and these reward amounts are stored by day in the array rewards. Count how many coins the player earns in the first n days to see the accumulated reward for that period.",
-        "task": "Starting from day 1, add up the coin rewards for the first n days and return the total number of coins.",
-        "input": "Two parameters: the coin reward array rewards and the number of days n.",
-        "output": "Return the total number of coins.",
-        "hint": "Use total starting from 0 to store the accumulated result. On each loop day, add rewards[i] to total."
+        "background": "A staircase is numbered from step 1 to step n. The teacher wants students to calculate the sum of all stair numbers.",
+        "task": "Calculate the sum of the numbers from 1 to n.",
+        "input": "One positive integer: n.",
+        "output": "Return the sum from 1 to n.",
+        "hint": "You can use a variable to store the accumulated result."
       },
-      "starter_code": "function solution(rewards, n)\n    return 0\nend",
-      "reference_code": "function solution(rewards, n)\n    local total = 0\n    for i = 1, n do\n        total = total + rewards[i]\n    end\n    return total\nend",
+      "starter_code": "function solution(n)\n    return 0\nend",
+      "reference_code": "function solution(n)\n    local sum = 0\n\n    for i = 1, n do\n        sum = sum + i\n    end\n\n    return sum\nend",
       "test_cases": [
         [
-          [
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7
-          ],
-          7
+          5
         ],
         [
-          [
-            5,
-            5,
-            10
-          ],
-          3
+          10
         ],
         [
-          [
-            9
-          ],
           1
         ]
       ],
       "sort_order": 1
     },
     {
-      "title": "Calculate the Sum of Stair Numbers from 1 to n",
+      "title": "Calculate the Total Fixed Coin Reward Over Several Days",
       "description": {
         "difficulty": "Simple",
-        "background": "A staircase is numbered from step 1 to step n. For a numbering exercise, all of these step numbers need to be added together to calculate the sum from 1 to n.",
-        "task": "Loop from 1 to n, add each stair number to the running sum, and return the final sum.",
-        "input": "One positive integer: n.",
-        "output": "Return 1 + 2 + ... + n.",
-        "hint": "Prepare a sum variable for the accumulated result. In the loop, add the current number i to sum."
+        "background": "A game gives the player the same number of reward coins every day. The player logs in for days consecutive days and receives reward coins each day.",
+        "task": "Calculate how many coins the player receives in total.",
+        "input": "Two numbers: reward and days.",
+        "output": "Return the total number of coins.",
+        "hint": "You can add each day's reward one by one."
       },
-      "starter_code": "function solution(n)\n    return 0\nend",
-      "reference_code": "function solution(n)\n    local sum = 0\n    for i = 1, n do\n        sum = sum + i\n    end\n    return sum\nend",
+      "starter_code": "function solution(reward, days)\n    return 0\nend",
+      "reference_code": "function solution(reward, days)\n    local sum = 0\n\n    for i = 1, days do\n        sum = sum + reward\n    end\n\n    return sum\nend",
       "test_cases": [
         [
-          5
+          10,
+          7
         ],
         [
-          10
+          5,
+          3
         ],
         [
+          20,
           1
         ]
       ],
       "sort_order": 2
     },
     {
-      "title": "Calculate the Total Distance Run After Several Days",
+      "title": "Calculate the Total Distance Run Over Several Trainings",
       "description": {
         "difficulty": "Simple",
-        "background": "An athlete records the running distance each day, and these distances are stored by day in the array meters. The coach wants to know how many meters the athlete ran in total over the first n days to evaluate the training load.",
-        "task": "Starting from day 1, add up the running distances for the first n days and return the total training distance.",
-        "input": "Two parameters: the distance array meters and the number of days n.",
-        "output": "Return the total number of meters.",
-        "hint": "The i-th number in the array represents the distance run on day i. Use total to record the accumulated meters."
+        "background": "A student runs the same distance, distance meters, each day and trains for days days. The teacher wants to know how many meters the student ran in total.",
+        "task": "Calculate the total training distance.",
+        "input": "Two numbers: distance and days.",
+        "output": "Return the total distance.",
+        "hint": "Each day's distance should be added to the total."
       },
-      "starter_code": "function solution(meters, n)\n    return 0\nend",
-      "reference_code": "function solution(meters, n)\n    local total = 0\n    for day = 1, n do\n        total = total + meters[day]\n    end\n    return total\nend",
+      "starter_code": "function solution(distance, days)\n    return 0\nend",
+      "reference_code": "function solution(distance, days)\n    local total = 0\n\n    for i = 1, days do\n        total = total + distance\n    end\n\n    return total\nend",
       "test_cases": [
         [
-          [
-            400,
-            500,
-            600
-          ],
+          400,
           3
         ],
         [
-          [
-            1000,
-            800
-          ],
-          2
+          800,
+          5
         ],
         [
-          [
-            250
-          ],
+          1000,
           1
         ]
       ],
       "sort_order": 3
     },
     {
-      "title": "Calculate the Average Score of Several Class Quizzes",
+      "title": "Calculate the Sum of All Even Numbers from 1 to n",
       "description": {
         "difficulty": "Normal",
-        "background": "A class has taken several quizzes over a period of time, and each quiz score is recorded in the array scores. The teacher wants to calculate the average score from the first n quiz scores.",
-        "task": "First add up the first n quiz scores, then divide the total by n to calculate and return the average score.",
-        "input": "Two parameters: the score array scores and the count n.",
-        "output": "Return the average score.",
-        "hint": "Use a loop to calculate total first, then use total / n to get average."
+        "background": "The teacher selects the even numbers from 1 to n and wants to know what these even numbers add up to.",
+        "task": "Calculate the sum of all even numbers from 1 to n.",
+        "input": "One positive integer: n.",
+        "output": "Return the sum of the even numbers.",
+        "hint": "Check whether a number meets the condition first, then decide whether to add it to the sum."
       },
-      "starter_code": "function solution(scores, n)\n    return 0\nend",
-      "reference_code": "function solution(scores, n)\n    local total = 0\n    for i = 1, n do\n        total = total + scores[i]\n    end\n    local average = total / n\n    return average\nend",
+      "starter_code": "function solution(n)\n    return 0\nend",
+      "reference_code": "function solution(n)\n    local sum = 0\n\n    for i = 1, n do\n        if i % 2 == 0 then\n            sum = sum + i\n        end\n    end\n\n    return sum\nend",
       "test_cases": [
         [
-          [
-            80,
-            90,
-            100
-          ],
-          3
+          6
         ],
         [
-          [
-            60,
-            70
-          ],
-          2
+          10
         ],
         [
-          [
-            88
-          ],
           1
         ]
       ],
       "sort_order": 4
     },
     {
-      "title": "Calculate Total Savings on Day n",
+      "title": "Count Reward Levels and Calculate Total Reward Coins",
       "description": {
         "difficulty": "Normal",
-        "background": "Xiaoming makes a savings plan: save 1 on day 1, 2 on day 2, 3 on day 3, and then save 1 more each day than the previous day. Calculate how much money has been saved after continuing through day n.",
-        "task": "Loop from day 1 to day n, add each day's savings amount, and return the accumulated savings.",
-        "input": "One positive integer: n.",
-        "output": "Return the accumulated savings.",
-        "hint": "This is similar to summing 1 to n. Use total to record the accumulated savings, and add day to total each day."
+        "background": "A game has n levels. Whenever a level number is a multiple of step, the player receives reward coins.",
+        "task": "Count the reward levels and calculate the total number of reward coins.",
+        "input": "Three numbers: n, step, and reward.",
+        "output": "Return the reward level count and the total coin count in order.",
+        "hint": "Counting and accumulation can be done in the same loop."
       },
-      "starter_code": "function solution(n)\n    return 0\nend",
-      "reference_code": "function solution(n)\n    local total = 0\n    for day = 1, n do\n        total = total + day\n    end\n    return total\nend",
+      "starter_code": "function solution(n, step, reward)\n    return 0, 0\nend",
+      "reference_code": "function solution(n, step, reward)\n    local count = 0\n    local sum = 0\n\n    for i = 1, n do\n        if i % step == 0 then\n            count = count + 1\n            sum = sum + reward\n        end\n    end\n\n    return count, sum\nend",
       "test_cases": [
         [
-          3
+          10,
+          2,
+          5
         ],
         [
-          7
+          12,
+          3,
+          10
         ],
         [
-          1
+          5,
+          6,
+          8
         ]
       ],
       "sort_order": 5
     },
     {
-      "title": "Calculate Total and Average Coin Rewards from Game Levels",
+      "title": "Calculate Quiz Total, Average, and Pass Status",
       "description": {
         "difficulty": "Normal",
-        "background": "A player clears several game levels in a row. Each level gives a certain number of coin rewards, stored in the array rewards. To analyze the rewards, calculate both the total coins from the first n levels and the average reward per level.",
-        "task": "First add up the coin rewards for the first n levels, then calculate the average reward, and return the total and average in order.",
-        "input": "Two parameters: the reward array rewards and the number of levels n.",
-        "output": "Return two values: the total and the average.",
-        "hint": "Use one loop to calculate total, then use total / n to calculate average after the loop."
+        "background": "A student takes three quizzes. The teacher needs to calculate the total score and average score, then decide whether the average reaches passLine.",
+        "task": "Use the three scores to calculate the total, average, and pass result.",
+        "input": "Four numbers: score1, score2, score3, and passLine.",
+        "output": "Return the total score, average score, and whether the average reaches the line, in order.",
+        "hint": "Calculate the total first, use it to calculate the average, then decide whether the average reaches the line."
       },
-      "starter_code": "function solution(rewards, n)\n    return 0, 0\nend",
-      "reference_code": "function solution(rewards, n)\n    local total = 0\n    for i = 1, n do\n        total = total + rewards[i]\n    end\n    local average = total / n\n    return total, average\nend",
+      "starter_code": "function solution(score1, score2, score3, passLine)\n    return 0, 0, false\nend",
+      "reference_code": "function solution(score1, score2, score3, passLine)\n    local total = score1 + score2 + score3\n    local average = total / 3\n    local passed = false\n\n    if average >= passLine then\n        passed = true\n    end\n\n    return total, average, passed\nend",
       "test_cases": [
         [
-          [
-            10,
-            20,
-            30
-          ],
-          3
+          80,
+          90,
+          70,
+          75
         ],
         [
-          [
-            5,
-            15
-          ],
-          2
+          60,
+          60,
+          60,
+          60
         ],
         [
-          [
-            8
-          ],
-          1
+          50,
+          70,
+          55,
+          65
         ]
       ],
       "sort_order": 6
     },
     {
-      "title": "Find the First Day When Savings Reach the Toy Goal",
+      "title": "Find the Earliest Day a Growing Daily Savings Plan Reaches the Target",
       "description": {
         "difficulty": "Challenge",
-        "background": "Xiaoming wants to buy a toy that costs target. He starts saving money: 1 on day 1, 2 on day 2, 3 on day 3, and then 1 more each day than the previous day. Determine the earliest day when he has saved enough money for the toy.",
-        "task": "Accumulate savings day by day until the total first reaches or exceeds target, then return that day number.",
-        "input": "One number: target.",
-        "output": "Return the earliest day when the total reaches or exceeds target.",
-        "hint": "Use a while loop to keep increasing the day count and accumulated savings. When total is no longer less than target, the loop can stop."
+        "background": "A student starts saving money on day 1. On the first day the student saves start; each later day, the student saves increase more than the previous day. Now the student wants to know the earliest day the savings total reaches target or more.",
+        "task": "Simulate the daily savings process and return the earliest day that reaches the target.",
+        "input": "Three numbers: start, increase, and target.",
+        "output": "Return the earliest day that reaches the target.",
+        "hint": "Each day, update both the amount saved that day and the total amount saved so far."
       },
-      "starter_code": "function solution(target)\n    return 0\nend",
-      "reference_code": "function solution(target)\n    local day = 0\n    local total = 0\n    while total < target do\n        day = day + 1\n        total = total + day\n    end\n    return day\nend",
+      "starter_code": "function solution(start, increase, target)\n    return 0\nend",
+      "reference_code": "function solution(start, increase, target)\n    local day = 0\n    local current = start\n    local total = 0\n\n    while total < target do\n        total = total + current\n        current = current + increase\n        day = day + 1\n    end\n\n    return day\nend",
       "test_cases": [
         [
-          1
+          5,
+          5,
+          30
         ],
         [
-          6
+          10,
+          0,
+          25
         ],
         [
+          3,
+          2,
           20
         ]
       ],
       "sort_order": 7
     },
     {
-      "title": "Find the First Floor Where Total Steps Exceed a Target",
+      "title": "Accumulate Coins Through Levels and Return the Level That Reaches the Upgrade Target",
       "description": {
         "difficulty": "Challenge",
-        "background": "In a building, the number of stairs between floors increases by floor: reaching floor 1 requires 1 step, reaching floor 2 requires 2 more steps, reaching floor 3 requires 3 more steps, and so on. Find which floor is reached when the accumulated number of steps first exceeds target.",
-        "task": "Starting from floor 1, accumulate the stair count floor by floor until the total first exceeds the target value, then return the current floor.",
-        "input": "One number: target.",
-        "output": "Return the floor number.",
-        "hint": "The problem asks for exceeding the target, not reaching it. Design the loop condition around total <= target."
+        "background": "A player clears levels in sequence. Level i gives i times base coins. Upgrading requires total coins to reach target. The game has n levels.",
+        "task": "Calculate the earliest level at which the player reaches the upgrade requirement; if the target is still not reached after n levels, return 0.",
+        "input": "Three numbers: n, base, and target.",
+        "output": "Return the earliest level number that reaches the target; if it is not reached, return 0.",
+        "hint": "After each level, update the accumulated coins and check whether the target has been reached."
       },
-      "starter_code": "function solution(target)\n    return 0\nend",
-      "reference_code": "function solution(target)\n    local floor = 0\n    local total = 0\n    while total <= target do\n        floor = floor + 1\n        total = total + floor\n    end\n    return floor\nend",
+      "starter_code": "function solution(n, base, target)\n    return 0\nend",
+      "reference_code": "function solution(n, base, target)\n    local total = 0\n\n    for i = 1, n do\n        total = total + i * base\n        if total >= target then\n            return i\n        end\n    end\n\n    return 0\nend",
       "test_cases": [
         [
-          0
+          5,
+          10,
+          60
         ],
         [
-          5
+          3,
+          5,
+          100
         ],
         [
-          10
+          4,
+          2,
+          20
         ]
       ],
       "sort_order": 8
     },
     {
-      "title": "Find the Day When Daily Game Rewards Reach an Upgrade Goal",
+      "title": "Count, Sum, and Average Numbers That Meet Conditions",
       "description": {
         "difficulty": "Challenge",
-        "background": "A player earns a certain amount of experience each day, stored by day in the array rewards. The character needs accumulated experience greater than need to level up. Determine the earliest day within the first n days when the accumulated experience exceeds the upgrade requirement.",
-        "task": "Starting from day 1, add each day's experience reward and check after each addition whether the accumulated experience is greater than need. If it is, return that day immediately; if it never exceeds need in the first n days, return 0.",
-        "input": "Three parameters: the experience array rewards, the number of days n, and the upgrade requirement need.",
-        "output": "Return the day number; if it does not exceed the requirement within n days, return 0.",
-        "hint": "Accumulate total while checking whether total is greater than need. Return the current day as soon as the condition is first satisfied."
+        "background": "The teacher selects numbers from 1 to n. A number is selected only if it satisfies both conditions: it is a multiple of k and it is greater than limit.",
+        "task": "Count the selected numbers, calculate their sum, and calculate their average.",
+        "input": "Three numbers: n, k, and limit.",
+        "output": "Return the count, sum, and average in order. If no number is selected, return 0 for the average.",
+        "hint": "Filter by the conditions first, then maintain both count and sum."
       },
-      "starter_code": "function solution(rewards, n, need)\n    return 0\nend",
-      "reference_code": "function solution(rewards, n, need)\n    local total = 0\n    for day = 1, n do\n        total = total + rewards[day]\n        if total > need then\n            return day\n        end\n    end\n    return 0\nend",
+      "starter_code": "function solution(n, k, limit)\n    return 0, 0, 0\nend",
+      "reference_code": "function solution(n, k, limit)\n    local count = 0\n    local sum = 0\n\n    for i = 1, n do\n        if i % k == 0 and i > limit then\n            count = count + 1\n            sum = sum + i\n        end\n    end\n\n    local average = 0\n    if count > 0 then\n        average = sum / count\n    end\n\n    return count, sum, average\nend",
       "test_cases": [
         [
-          [
-            3,
-            4,
-            5
-          ],
-          3,
-          6
-        ],
-        [
-          [
-            2,
-            2,
-            2
-          ],
+          20,
           3,
           10
         ],
         [
-          [
-            10
-          ],
-          1,
-          5
+          10,
+          4,
+          20
+        ],
+        [
+          15,
+          5,
+          0
         ]
       ],
       "sort_order": 9

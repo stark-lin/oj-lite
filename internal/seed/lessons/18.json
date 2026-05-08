@@ -194,7 +194,7 @@
         "提示": "每次检查中间位置，然后缩小下一次查找的范围。"
       },
       "starter_code": "function solution(books, n, target)\n    return 0, 0\nend",
-      "reference_code": "function solution(books, n, target)\n    local left = 1\n    local right = n\n    local position = 0\n    local checks = 0\n\n    while left <= right and position == 0 do\n        local mid = (left + right) // 2\n        checks = checks + 1\n\n        if books[mid] == target then\n            position = mid\n        elseif target < books[mid] then\n            right = mid - 1\n        else\n            left = mid + 1\n        end\n    end\n\n    return position, checks\nend",
+      "reference_code": "function solution(books, n, target)\n    local left = 1\n    local right = n\n    local position = 0\n    local checks = 0\n\n    while left <= right and position == 0 do\n        local mid = (left + right) / 2\n        if mid % 1 ~= 0 then\n            mid = mid - 0.5\n        end\n        checks = checks + 1\n\n        if books[mid] == target then\n            position = mid\n        elseif target < books[mid] then\n            right = mid - 1\n        else\n            left = mid + 1\n        end\n    end\n\n    return position, checks\nend",
       "test_cases": [
         [
           [2, 5, 8, 12, 18, 25],
@@ -225,7 +225,7 @@
         "提示": "两种方法要分开模拟，并各自记录检查次数。"
       },
       "starter_code": "function solution(numbers, n, target)\n    return 0, 0, 0, 0\nend",
-      "reference_code": "function solution(numbers, n, target)\n    local linearChecks = 0\n    local linearPosition = 0\n    local i = 1\n\n    while i <= n and linearPosition == 0 do\n        linearChecks = linearChecks + 1\n        if numbers[i] == target then\n            linearPosition = i\n        end\n        i = i + 1\n    end\n\n    local left = 1\n    local right = n\n    local binaryChecks = 0\n    local binaryPosition = 0\n\n    while left <= right and binaryPosition == 0 do\n        local mid = (left + right) // 2\n        binaryChecks = binaryChecks + 1\n\n        if numbers[mid] == target then\n            binaryPosition = mid\n        elseif target < numbers[mid] then\n            right = mid - 1\n        else\n            left = mid + 1\n        end\n    end\n\n    return linearChecks, binaryChecks, linearPosition, binaryPosition\nend",
+      "reference_code": "function solution(numbers, n, target)\n    local linearChecks = 0\n    local linearPosition = 0\n    local i = 1\n\n    while i <= n and linearPosition == 0 do\n        linearChecks = linearChecks + 1\n        if numbers[i] == target then\n            linearPosition = i\n        end\n        i = i + 1\n    end\n\n    local left = 1\n    local right = n\n    local binaryChecks = 0\n    local binaryPosition = 0\n\n    while left <= right and binaryPosition == 0 do\n        local mid = (left + right) / 2\n        if mid % 1 ~= 0 then\n            mid = mid - 0.5\n        end\n        binaryChecks = binaryChecks + 1\n\n        if numbers[mid] == target then\n            binaryPosition = mid\n        elseif target < numbers[mid] then\n            right = mid - 1\n        else\n            left = mid + 1\n        end\n    end\n\n    return linearChecks, binaryChecks, linearPosition, binaryPosition\nend",
       "test_cases": [
         [
           [1, 3, 5, 7, 9, 11, 13],
@@ -256,7 +256,7 @@
         "提示": "查找结束后，剩下的边界位置可以帮助判断插入位置。"
       },
       "starter_code": "function solution(scores, n, target)\n    return false, 0\nend",
-      "reference_code": "function solution(scores, n, target)\n    local left = 1\n    local right = n\n    local position = 0\n\n    while left <= right and position == 0 do\n        local mid = (left + right) // 2\n\n        if scores[mid] == target then\n            position = mid\n        elseif target < scores[mid] then\n            right = mid - 1\n        else\n            left = mid + 1\n        end\n    end\n\n    if position > 0 then\n        return true, position\n    end\n\n    return false, left\nend",
+      "reference_code": "function solution(scores, n, target)\n    local left = 1\n    local right = n\n    local position = 0\n\n    while left <= right and position == 0 do\n        local mid = (left + right) / 2\n        if mid % 1 ~= 0 then\n            mid = mid - 0.5\n        end\n\n        if scores[mid] == target then\n            position = mid\n        elseif target < scores[mid] then\n            right = mid - 1\n        else\n            left = mid + 1\n        end\n    end\n\n    if position > 0 then\n        return true, position\n    end\n\n    return false, left\nend",
       "test_cases": [
         [
           [50, 60, 70, 80, 90],

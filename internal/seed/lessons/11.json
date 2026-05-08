@@ -1,51 +1,54 @@
 {
   "title": "Week 06 - Quantity Relations and Double Enumeration",
-  "description": "Practice nested loops, solution search, and combination counting.",
+  "description": "Practice nested loops, plan counting, condition filtering, and best-plan search.",
   "sort_order": 11,
   "questions": [
     {
-      "title": "How Many Ways Are There to Buy Two Types of Candy",
+      "title": "Count Ways to Buy total Candies from Two Candy Types",
       "description": {
         "difficulty": "Simple",
-        "background": "A store sells two types of candy: fruit candy and milk candy. Xiaoming plans to buy total candies in all. He may buy any number of fruit candies and any number of milk candies, as long as the two quantities add up exactly to total. Buying 0 of one type is also allowed.",
-        "task": "Count how many different quantity combinations exist when buying total candies across the two candy types.",
+        "background": "A student can buy two kinds of candy: fruit candy and chocolate candy. Only whether the two candy counts add up to total matters.",
+        "task": "Count the number of purchase plans where the two candy counts add up exactly to total.",
         "input": "One number: total.",
-        "output": "Return the number of ways, allowing one type to have quantity 0.",
-        "hint": "Enumerate the quantity a of the first candy type and the quantity b of the second candy type, then check whether a + b equals total."
+        "output": "Return the number of purchase plans.",
+        "hint": "You can try the quantities of the first candy and the second candy separately."
       },
       "starter_code": "function solution(total)\n    return 0\nend",
-      "reference_code": "function solution(total)\n    local count = 0\n    for a = 0, total do\n        for b = 0, total do\n            if a + b == total then\n                count = count + 1\n            end\n        end\n    end\n    return count\nend",
+      "reference_code": "function solution(total)\n    local count = 0\n\n    for a = 0, total do\n        for b = 0, total do\n            if a + b == total then\n                count = count + 1\n            end\n        end\n    end\n\n    return count\nend",
       "test_cases": [
-        [
-          20
-        ],
         [
           3
         ],
         [
-          0
+          5
+        ],
+        [
+          20
         ]
       ],
       "sort_order": 1
     },
     {
-      "title": "How Many Dice Outcomes Have a Target Sum",
+      "title": "Count Outcomes Where Two Dice Sum to the Target",
       "description": {
         "difficulty": "Simple",
-        "background": "In a game, two normal dice are rolled at the same time, and each die can show a value from 1 to 6. Because the first die and second die are ordered, rolling 1 and 6 is different from rolling 6 and 1.",
-        "task": "Count how many ordered outcomes have a sum exactly equal to target.",
+        "background": "Two ordinary dice each have values from 1 to 6. A player wants to know how many possible outcomes have a sum equal to target.",
+        "task": "Count the number of cases where the two dice values sum to target.",
         "input": "One number: target.",
-        "output": "Return the number of outcomes.",
-        "hint": "Use nested loops to enumerate the first die and second die values, then check whether their sum equals target."
+        "output": "Return the number of possible cases.",
+        "hint": "Both the first die and the second die need to be enumerated."
       },
       "starter_code": "function solution(target)\n    return 0\nend",
-      "reference_code": "function solution(target)\n    local count = 0\n    for a = 1, 6 do\n        for b = 1, 6 do\n            if a + b == target then\n                count = count + 1\n            end\n        end\n    end\n    return count\nend",
+      "reference_code": "function solution(target)\n    local count = 0\n\n    for a = 1, 6 do\n        for b = 1, 6 do\n            if a + b == target then\n                count = count + 1\n            end\n        end\n    end\n\n    return count\nend",
       "test_cases": [
+        [
+          2
+        ],
         [
           7
         ],
         [
-          2
+          12
         ],
         [
           13
@@ -54,17 +57,17 @@
       "sort_order": 2
     },
     {
-      "title": "How Many Length and Width Pairs Match a Fixed Rectangle Perimeter",
+      "title": "Count Length-Width Pairs for a Fixed Rectangle Perimeter",
       "description": {
         "difficulty": "Simple",
-        "background": "In craft class, students use small blocks to build a rectangular puzzle. The teacher gives the rectangle perimeter, and both length and width must be positive integers. Count how many length-and-width pairs can make a rectangle with that perimeter.",
-        "task": "Enumerate possible length and width values, count the pairs satisfying 2 * (length + width) == perimeter, and return the count.",
+        "background": "A rectangle has positive integer length and width. Given perimeter, the teacher wants to know how many length-width pairs can make this perimeter.",
+        "task": "Count the length-width pairs whose perimeter equals perimeter.",
         "input": "One number: perimeter.",
-        "output": "Return the number of pairs satisfying 2 * (length + width) == perimeter.",
-        "hint": "Use nested loops to enumerate length and width separately, then check whether the calculated perimeter equals perimeter."
+        "output": "Return the number of length-width pairs.",
+        "hint": "Length and width can both be tried one by one."
       },
       "starter_code": "function solution(perimeter)\n    return 0\nend",
-      "reference_code": "function solution(perimeter)\n    local count = 0\n    for length = 1, perimeter do\n        for width = 1, perimeter do\n            if (length + width) * 2 == perimeter then\n                count = count + 1\n            end\n        end\n    end\n    return count\nend",
+      "reference_code": "function solution(perimeter)\n    local count = 0\n\n    for length = 1, perimeter do\n        for width = 1, perimeter do\n            if 2 * (length + width) == perimeter then\n                count = count + 1\n            end\n        end\n    end\n\n    return count\nend",
       "test_cases": [
         [
           10
@@ -73,23 +76,23 @@
           12
         ],
         [
-          3
+          7
         ]
       ],
       "sort_order": 3
     },
     {
-      "title": "Count Stationery Plans for Buying Pencils and Erasers with a Fixed Budget",
+      "title": "Count Stationery Plans That Spend a Fixed Budget on Pencils and Erasers",
       "description": {
         "difficulty": "Normal",
-        "background": "Xiaoming brings budget to a stationery store. Each pencil costs pencilPrice, and each eraser costs eraserPrice. He wants to buy some pencils and erasers and spend the entire budget exactly. Buying 0 pencils or 0 erasers is allowed.",
-        "task": "Count how many pencil-and-eraser quantity plans spend exactly budget.",
+        "background": "At a stationery store, each pencil costs pencilPrice and each eraser costs eraserPrice. A student wants to spend exactly budget.",
+        "task": "Count the purchase plans for pencils and erasers that spend the budget exactly.",
         "input": "Three numbers: budget, pencilPrice, and eraserPrice.",
-        "output": "Return the number of plans that spend the budget exactly, allowing quantity 0.",
-        "hint": "Enumerate pencils and erasers, calculate the total price, and check whether it equals budget."
+        "output": "Return the number of plans that spend the budget exactly.",
+        "hint": "Each quantity combination needs its total price calculated before it is checked."
       },
       "starter_code": "function solution(budget, pencilPrice, eraserPrice)\n    return 0\nend",
-      "reference_code": "function solution(budget, pencilPrice, eraserPrice)\n    local count = 0\n    for pencils = 0, budget do\n        for erasers = 0, budget do\n            local cost = pencils * pencilPrice + erasers * eraserPrice\n            if cost == budget then\n                count = count + 1\n            end\n        end\n    end\n    return count\nend",
+      "reference_code": "function solution(budget, pencilPrice, eraserPrice)\n    local count = 0\n\n    for pencil = 0, budget do\n        for eraser = 0, budget do\n            local total = pencil * pencilPrice + eraser * eraserPrice\n            if total == budget then\n                count = count + 1\n            end\n        end\n    end\n\n    return count\nend",
       "test_cases": [
         [
           10,
@@ -98,13 +101,13 @@
         ],
         [
           12,
-          4,
-          6
+          3,
+          4
         ],
         [
           5,
-          2,
-          4
+          6,
+          2
         ]
       ],
       "sort_order": 4
@@ -113,144 +116,144 @@
       "title": "Count Game Shop Plans That Spend All Coins on Potions and Shields",
       "description": {
         "difficulty": "Normal",
-        "background": "A player enters a game shop with the number of coins represented by coins. A potion costs potionPrice coins, and a shield costs shieldPrice coins. The player wants to buy some potions and shields and spend all coins exactly.",
-        "task": "Count how many buying plans for potions and shields spend exactly the available coins.",
+        "background": "In a game shop, each potion costs potionPrice coins and each shield costs shieldPrice coins. The player has coins coins and wants to spend them exactly.",
+        "task": "Count the number of plans for buying potions and shields that spend all coins exactly.",
         "input": "Three numbers: coins, potionPrice, and shieldPrice.",
         "output": "Return the number of plans that spend all coins exactly.",
-        "hint": "Use two-variable enumeration: enumerate potions and shields separately, then check whether the total cost equals coins."
+        "hint": "Different item quantity combinations may produce the same or different total costs."
       },
       "starter_code": "function solution(coins, potionPrice, shieldPrice)\n    return 0\nend",
-      "reference_code": "function solution(coins, potionPrice, shieldPrice)\n    local count = 0\n    for potions = 0, coins do\n        for shields = 0, coins do\n            if potions * potionPrice + shields * shieldPrice == coins then\n                count = count + 1\n            end\n        end\n    end\n    return count\nend",
+      "reference_code": "function solution(coins, potionPrice, shieldPrice)\n    local count = 0\n\n    for potion = 0, coins do\n        for shield = 0, coins do\n            local total = potion * potionPrice + shield * shieldPrice\n            if total == coins then\n                count = count + 1\n            end\n        end\n    end\n\n    return count\nend",
       "test_cases": [
         [
           20,
-          5,
-          8
+          4,
+          6
         ],
         [
           15,
           3,
-          6
+          5
         ],
         [
           7,
           4,
-          5
+          6
         ]
       ],
       "sort_order": 5
     },
     {
-      "title": "Count Ways to Split a Fixed Signup Quota Between Two Classes",
+      "title": "Find the Length and Width with Maximum Area for a Fixed Perimeter",
       "description": {
         "difficulty": "Normal",
-        "background": "A school activity has total signup spots to distribute between class A and class B. To make sure both classes can participate, each class must receive at least 1 spot. Count how many ways the total spots can be distributed between the two classes.",
-        "task": "Enumerate how many spots class A and class B each receive, count the plans where the two counts add up exactly to total and both classes receive at least 1 spot.",
-        "input": "One number: total.",
-        "output": "Return the number of distribution plans.",
-        "hint": "Enumerate classA and classB spots, then check whether classA + classB equals total."
+        "background": "A rectangle has a fixed perimeter. The teacher wants to know which integer length-width pair has the largest area.",
+        "task": "Find the length and width with the largest area, then return that maximum area.",
+        "input": "One number: perimeter.",
+        "output": "Return the best length, best width, and maximum area in order.",
+        "hint": "Enumerate all valid pairs and keep updating the current best answer."
       },
-      "starter_code": "function solution(total)\n    return 0\nend",
-      "reference_code": "function solution(total)\n    local count = 0\n    for classA = 1, total do\n        for classB = 1, total do\n            if classA + classB == total then\n                count = count + 1\n            end\n        end\n    end\n    return count\nend",
+      "starter_code": "function solution(perimeter)\n    return 0, 0, 0\nend",
+      "reference_code": "function solution(perimeter)\n    local bestLength = 0\n    local bestWidth = 0\n    local bestArea = 0\n\n    for length = 1, perimeter do\n        for width = 1, perimeter do\n            if 2 * (length + width) == perimeter then\n                local area = length * width\n                if area > bestArea then\n                    bestArea = area\n                    bestLength = length\n                    bestWidth = width\n                end\n            end\n        end\n    end\n\n    return bestLength, bestWidth, bestArea\nend",
       "test_cases": [
         [
-          5
+          12
         ],
         [
-          2
+          20
         ],
         [
-          1
+          6
         ]
       ],
       "sort_order": 6
     },
     {
-      "title": "Chicken and Rabbit Problem: Find Animal Counts from Heads and Legs",
+      "title": "Chicken and Rabbit Cage: Find Animal Counts from Heads and Legs",
       "description": {
         "difficulty": "Challenge",
-        "background": "A cage contains some chickens and rabbits. Each chicken has 1 head and 2 legs, and each rabbit has 1 head and 4 legs. Given the total number of heads and legs in the cage, determine how many chickens and rabbits there are.",
-        "task": "Use the head and leg counts to find the numbers of chickens and rabbits, then return both counts. If no valid combination exists, return -1, -1.",
+        "background": "A cage contains chickens and rabbits. Chickens have 2 legs, and rabbits have 4 legs. Given the total heads and total legs, we need to find how many chickens and rabbits there are.",
+        "task": "Enumerate possible chicken and rabbit counts and find the answer that satisfies the conditions.",
         "input": "Two numbers: heads and legs.",
-        "output": "Return two values: the number of chickens and the number of rabbits; return -1, -1 when there is no solution.",
-        "hint": "Enumerate the number of chickens. The rabbit count is heads - chickens. Then check whether the leg count matches."
+        "output": "If an answer is found, return the chicken count and rabbit count in order; if no answer exists, return -1 and -1.",
+        "hint": "Both counts are changing, and they must satisfy the head count and leg count at the same time."
       },
       "starter_code": "function solution(heads, legs)\n    return -1, -1\nend",
-      "reference_code": "function solution(heads, legs)\n    for chickens = 0, heads do\n        local rabbits = heads - chickens\n        if chickens * 2 + rabbits * 4 == legs then\n            return chickens, rabbits\n        end\n    end\n    return -1, -1\nend",
+      "reference_code": "function solution(heads, legs)\n    for chickens = 0, heads do\n        for rabbits = 0, heads do\n            if chickens + rabbits == heads and chickens * 2 + rabbits * 4 == legs then\n                return chickens, rabbits\n            end\n        end\n    end\n\n    return -1, -1\nend",
       "test_cases": [
+        [
+          10,
+          28
+        ],
         [
           5,
           14
         ],
         [
-          8,
-          26
-        ],
-        [
           3,
-          5
+          7
         ]
       ],
       "sort_order": 7
     },
     {
-      "title": "Buy Child and Adult Tickets with an Exact Budget",
+      "title": "Spend the Exact Budget on Children's and Adult Tickets",
       "description": {
         "difficulty": "Challenge",
-        "background": "A family goes to an amusement park to buy tickets. Each child ticket costs childPrice, and each adult ticket costs adultPrice. They have a ticket budget of budget and want to buy some child tickets and adult tickets while spending the entire budget exactly.",
-        "task": "Count how many child-ticket and adult-ticket purchase plans spend exactly budget.",
+        "background": "At an amusement park, each child ticket costs childPrice and each adult ticket costs adultPrice. There is budget money, and the goal is to spend it exactly.",
+        "task": "Count the purchase plans for child and adult tickets, and find the plan with the largest total ticket count.",
         "input": "Three numbers: budget, childPrice, and adultPrice.",
-        "output": "Return the number of plans.",
-        "hint": "Enumerate the number of child tickets children and adult tickets adults, calculate the total ticket price, and check whether it equals budget."
+        "output": "Return the plan count, the child ticket count in the largest-ticket plan, and the adult ticket count in that plan.",
+        "hint": "First decide whether a plan is valid, then decide whether it is better than the currently recorded plan."
       },
-      "starter_code": "function solution(budget, childPrice, adultPrice)\n    return 0\nend",
-      "reference_code": "function solution(budget, childPrice, adultPrice)\n    local count = 0\n    for children = 0, budget do\n        for adults = 0, budget do\n            if children * childPrice + adults * adultPrice == budget then\n                count = count + 1\n            end\n        end\n    end\n    return count\nend",
+      "starter_code": "function solution(budget, childPrice, adultPrice)\n    return 0, 0, 0\nend",
+      "reference_code": "function solution(budget, childPrice, adultPrice)\n    local count = 0\n    local bestChild = 0\n    local bestAdult = 0\n    local bestTickets = -1\n\n    for child = 0, budget do\n        for adult = 0, budget do\n            local total = child * childPrice + adult * adultPrice\n            if total == budget then\n                count = count + 1\n                local tickets = child + adult\n                if tickets > bestTickets then\n                    bestTickets = tickets\n                    bestChild = child\n                    bestAdult = adult\n                end\n            end\n        end\n    end\n\n    return count, bestChild, bestAdult\nend",
       "test_cases": [
         [
-          30,
-          5,
-          10
+          20,
+          3,
+          5
         ],
         [
-          25,
+          30,
           4,
           7
         ],
         [
-          3,
           5,
+          6,
           8
         ]
       ],
       "sort_order": 8
     },
     {
-      "title": "Find the Shopping Plan with the Most Items Under a Budget",
+      "title": "Buy Two Products Within Budget and Maximize Quantity with Minimum Leftover",
       "description": {
         "difficulty": "Challenge",
-        "background": "A store sells two products, A and B. Product A costs priceA, and product B costs priceB. A customer has budget and wants to buy as many items as possible without exceeding the budget. If multiple plans buy the same total number of items, choose the one with less money left over.",
-        "task": "Enumerate the quantities of product A and product B, find the plan with the largest total quantity, and return the A count, B count, total count, and remaining money.",
-        "input": "Three numbers: budget, priceA, and priceB.",
-        "output": "Return four values: A count, B count, total count, and remaining money.",
-        "hint": "Use nested loops to enumerate countA and countB. Only consider plans whose total cost does not exceed budget, and update the best answer when the total count is larger or the remaining money is smaller."
+        "background": "A store sells two products, with prices priceA and priceB. A student has budget money. The budget does not have to be spent exactly, but the student wants to buy as many items as possible; if the item count is tied, the student wants the least leftover money.",
+        "task": "Find the best purchase plan.",
+        "input": "Three numbers: priceA, priceB, and budget.",
+        "output": "Return the product A count, product B count, and leftover money in order.",
+        "hint": "Split the problem into enumerating plans, checking validity, and updating the best answer."
       },
-      "starter_code": "function solution(budget, priceA, priceB)\n    return 0, 0, 0, budget\nend",
-      "reference_code": "function solution(budget, priceA, priceB)\n    local bestA = 0\n    local bestB = 0\n    local bestTotal = 0\n    local bestRemain = budget\n    for countA = 0, budget do\n        for countB = 0, budget do\n            local cost = countA * priceA + countB * priceB\n            if cost <= budget then\n                local total = countA + countB\n                local remain = budget - cost\n                if total > bestTotal or (total == bestTotal and remain < bestRemain) then\n                    bestA = countA\n                    bestB = countB\n                    bestTotal = total\n                    bestRemain = remain\n                end\n            end\n        end\n    end\n    return bestA, bestB, bestTotal, bestRemain\nend",
+      "starter_code": "function solution(priceA, priceB, budget)\n    return 0, 0, budget\nend",
+      "reference_code": "function solution(priceA, priceB, budget)\n    local bestA = 0\n    local bestB = 0\n    local bestCount = -1\n    local bestLeft = budget\n\n    for a = 0, budget do\n        for b = 0, budget do\n            local cost = a * priceA + b * priceB\n            if cost <= budget then\n                local count = a + b\n                local left = budget - cost\n\n                if count > bestCount then\n                    bestCount = count\n                    bestLeft = left\n                    bestA = a\n                    bestB = b\n                elseif count == bestCount and left < bestLeft then\n                    bestLeft = left\n                    bestA = a\n                    bestB = b\n                end\n            end\n        end\n    end\n\n    return bestA, bestB, bestLeft\nend",
       "test_cases": [
         [
-          10,
           3,
-          4
-        ],
-        [
-          20,
-          6,
-          9
-        ],
-        [
           5,
+          20
+        ],
+        [
+          4,
           7,
-          8
+          30
+        ],
+        [
+          6,
+          10,
+          5
         ]
       ],
       "sort_order": 9

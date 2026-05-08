@@ -45,7 +45,7 @@
         "提示": "中间位置和数组长度有关。"
       },
       "starter_code": "function solution(scores, n)\n    return 0\nend",
-      "reference_code": "function solution(scores, n)\n    local mid = (n + 1) // 2\n    return scores[mid]\nend",
+      "reference_code": "function solution(scores, n)\n    local mid = (n + 1) / 2\n    return scores[mid]\nend",
       "test_cases": [
         [
           [60, 70, 80],

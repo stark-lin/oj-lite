@@ -1,26 +1,26 @@
 {
   "title": "Week 03 - Counting and Classification",
-  "description": "Practice conditional counting, classification statistics, and remainder grouping.",
+  "description": "Practice conditional counting, classification statistics, and using multiple counters.",
   "sort_order": 5,
   "questions": [
     {
-      "title": "Count How Many Even Seat Numbers Are in a Class",
+      "title": "Count How Many Even Numbers There Are from 1 to n",
       "description": {
         "difficulty": "Simple",
-        "background": "The seats in a classroom are numbered from 1 to n. The teacher wants to pick out seats with even numbers to arrange for some students, so the number of even seat numbers needs to be counted.",
-        "task": "Traverse all seat numbers from 1 to n, count the even seat numbers, and return the result.",
+        "background": "The teacher gives a positive integer n and asks students to count from 1 to n, then count how many of the numbers are even.",
+        "task": "Count the even numbers from 1 to n and return the result.",
         "input": "One positive integer: n.",
-        "output": "Return the number of even seat numbers.",
-        "hint": "A number divisible by 2 is even. Use a count variable to record how many seat numbers meet the condition."
+        "output": "Return the number of even numbers from 1 to n.",
+        "hint": "Loop through the numbers and use a count variable to record how many meet the condition."
       },
       "starter_code": "function solution(n)\n    return 0\nend",
-      "reference_code": "function solution(n)\n    local count = 0\n    for seat = 1, n do\n        if seat % 2 == 0 then\n            count = count + 1\n        end\n    end\n    return count\nend",
+      "reference_code": "function solution(n)\n    local count = 0\n\n    for i = 1, n do\n        if i % 2 == 0 then\n            count = count + 1\n        end\n    end\n\n    return count\nend",
       "test_cases": [
         [
-          10
+          5
         ],
         [
-          9
+          8
         ],
         [
           1
@@ -29,29 +29,26 @@
       "sort_order": 1
     },
     {
-      "title": "Count Multiples of 5 from 1 to n",
+      "title": "Count How Many Multiples of 5 There Are from 1 to n",
       "description": {
         "difficulty": "Simple",
-        "background": "The teacher is helping students practice number statistics. Given a positive integer n, students need to count from 1 to n, find all numbers divisible by 5, and count how many there are.",
-        "task": "Loop from 1 to n, count all multiples of 5, and return the result.",
+        "background": "In a school activity, a special task is arranged every 5 numbers. Now the teacher wants to know how many numbers from 1 to n are multiples of 5.",
+        "task": "Count how many numbers from 1 to n are divisible by 5.",
         "input": "One positive integer: n.",
         "output": "Return the number of multiples of 5.",
-        "hint": "Check each number from 1 to n. If a number has remainder 0 when divided by 5, add 1 to the count variable."
+        "hint": "Check whether each number can be divided evenly by the target number."
       },
       "starter_code": "function solution(n)\n    return 0\nend",
-      "reference_code": "function solution(n)\n    local count = 0\n    for number = 1, n do\n        if number % 5 == 0 then\n            count = count + 1\n        end\n    end\n    return count\nend",
+      "reference_code": "function solution(n)\n    local count = 0\n\n    for i = 1, n do\n        if i % 5 == 0 then\n            count = count + 1\n        end\n    end\n\n    return count\nend",
       "test_cases": [
         [
-          50
+          10
         ],
         [
-          12
+          24
         ],
         [
           4
-        ],
-        [
-          100
         ]
       ],
       "sort_order": 2
@@ -60,114 +57,123 @@
       "title": "Count How Many Odd Task Numbers There Are",
       "description": {
         "difficulty": "Simple",
-        "background": "A task list is numbered from 1 to n. According to the activity rule, odd-numbered tasks belong to group one and should be handled by students in that group. Count how many tasks group one must handle.",
-        "task": "Traverse all task numbers from 1 to n, count the odd numbers, and return the result.",
+        "background": "Game tasks are numbered from 1 to n. Odd-numbered tasks are normal tasks, and even-numbered tasks are special tasks. The system needs to count the normal tasks.",
+        "task": "Count how many odd numbers there are from 1 to n.",
         "input": "One positive integer: n.",
-        "output": "Return the count of odd-numbered tasks.",
-        "hint": "If a number has remainder 1 after division by 2, it is odd. Use count to record the number of odd tasks."
+        "output": "Return the number of odd task numbers.",
+        "hint": "You can use the remainder after division by 2 to decide the number type."
       },
       "starter_code": "function solution(n)\n    return 0\nend",
-      "reference_code": "function solution(n)\n    local count = 0\n    for task = 1, n do\n        if task % 2 == 1 then\n            count = count + 1\n        end\n    end\n    return count\nend",
+      "reference_code": "function solution(n)\n    local count = 0\n\n    for i = 1, n do\n        if i % 2 ~= 0 then\n            count = count + 1\n        end\n    end\n\n    return count\nend",
       "test_cases": [
         [
-          7
+          5
         ],
         [
-          8
+          6
         ],
         [
-          2
+          1
         ]
       ],
       "sort_order": 3
     },
     {
-      "title": "Count How Many Lucky Lottery Numbers There Are",
+      "title": "Count Numbers That Are Even and Greater Than the Target",
       "description": {
         "difficulty": "Normal",
-        "background": "A school lottery gives out lottery numbers from 1 to n. The activity rule says that only numbers divisible by 6 are lucky numbers. The staff need to count the lucky numbers in advance to prepare prizes.",
-        "task": "Traverse all numbers from 1 to n, count the numbers divisible by 6, and return the result.",
-        "input": "One positive integer: n.",
-        "output": "Return the number of lucky numbers.",
-        "hint": "A lucky number must satisfy number % 6 == 0. Add 1 to the count variable whenever a number meets the condition."
+        "background": "The teacher wants to select some students from the numbers 1 to n. The rule is that a number must be even and must be greater than target.",
+        "task": "Count how many numbers from 1 to n satisfy both conditions.",
+        "input": "Two numbers: n and target.",
+        "output": "Return the number of values that satisfy the conditions.",
+        "hint": "First decide which conditions a number must satisfy, then decide whether to count it."
       },
-      "starter_code": "function solution(n)\n    return 0\nend",
-      "reference_code": "function solution(n)\n    local count = 0\n    for number = 1, n do\n        if number % 6 == 0 then\n            count = count + 1\n        end\n    end\n    return count\nend",
+      "starter_code": "function solution(n, target)\n    return 0\nend",
+      "reference_code": "function solution(n, target)\n    local count = 0\n\n    for i = 1, n do\n        if i % 2 == 0 and i > target then\n            count = count + 1\n        end\n    end\n\n    return count\nend",
       "test_cases": [
         [
-          20
-        ],
-        [
-          36
-        ],
-        [
+          10,
           5
+        ],
+        [
+          8,
+          8
+        ],
+        [
+          12,
+          3
         ]
       ],
       "sort_order": 4
     },
     {
-      "title": "Count Regular Books by Library Number",
+      "title": "Count Game Levels That Can Receive Reward Coins",
       "description": {
         "difficulty": "Normal",
-        "background": "Books in a library are numbered from 1 to n. The librarian defines books whose numbers are multiples of 5 as special books, and all other books as regular books. Count the regular books for classification.",
-        "task": "Traverse all book numbers from 1 to n, count the numbers that are not multiples of 5, and return the number of regular books.",
-        "input": "One positive integer: n.",
-        "output": "Return the number of values that are not multiples of 5.",
-        "hint": "If a number has a nonzero remainder when divided by 5, it is not a special book and can be counted as a regular book."
+        "background": "A game has n levels. The system gives rewards starting from levels that are multiples of rewardStep, but a reward level is valid only when its level number is at least minLevel.",
+        "task": "Count how many levels from 1 to n can receive reward coins.",
+        "input": "Three numbers: n, rewardStep, and minLevel.",
+        "output": "Return the number of levels that can receive rewards.",
+        "hint": "A level must satisfy both the number rule and the minimum-level requirement."
       },
-      "starter_code": "function solution(n)\n    return 0\nend",
-      "reference_code": "function solution(n)\n    local count = 0\n    for book = 1, n do\n        if book % 5 ~= 0 then\n            count = count + 1\n        end\n    end\n    return count\nend",
+      "starter_code": "function solution(n, rewardStep, minLevel)\n    return 0\nend",
+      "reference_code": "function solution(n, rewardStep, minLevel)\n    local count = 0\n\n    for i = 1, n do\n        if i % rewardStep == 0 and i >= minLevel then\n            count = count + 1\n        end\n    end\n\n    return count\nend",
       "test_cases": [
         [
+          20,
+          5,
           10
         ],
         [
-          12
+          12,
+          3,
+          4
         ],
         [
-          4
+          9,
+          4,
+          10
         ]
       ],
       "sort_order": 5
     },
     {
-      "title": "Count Athletes Whose Numbers Are Divisible by 3",
+      "title": "Count Numbers Divisible by 3 but Not Even",
       "description": {
         "difficulty": "Normal",
-        "background": "After sports day registration, athletes are numbered from 1 to n. The teacher decides that students whose numbers are divisible by 3 will join the relay event, so the number of eligible athletes must be counted first.",
-        "task": "Traverse all athlete numbers from 1 to n, count the numbers divisible by 3, and return the number of relay participants.",
+        "background": "Student numbers run from 1 to n. The teacher wants to find a special kind of number: it is divisible by 3, but it must not be even.",
+        "task": "Count how many numbers from 1 to n satisfy the rule.",
         "input": "One positive integer: n.",
-        "output": "Return the count of numbers divisible by 3.",
-        "hint": "Use count to record the number of eligible athletes. If a number has remainder 0 when divided by 3, add 1 to count."
+        "output": "Return the number of values that satisfy the condition.",
+        "hint": "You can put the multiple check and the odd-even check in the same test."
       },
       "starter_code": "function solution(n)\n    return 0\nend",
-      "reference_code": "function solution(n)\n    local count = 0\n    for athlete = 1, n do\n        if athlete % 3 == 0 then\n            count = count + 1\n        end\n    end\n    return count\nend",
+      "reference_code": "function solution(n)\n    local count = 0\n\n    for i = 1, n do\n        if i % 3 == 0 and i % 2 ~= 0 then\n            count = count + 1\n        end\n    end\n\n    return count\nend",
       "test_cases": [
-        [
-          9
-        ],
         [
           10
         ],
         [
-          2
+          20
+        ],
+        [
+          5
         ]
       ],
       "sort_order": 6
     },
     {
-      "title": "Classify Library Books into Three Levels by Number",
+      "title": "Split Student Numbers into Three Remainder Groups and Count Them",
       "description": {
         "difficulty": "Challenge",
-        "background": "The library numbers books from 1 to n and classifies them into three groups by the remainder after division by 3. Remainder 0 goes into the first group, remainder 1 into the second group, and remainder 2 into the third group. The librarian needs to count how many books are in each group.",
-        "task": "Traverse all book numbers from 1 to n, classify each number by its remainder after division by 3, and return the counts for the three groups.",
+        "background": "The teacher wants to split students numbered from 1 to n into three groups. Each student enters a group based on the remainder after dividing the number by 3.",
+        "task": "Count the numbers with remainder 0, remainder 1, and remainder 2.",
         "input": "One positive integer: n.",
-        "output": "Return three values: the counts for remainder 0, remainder 1, and remainder 2.",
-        "hint": "Prepare three count variables: group0, group1, and group2. Use book % 3 to decide which count to increase."
+        "output": "Return the counts for remainders 0, 1, and 2 in order.",
+        "hint": "Prepare multiple count variables, with each variable responsible for one category."
       },
       "starter_code": "function solution(n)\n    return 0, 0, 0\nend",
-      "reference_code": "function solution(n)\n    local group0 = 0\n    local group1 = 0\n    local group2 = 0\n    for book = 1, n do\n        if book % 3 == 0 then\n            group0 = group0 + 1\n        elseif book % 3 == 1 then\n            group1 = group1 + 1\n        else\n            group2 = group2 + 1\n        end\n    end\n    return group0, group1, group2\nend",
+      "reference_code": "function solution(n)\n    local count0 = 0\n    local count1 = 0\n    local count2 = 0\n\n    for i = 1, n do\n        if i % 3 == 0 then\n            count0 = count0 + 1\n        elseif i % 3 == 1 then\n            count1 = count1 + 1\n        else\n            count2 = count2 + 1\n        end\n    end\n\n    return count0, count1, count2\nend",
       "test_cases": [
         [
           6
@@ -182,51 +188,57 @@
       "sort_order": 7
     },
     {
-      "title": "Count Game Tasks by Difficulty Number",
+      "title": "Count Normal, Hard, and Hidden Game Tasks by Number Rules",
       "description": {
         "difficulty": "Challenge",
-        "background": "A game system numbers tasks from 1 to n and assigns task difficulty cyclically by the remainder after division by 3. A remainder of 1 means easy, 2 means normal, and 0 means hard. Count how many tasks belong to each difficulty.",
-        "task": "Traverse all task numbers from 1 to n, determine each task difficulty by its remainder, and count the easy, normal, and hard tasks separately.",
+        "background": "Game tasks are numbered from 1 to n. A task is hidden if its number is a multiple of 10; if it is not hidden but is divisible by 3, it is hard; all other tasks are normal.",
+        "task": "Count the numbers of normal tasks, hard tasks, and hidden tasks.",
         "input": "One positive integer: n.",
-        "output": "Return three values: the counts of easy, normal, and hard tasks.",
-        "hint": "Use three count variables: easy, normal, and hard. Increase the matching count according to task % 3."
+        "output": "Return the normal count, hard count, and hidden count in order.",
+        "hint": "Pay attention to the order of the classification rules."
       },
       "starter_code": "function solution(n)\n    return 0, 0, 0\nend",
-      "reference_code": "function solution(n)\n    local easy = 0\n    local normal = 0\n    local hard = 0\n    for task = 1, n do\n        if task % 3 == 1 then\n            easy = easy + 1\n        elseif task % 3 == 2 then\n            normal = normal + 1\n        else\n            hard = hard + 1\n        end\n    end\n    return easy, normal, hard\nend",
+      "reference_code": "function solution(n)\n    local normal = 0\n    local hard = 0\n    local hidden = 0\n\n    for i = 1, n do\n        if i % 10 == 0 then\n            hidden = hidden + 1\n        elseif i % 3 == 0 then\n            hard = hard + 1\n        else\n            normal = normal + 1\n        end\n    end\n\n    return normal, hard, hidden\nend",
       "test_cases": [
         [
-          5
-        ],
-        [
-          9
-        ],
-        [
           10
+        ],
+        [
+          20
+        ],
+        [
+          5
         ]
       ],
       "sort_order": 8
     },
     {
-      "title": "Group Student Numbers by Remainder and Count Each Group",
+      "title": "Compare How Many Numbers Two Reward Rules Select",
       "description": {
         "difficulty": "Challenge",
-        "background": "The teacher wants to split students numbered from 1 to n into three groups. Students whose number has remainder 0 after division by 3 enter group A, remainder 1 enter group B, and remainder 2 enter group C. Count how many students are in each group.",
-        "task": "Traverse all student numbers from 1 to n, group each number by its remainder after division by 3, and return the counts for groups A, B, and C.",
-        "input": "One positive integer: n.",
-        "output": "Return three values: the numbers of students in group A, group B, and group C.",
-        "hint": "Prepare groupA, groupB, and groupC count variables. Use student % 3 to put each student into the matching group."
+        "background": "A game system has two reward rules. The first rule rewards numbers that are multiples of a, and the second rule rewards numbers that are multiples of b. The designer wants to know which rule selects more numbers.",
+        "task": "Count how many numbers from 1 to n match each rule, then return the rule with the larger count.",
+        "input": "Three numbers: n, a, and b.",
+        "output": "Return \"first\" if the first rule has more matches, \"second\" if the second rule has more matches, and \"same\" if they have the same count.",
+        "hint": "Count the two rules separately first, then compare the results."
       },
-      "starter_code": "function solution(n)\n    return 0, 0, 0\nend",
-      "reference_code": "function solution(n)\n    local groupA = 0\n    local groupB = 0\n    local groupC = 0\n    for student = 1, n do\n        if student % 3 == 0 then\n            groupA = groupA + 1\n        elseif student % 3 == 1 then\n            groupB = groupB + 1\n        else\n            groupC = groupC + 1\n        end\n    end\n    return groupA, groupB, groupC\nend",
+      "starter_code": "function solution(n, a, b)\n    return \"\"\nend",
+      "reference_code": "function solution(n, a, b)\n    local countA = 0\n    local countB = 0\n\n    for i = 1, n do\n        if i % a == 0 then\n            countA = countA + 1\n        end\n\n        if i % b == 0 then\n            countB = countB + 1\n        end\n    end\n\n    if countA > countB then\n        return \"first\"\n    elseif countB > countA then\n        return \"second\"\n    end\n\n    return \"same\"\nend",
       "test_cases": [
         [
+          20,
+          2,
+          5
+        ],
+        [
+          30,
+          3,
+          2
+        ],
+        [
+          12,
+          3,
           3
-        ],
-        [
-          8
-        ],
-        [
-          11
         ]
       ],
       "sort_order": 9
