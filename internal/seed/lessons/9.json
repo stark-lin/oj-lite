@@ -1,19 +1,253 @@
 {
   "title": "Week 05 - Factors, Multiples, and Prime Numbers",
-  "description": "Practice enumeration and prime checking.",
+  "description": "Practice enumeration, factor counting, prime checking, and common multiples.",
   "sort_order": 9,
   "questions": [
     {
-      "title": "Check Whether a Number Is Prime",
+      "title": "Check Whether a Team Can Be Split into Equal Groups",
       "description": {
-        "statement": "Return true if n is a prime number.",
-        "input": "One integer n.",
-        "output": "true for prime numbers, otherwise false."
+        "difficulty": "Simple",
+        "background": "In PE class, the teacher wants to split the number of students represented by students evenly into the number of groups represented by groups. To make every group have the same number of students, there cannot be extra students or groups with fewer students. Decide whether these students can be divided evenly.",
+        "task": "Determine whether the total number of students can be divided evenly by the number of groups, then return the result.",
+        "input": "Two numbers: students and groups.",
+        "output": "Return true if they can be divided evenly, otherwise return false.",
+        "hint": "If students % groups == 0, there are no leftover students and the students can be divided evenly into groups."
       },
-      "starter_code": "function solution(n)\n    return false\nend",
-      "reference_code": "function solution(n)\n    if n < 2 then\n        return false\n    end\n    for i = 2, n - 1 do\n        if n % i == 0 then\n            return false\n        end\n    end\n    return true\nend",
-      "test_cases": [[2], [9], [13], [1]],
+      "starter_code": "function solution(students, groups)\n    return false\nend",
+      "reference_code": "function solution(students, groups)\n    if students % groups == 0 then\n        return true\n    end\n    return false\nend",
+      "test_cases": [
+        [
+          24,
+          6
+        ],
+        [
+          25,
+          6
+        ],
+        [
+          12,
+          3
+        ]
+      ],
       "sort_order": 1
+    },
+    {
+      "title": "Check Whether One Number Is a Multiple of Another",
+      "description": {
+        "difficulty": "Simple",
+        "background": "In a school activity, some task numbers are grouped according to a base number. If a number a can be divided evenly by the base number b, then a is a multiple of b and belongs to that group.",
+        "task": "Determine whether a is a multiple of b, then return the result.",
+        "input": "Two numbers: a and b.",
+        "output": "Return true if a is a multiple of b, otherwise return false.",
+        "hint": "Use the modulo operator to check multiples. If a % b == 0, then a is a multiple of b."
+      },
+      "starter_code": "function solution(a, b)\n    return false\nend",
+      "reference_code": "function solution(a, b)\n    if a % b == 0 then\n        return true\n    end\n    return false\nend",
+      "test_cases": [
+        [
+          18,
+          3
+        ],
+        [
+          20,
+          6
+        ],
+        [
+          7,
+          7
+        ]
+      ],
+      "sort_order": 2
+    },
+    {
+      "title": "Check Whether Puzzle Blocks Can Be Shared Equally",
+      "description": {
+        "difficulty": "Simple",
+        "background": "In craft class, the teacher wants to share a box of puzzle blocks among the number of groups represented by groups. The box contains the number of puzzle blocks represented by pieces. To give each group the same number of blocks, decide whether the blocks can be shared evenly.",
+        "task": "Determine whether the number of puzzle blocks can be divided evenly by the number of groups, then return whether equal sharing is possible.",
+        "input": "Two numbers: pieces and groups.",
+        "output": "Return true if they can be shared evenly, otherwise return false.",
+        "hint": "This uses the same method as equal team grouping. If pieces % groups == 0, the blocks can be shared evenly."
+      },
+      "starter_code": "function solution(pieces, groups)\n    return false\nend",
+      "reference_code": "function solution(pieces, groups)\n    if pieces % groups == 0 then\n        return true\n    end\n    return false\nend",
+      "test_cases": [
+        [
+          30,
+          5
+        ],
+        [
+          31,
+          5
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "sort_order": 3
+    },
+    {
+      "title": "Find All Ways to Split a Set of Puzzle Blocks",
+      "description": {
+        "difficulty": "Normal",
+        "background": "A box contains the number of puzzle blocks represented by pieces. The teacher wants to know how many blocks each group could receive if the blocks are shared evenly. Any number that divides pieces evenly is a possible per-group block count.",
+        "task": "Find all factors of pieces, put them into an array in increasing order, and return the array.",
+        "input": "One positive integer: pieces.",
+        "output": "Return an array containing all factors in increasing order.",
+        "hint": "Enumerate from 1 to pieces. Whenever a number divides pieces evenly, put it into the next position of the result array."
+      },
+      "starter_code": "function solution(pieces)\n    return {}\nend",
+      "reference_code": "function solution(pieces)\n    local ways = {}\n    local count = 0\n    for size = 1, pieces do\n        if pieces % size == 0 then\n            count = count + 1\n            ways[count] = size\n        end\n    end\n    return ways\nend",
+      "test_cases": [
+        [
+          6
+        ],
+        [
+          10
+        ],
+        [
+          1
+        ]
+      ],
+      "sort_order": 4
+    },
+    {
+      "title": "Count How Many Factors a Special Number Has",
+      "description": {
+        "difficulty": "Normal",
+        "background": "In a school activity, each special number can be grouped in different ways. If a number divides number evenly, it is a factor of number. More factors mean the number supports more grouping methods.",
+        "task": "Count how many factors number has, then return the factor count.",
+        "input": "One positive integer: number.",
+        "output": "Return the number of factors.",
+        "hint": "Try every value from 1 to number. If number % i == 0, then i is a factor of number and the count variable should increase by 1."
+      },
+      "starter_code": "function solution(number)\n    return 0\nend",
+      "reference_code": "function solution(number)\n    local count = 0\n    for i = 1, number do\n        if number % i == 0 then\n            count = count + 1\n        end\n    end\n    return count\nend",
+      "test_cases": [
+        [
+          12
+        ],
+        [
+          17
+        ],
+        [
+          1
+        ]
+      ],
+      "sort_order": 5
+    },
+    {
+      "title": "Find When Two Running Cycles Meet for the First Time",
+      "description": {
+        "difficulty": "Normal",
+        "background": "Two running groups are doing repeated training on the playground. The first group gathers every a minutes, and the second group gathers every b minutes. Both groups start at the same time. Find the first time when they gather together again.",
+        "task": "Find the smallest time that is a multiple of both a and b, then return that time.",
+        "input": "Two positive integers: a and b.",
+        "output": "Return the least common multiple.",
+        "hint": "Start from the larger of a and b, then try each following number until you find the first number divisible by both a and b."
+      },
+      "starter_code": "function solution(a, b)\n    return 0\nend",
+      "reference_code": "function solution(a, b)\n    local time = a\n    if b > time then\n        time = b\n    end\n    while time % a ~= 0 or time % b ~= 0 do\n        time = time + 1\n    end\n    return time\nend",
+      "test_cases": [
+        [
+          3,
+          4
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          6,
+          8
+        ]
+      ],
+      "sort_order": 6
+    },
+    {
+      "title": "Check Whether a Special Number Is Prime",
+      "description": {
+        "difficulty": "Challenge",
+        "background": "In a numbering system, only numbers with exactly two factors are called prime numbers. Those two factors are 1 and the number itself. Determine whether the input number follows the prime-number rule.",
+        "task": "Count the number of factors of number and decide whether it has exactly two factors.",
+        "input": "One positive integer: number.",
+        "output": "Return true for a prime number, otherwise return false.",
+        "hint": "Enumerate all possible factors from 1 to number and count them. Finally check whether the factor count equals 2."
+      },
+      "starter_code": "function solution(number)\n    return false\nend",
+      "reference_code": "function solution(number)\n    local factorCount = 0\n    for i = 1, number do\n        if number % i == 0 then\n            factorCount = factorCount + 1\n        end\n    end\n    if factorCount == 2 then\n        return true\n    end\n    return false\nend",
+      "test_cases": [
+        [
+          2
+        ],
+        [
+          17
+        ],
+        [
+          18
+        ],
+        [
+          1
+        ]
+      ],
+      "sort_order": 7
+    },
+    {
+      "title": "Find the Largest Common Group Size for Two Classes",
+      "description": {
+        "difficulty": "Challenge",
+        "background": "Two classes have student counts represented by a and b. The teacher wants both classes to use the same group size, and neither class can have leftover students. To make each group as large as possible, find the largest size that divides both class sizes.",
+        "task": "Find the greatest common factor of a and b, then return this largest common group size.",
+        "input": "Two positive integers: a and b.",
+        "output": "Return the greatest common factor.",
+        "hint": "Enumerate from 1 up to the smaller class size. Whenever a groupSize divides both a and b, update the answer."
+      },
+      "starter_code": "function solution(a, b)\n    return 0\nend",
+      "reference_code": "function solution(a, b)\n    local limit = a\n    if b < limit then\n        limit = b\n    end\n    local answer = 1\n    for groupSize = 1, limit do\n        if a % groupSize == 0 and b % groupSize == 0 then\n            answer = groupSize\n        end\n    end\n    return answer\nend",
+      "test_cases": [
+        [
+          24,
+          18
+        ],
+        [
+          7,
+          13
+        ],
+        [
+          20,
+          30
+        ]
+      ],
+      "sort_order": 8
+    },
+    {
+      "title": "Find the First Minute When Two Alarms Ring Together",
+      "description": {
+        "difficulty": "Challenge",
+        "background": "Two alarms start timing from the same moment. The first alarm rings every a minutes, and the second alarm rings every b minutes. Find the minute when they first ring together after the start.",
+        "task": "Find the smallest minute count that is a multiple of both a and b, then return it.",
+        "input": "Two positive integers: a and b.",
+        "output": "Return the least common multiple.",
+        "hint": "This is a common-multiple enumeration problem. Start from the larger cycle and keep increasing minute until it is divisible by both a and b."
+      },
+      "starter_code": "function solution(a, b)\n    return 0\nend",
+      "reference_code": "function solution(a, b)\n    local minute = a\n    if b > minute then\n        minute = b\n    end\n    while minute % a ~= 0 or minute % b ~= 0 do\n        minute = minute + 1\n    end\n    return minute\nend",
+      "test_cases": [
+        [
+          4,
+          6
+        ],
+        [
+          9,
+          12
+        ],
+        [
+          5,
+          5
+        ]
+      ],
+      "sort_order": 9
     }
   ]
 }

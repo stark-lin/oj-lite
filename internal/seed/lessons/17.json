@@ -1,19 +1,370 @@
 {
   "title": "Week 09 - Search and Binary Search",
-  "description": "Practice linear search and position reporting.",
+  "description": "Practice linear search, position search, and binary search.",
   "sort_order": 17,
   "questions": [
     {
-      "title": "Search for a Student Number",
+      "title": "Search for a Student in Number Cards",
       "description": {
-        "statement": "Return the first 1-based position of target in the array, or 0 if it is missing.",
-        "input": "An array table and a target number.",
-        "output": "The first position, or 0."
+        "difficulty": "Simple",
+        "background": "In a class activity, each student has a number card, and all numbers are stored in order in the array numbers. The teacher wants to confirm whether a target number target appears among the first n cards to decide whether the matching student is on the list.",
+        "task": "Check the first n numbers in numbers from front to back, determine whether any number equals target, and return the result.",
+        "input": "Three parameters: the number array numbers, the count n, and the target value target.",
+        "output": "Return true if it exists, otherwise return false.",
+        "hint": "Compare the numbers one by one. If numbers[i] == target is found, return true immediately. If the whole check finishes without finding it, return false."
       },
-      "starter_code": "function solution(numbers, target)\n    return 0\nend",
-      "reference_code": "function solution(numbers, target)\n    for i = 1, #numbers do\n        if numbers[i] == target then\n            return i\n        end\n    end\n    return 0\nend",
-      "test_cases": [{"args": [[3, 5, 7], 5]}, {"args": [[10, 20, 30], 40]}, {"args": [[1, 1, 2], 1]}],
+      "starter_code": "function solution(numbers, n, target)\n    return false\nend",
+      "reference_code": "function solution(numbers, n, target)\n    for i = 1, n do\n        if numbers[i] == target then\n            return true\n        end\n    end\n    return false\nend",
+      "test_cases": [
+        [
+          [
+            3,
+            8,
+            12
+          ],
+          3,
+          8
+        ],
+        [
+          [
+            1,
+            2,
+            3
+          ],
+          3,
+          4
+        ],
+        [
+          [
+            9
+          ],
+          1,
+          9
+        ]
+      ],
       "sort_order": 1
+    },
+    {
+      "title": "Check Whether Anyone Got a Full Score",
+      "description": {
+        "difficulty": "Simple",
+        "background": "After an exam, the teacher stores the first n students' scores in order in the array scores. The full score is 100, and the teacher wants to quickly check whether anyone got a full score.",
+        "task": "Traverse the first n scores in scores, determine whether any score equals 100, and return the result.",
+        "input": "Two parameters: the score array scores and the number of students n.",
+        "output": "Return true if there is a score of 100, otherwise return false.",
+        "hint": "A search does not always need to check the whole array. Once you find a 100, return true immediately."
+      },
+      "starter_code": "function solution(scores, n)\n    return false\nend",
+      "reference_code": "function solution(scores, n)\n    for i = 1, n do\n        if scores[i] == 100 then\n            return true\n        end\n    end\n    return false\nend",
+      "test_cases": [
+        [
+          [
+            80,
+            100,
+            90
+          ],
+          3
+        ],
+        [
+          [
+            99,
+            98
+          ],
+          2
+        ],
+        [
+          [
+            100
+          ],
+          1
+        ]
+      ],
+      "sort_order": 2
+    },
+    {
+      "title": "Search for a Target Item Count in a Bag Slot",
+      "description": {
+        "difficulty": "Simple",
+        "background": "A game bag has multiple slots, and the item count in each slot is recorded in order in the array items. The player wants to find the first slot whose item count is exactly target to identify the earliest position where that target count appears.",
+        "task": "Starting from slot 1, search in order for the first slot whose count equals target, and return its position. If none is found, return 0.",
+        "input": "Three parameters: the item count array items, the slot count n, and the target value target.",
+        "output": "Return the first position; return 0 if it does not exist.",
+        "hint": "Check items[i] from front to back. Return i immediately when it equals target; if the loop finishes without finding it, return 0."
+      },
+      "starter_code": "function solution(items, n, target)\n    return 0\nend",
+      "reference_code": "function solution(items, n, target)\n    for i = 1, n do\n        if items[i] == target then\n            return i\n        end\n    end\n    return 0\nend",
+      "test_cases": [
+        [
+          [
+            3,
+            0,
+            5,
+            2
+          ],
+          4,
+          5
+        ],
+        [
+          [
+            1,
+            1,
+            1
+          ],
+          3,
+          2
+        ],
+        [
+          [
+            7
+          ],
+          1,
+          7
+        ]
+      ],
+      "sort_order": 3
+    },
+    {
+      "title": "Find the First Failing Student in a Retake List",
+      "description": {
+        "difficulty": "Normal",
+        "background": "The teacher stores the first n students' exam scores in order in the array scores. Students scoring below 60 need a retake. To organize the list quickly, the teacher wants to know the first position in the score sheet that needs a retake.",
+        "task": "Check the first n scores in scores from front to back, find the first score below 60, and return that position. If there is no failing score, return 0.",
+        "input": "Two parameters: the score array scores and the number of students n.",
+        "output": "Return the first position below 60; return 0 if there is none.",
+        "hint": "When searching from front to back, the first position where scores[i] < 60 is the answer, so you can return i directly."
+      },
+      "starter_code": "function solution(scores, n)\n    return 0\nend",
+      "reference_code": "function solution(scores, n)\n    for i = 1, n do\n        if scores[i] < 60 then\n            return i\n        end\n    end\n    return 0\nend",
+      "test_cases": [
+        [
+          [
+            80,
+            59,
+            70
+          ],
+          3
+        ],
+        [
+          [
+            60,
+            70
+          ],
+          2
+        ],
+        [
+          [
+            10
+          ],
+          1
+        ]
+      ],
+      "sort_order": 4
+    },
+    {
+      "title": "Find the Last Full-Score Position in Competition Results",
+      "description": {
+        "difficulty": "Normal",
+        "background": "After a competition, athlete scores are stored in order in the array scores. Since multiple athletes may score 100, the judge wants to know the last position where a full score appears. If nobody gets a full score, return 0.",
+        "task": "Traverse the first n scores in scores, record the last position where 100 appears, and return that position.",
+        "input": "Two parameters: the score array scores and the number of athletes n.",
+        "output": "Return the last full-score position; return 0 if there is none.",
+        "hint": "Use position to store the current full-score position, initially 0. Every time scores[i] == 100 is found, update position to i."
+      },
+      "starter_code": "function solution(scores, n)\n    return 0\nend",
+      "reference_code": "function solution(scores, n)\n    local position = 0\n    for i = 1, n do\n        if scores[i] == 100 then\n            position = i\n        end\n    end\n    return position\nend",
+      "test_cases": [
+        [
+          [
+            100,
+            80,
+            100
+          ],
+          3
+        ],
+        [
+          [
+            99,
+            98
+          ],
+          2
+        ],
+        [
+          [
+            100
+          ],
+          1
+        ]
+      ],
+      "sort_order": 5
+    },
+    {
+      "title": "Find the First Unfinished Task Number",
+      "description": {
+        "difficulty": "Normal",
+        "background": "A group of task completion states is stored in order in the array tasks. In the array, 1 means completed and 0 means unfinished. To continue progress, find the first task that is not finished yet.",
+        "task": "Check the first n task states in tasks from front to back, return the first position whose value is 0. If all tasks are completed, return 0.",
+        "input": "Two parameters: the task state array tasks and the task count n.",
+        "output": "Return the first position with value 0; return 0 if all tasks are complete.",
+        "hint": "Check whether tasks[i] equals 0 one by one. Return i directly the first time you find 0."
+      },
+      "starter_code": "function solution(tasks, n)\n    return 0\nend",
+      "reference_code": "function solution(tasks, n)\n    for i = 1, n do\n        if tasks[i] == 0 then\n            return i\n        end\n    end\n    return 0\nend",
+      "test_cases": [
+        [
+          [
+            1,
+            1,
+            0,
+            1
+          ],
+          4
+        ],
+        [
+          [
+            1,
+            1
+          ],
+          2
+        ],
+        [
+          [
+            0
+          ],
+          1
+        ]
+      ],
+      "sort_order": 6
+    },
+    {
+      "title": "Quickly Find a Target Book in Sorted Book Numbers",
+      "description": {
+        "difficulty": "Challenge",
+        "background": "Book numbers in the library are already stored in increasing order in the array books. The librarian wants to find whether the target number target exists. Because the numbers are sorted, binary search can reduce the number of checks.",
+        "task": "Use binary search to look for target among the first n book numbers in books. If the target number is found, return its position; otherwise return 0.",
+        "input": "Three parameters: the sorted number array books, the count n, and the target value target.",
+        "output": "Return the target position; return 0 if it does not exist.",
+        "hint": "Check the middle position of the current range each time. If target is smaller than the middle value, keep only the left half; if larger, keep only the right half."
+      },
+      "starter_code": "function solution(books, n, target)\n    return 0\nend",
+      "reference_code": "function solution(books, n, target)\n    local left = 1\n    local right = n\n    while left <= right do\n        local mid = left\n        local gap = right - left\n        while gap >= 2 do\n            mid = mid + 1\n            gap = gap - 2\n        end\n        if books[mid] == target then\n            return mid\n        elseif target < books[mid] then\n            right = mid - 1\n        else\n            left = mid + 1\n        end\n    end\n    return 0\nend",
+      "test_cases": [
+        [
+          [
+            1,
+            3,
+            5,
+            7,
+            9
+          ],
+          5,
+          7
+        ],
+        [
+          [
+            2,
+            4,
+            6,
+            8
+          ],
+          4,
+          5
+        ],
+        [
+          [
+            10
+          ],
+          1,
+          10
+        ]
+      ],
+      "sort_order": 7
+    },
+    {
+      "title": "Compare How Many Checks Linear Search and Binary Search Need",
+      "description": {
+        "difficulty": "Challenge",
+        "background": "The same sorted array numbers can be searched with linear search or binary search. Linear search checks from the first element one by one, while binary search keeps narrowing the possible range. Compare how many positions each method checks when searching for target.",
+        "task": "Simulate linear search and binary search separately, count how many positions each checks before finding the target or determining it is missing, and return both check counts.",
+        "input": "Three parameters: the sorted array numbers, the count n, and the target value target.",
+        "output": "Return two values: the linear-search check count and the binary-search check count.",
+        "hint": "Linear search counts once for each checked element. Binary search counts once for each checked middle position. Stop when the target is found or the search range becomes empty."
+      },
+      "starter_code": "function solution(numbers, n, target)\n    return 0, 0\nend",
+      "reference_code": "function solution(numbers, n, target)\n    local linearChecks = 0\n    for i = 1, n do\n        linearChecks = linearChecks + 1\n        if numbers[i] == target then\n            break\n        end\n    end\n\n    local binaryChecks = 0\n    local left = 1\n    local right = n\n    while left <= right do\n        local mid = left\n        local gap = right - left\n        while gap >= 2 do\n            mid = mid + 1\n            gap = gap - 2\n        end\n        binaryChecks = binaryChecks + 1\n        if numbers[mid] == target then\n            break\n        elseif target < numbers[mid] then\n            right = mid - 1\n        else\n            left = mid + 1\n        end\n    end\n    return linearChecks, binaryChecks\nend",
+      "test_cases": [
+        [
+          [
+            1,
+            3,
+            5,
+            7,
+            9
+          ],
+          5,
+          9
+        ],
+        [
+          [
+            2,
+            4,
+            6,
+            8
+          ],
+          4,
+          5
+        ],
+        [
+          [
+            10
+          ],
+          1,
+          10
+        ]
+      ],
+      "sort_order": 8
+    },
+    {
+      "title": "Find a Target Score in a Sorted Score Table",
+      "description": {
+        "difficulty": "Challenge",
+        "background": "The teacher has stored a score table in increasing order in the array scores. Now target needs to be found in this sorted score table. Since the data is sorted, binary search can improve search efficiency.",
+        "task": "Use binary search to look for target among the first n scores in scores. If the target score is found, return its position; otherwise return 0.",
+        "input": "Three parameters: the sorted score array scores, the number of students n, and the target value target.",
+        "output": "Return the target position; return 0 if it does not exist.",
+        "hint": "Binary search requires the array to already be sorted. Compare the middle score each time, then decide whether to continue searching the left half or the right half based on target."
+      },
+      "starter_code": "function solution(scores, n, target)\n    return 0\nend",
+      "reference_code": "function solution(scores, n, target)\n    local left = 1\n    local right = n\n    while left <= right do\n        local mid = left\n        local gap = right - left\n        while gap >= 2 do\n            mid = mid + 1\n            gap = gap - 2\n        end\n        if scores[mid] == target then\n            return mid\n        elseif target < scores[mid] then\n            right = mid - 1\n        else\n            left = mid + 1\n        end\n    end\n    return 0\nend",
+      "test_cases": [
+        [
+          [
+            50,
+            60,
+            70,
+            80,
+            90
+          ],
+          5,
+          70
+        ],
+        [
+          [
+            60,
+            75,
+            85
+          ],
+          3,
+          100
+        ],
+        [
+          [
+            88
+          ],
+          1,
+          88
+        ]
+      ],
+      "sort_order": 9
     }
   ]
 }
