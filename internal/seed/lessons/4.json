@@ -1,0 +1,244 @@
+{
+  "title": "Week 02 - 判断与循环",
+  "description": "练习条件判断、循环计数和边界判断。",
+  "sort_order": 4,
+  "questions": [
+    {
+      "title": "判断考试成绩是否达到及格线",
+      "description": {
+        "难度": "Simple",
+        "背景": "老师批改完一次考试后，需要快速判断每位学生的成绩是否达到及格线。学校规定，考试成绩达到 60 分或 60 分以上就算及格，低于 60 分则不及格。",
+        "任务": "请根据输入的考试分数，判断这名学生是否及格，并返回判断结果。",
+        "输入": "一个数字：score。",
+        "输出": "score 至少为 60 时返回 true，否则返回 false。",
+        "提示": "可以使用 if 判断 score 是否大于或等于 60。如果条件成立，就返回 true；否则返回 false。"
+      },
+      "starter_code": "function solution(score)\n    return false\nend",
+      "reference_code": "function solution(score)\n    if score >= 60 then\n        return true\n    end\n    return false\nend",
+      "test_cases": [
+        [
+          75
+        ],
+        [
+          60
+        ],
+        [
+          59
+        ]
+      ],
+      "sort_order": 1
+    },
+    {
+      "title": "判断学生编号是奇数还是偶数",
+      "description": {
+        "难度": "Simple",
+        "背景": "体育课上，老师要让学生按照编号分成两列站队。编号为奇数的学生站在一列，编号为偶数的学生站在另一列。现在需要根据学生编号判断他应该站在哪一列。",
+        "任务": "请判断输入的学生编号是奇数还是偶数，并返回对应的英文结果。",
+        "输入": "一个数字：number。",
+        "输出": "奇数返回 \"odd\"，偶数返回 \"even\"。",
+        "提示": "可以用 number % 2 计算除以 2 的余数。余数为 0 表示偶数，否则表示奇数。"
+      },
+      "starter_code": "function solution(number)\n    return \"\"\nend",
+      "reference_code": "function solution(number)\n    if number % 2 == 0 then\n        return \"even\"\n    end\n    return \"odd\"\nend",
+      "test_cases": [
+        [
+          1
+        ],
+        [
+          8
+        ],
+        [
+          15
+        ]
+      ],
+      "sort_order": 2
+    },
+    {
+      "title": "判断今天温度是否适合户外运动",
+      "description": {
+        "难度": "Simple",
+        "背景": "体育课开始前，老师需要根据当天温度决定是否安排学生去操场进行户外运动。为了保证运动安全，只有当温度在 15 度到 30 度之间时，才认为适合户外运动。",
+        "任务": "请根据输入的温度，判断今天是否适合进行户外运动，并返回判断结果。",
+        "输入": "一个数字：temperature。",
+        "输出": "15 到 30 之间返回 true，否则返回 false。",
+        "提示": "边界值 15 和 30 也算适合。可以判断 temperature 是否同时满足大于等于 15 且小于等于 30。"
+      },
+      "starter_code": "function solution(temperature)\n    return false\nend",
+      "reference_code": "function solution(temperature)\n    if temperature >= 15 and temperature <= 30 then\n        return true\n    end\n    return false\nend",
+      "test_cases": [
+        [
+          20
+        ],
+        [
+          15
+        ],
+        [
+          31
+        ]
+      ],
+      "sort_order": 3
+    },
+    {
+      "title": "怪物每回合扣血，几回合后被打败",
+      "description": {
+        "难度": "Normal",
+        "背景": "在游戏战斗中，怪物一开始有 hp 点血量。玩家每一回合都会对怪物造成 damage 点固定伤害。只要怪物血量还大于 0，战斗就会继续进行，直到怪物血量扣到 0 或以下为止。",
+        "任务": "请计算玩家需要攻击多少回合，才能把怪物打败，并返回所需的回合数。",
+        "输入": "两个数字：hp 和 damage。",
+        "输出": "返回需要的回合数。",
+        "提示": "可以使用 while 循环不断减少怪物当前血量，并在每次攻击后把回合数加 1。"
+      },
+      "starter_code": "function solution(hp, damage)\n    return 0\nend",
+      "reference_code": "function solution(hp, damage)\n    local rounds = 0\n    local currentHp = hp\n    while currentHp > 0 do\n        currentHp = currentHp - damage\n        rounds = rounds + 1\n    end\n    return rounds\nend",
+      "test_cases": [
+        [
+          30,
+          10
+        ],
+        [
+          31,
+          10
+        ],
+        [
+          5,
+          8
+        ]
+      ],
+      "sort_order": 4
+    },
+    {
+      "title": "统计 1 到 n 中有多少个偶数",
+      "description": {
+        "难度": "Normal",
+        "背景": "班级正在练习编号统计。老师给出一个正整数 n，要求同学们从 1 开始一直数到 n，并统计其中有多少个编号是偶数。",
+        "任务": "请遍历 1 到 n 之间的每个数字，统计能被 2 整除的数字数量，并返回偶数的总数。",
+        "输入": "一个正整数：n。",
+        "输出": "返回偶数数量。",
+        "提示": "可以使用循环依次检查每个数字。如果某个数字除以 2 的余数为 0，就把计数变量加 1。"
+      },
+      "starter_code": "function solution(n)\n    return 0\nend",
+      "reference_code": "function solution(n)\n    local count = 0\n    for i = 1, n do\n        if i % 2 == 0 then\n            count = count + 1\n        end\n    end\n    return count\nend",
+      "test_cases": [
+        [
+          5
+        ],
+        [
+          8
+        ],
+        [
+          1
+        ]
+      ],
+      "sort_order": 5
+    },
+    {
+      "title": "判断一个数字是否是 3 的倍数",
+      "description": {
+        "难度": "Normal",
+        "背景": "学校活动中，部分任务编号需要做特殊标记。规则规定：如果一个任务编号是 3 的倍数，就需要被标记出来；如果不是 3 的倍数，则不需要标记。",
+        "任务": "请判断输入的数字是否能被 3 整除，并返回判断结果。",
+        "输入": "一个数字：number。",
+        "输出": "是 3 的倍数返回 true，否则返回 false。",
+        "提示": "可以用 number % 3 判断余数。余数为 0 表示这个数字可以被 3 整除。"
+      },
+      "starter_code": "function solution(number)\n    return false\nend",
+      "reference_code": "function solution(number)\n    if number % 3 == 0 then\n        return true\n    end\n    return false\nend",
+      "test_cases": [
+        [
+          9
+        ],
+        [
+          10
+        ],
+        [
+          0
+        ]
+      ],
+      "sort_order": 6
+    },
+    {
+      "title": "根据年份判断学校运动会是否遇到闰年",
+      "description": {
+        "难度": "Challenge",
+        "背景": "学校计划在某一年举办运动会，并想了解这一年的二月是否有 29 天。根据日历规则，只有闰年的二月才有 29 天，因此需要根据年份判断这一年是否为闰年。",
+        "任务": "请根据闰年规则判断输入年份是否为闰年，并返回判断结果。",
+        "输入": "一个数字：year。",
+        "输出": "闰年返回 true，否则返回 false。",
+        "提示": "闰年规则是：能被 400 整除的年份是闰年；或者能被 4 整除但不能被 100 整除的年份也是闰年。"
+      },
+      "starter_code": "function solution(year)\n    return false\nend",
+      "reference_code": "function solution(year)\n    if year % 400 == 0 then\n        return true\n    end\n    if year % 4 == 0 and year % 100 ~= 0 then\n        return true\n    end\n    return false\nend",
+      "test_cases": [
+        [
+          2024
+        ],
+        [
+          2023
+        ],
+        [
+          2100
+        ],
+        [
+          2000
+        ]
+      ],
+      "sort_order": 7
+    },
+    {
+      "title": "自动售货机根据金额判断能买哪种饮料",
+      "description": {
+        "难度": "Challenge",
+        "背景": "自动售货机里有三种饮料，价格从低到高分别不同。矿泉水需要 2 元，果汁需要 5 元，牛奶需要 8 元。顾客投入 money 元后，售货机需要判断当前金额最多可以买到哪一种饮料。",
+        "任务": "请根据当前金额，返回可以买到的最贵饮料名称；如果金额不足以购买任何饮料，则返回 \"none\"。",
+        "输入": "一个数字：money。",
+        "输出": "8 元及以上返回 \"milk\"，5 元及以上返回 \"juice\"，2 元及以上返回 \"water\"，否则返回 \"none\"。",
+        "提示": "可以按价格从高到低依次判断。先判断是否能买 milk，再判断 juice，最后判断 water。"
+      },
+      "starter_code": "function solution(money)\n    return \"\"\nend",
+      "reference_code": "function solution(money)\n    if money >= 8 then\n        return \"milk\"\n    elseif money >= 5 then\n        return \"juice\"\n    elseif money >= 2 then\n        return \"water\"\n    end\n    return \"none\"\nend",
+      "test_cases": [
+        [
+          10
+        ],
+        [
+          6
+        ],
+        [
+          3
+        ],
+        [
+          1
+        ]
+      ],
+      "sort_order": 8
+    },
+    {
+      "title": "游戏关卡根据分数判断获得几颗星",
+      "description": {
+        "难度": "Challenge",
+        "背景": "玩家完成一个游戏关卡后，系统会根据通关分数给予星级奖励。分数越高，获得的星星数量越多；如果分数太低，则无法获得星星。",
+        "任务": "请根据输入的通关分数，判断玩家可以获得几颗星，并返回星星数量。",
+        "输入": "一个数字：score。",
+        "输出": "90 分及以上 3 星，70 分及以上 2 星，50 分及以上 1 星，否则 0 星。",
+        "提示": "可以使用 if 和 elseif 处理多个分数区间。判断时建议从最高分数段开始，依次向下判断。"
+      },
+      "starter_code": "function solution(score)\n    return 0\nend",
+      "reference_code": "function solution(score)\n    if score >= 90 then\n        return 3\n    elseif score >= 70 then\n        return 2\n    elseif score >= 50 then\n        return 1\n    end\n    return 0\nend",
+      "test_cases": [
+        [
+          95
+        ],
+        [
+          70
+        ],
+        [
+          55
+        ],
+        [
+          40
+        ]
+      ],
+      "sort_order": 9
+    }
+  ]
+}

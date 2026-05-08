@@ -495,6 +495,24 @@ Description: list the current teacher's classrooms ordered by `classroom.id ASC`
 
 Description: read one classroom owned by the current teacher. Ownership is checked by `id + teacher_id`.
 
+#### `DELETE /api/teacher/classrooms/:classroomId`
+
+Description: delete one classroom owned by the current teacher. The operation is transactional and removes submissions for the classroom enrollments, classroom enrollments, student accounts in that classroom, and then the classroom row.
+
+Successful response:
+
+```json
+{
+  "data": {
+    "ok": true
+  }
+}
+```
+
+Errors:
+
+- `404 not_found`: the classroom does not exist or does not belong to the current teacher.
+
 ### Student Management
 
 #### `POST /api/teacher/classrooms/:classroomId/students`

@@ -1,0 +1,274 @@
+{
+  "title": "Week 01 - Variables",
+  "description": "Practice sequential calculation, variable updates, and variable swapping.",
+  "sort_order": 1,
+  "questions": [
+    {
+      "title": "How Much Health Is Left After a Game Character Is Attacked",
+      "description": {
+        "difficulty": "Simple",
+        "background": "A game character enters a level with initial health represented by hp. During the battle, a monster attacks once and deals damage. Calculate how much health the character has left after the attack.",
+        "task": "Save the remaining health after the attack in a variable first, then return that remaining health.",
+        "input": "Two numbers: hp and damage.",
+        "output": "Return hp - damage.",
+        "hint": "Create a variable for remaining health, set it to the initial health minus the damage taken, then return that variable."
+      },
+      "starter_code": "function solution(hp, damage)\n    return 0\nend",
+      "reference_code": "function solution(hp, damage)\n    local remainHp = hp - damage\n    return remainHp\nend",
+      "test_cases": [
+        [
+          100,
+          25
+        ],
+        [
+          80,
+          35
+        ],
+        [
+          50,
+          0
+        ]
+      ],
+      "sort_order": 1
+    },
+    {
+      "title": "How Much Do the Pencils Cost at the Stationery Store",
+      "description": {
+        "difficulty": "Simple",
+        "background": "A stationery store sells one kind of pencil, and each pencil costs price units of money. A student plans to buy count pencils. Calculate the total price from the unit price and the number of pencils.",
+        "task": "Calculate how much these pencils cost in total, then return the total price.",
+        "input": "Two numbers: price and count.",
+        "output": "Return price * count.",
+        "hint": "The total price equals the unit price multiplied by the quantity. You can save the result in a variable first, then return that variable."
+      },
+      "starter_code": "function solution(price, count)\n    return 0\nend",
+      "reference_code": "function solution(price, count)\n    local total = price * count\n    return total\nend",
+      "test_cases": [
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          4,
+          1
+        ]
+      ],
+      "sort_order": 2
+    },
+    {
+      "title": "What Is the Area of the Rectangular Playground",
+      "description": {
+        "difficulty": "Simple",
+        "background": "A rectangular training area is marked on the school playground. Its length is length meters, and its width is width meters. The teacher needs to know the area of this rectangle to arrange training activities.",
+        "task": "Calculate the area of the training area from the rectangle's length and width, then return the area.",
+        "input": "Two numbers: length and width.",
+        "output": "Return length * width.",
+        "hint": "The area of a rectangle equals length multiplied by width. You can store the area in a variable and return it."
+      },
+      "starter_code": "function solution(length, width)\n    return 0\nend",
+      "reference_code": "function solution(length, width)\n    local area = length * width\n    return area\nend",
+      "test_cases": [
+        [
+          10,
+          6
+        ],
+        [
+          8,
+          8
+        ],
+        [
+          15,
+          4
+        ]
+      ],
+      "sort_order": 3
+    },
+    {
+      "title": "How Many Coins Are in the Bag After Defeating a Monster",
+      "description": {
+        "difficulty": "Normal",
+        "background": "A game character originally has a number of coins in the bag, represented by coins. After defeating a monster in battle, the character receives a new coin reward represented by reward. Update the number of coins in the bag after receiving the reward.",
+        "task": "Add the newly earned coin reward to the original number of coins, then return the updated total.",
+        "input": "Two numbers: coins and reward.",
+        "output": "Return coins + reward.",
+        "hint": "Use a variable for the new coin total, set it to the original coin count plus the reward coin count."
+      },
+      "starter_code": "function solution(coins, reward)\n    return 0\nend",
+      "reference_code": "function solution(coins, reward)\n    local totalCoins = coins + reward\n    return totalCoins\nend",
+      "test_cases": [
+        [
+          30,
+          12
+        ],
+        [
+          0,
+          50
+        ],
+        [
+          99,
+          1
+        ]
+      ],
+      "sort_order": 4
+    },
+    {
+      "title": "How Much Money Is Left After Buying Pencils and Erasers",
+      "description": {
+        "difficulty": "Normal",
+        "background": "A student brings an amount of money represented by money to a stationery store. The student plans to buy pencilCount pencils at pencilPrice each and eraserCount erasers at eraserPrice each. Calculate how much money is left after buying these items.",
+        "task": "First calculate the cost of the pencils and the cost of the erasers separately. Then subtract both costs from the total money and return the remaining amount.",
+        "input": "Five numbers: money, pencilPrice, pencilCount, eraserPrice, and eraserCount.",
+        "output": "Return the remaining amount of money.",
+        "hint": "Calculate the pencil total first, then the eraser total, and subtract both costs from money."
+      },
+      "starter_code": "function solution(money, pencilPrice, pencilCount, eraserPrice, eraserCount)\n    return 0\nend",
+      "reference_code": "function solution(money, pencilPrice, pencilCount, eraserPrice, eraserCount)\n    local pencilTotal = pencilPrice * pencilCount\n    local eraserTotal = eraserPrice * eraserCount\n    local leftMoney = money - pencilTotal - eraserTotal\n    return leftMoney\nend",
+      "test_cases": [
+        [
+          50,
+          2,
+          6,
+          3,
+          4
+        ],
+        [
+          30,
+          1,
+          10,
+          2,
+          5
+        ],
+        [
+          100,
+          4,
+          8,
+          5,
+          6
+        ]
+      ],
+      "sort_order": 5
+    },
+    {
+      "title": "How Many Meters Have Been Run After Training",
+      "description": {
+        "difficulty": "Normal",
+        "background": "An athlete records the total distance run over time. Before today's training, the athlete had already run beforeMeters meters in total. After today's training, the athlete runs todayMeters more meters. Update the accumulated running distance.",
+        "task": "Add today's new running distance to the previous accumulated distance, then return the new accumulated distance.",
+        "input": "Two numbers: beforeMeters and todayMeters.",
+        "output": "Return the new accumulated distance.",
+        "hint": "The accumulated distance equals the previous distance plus today's added distance. You can save the updated result in a variable."
+      },
+      "starter_code": "function solution(beforeMeters, todayMeters)\n    return 0\nend",
+      "reference_code": "function solution(beforeMeters, todayMeters)\n    local totalMeters = beforeMeters + todayMeters\n    return totalMeters\nend",
+      "test_cases": [
+        [
+          1200,
+          800
+        ],
+        [
+          0,
+          500
+        ],
+        [
+          3500,
+          1500
+        ]
+      ],
+      "sort_order": 6
+    },
+    {
+      "title": "How Do Two Students Swap Seat Numbers",
+      "description": {
+        "difficulty": "Challenge",
+        "background": "Two students in a classroom need to swap seats. The first student's original seat number is seatA, and the second student's original seat number is seatB. After swapping, the first student should sit in the second student's original seat, and the second student should sit in the first student's original seat.",
+        "task": "Use variables to swap the two seat numbers, then return the swapped seatA and seatB.",
+        "input": "Two numbers: seatA and seatB.",
+        "output": "Return two values: the new seatA and the new seatB.",
+        "hint": "When swapping two variables, use a temporary variable to save one seat number first so the original value is not overwritten."
+      },
+      "starter_code": "function solution(seatA, seatB)\n    return seatA, seatB\nend",
+      "reference_code": "function solution(seatA, seatB)\n    local temp = seatA\n    seatA = seatB\n    seatB = temp\n    return seatA, seatB\nend",
+      "test_cases": [
+        [
+          3,
+          8
+        ],
+        [
+          1,
+          20
+        ],
+        [
+          12,
+          12
+        ]
+      ],
+      "sort_order": 7
+    },
+    {
+      "title": "How Much Health Is Left After Damage and Healing",
+      "description": {
+        "difficulty": "Challenge",
+        "background": "A game character currently has health represented by hp. In one battle, the character first takes damage, which reduces health, and then uses a potion to recover an amount of health represented by heal. Calculate the character's final health in the order these events happen.",
+        "task": "First save the character's current health in a variable. Then process the damage and healing changes in order, and finally return the updated health.",
+        "input": "Three numbers: hp, damage, and heal.",
+        "output": "Return hp - damage + heal.",
+        "hint": "This problem requires updating a variable in sequence: subtract the damage first, then add the healed health."
+      },
+      "starter_code": "function solution(hp, damage, heal)\n    return 0\nend",
+      "reference_code": "function solution(hp, damage, heal)\n    local currentHp = hp\n    currentHp = currentHp - damage\n    currentHp = currentHp + heal\n    return currentHp\nend",
+      "test_cases": [
+        [
+          100,
+          30,
+          15
+        ],
+        [
+          60,
+          20,
+          40
+        ],
+        [
+          10,
+          5,
+          0
+        ]
+      ],
+      "sort_order": 8
+    },
+    {
+      "title": "Calculate Total Price and Change for a Store Bundle",
+      "description": {
+        "difficulty": "Challenge",
+        "background": "A store sells a bundle at a fixed price. Each bundle costs packPrice. A student brings an amount of money represented by money and buys packCount bundles. Before paying, calculate the total price of the bundles. After paying, calculate how much change should be returned.",
+        "task": "First calculate the total price from the bundle price and quantity. Then subtract the total from the payment amount to calculate the change, and finally return both the total price and the change.",
+        "input": "Three numbers: money, packPrice, and packCount.",
+        "output": "Return two values: the total price and the change.",
+        "hint": "Save the bundle total in a variable first, then subtract it from money to get the change. Return these two values in order."
+      },
+      "starter_code": "function solution(money, packPrice, packCount)\n    return 0, 0\nend",
+      "reference_code": "function solution(money, packPrice, packCount)\n    local total = packPrice * packCount\n    local change = money - total\n    return total, change\nend",
+      "test_cases": [
+        [
+          100,
+          12,
+          5
+        ],
+        [
+          50,
+          7,
+          6
+        ],
+        [
+          30,
+          10,
+          3
+        ]
+      ],
+      "sort_order": 9
+    }
+  ]
+}

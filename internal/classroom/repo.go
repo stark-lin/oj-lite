@@ -86,6 +86,108 @@ func (repo *repo) FindClassroomByIDAndTeacherID(ctx context.Context, classroomID
 	`, classroomID, teacherID))
 }
 
+func (repo *repo) DeleteClassroom(ctx context.Context, classroomID, teacherID int64) error {
+	tx, err := repo.db.BeginTx(ctx, nil)
+	if err != nil {
+		return err
+	}
+	defer func() {
+		if err != nil {
+			_ = tx.Rollback()
+		}
+	}()
+
+	var exists bool
+	err = tx.QueryRowContext(ctx, `
+		SELECT EXISTS(
+			SELECT 1
+			FROM classroom
+			WHERE id = ? AND teacher_id = ?
+		)
+	`, classroomID, teacherID).Scan(&exists)
+	if err != nil {
+		return err
+	}
+	if !exists {
+		err = sql.ErrNoRows
+		return err
+	}
+
+	rows, err := tx.QueryContext(ctx, `
+		SELECT student_id
+		FROM enrollment
+		WHERE classroom_id = ?
+		ORDER BY student_id ASC
+	`, classroomID)
+	if err != nil {
+		return err
+	}
+
+	var studentIDs []int64
+	for rows.Next() {
+		var studentID int64
+		if err = rows.Scan(&studentID); err != nil {
+			_ = rows.Close()
+			return err
+		}
+		studentIDs = append(studentIDs, studentID)
+	}
+	if err = rows.Err(); err != nil {
+		_ = rows.Close()
+		return err
+	}
+	if err = rows.Close(); err != nil {
+		return err
+	}
+
+	if _, err = tx.ExecContext(ctx, `
+		DELETE FROM submission
+		WHERE enrollment_id IN (
+			SELECT id
+			FROM enrollment
+			WHERE classroom_id = ?
+		)
+	`, classroomID); err != nil {
+		return err
+	}
+
+	if _, err = tx.ExecContext(ctx, `
+		DELETE FROM enrollment
+		WHERE classroom_id = ?
+	`, classroomID); err != nil {
+		return err
+	}
+
+	for _, studentID := range studentIDs {
+		if _, err = tx.ExecContext(ctx, `
+			DELETE FROM user_account
+			WHERE id = ? AND role = 'student'
+		`, studentID); err != nil {
+			return err
+		}
+	}
+
+	result, err := tx.ExecContext(ctx, `
+		DELETE FROM classroom
+		WHERE id = ? AND teacher_id = ?
+	`, classroomID, teacherID)
+	if err != nil {
+		return err
+	}
+
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		return err
+	}
+	if rowsAffected == 0 {
+		err = sql.ErrNoRows
+		return err
+	}
+
+	err = tx.Commit()
+	return err
+}
+
 func (repo *repo) FindDefaultLessonID(ctx context.Context) (sql.NullInt64, error) {
 	var lessonID sql.NullInt64
 	err := repo.db.QueryRowContext(ctx, `

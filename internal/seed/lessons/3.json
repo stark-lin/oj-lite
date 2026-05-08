@@ -1,0 +1,244 @@
+{
+  "title": "Week 02 - Conditions and Loops",
+  "description": "Practice conditional checks, loop counting, and boundary checks.",
+  "sort_order": 3,
+  "questions": [
+    {
+      "title": "Check Whether an Exam Score Reaches the Passing Line",
+      "description": {
+        "difficulty": "Simple",
+        "background": "After grading an exam, a teacher needs to quickly check whether each student's score reaches the passing line. The school rule is that a score of 60 or above is passing, while a score below 60 is not passing.",
+        "task": "Use the input exam score to decide whether this student passes, then return the result.",
+        "input": "One number: score.",
+        "output": "Return true when score is at least 60, otherwise return false.",
+        "hint": "Use if to check whether score is greater than or equal to 60. If the condition is true, return true; otherwise return false."
+      },
+      "starter_code": "function solution(score)\n    return false\nend",
+      "reference_code": "function solution(score)\n    if score >= 60 then\n        return true\n    end\n    return false\nend",
+      "test_cases": [
+        [
+          75
+        ],
+        [
+          60
+        ],
+        [
+          59
+        ]
+      ],
+      "sort_order": 1
+    },
+    {
+      "title": "Check Whether a Student Number Is Odd or Even",
+      "description": {
+        "difficulty": "Simple",
+        "background": "In PE class, the teacher wants students to line up in two columns by number. Students with odd numbers stand in one column, and students with even numbers stand in the other. Decide which column a student belongs to from the student number.",
+        "task": "Determine whether the input student number is odd or even, then return the corresponding English result.",
+        "input": "One number: number.",
+        "output": "Return \"odd\" for odd numbers and \"even\" for even numbers.",
+        "hint": "Use number % 2 to get the remainder after dividing by 2. A remainder of 0 means even; otherwise the number is odd."
+      },
+      "starter_code": "function solution(number)\n    return \"\"\nend",
+      "reference_code": "function solution(number)\n    if number % 2 == 0 then\n        return \"even\"\n    end\n    return \"odd\"\nend",
+      "test_cases": [
+        [
+          1
+        ],
+        [
+          8
+        ],
+        [
+          15
+        ]
+      ],
+      "sort_order": 2
+    },
+    {
+      "title": "Check Whether the Temperature Is Good for Outdoor Sports",
+      "description": {
+        "difficulty": "Simple",
+        "background": "Before PE class starts, the teacher needs to decide whether students should do outdoor sports on the playground based on the day's temperature. For safety, outdoor sports are considered suitable only when the temperature is between 15 and 30 degrees.",
+        "task": "Use the input temperature to decide whether today is suitable for outdoor sports, then return the result.",
+        "input": "One number: temperature.",
+        "output": "Return true when temperature is between 15 and 30, otherwise return false.",
+        "hint": "The boundary values 15 and 30 are also suitable. Check whether temperature is at least 15 and at most 30."
+      },
+      "starter_code": "function solution(temperature)\n    return false\nend",
+      "reference_code": "function solution(temperature)\n    if temperature >= 15 and temperature <= 30 then\n        return true\n    end\n    return false\nend",
+      "test_cases": [
+        [
+          20
+        ],
+        [
+          15
+        ],
+        [
+          31
+        ]
+      ],
+      "sort_order": 3
+    },
+    {
+      "title": "How Many Rounds Until a Monster Is Defeated",
+      "description": {
+        "difficulty": "Normal",
+        "background": "In a game battle, a monster starts with hp health. Each round, the player deals a fixed damage amount to the monster. The battle continues while the monster's health is greater than 0, until the health is reduced to 0 or below.",
+        "task": "Calculate how many attack rounds the player needs to defeat the monster, then return the round count.",
+        "input": "Two numbers: hp and damage.",
+        "output": "Return the number of rounds needed.",
+        "hint": "Use a while loop to keep reducing the monster's current health, and increase the round count after each attack."
+      },
+      "starter_code": "function solution(hp, damage)\n    return 0\nend",
+      "reference_code": "function solution(hp, damage)\n    local rounds = 0\n    local currentHp = hp\n    while currentHp > 0 do\n        currentHp = currentHp - damage\n        rounds = rounds + 1\n    end\n    return rounds\nend",
+      "test_cases": [
+        [
+          30,
+          10
+        ],
+        [
+          31,
+          10
+        ],
+        [
+          5,
+          8
+        ]
+      ],
+      "sort_order": 4
+    },
+    {
+      "title": "Count How Many Even Numbers There Are from 1 to n",
+      "description": {
+        "difficulty": "Normal",
+        "background": "The class is practicing number counting. The teacher gives a positive integer n and asks students to count from 1 to n, then count how many of those numbers are even.",
+        "task": "Traverse every number from 1 to n, count the numbers divisible by 2, and return the total number of even values.",
+        "input": "One positive integer: n.",
+        "output": "Return the count of even numbers.",
+        "hint": "Use a loop to check each number. If a number has remainder 0 when divided by 2, add 1 to the count variable."
+      },
+      "starter_code": "function solution(n)\n    return 0\nend",
+      "reference_code": "function solution(n)\n    local count = 0\n    for i = 1, n do\n        if i % 2 == 0 then\n            count = count + 1\n        end\n    end\n    return count\nend",
+      "test_cases": [
+        [
+          5
+        ],
+        [
+          8
+        ],
+        [
+          1
+        ]
+      ],
+      "sort_order": 5
+    },
+    {
+      "title": "Check Whether a Number Is a Multiple of 3",
+      "description": {
+        "difficulty": "Normal",
+        "background": "In a school activity, some task numbers need a special mark. The rule says that if a task number is a multiple of 3, it should be marked; otherwise it should not be marked.",
+        "task": "Determine whether the input number can be divided by 3 evenly, then return the result.",
+        "input": "One number: number.",
+        "output": "Return true if the number is a multiple of 3, otherwise return false.",
+        "hint": "Use number % 3 to check the remainder. A remainder of 0 means the number is divisible by 3."
+      },
+      "starter_code": "function solution(number)\n    return false\nend",
+      "reference_code": "function solution(number)\n    if number % 3 == 0 then\n        return true\n    end\n    return false\nend",
+      "test_cases": [
+        [
+          9
+        ],
+        [
+          10
+        ],
+        [
+          0
+        ]
+      ],
+      "sort_order": 6
+    },
+    {
+      "title": "Check Whether the School Sports Day Falls in a Leap Year",
+      "description": {
+        "difficulty": "Challenge",
+        "background": "The school plans to hold a sports day in a certain year and wants to know whether February has 29 days that year. According to calendar rules, only leap years have 29 days in February, so the year needs to be checked.",
+        "task": "Use the leap year rules to determine whether the input year is a leap year, then return the result.",
+        "input": "One number: year.",
+        "output": "Return true for a leap year, otherwise return false.",
+        "hint": "A year is a leap year if it is divisible by 400, or if it is divisible by 4 but not divisible by 100."
+      },
+      "starter_code": "function solution(year)\n    return false\nend",
+      "reference_code": "function solution(year)\n    if year % 400 == 0 then\n        return true\n    end\n    if year % 4 == 0 and year % 100 ~= 0 then\n        return true\n    end\n    return false\nend",
+      "test_cases": [
+        [
+          2024
+        ],
+        [
+          2023
+        ],
+        [
+          2100
+        ],
+        [
+          2000
+        ]
+      ],
+      "sort_order": 7
+    },
+    {
+      "title": "Choose a Drink in a Vending Machine Based on Money",
+      "description": {
+        "difficulty": "Challenge",
+        "background": "A vending machine has three drinks with different prices from low to high. Water costs 2, juice costs 5, and milk costs 8. After a customer inserts money, the vending machine needs to decide the most expensive drink that can be bought.",
+        "task": "Return the name of the most expensive drink that can be bought with the current money. If the money is not enough for any drink, return \"none\".",
+        "input": "One number: money.",
+        "output": "Return \"milk\" for 8 or more, \"juice\" for 5 or more, \"water\" for 2 or more, otherwise \"none\".",
+        "hint": "Check prices from high to low: first milk, then juice, then water."
+      },
+      "starter_code": "function solution(money)\n    return \"\"\nend",
+      "reference_code": "function solution(money)\n    if money >= 8 then\n        return \"milk\"\n    elseif money >= 5 then\n        return \"juice\"\n    elseif money >= 2 then\n        return \"water\"\n    end\n    return \"none\"\nend",
+      "test_cases": [
+        [
+          10
+        ],
+        [
+          6
+        ],
+        [
+          3
+        ],
+        [
+          1
+        ]
+      ],
+      "sort_order": 8
+    },
+    {
+      "title": "Decide How Many Stars a Game Level Gets Based on Score",
+      "description": {
+        "difficulty": "Challenge",
+        "background": "After a player completes a game level, the system gives a star reward based on the completion score. Higher scores earn more stars, while scores that are too low earn no stars.",
+        "task": "Use the input completion score to decide how many stars the player receives, then return the star count.",
+        "input": "One number: score.",
+        "output": "Return 3 stars for 90 or above, 2 stars for 70 or above, 1 star for 50 or above, otherwise 0 stars.",
+        "hint": "Use if and elseif to handle multiple score ranges. It is best to check from the highest range down."
+      },
+      "starter_code": "function solution(score)\n    return 0\nend",
+      "reference_code": "function solution(score)\n    if score >= 90 then\n        return 3\n    elseif score >= 70 then\n        return 2\n    elseif score >= 50 then\n        return 1\n    end\n    return 0\nend",
+      "test_cases": [
+        [
+          95
+        ],
+        [
+          70
+        ],
+        [
+          55
+        ],
+        [
+          40
+        ]
+      ],
+      "sort_order": 9
+    }
+  ]
+}

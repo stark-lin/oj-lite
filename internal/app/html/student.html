@@ -414,6 +414,7 @@
         <span class="status-pill" id="statusMiddle">Problem 1 / 3</span>
       </div>
       <div class="statusbar__right">
+        <span class="status-pill" id="studentName">Student: —</span>
         <span class="status-pill" id="statusRight">Lua · UTF-8</span>
       </div>
     </footer>
@@ -485,6 +486,7 @@
   const INITIAL_DATA = {
     session: {
       lessonTitle: PLACEHOLDERS.lessonTitleLoading,
+      studentName: '',
     },
     lesson: {
       id: null,
@@ -759,6 +761,7 @@
     judgeReportBlock: document.getElementById('judgeReportBlock'),
     statusLeft: document.getElementById('statusLeft'),
     statusMiddle: document.getElementById('statusMiddle'),
+    studentName: document.getElementById('studentName'),
     statusRight: document.getElementById('statusRight'),
     workspace: document.getElementById('workspace'),
     editorShell: document.getElementById('editorShell'),
@@ -843,6 +846,8 @@
     const queueStatus = submission?.queueStatus || 'idle';
 
     dom.statusMiddle.textContent = 'Problem ' + (selectedIndex >= 0 ? selectedIndex + 1 : 0) + ' / ' + questionCount;
+    dom.studentName.textContent = 'Student: ' + (store.session.studentName || '—');
+    dom.studentName.title = store.session.studentName || '';
     dom.statusRight.textContent = APP_CONFIG.languageLabel;
 
     if (store.ui.isBootstrapping) {
@@ -1404,7 +1409,8 @@
     renderApp();
 
     try {
-      await sessionService.getCurrentUser();
+      const user = await sessionService.getCurrentUser();
+      store.session.studentName = user?.username || '';
     } catch (error) {
       if (error instanceof ApiError && (error.status === 401 || error.status === 403)) {
         redirectToLogin();

@@ -4,6 +4,9 @@ package app
 
 import (
 	"context"
+	"fmt"
+	"os"
+
 	"oj-lite/internal/platform/config"
 	"oj-lite/internal/platform/db"
 	"oj-lite/internal/platform/logger"
@@ -23,6 +26,11 @@ func BootstrapWithOptions(options BootstrapOptions) (*App, error) {
 	cfg := config.Load()
 	log := logger.NewLogger(cfg.App.Name)
 
+	databaseExists, err := databaseFileExists(cfg.DB.Path)
+	if err != nil {
+		return nil, err
+	}
+
 	database, err := db.Open(context.Background(), cfg.DB)
 	if err != nil {
 		return nil, err
@@ -35,6 +43,8 @@ func BootstrapWithOptions(options BootstrapOptions) (*App, error) {
 
 	if options.SkipSeed {
 		log.Infof("demo seed skipped")
+	} else if databaseExists {
+		log.Infof("demo seed skipped for existing database")
 	} else {
 		if err := seed.SeedDemoAccounts(context.Background(), database); err != nil {
 			_ = database.Close()
@@ -51,4 +61,16 @@ func BootstrapWithOptions(options BootstrapOptions) (*App, error) {
 	}
 
 	return NewApp(cfg, log, database, apiSession), nil
+}
+
+func databaseFileExists(path string) (bool, error) {
+	if _, err := os.Stat(path); err != nil {
+		if os.IsNotExist(err) {
+			return false, nil
+		}
+
+		return false, fmt.Errorf("stat database path %q: %w", path, err)
+	}
+
+	return true, nil
 }

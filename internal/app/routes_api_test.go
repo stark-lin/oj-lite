@@ -17,7 +17,6 @@ import (
 	"oj-lite/internal/platform/logger"
 	platformpassword "oj-lite/internal/platform/password"
 	"oj-lite/internal/platform/session"
-	"oj-lite/internal/seed"
 )
 
 func TestTeacherSimpleCRUDRoutes(t *testing.T) {
@@ -237,6 +236,121 @@ func TestTeacherSimpleCRUDRoutesKeepClassroomScopedAndContentGlobal(t *testing.T
 	)
 	if getQuestion.Code != http.StatusOK {
 		t.Fatalf("GET shared question status = %d, want %d body=%s", getQuestion.Code, http.StatusOK, getQuestion.Body.String())
+	}
+
+	deleteClassroom := performRequest(
+		t,
+		app,
+		http.MethodDelete,
+		"/api/teacher/classrooms/"+itoa(otherClassroomID),
+		nil,
+		teacherCookie,
+	)
+	if deleteClassroom.Code != http.StatusNotFound {
+		t.Fatalf("DELETE foreign classroom status = %d, want %d body=%s", deleteClassroom.Code, http.StatusNotFound, deleteClassroom.Body.String())
+	}
+	if countRows(t, app.db, "SELECT COUNT(*) FROM classroom WHERE id = ?", otherClassroomID) != 1 {
+		t.Fatal("foreign classroom should remain after delete attempt")
+	}
+}
+
+func TestTeacherDeleteClassroomRemovesEmptyClassroom(t *testing.T) {
+	app := newTestApp(t)
+	defer shutdownTestApp(t, app)
+
+	teacherCookie := loginAs(t, app, "teacher", "teacher")
+
+	createClassroom := performRequest(t, app, http.MethodPost, "/api/teacher/classrooms", []byte(`{"name":"delete_empty_classroom"}`), teacherCookie)
+	if createClassroom.Code != http.StatusCreated {
+		t.Fatalf("POST /api/teacher/classrooms status = %d, want %d body=%s", createClassroom.Code, http.StatusCreated, createClassroom.Body.String())
+	}
+
+	var classroomEnvelope struct {
+		Data struct {
+			Classroom struct {
+				ID   int64  `json:"id"`
+				Name string `json:"name"`
+			} `json:"classroom"`
+		} `json:"data"`
+	}
+	decodeJSON(t, createClassroom.Body.Bytes(), &classroomEnvelope)
+
+	deleteClassroom := performRequest(t, app, http.MethodDelete, "/api/teacher/classrooms/"+itoa(classroomEnvelope.Data.Classroom.ID), nil, teacherCookie)
+	if deleteClassroom.Code != http.StatusOK {
+		t.Fatalf("DELETE /api/teacher/classrooms/:id status = %d, want %d body=%s", deleteClassroom.Code, http.StatusOK, deleteClassroom.Body.String())
+	}
+
+	getDeletedClassroom := performRequest(t, app, http.MethodGet, "/api/teacher/classrooms/"+itoa(classroomEnvelope.Data.Classroom.ID), nil, teacherCookie)
+	if getDeletedClassroom.Code != http.StatusNotFound {
+		t.Fatalf("GET deleted classroom status = %d, want %d body=%s", getDeletedClassroom.Code, http.StatusNotFound, getDeletedClassroom.Body.String())
+	}
+
+	listClassrooms := performRequest(t, app, http.MethodGet, "/api/teacher/classrooms", nil, teacherCookie)
+	if listClassrooms.Code != http.StatusOK {
+		t.Fatalf("GET /api/teacher/classrooms status = %d, want %d body=%s", listClassrooms.Code, http.StatusOK, listClassrooms.Body.String())
+	}
+
+	var classroomsEnvelope struct {
+		Data struct {
+			Classrooms []struct {
+				ID   int64  `json:"id"`
+				Name string `json:"name"`
+			} `json:"classrooms"`
+		} `json:"data"`
+	}
+	decodeJSON(t, listClassrooms.Body.Bytes(), &classroomsEnvelope)
+	if containsNamedClassroom(classroomsEnvelope.Data.Classrooms, classroomEnvelope.Data.Classroom.ID, "delete_empty_classroom") {
+		t.Fatalf("GET /api/teacher/classrooms still includes deleted classroom: %#v", classroomsEnvelope.Data.Classrooms)
+	}
+}
+
+func TestTeacherDeleteClassroomRemovesStudentsAndSubmissions(t *testing.T) {
+	app := newTestApp(t)
+	defer shutdownTestApp(t, app)
+
+	teacherCookie := loginAs(t, app, "teacher", "teacher")
+	teacherID := int64(1)
+	classroomID := insertClassroom(t, app.db, teacherID, "delete_full_classroom")
+	lessonID := insertLesson(t, app.db, "Classroom Delete Lesson", "Delete classroom dependencies", 1)
+	questionID := insertQuestion(t, app.db, "Classroom Delete Question")
+	lessonQuestionID := insertLessonQuestion(t, app.db, lessonID, questionID, 1)
+	studentWithSubmissionID := insertStudent(t, app.db, "delete_class_student_01", "studentpw")
+	studentWithoutSubmissionID := insertStudent(t, app.db, "delete_class_student_02", "studentpw")
+	enrollmentWithSubmissionID := insertEnrollment(t, app.db, classroomID, studentWithSubmissionID, &lessonID)
+	enrollmentWithoutSubmissionID := insertEnrollment(t, app.db, classroomID, studentWithoutSubmissionID, &lessonID)
+	submissionID := insertFinishedSubmission(
+		t,
+		app.db,
+		enrollmentWithSubmissionID,
+		lessonID,
+		lessonQuestionID,
+		"accepted",
+		"return 1",
+		"",
+		"{}",
+	)
+
+	deleteClassroom := performRequest(t, app, http.MethodDelete, "/api/teacher/classrooms/"+itoa(classroomID), nil, teacherCookie)
+	if deleteClassroom.Code != http.StatusOK {
+		t.Fatalf("DELETE /api/teacher/classrooms/:id status = %d, want %d body=%s", deleteClassroom.Code, http.StatusOK, deleteClassroom.Body.String())
+	}
+
+	if countRows(t, app.db, "SELECT COUNT(*) FROM classroom WHERE id = ?", classroomID) != 0 {
+		t.Fatal("classroom row should be deleted")
+	}
+	if countRows(t, app.db, "SELECT COUNT(*) FROM submission WHERE id = ?", submissionID) != 0 {
+		t.Fatal("classroom submissions should be deleted")
+	}
+	if countRows(t, app.db, "SELECT COUNT(*) FROM enrollment WHERE id IN (?, ?)", enrollmentWithSubmissionID, enrollmentWithoutSubmissionID) != 0 {
+		t.Fatal("classroom enrollments should be deleted")
+	}
+	if countRows(t, app.db, "SELECT COUNT(*) FROM user_account WHERE id IN (?, ?)", studentWithSubmissionID, studentWithoutSubmissionID) != 0 {
+		t.Fatal("classroom students should be deleted")
+	}
+
+	loginDeletedStudent := performRequest(t, app, http.MethodPost, "/api/login", []byte(`{"username":"delete_class_student_01","password":"studentpw"}`), nil)
+	if loginDeletedStudent.Code != http.StatusUnauthorized {
+		t.Fatalf("deleted student login status = %d, want %d body=%s", loginDeletedStudent.Code, http.StatusUnauthorized, loginDeletedStudent.Body.String())
 	}
 }
 
@@ -1256,9 +1370,7 @@ func newTestApp(t *testing.T) *App {
 	if err := platformdb.Migrate(context.Background(), database); err != nil {
 		t.Fatalf("migrate test database: %v", err)
 	}
-	if err := seed.SeedDemoAccounts(context.Background(), database); err != nil {
-		t.Fatalf("seed test database: %v", err)
-	}
+	seedTestAccounts(t, database)
 
 	sessions, err := session.NewManager()
 	if err != nil {
@@ -1266,6 +1378,37 @@ func newTestApp(t *testing.T) *App {
 	}
 
 	return NewApp(cfg, logger.NewLogger("app-test"), database, sessions)
+}
+
+func seedTestAccounts(t *testing.T, database *sql.DB) {
+	t.Helper()
+
+	insertTestAccount(t, database, "teacher", "teacher", "teacher")
+	insertTestAccount(t, database, "student", "student", "student")
+}
+
+func insertTestAccount(t *testing.T, database *sql.DB, username, rawPassword, role string) int64 {
+	t.Helper()
+
+	passwordHash, err := platformpassword.Hash(rawPassword)
+	if err != nil {
+		t.Fatalf("hash test account password: %v", err)
+	}
+
+	result, err := database.ExecContext(context.Background(), `
+		INSERT INTO user_account (username, password_hash, role, status)
+		VALUES (?, ?, ?, 'active')
+	`, username, passwordHash, role)
+	if err != nil {
+		t.Fatalf("insert test account: %v", err)
+	}
+
+	id, err := result.LastInsertId()
+	if err != nil {
+		t.Fatalf("test account last insert id: %v", err)
+	}
+
+	return id
 }
 
 func shutdownTestApp(t *testing.T, app *App) {
@@ -1594,6 +1737,17 @@ func insertFinishedSubmission(
 	}
 
 	return id
+}
+
+func countRows(t *testing.T, database *sql.DB, query string, args ...any) int {
+	t.Helper()
+
+	var count int
+	if err := database.QueryRowContext(context.Background(), query, args...).Scan(&count); err != nil {
+		t.Fatalf("count rows: %v", err)
+	}
+
+	return count
 }
 
 func itoa(value int64) string {

@@ -1,0 +1,354 @@
+{
+  "title": "Week 08 - 数组统计与最值",
+  "description": "练习数组求和、计数、最大值、最小值和第二大值。",
+  "sort_order": 16,
+  "questions": [
+    {
+      "title": "计算班级成绩单的总分",
+      "description": {
+        "难度": "Simple",
+        "背景": "老师把班级里前 n 个学生的成绩按顺序保存在数组 scores 中。为了统计这次考试的整体情况，需要先计算这些学生的成绩总和，作为后续计算平均分或分析成绩分布的基础。",
+        "任务": "请遍历 scores 数组中的前 n 个成绩，把每个学生的分数依次累加起来，并返回最终的总分。",
+        "输入": "两个参数：成绩数组 scores 和人数 n。",
+        "输出": "返回总分。",
+        "提示": "可以准备一个 total 变量，从 0 开始保存累计结果。每访问一个成绩，就把它加到 total 中。"
+      },
+      "starter_code": "function solution(scores, n)\n    return 0\nend",
+      "reference_code": "function solution(scores, n)\n    local total = 0\n    for i = 1, n do\n        total = total + scores[i]\n    end\n    return total\nend",
+      "test_cases": [
+        [
+          [
+            80,
+            90,
+            70
+          ],
+          3
+        ],
+        [
+          [
+            100
+          ],
+          1
+        ],
+        [
+          [
+            60,
+            60,
+            60,
+            60
+          ],
+          4
+        ]
+      ],
+      "sort_order": 1
+    },
+    {
+      "title": "计算每日金币数组的平均奖励",
+      "description": {
+        "难度": "Simple",
+        "背景": "游戏系统每天都会给玩家发放金币奖励，每一天获得的金币数量按顺序保存在数组 coins 中。玩家想了解前 n 天平均每天能获得多少金币，用来判断自己的奖励情况是否稳定。",
+        "任务": "请先累加 coins 数组中前 n 天的金币总数，再用总数除以天数 n，计算并返回平均每日奖励。",
+        "输入": "两个参数：金币数组 coins 和天数 n。",
+        "输出": "返回平均值。",
+        "提示": "可以先用循环求出金币总和 total，再返回 total / n。"
+      },
+      "starter_code": "function solution(coins, n)\n    return 0\nend",
+      "reference_code": "function solution(coins, n)\n    local total = 0\n    for i = 1, n do\n        total = total + coins[i]\n    end\n    return total / n\nend",
+      "test_cases": [
+        [
+          [
+            10,
+            20,
+            30
+          ],
+          3
+        ],
+        [
+          [
+            5,
+            15
+          ],
+          2
+        ],
+        [
+          [
+            8
+          ],
+          1
+        ]
+      ],
+      "sort_order": 2
+    },
+    {
+      "title": "统计成绩单中有多少人及格",
+      "description": {
+        "难度": "Simple",
+        "背景": "老师已经把前 n 个学生的考试成绩保存在数组 scores 中。学校规定考试成绩达到 60 分或 60 分以上就算及格。现在需要统计这份成绩单中有多少名学生达到了及格线。",
+        "任务": "请遍历 scores 数组中的前 n 个成绩，统计其中大于或等于 60 分的成绩数量，并返回及格人数。",
+        "输入": "两个参数：成绩数组 scores 和人数 n。",
+        "输出": "返回及格人数。",
+        "提示": "可以用 count 记录及格人数。每当 scores[i] >= 60 时，就把 count 加 1。"
+      },
+      "starter_code": "function solution(scores, n)\n    return 0\nend",
+      "reference_code": "function solution(scores, n)\n    local count = 0\n    for i = 1, n do\n        if scores[i] >= 60 then\n            count = count + 1\n        end\n    end\n    return count\nend",
+      "test_cases": [
+        [
+          [
+            80,
+            50,
+            70
+          ],
+          3
+        ],
+        [
+          [
+            59,
+            60,
+            61
+          ],
+          3
+        ],
+        [
+          [
+            10
+          ],
+          1
+        ]
+      ],
+      "sort_order": 3
+    },
+    {
+      "title": "找出跳远比赛中成绩最好的选手",
+      "description": {
+        "难度": "Normal",
+        "背景": "跳远比赛结束后，每位选手的成绩按比赛顺序保存在数组 jumps 中。跳远成绩越大，说明选手跳得越远，排名也越靠前。裁判需要找出前 n 名选手中成绩最好的选手，以及他的跳远成绩。",
+        "任务": "请遍历 jumps 数组中的前 n 个成绩，找出最大成绩和对应的选手位置，并按顺序返回位置和成绩。",
+        "输入": "两个参数：跳远成绩数组 jumps 和人数 n。",
+        "输出": "返回两个值：最好选手位置和最好成绩。",
+        "提示": "可以先假设第 1 个选手成绩最好，再从第 2 个选手开始逐个比较。如果发现更大的成绩，就更新最好成绩和位置。"
+      },
+      "starter_code": "function solution(jumps, n)\n    return 0, 0\nend",
+      "reference_code": "function solution(jumps, n)\n    local bestIndex = 1\n    local bestValue = jumps[1]\n    for i = 2, n do\n        if jumps[i] > bestValue then\n            bestValue = jumps[i]\n            bestIndex = i\n        end\n    end\n    return bestIndex, bestValue\nend",
+      "test_cases": [
+        [
+          [
+            120,
+            135,
+            128
+          ],
+          3
+        ],
+        [
+          [
+            150,
+            140
+          ],
+          2
+        ],
+        [
+          [
+            99
+          ],
+          1
+        ]
+      ],
+      "sort_order": 4
+    },
+    {
+      "title": "找出成绩单中的最低分和位置",
+      "description": {
+        "难度": "Normal",
+        "背景": "老师在查看成绩单时，不仅想知道最低分是多少，还想知道最低分出现在第几个学生的位置。前 n 个学生的成绩按顺序保存在数组 scores 中，需要通过比较找出最小值。",
+        "任务": "请遍历 scores 数组中的前 n 个成绩，找出最低分以及它所在的位置，并按顺序返回位置和最低分。",
+        "输入": "两个参数：成绩数组 scores 和人数 n。",
+        "输出": "返回两个值：最低分位置和最低分。",
+        "提示": "可以先假设第 1 个成绩是最低分。之后逐个比较，如果发现更小的分数，就同时更新最低分和对应位置。"
+      },
+      "starter_code": "function solution(scores, n)\n    return 0, 0\nend",
+      "reference_code": "function solution(scores, n)\n    local minIndex = 1\n    local minValue = scores[1]\n    for i = 2, n do\n        if scores[i] < minValue then\n            minValue = scores[i]\n            minIndex = i\n        end\n    end\n    return minIndex, minValue\nend",
+      "test_cases": [
+        [
+          [
+            80,
+            50,
+            70
+          ],
+          3
+        ],
+        [
+          [
+            59,
+            60,
+            61
+          ],
+          3
+        ],
+        [
+          [
+            100
+          ],
+          1
+        ]
+      ],
+      "sort_order": 5
+    },
+    {
+      "title": "统计游戏分数中超过目标线的人数",
+      "description": {
+        "难度": "Normal",
+        "背景": "游戏活动结束后，玩家的分数按顺序保存在数组 points 中。活动设置了一条目标分数线 target，只有分数严格超过 target 的玩家才会被计入达标名单。现在需要统计前 n 名玩家中有多少人超过了这条目标线。",
+        "任务": "请遍历 points 数组中的前 n 个分数，统计所有大于 target 的分数数量，并返回超过目标线的玩家人数。",
+        "输入": "三个参数：分数数组 points、人数 n、目标线 target。",
+        "输出": "返回超过 target 的数量。",
+        "提示": "题目要求的是超过 target，所以等于 target 的分数不计入。只有 points[i] > target 时才把计数变量加 1。"
+      },
+      "starter_code": "function solution(points, n, target)\n    return 0\nend",
+      "reference_code": "function solution(points, n, target)\n    local count = 0\n    for i = 1, n do\n        if points[i] > target then\n            count = count + 1\n        end\n    end\n    return count\nend",
+      "test_cases": [
+        [
+          [
+            100,
+            80,
+            120
+          ],
+          3,
+          90
+        ],
+        [
+          [
+            50,
+            50
+          ],
+          2,
+          50
+        ],
+        [
+          [
+            99
+          ],
+          1,
+          10
+        ]
+      ],
+      "sort_order": 6
+    },
+    {
+      "title": "成绩排行榜中找出亚军分数",
+      "description": {
+        "难度": "Challenge",
+        "背景": "一次比赛结束后，所有选手的成绩保存在数组 scores 中。排行榜中最高的不同分数是冠军分数，第二高的不同分数是亚军分数。现在需要从前 n 个成绩中找出这个亚军分数。",
+        "任务": "请先找出最高分，再在所有小于最高分的成绩中找出最大的那个分数，并返回它作为亚军分数。",
+        "输入": "两个参数：成绩数组 scores 和人数 n。",
+        "输出": "返回亚军分数。",
+        "提示": "可以分两次遍历数组：第一次找最高分 maxValue，第二次找小于 maxValue 的最大成绩。"
+      },
+      "starter_code": "function solution(scores, n)\n    return 0\nend",
+      "reference_code": "function solution(scores, n)\n    local maxValue = scores[1]\n    for i = 2, n do\n        if scores[i] > maxValue then\n            maxValue = scores[i]\n        end\n    end\n    local second = scores[1]\n    for i = 1, n do\n        if scores[i] < maxValue then\n            if second == maxValue or scores[i] > second then\n                second = scores[i]\n            end\n        end\n    end\n    return second\nend",
+      "test_cases": [
+        [
+          [
+            90,
+            100,
+            80
+          ],
+          3
+        ],
+        [
+          [
+            70,
+            95,
+            88,
+            60
+          ],
+          4
+        ],
+        [
+          [
+            5,
+            1
+          ],
+          2
+        ]
+      ],
+      "sort_order": 7
+    },
+    {
+      "title": "找出跳远比赛中第一名和第二名的成绩差",
+      "description": {
+        "难度": "Challenge",
+        "背景": "跳远比赛中，成绩越大表示跳得越远。比赛结束后，所有选手的成绩保存在数组 jumps 中。裁判想知道第一名和第二名之间相差多少，因此需要找到最高成绩和第二高的不同成绩。",
+        "任务": "请先找出 jumps 数组中的最高成绩，再找出小于最高成绩的最大成绩，最后返回最高成绩减去第二高成绩的差值。",
+        "输入": "两个参数：跳远数组 jumps 和人数 n。",
+        "输出": "返回第一名成绩减第二名成绩。",
+        "提示": "可以复用寻找第二大值的方法。先找到 best，再找到小于 best 的最大值 second，最后返回 best - second。"
+      },
+      "starter_code": "function solution(jumps, n)\n    return 0\nend",
+      "reference_code": "function solution(jumps, n)\n    local best = jumps[1]\n    for i = 2, n do\n        if jumps[i] > best then\n            best = jumps[i]\n        end\n    end\n    local second = jumps[1]\n    for i = 1, n do\n        if jumps[i] < best then\n            if second == best or jumps[i] > second then\n                second = jumps[i]\n            end\n        end\n    end\n    return best - second\nend",
+      "test_cases": [
+        [
+          [
+            120,
+            135,
+            128
+          ],
+          3
+        ],
+        [
+          [
+            200,
+            150,
+            180
+          ],
+          3
+        ],
+        [
+          [
+            9,
+            1
+          ],
+          2
+        ]
+      ],
+      "sort_order": 8
+    },
+    {
+      "title": "按成绩区间统计优秀、及格和待提高人数",
+      "description": {
+        "难度": "Challenge",
+        "背景": "老师需要根据成绩区间对学生进行分类统计。成绩达到 85 分或以上的学生记为优秀，成绩在 60 到 84 分之间的学生记为及格，成绩低于 60 分的学生记为待提高。前 n 个学生的成绩保存在数组 scores 中。",
+        "任务": "请遍历 scores 数组中的前 n 个成绩，分别统计优秀、及格和待提高三类学生的人数，并按顺序返回三个统计结果。",
+        "输入": "两个参数：成绩数组 scores 和人数 n。",
+        "输出": "返回三个值：优秀、及格、待提高人数。",
+        "提示": "可以准备 excellent、pass 和 improve 三个计数变量。判断时先检查是否大于等于 85，再检查是否大于等于 60，剩下的就是待提高。"
+      },
+      "starter_code": "function solution(scores, n)\n    return 0, 0, 0\nend",
+      "reference_code": "function solution(scores, n)\n    local excellent = 0\n    local pass = 0\n    local improve = 0\n    for i = 1, n do\n        if scores[i] >= 85 then\n            excellent = excellent + 1\n        elseif scores[i] >= 60 then\n            pass = pass + 1\n        else\n            improve = improve + 1\n        end\n    end\n    return excellent, pass, improve\nend",
+      "test_cases": [
+        [
+          [
+            90,
+            80,
+            50
+          ],
+          3
+        ],
+        [
+          [
+            60,
+            85,
+            100,
+            59
+          ],
+          4
+        ],
+        [
+          [
+            10
+          ],
+          1
+        ]
+      ],
+      "sort_order": 9
+    }
+  ]
+}

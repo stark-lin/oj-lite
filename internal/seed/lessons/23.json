@@ -1,0 +1,349 @@
+{
+  "title": "Week 12 - Integrated Math Algorithm Projects",
+  "description": "Practice combining statistics, search, sorting, and enumeration into small algorithm projects.",
+  "sort_order": 23,
+  "questions": [
+    {
+      "title": "Class Score Analysis System: Total, Average, and Passing Count",
+      "description": {
+        "difficulty": "Simple",
+        "background": "The teacher has stored the first n students' scores in order in the array scores. To quickly understand the overall exam result, calculate the class total score, average score, and number of students reaching the passing line. The school rule says scores of 60 or above are passing.",
+        "task": "Traverse the first n scores in scores, complete total-score accumulation and passing-count statistics in the same loop, then calculate the average score and return the total, average, and passing count.",
+        "input": "Two parameters: the score array scores and the number of students n.",
+        "output": "Return three values: total score, average score, and passing count.",
+        "hint": "Put summation and conditional counting in the same loop. Each time you visit a score, add it to total; if it is at least 60, add 1 to passCount."
+      },
+      "starter_code": "function solution(scores, n)\n    return 0, 0, 0\nend",
+      "reference_code": "function solution(scores, n)\n    local total = 0\n    local passCount = 0\n    for i = 1, n do\n        total = total + scores[i]\n        if scores[i] >= 60 then\n            passCount = passCount + 1\n        end\n    end\n    local average = total / n\n    return total, average, passCount\nend",
+      "test_cases": [
+        [
+          [
+            80,
+            50,
+            70
+          ],
+          3
+        ],
+        [
+          [
+            60,
+            60,
+            59
+          ],
+          3
+        ],
+        [
+          [
+            100
+          ],
+          1
+        ]
+      ],
+      "sort_order": 1
+    },
+    {
+      "title": "Game Points Analysis System: Highest, Lowest, and Average",
+      "description": {
+        "difficulty": "Simple",
+        "background": "After a game event, the system stores the first n players' points in order in the array points. To analyze player performance, find the highest points, lowest points, and average points. These values help the administrator understand the overall level of the event.",
+        "task": "Traverse the first n points in points, update the highest score, lowest score, and total score at the same time, then divide the total by n to get the average score.",
+        "input": "Two parameters: the points array points and the number of players n.",
+        "output": "Return three values: highest score, lowest score, and average score.",
+        "hint": "The maximum, minimum, and total can be updated together in one loop. Use the first point as the initial maximum and minimum."
+      },
+      "starter_code": "function solution(points, n)\n    return 0, 0, 0\nend",
+      "reference_code": "function solution(points, n)\n    local maxValue = points[1]\n    local minValue = points[1]\n    local total = 0\n    for i = 1, n do\n        if points[i] > maxValue then\n            maxValue = points[i]\n        end\n        if points[i] < minValue then\n            minValue = points[i]\n        end\n        total = total + points[i]\n    end\n    return maxValue, minValue, total / n\nend",
+      "test_cases": [
+        [
+          [
+            120,
+            300,
+            250
+          ],
+          3
+        ],
+        [
+          [
+            5,
+            5,
+            5
+          ],
+          3
+        ],
+        [
+          [
+            9
+          ],
+          1
+        ]
+      ],
+      "sort_order": 2
+    },
+    {
+      "title": "Daily Savings Record System: Total, Highest Day, and Goal Check",
+      "description": {
+        "difficulty": "Simple",
+        "background": "A student records how much money is saved each day, and these amounts are stored by day order in the array saves. The student sets a savings target represented by target and wants to know the total saved over the first n days, the highest single-day saving amount, and whether the accumulated total has reached the target.",
+        "task": "Traverse the first n days in saves, calculate the accumulated savings total, find the highest single-day saving amount, and decide whether the accumulated total reaches or exceeds target.",
+        "input": "Three parameters: the savings array saves, the number of days n, and the target value target.",
+        "output": "Return three values: total amount, highest single-day amount, and whether the target is reached.",
+        "hint": "In the loop, accumulate total while updating maxSave. After the loop, use total >= target to decide whether the target is reached."
+      },
+      "starter_code": "function solution(saves, n, target)\n    return 0, 0, false\nend",
+      "reference_code": "function solution(saves, n, target)\n    local total = 0\n    local maxSave = saves[1]\n    for i = 1, n do\n        total = total + saves[i]\n        if saves[i] > maxSave then\n            maxSave = saves[i]\n        end\n    end\n    local reached = false\n    if total >= target then\n        reached = true\n    end\n    return total, maxSave, reached\nend",
+      "test_cases": [
+        [
+          [
+            3,
+            5,
+            2
+          ],
+          3,
+          10
+        ],
+        [
+          [
+            1,
+            1,
+            1
+          ],
+          3,
+          5
+        ],
+        [
+          [
+            8
+          ],
+          1,
+          8
+        ]
+      ],
+      "sort_order": 3
+    },
+    {
+      "title": "Game Leaderboard System: Sorting, Top Three, and Entry Check",
+      "description": {
+        "difficulty": "Normal",
+        "background": "In a game event, existing player points are stored in the array points. The leaderboard needs to be sorted from high to low. Now a new player submits a score candidate, and the system must first organize the existing leaderboard, then decide whether this new score can enter the top three.",
+        "task": "First use selection sort to arrange the first n points in points from high to low. Then use the sorted top-three situation to decide whether candidate can enter the top three.",
+        "input": "Three parameters: the points array points, the number of players n, and the new score candidate.",
+        "output": "Return two values: the sorted points array and whether candidate can enter the top three.",
+        "hint": "Sort points in descending order with selection sort. If the current player count is less than 3, candidate can enter the top three; otherwise compare candidate with the sorted third-place score."
+      },
+      "starter_code": "function solution(points, n, candidate)\n    return {}, false\nend",
+      "reference_code": "function solution(points, n, candidate)\n    for i = 1, n - 1 do\n        local maxIndex = i\n        for j = i + 1, n do\n            if points[j] > points[maxIndex] then\n                maxIndex = j\n            end\n        end\n        local temp = points[i]\n        points[i] = points[maxIndex]\n        points[maxIndex] = temp\n    end\n    local canEnter = false\n    if n < 3 then\n        canEnter = true\n    elseif candidate >= points[3] then\n        canEnter = true\n    end\n    return points, canEnter\nend",
+      "test_cases": [
+        [
+          [
+            120,
+            300,
+            250,
+            180
+          ],
+          4,
+          200
+        ],
+        [
+          [
+            9,
+            8,
+            7
+          ],
+          3,
+          6
+        ],
+        [
+          [
+            5,
+            1
+          ],
+          2,
+          2
+        ]
+      ],
+      "sort_order": 4
+    },
+    {
+      "title": "Book Number Management System: Search, Sorting, and Classification",
+      "description": {
+        "difficulty": "Normal",
+        "background": "The library receives a batch of unsorted book numbers stored in the array ids. The administrator needs to do three things: find the original first position of target, sort all IDs from small to large, and count how many IDs are even and how many are odd.",
+        "task": "First use linear search to find the first original position of target while counting even and odd values. Then use selection sort to arrange the first n IDs in ids in ascending order. Finally return the target original position, sorted array, even count, and odd count.",
+        "input": "Three parameters: the ID array ids, the count n, and the target value target.",
+        "output": "Return four values: target original position, sorted array, even count, and odd count.",
+        "hint": "Complete search and even-odd counting during the linear scan, then sort ids. For target search, only record the first occurrence."
+      },
+      "starter_code": "function solution(ids, n, target)\n    return 0, {}, 0, 0\nend",
+      "reference_code": "function solution(ids, n, target)\n    local position = 0\n    local evenCount = 0\n    local oddCount = 0\n    for i = 1, n do\n        if ids[i] == target and position == 0 then\n            position = i\n        end\n        if ids[i] % 2 == 0 then\n            evenCount = evenCount + 1\n        else\n            oddCount = oddCount + 1\n        end\n    end\n    for i = 1, n - 1 do\n        local minIndex = i\n        for j = i + 1, n do\n            if ids[j] < ids[minIndex] then\n                minIndex = j\n            end\n        end\n        local temp = ids[i]\n        ids[i] = ids[minIndex]\n        ids[minIndex] = temp\n    end\n    return position, ids, evenCount, oddCount\nend",
+      "test_cases": [
+        [
+          [
+            5,
+            2,
+            8,
+            1
+          ],
+          4,
+          8
+        ],
+        [
+          [
+            3,
+            3,
+            2
+          ],
+          3,
+          4
+        ],
+        [
+          [
+            6
+          ],
+          1,
+          6
+        ]
+      ],
+      "sort_order": 5
+    },
+    {
+      "title": "Sports Day Results System: Best Result, Ranking, and Range Statistics",
+      "description": {
+        "difficulty": "Normal",
+        "background": "After sports day, athlete results are stored in record order in the array results. Higher results mean better performance. Staff need to find the position of the highest result, generate a descending ranking table, and count how many athletes are excellent, qualified, or need improvement by result range.",
+        "task": "First traverse results to find the best result position and count excellent, qualified, and needs-improvement athletes. Then copy the result array and sort it in descending order. Finally return the best position, sorted array, and the three range counts.",
+        "input": "Two parameters: the result array results and the number of athletes n.",
+        "output": "Return five values: best position, sorted array, excellent count, qualified count, and needs-improvement count.",
+        "hint": "Excellent means 90 or above, qualified means 60 or above but below 90, and below 60 needs improvement. Copy the array before sorting so the original position check is not affected."
+      },
+      "starter_code": "function solution(results, n)\n    return 0, {}, 0, 0, 0\nend",
+      "reference_code": "function solution(results, n)\n    local bestIndex = 1\n    local excellent = 0\n    local pass = 0\n    local improve = 0\n    for i = 1, n do\n        if results[i] > results[bestIndex] then\n            bestIndex = i\n        end\n        if results[i] >= 90 then\n            excellent = excellent + 1\n        elseif results[i] >= 60 then\n            pass = pass + 1\n        else\n            improve = improve + 1\n        end\n    end\n    local sorted = {}\n    for i = 1, n do\n        sorted[i] = results[i]\n    end\n    for i = 1, n - 1 do\n        local maxIndex = i\n        for j = i + 1, n do\n            if sorted[j] > sorted[maxIndex] then\n                maxIndex = j\n            end\n        end\n        local temp = sorted[i]\n        sorted[i] = sorted[maxIndex]\n        sorted[maxIndex] = temp\n    end\n    return bestIndex, sorted, excellent, pass, improve\nend",
+      "test_cases": [
+        [
+          [
+            80,
+            95,
+            50
+          ],
+          3
+        ],
+        [
+          [
+            60,
+            100,
+            90,
+            59
+          ],
+          4
+        ],
+        [
+          [
+            10
+          ],
+          1
+        ]
+      ],
+      "sort_order": 6
+    },
+    {
+      "title": "Shopping Plan System: Find the Best Plan Within a Budget",
+      "description": {
+        "difficulty": "Challenge",
+        "background": "A store sells two products, A and B. Product A costs priceA, and product B costs priceB. A customer has a budget of budget and wants to buy as many items as possible without exceeding the budget. If multiple plans buy the same total number of items, choose the plan with less money left over.",
+        "task": "Enumerate the purchase quantities of product A and product B, find the plan within budget with the largest total quantity, and return the A count, B count, total count, and remaining money.",
+        "input": "Three numbers: budget, priceA, and priceB.",
+        "output": "Return four values: A count, B count, total count, and remaining money.",
+        "hint": "Use nested loops to enumerate countA and countB. Only consider plans whose total cost does not exceed budget; if the total quantity is larger, or the quantity is tied but the remaining money is smaller, update the best plan."
+      },
+      "starter_code": "function solution(budget, priceA, priceB)\n    return 0, 0, 0, budget\nend",
+      "reference_code": "function solution(budget, priceA, priceB)\n    local bestA = 0\n    local bestB = 0\n    local bestTotal = 0\n    local bestRemain = budget\n    for countA = 0, budget do\n        for countB = 0, budget do\n            local cost = countA * priceA + countB * priceB\n            if cost <= budget then\n                local total = countA + countB\n                local remain = budget - cost\n                if total > bestTotal or (total == bestTotal and remain < bestRemain) then\n                    bestA = countA\n                    bestB = countB\n                    bestTotal = total\n                    bestRemain = remain\n                end\n            end\n        end\n    end\n    return bestA, bestB, bestTotal, bestRemain\nend",
+      "test_cases": [
+        [
+          10,
+          3,
+          4
+        ],
+        [
+          20,
+          6,
+          9
+        ],
+        [
+          5,
+          7,
+          8
+        ]
+      ],
+      "sort_order": 7
+    },
+    {
+      "title": "Chicken and Rabbit System: Enumerate and Verify All Possible Answers",
+      "description": {
+        "difficulty": "Challenge",
+        "background": "A cage contains some chickens and rabbits. Each chicken has 1 head and 2 legs, and each rabbit has 1 head and 4 legs. Given total heads represented by heads and total legs represented by legs, enumerate and verify possible chicken-and-rabbit count combinations.",
+        "task": "Enumerate the numbers of chickens and rabbits, count the plans that satisfy both the head and leg conditions, and record the last chicken count and rabbit count found. If no plan exists, keep the chicken and rabbit counts as -1.",
+        "input": "Two numbers: heads and legs.",
+        "output": "Return three values: plan count, last found chicken count, and last found rabbit count.",
+        "hint": "Use nested loops for chicken and rabbit counts. Check both chickens + rabbits == heads and chickens * 2 + rabbits * 4 == legs."
+      },
+      "starter_code": "function solution(heads, legs)\n    return 0, -1, -1\nend",
+      "reference_code": "function solution(heads, legs)\n    local count = 0\n    local answerChickens = -1\n    local answerRabbits = -1\n    for chickens = 0, heads do\n        for rabbits = 0, heads do\n            if chickens + rabbits == heads and chickens * 2 + rabbits * 4 == legs then\n                count = count + 1\n                answerChickens = chickens\n                answerRabbits = rabbits\n            end\n        end\n    end\n    return count, answerChickens, answerRabbits\nend",
+      "test_cases": [
+        [
+          5,
+          14
+        ],
+        [
+          8,
+          26
+        ],
+        [
+          3,
+          5
+        ]
+      ],
+      "sort_order": 8
+    },
+    {
+      "title": "Integrated Score Ranking System: Sorting, Tied Ranking, and Student Search",
+      "description": {
+        "difficulty": "Challenge",
+        "background": "After a comprehensive assessment, all student scores are stored in the array scores. The system needs to sort scores from high to low, generate a rank array from the sorted result, and handle ties so equal scores share the same rank while later ranks skip by actual position. Finally, it must find the first position of target in the sorted score table.",
+        "task": "First sort the first n scores in scores in descending order, then generate the ranks array using the tied-ranking rule, then find the first position where target appears. Return the sorted score array, ranks array, and target position.",
+        "input": "Three parameters: the score array scores, the number of students n, and the target score target.",
+        "output": "Return three values: sorted score array, rank array, and target position.",
+        "hint": "After sorting, equal scores share the same rank. If the current score equals the previous score, the current rank equals the previous rank; otherwise it equals position i. When searching target, only record its first occurrence."
+      },
+      "starter_code": "function solution(scores, n, target)\n    return {}, {}, 0\nend",
+      "reference_code": "function solution(scores, n, target)\n    for i = 1, n - 1 do\n        local maxIndex = i\n        for j = i + 1, n do\n            if scores[j] > scores[maxIndex] then\n                maxIndex = j\n            end\n        end\n        local temp = scores[i]\n        scores[i] = scores[maxIndex]\n        scores[maxIndex] = temp\n    end\n\n    local ranks = {}\n    if n >= 1 then\n        ranks[1] = 1\n        for i = 2, n do\n            if scores[i] == scores[i - 1] then\n                ranks[i] = ranks[i - 1]\n            else\n                ranks[i] = i\n            end\n        end\n    end\n\n    local position = 0\n    for i = 1, n do\n        if scores[i] == target and position == 0 then\n            position = i\n        end\n    end\n    return scores, ranks, position\nend",
+      "test_cases": [
+        [
+          [
+            100,
+            90,
+            90,
+            80
+          ],
+          4,
+          90
+        ],
+        [
+          [
+            70,
+            100,
+            60
+          ],
+          3,
+          80
+        ],
+        [
+          [
+            5
+          ],
+          1,
+          5
+        ]
+      ],
+      "sort_order": 9
+    }
+  ]
+}

@@ -49,6 +49,10 @@ func (service *service) GetClassroom(ctx context.Context, teacherID, classroomID
 	return classroom, nil
 }
 
+func (service *service) DeleteClassroom(ctx context.Context, teacherID, classroomID int64) error {
+	return errs.UnavailableIfNoRows(service.repo.DeleteClassroom(ctx, classroomID, teacherID))
+}
+
 func (service *service) CreateStudent(
 	ctx context.Context,
 	teacherID, classroomID int64,

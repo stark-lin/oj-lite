@@ -57,7 +57,10 @@
       <section class="column column--scope">
         <div class="column__header">
           <div class="column__title">Class Scope</div>
-          <span class="pane-meta" id="scopeMeta"></span>
+          <div class="header-actions">
+            <span class="pane-meta" id="scopeMeta"></span>
+            <button class="action-button" id="deleteClassBtn" type="button" disabled>DELETE</button>
+          </div>
         </div>
         <div class="column__body column__body--scope scroll-frame">
           <div id="studentManagementEntryMount"></div>
@@ -96,6 +99,7 @@
         <span class="status-pill" id="statusMiddle"></span>
       </div>
       <div class="statusbar__right">
+        <span class="status-pill" id="teacherName">Teacher: —</span>
         <span class="status-pill" id="statusRight"></span>
       </div>
     </footer>
@@ -400,6 +404,13 @@
           return normalizeClassroom(data?.classroom || {});
         },
 
+        async deleteClassroom(classroomId) {
+          const data = await apiRequest(`/api/teacher/classrooms/${classroomId}`, {
+            method: 'DELETE'
+          });
+          return Boolean(data?.ok);
+        },
+
         async createStudent(classroomId, username, password) {
           const data = await apiRequest(`/api/teacher/classrooms/${classroomId}/students`, {
             method: 'POST',
@@ -512,6 +523,7 @@
       studentManagementMeta: document.getElementById('studentManagementMeta'),
       studentManagementEntry: document.getElementById('studentManagementEntry'),
       createClassBtn: document.getElementById('createClassBtn'),
+      deleteClassBtn: document.getElementById('deleteClassBtn'),
       createStudentBtn: document.getElementById('createStudentBtn'),
       lessonMeta: document.getElementById('lessonMeta'),
       lessonList: document.getElementById('lessonList'),
@@ -523,6 +535,7 @@
       detailBody: document.getElementById('detailBody'),
       statusLeft: document.getElementById('statusLeft'),
       statusMiddle: document.getElementById('statusMiddle'),
+      teacherName: document.getElementById('teacherName'),
       statusRight: document.getElementById('statusRight'),
       dividers: Array.from(document.querySelectorAll('.divider'))
     };
@@ -718,11 +731,14 @@
       el.scopeMeta.textContent = classItem
         ? `${classStudentCount(classItem)} students · ${classItem.currentLessonTitle || 'No current lesson'}`
         : 'No class selected';
+      el.deleteClassBtn.disabled = !classItem;
       el.browserMeta.textContent = state.ui.browserMode === 'students'
         ? `${classItem?.students?.length || 0} items`
         : `${getLessonQuestions().length} items`;
       el.statusLeft.textContent = classItem?.name || 'No class selected';
       el.statusMiddle.textContent = lessonOrderText();
+      el.teacherName.textContent = 'Teacher: ' + (state.data.session?.teacherName || '—');
+      el.teacherName.title = state.data.session?.teacherName || '';
       el.statusRight.textContent = state.ui.browserMode === 'students' ? 'Students' : 'Questions';
     }
 
@@ -1013,7 +1029,15 @@
     }
 
     async function createClassAction() {
-      const className = nextClassName(getClasses());
+      const classNameInput = window.prompt('Class name', nextClassName(getClasses()));
+      if (classNameInput == null) return;
+
+      const className = classNameInput.trim();
+      if (!className) {
+        window.alert('Class name is required.');
+        return;
+      }
+
       const created = await api.createClass(className);
       await refreshData({ selectedClassId: created.id });
       if (!created) return;
@@ -1022,6 +1046,20 @@
       state.ui.selectedSubmissionId = null;
       state.ui.browserMode = 'questions';
       state.ui.inspectorMode = 'reference';
+      renderAll();
+    }
+
+    async function deleteClassroomAction() {
+      const classItem = getSelectedClass();
+      if (!classItem) return;
+      if (!window.confirm(`Delete class ${classItem.name}?`)) return;
+      await api.deleteClassroom(classItem.id);
+      state.ui.selectedStudentId = null;
+      state.ui.selectedSubmissionId = null;
+      state.ui.browserMode = 'questions';
+      state.ui.inspectorMode = 'reference';
+      state.data.submissionDetailsById = {};
+      await refreshData();
       renderAll();
     }
 
@@ -1218,6 +1256,16 @@
         }
       });
 
+      el.deleteClassBtn.addEventListener('click', async (event) => {
+        event.stopPropagation();
+        try {
+          await deleteClassroomAction();
+        } catch (error) {
+          console.error(error);
+          window.alert(error?.message || 'Failed to delete class.');
+        }
+      });
+
       el.createStudentBtn.addEventListener('click', async (event) => {
         event.stopPropagation();
         try {
@@ -1358,6 +1406,7 @@
         el.browserMeta.textContent = '0 items';
         el.statusLeft.textContent = 'Error';
         el.statusMiddle.textContent = 'Teacher workspace';
+        el.teacherName.textContent = 'Teacher: —';
         el.statusRight.textContent = 'Backend';
         el.classList.innerHTML = ui.emptyState('Failed to load classrooms from backend.');
         el.lessonList.innerHTML = ui.emptyState('Failed to load lessons from backend.');

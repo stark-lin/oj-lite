@@ -59,6 +59,7 @@ The teacher side owns classroom operations and read-only content access. Lesson 
 | `POST` | `/api/teacher/classrooms` | `available` | Create a classroom |
 | `GET` | `/api/teacher/classrooms` | `available` | List classrooms |
 | `GET` | `/api/teacher/classrooms/:classroomId` | `available` | Read one classroom |
+| `DELETE` | `/api/teacher/classrooms/:classroomId` | `available` | Delete one classroom and its students/submissions |
 | `POST` | `/api/teacher/classrooms/:classroomId/students` | `available` | Create a student and add the student to a classroom |
 | `GET` | `/api/teacher/classrooms/:classroomId/students` | `available` | List classroom students |
 | `GET` | `/api/teacher/classrooms/:classroomId/students/:studentId` | `available` | Read one student |
