@@ -134,18 +134,20 @@ Total question count:
 
 ## 6. Weekly Teaching Outline
 
-### Week 01: Variables
+Updated version below, with **Challenge** adjusted to integrated variable application problems containing `+ - * / %`.
+
+## Week 01: Variables
 
 | Item | Content |
 | --- | --- |
-| Core theme | A variable is a box that stores data. |
-| Math foundation | Four operations, area, perimeter, total price |
-| Programming content | `local`, assignment, variable updates, temporary variables |
-| Algorithm content | Sequential calculation, variable swapping, state updates |
-| Scenarios | Game health, playground area, stationery shopping, coin changes, seat swapping |
-| Goal | Students can use variables to express the calculation process of a concrete word problem. |
+| Core theme | A variable is a box that stores data and records intermediate results. |
+| Math foundation | Four operations, area, total price, average, difference, change, modulo |
+| Programming content | `local`, assignment, variable updates, temporary variables, operator precedence |
+| Algorithm content | Sequential calculation, variable swapping, state updates, multi-step settlement |
+| Scenarios | Game health, playground area, stationery shopping, coin changes, running accumulation, seat swapping, bundle discount settlement |
+| Goal | Students can break down real word problems with variables and express complete calculations using addition, subtraction, multiplication, division, and modulo. |
 
-Teaching task design:
+## Teaching Task Design
 
 | No. | Difficulty | Title |
 | ---: | --- | --- |
@@ -155,16 +157,38 @@ Teaching task design:
 | 04 | Normal | How Many Coins Are in the Bag After Defeating a Monster |
 | 05 | Normal | How Much Money Is Left After Buying Pencils and Erasers |
 | 06 | Normal | How Many Meters Have Been Run After Training |
-| 07 | Challenge | How Do Two Students Swap Seat Numbers |
-| 08 | Challenge | How Much Health Is Left After Damage and Healing |
-| 09 | Challenge | Calculate Total Price and Change for a Store Bundle |
+| 07 | Challenge | Update the Seat Statistics Card After Two Students Swap Seats |
+| 08 | Challenge | Final Health Settlement After Consecutive Battles |
+| 09 | Challenge | Store Bundle Discount, Packaging Fee, and Change Settlement |
 
-Core example:
+## Core Example
 
 ```lua
 local hp = 100
 local damage = 25
 local remainHp = hp - damage
+```
+
+## Challenge Core Example
+
+```lua
+local total = price * count
+local discount = total / 10
+local looseCount = count % 3
+local finalTotal = total - discount + looseCount
+local change = money - finalTotal
+```
+
+## Operator Tips
+
+```lua
+-- Multiplication, division, and modulo usually run first.
+-- Addition and subtraction usually run later.
+-- For complex word problems, split the work into multiple variables.
+
+local total = price * count
+local average = total / 2
+local remainder = total % 3
 ```
 
 ### Week 02: Conditions and Loops

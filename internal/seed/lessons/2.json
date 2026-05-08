@@ -1,17 +1,17 @@
 {
   "title": "Week 01 - 变量",
-  "description": "练习顺序计算、变量更新和变量交换。",
+  "description": "练习顺序计算、变量更新、变量交换，以及加减乘除和取余运算。",
   "sort_order": 2,
   "questions": [
     {
       "title": "游戏角色受到攻击后还剩多少血量",
       "description": {
         "难度": "Simple",
-        "背景": "一名游戏角色进入关卡时有一定的初始血量 hp。在战斗过程中，怪物发动了一次攻击，并造成 damage 点伤害。现在需要根据角色原来的血量和这次受到的伤害，计算角色被攻击后还剩下多少血量。",
-        "任务": "请先用变量保存角色受到攻击后的剩余血量，再返回这个剩余血量。",
-        "输入": "两个数字：hp 和 damage。",
-        "输出": "返回 hp - damage。",
-        "提示": "可以先创建一个变量表示剩余血量，让它等于初始血量减去受到的伤害，然后返回这个变量。"
+        "背景": "一名游戏角色进入关卡时有一定的初始血量。战斗开始后，怪物对角色发动了一次攻击，并造成固定伤害。系统需要在攻击结束后更新角色当前血量，方便后续判断角色是否还能继续战斗。",
+        "任务": "请根据角色原来的血量和这次受到的伤害，计算攻击结束后的剩余血量。",
+        "输入": "两个数字：hp 和 damage，分别表示角色初始血量和本次受到的伤害。",
+        "输出": "返回角色受到攻击后的剩余血量。",
+        "提示": "可以先用一个变量保存更新后的血量，再把这个变量返回。"
       },
       "starter_code": "function solution(hp, damage)\n    return 0\nend",
       "reference_code": "function solution(hp, damage)\n    local remainHp = hp - damage\n    return remainHp\nend",
@@ -35,11 +35,11 @@
       "title": "文具店买铅笔一共要花多少钱",
       "description": {
         "难度": "Simple",
-        "背景": "文具店里出售同一种铅笔，每支铅笔的价格都是 price 元。小明准备购买 count 支铅笔。为了知道自己一共需要支付多少钱，需要根据铅笔的单价和购买数量计算总价。",
-        "任务": "请计算购买这些铅笔一共需要花费多少钱，并返回计算出的总价。",
-        "输入": "两个数字：price 和 count。",
-        "输出": "返回 price * count。",
-        "提示": "总价等于单价乘以数量。可以先用一个变量保存计算结果，再返回这个变量。"
+        "背景": "文具店里出售同一种铅笔，每支铅笔价格相同。小明准备购买若干支铅笔，结账前需要先知道自己一共要支付多少钱。",
+        "任务": "请根据铅笔的单价和购买数量，计算本次购买铅笔的总花费。",
+        "输入": "两个数字：price 和 count，分别表示每支铅笔的价格和购买数量。",
+        "输出": "返回购买这些铅笔需要支付的总金额。",
+        "提示": "可以先用变量保存总价，再返回这个变量。"
       },
       "starter_code": "function solution(price, count)\n    return 0\nend",
       "reference_code": "function solution(price, count)\n    local total = price * count\n    return total\nend",
@@ -63,11 +63,11 @@
       "title": "操场长方形区域的面积是多少",
       "description": {
         "难度": "Simple",
-        "背景": "学校操场上画出了一个长方形训练区域，这个区域的长是 length 米，宽是 width 米。为了安排训练活动，老师需要知道这个长方形区域的面积是多少。",
-        "任务": "请根据长方形的长和宽，计算这个训练区域的面积，并返回面积结果。",
-        "输入": "两个数字：length 和 width。",
-        "输出": "返回 length * width。",
-        "提示": "长方形面积等于长乘宽。可以用一个变量保存面积，再把它返回。"
+        "背景": "学校操场上划出了一块长方形训练区域。体育老师需要知道这块区域有多大，才能安排学生进行分组训练和器材摆放。",
+        "任务": "请根据长方形区域的长和宽，计算这块训练区域的面积。",
+        "输入": "两个数字：length 和 width，分别表示长方形区域的长和宽。",
+        "输出": "返回这个长方形区域的面积。",
+        "提示": "可以把计算出的面积先保存到变量中，再返回结果。"
       },
       "starter_code": "function solution(length, width)\n    return 0\nend",
       "reference_code": "function solution(length, width)\n    local area = length * width\n    return area\nend",
@@ -91,11 +91,11 @@
       "title": "打怪获得金币后背包里共有多少金币",
       "description": {
         "难度": "Normal",
-        "背景": "游戏角色的背包里原本有 coins 枚金币。在一次战斗中，角色打败了怪物，并获得了 reward 枚新的金币奖励。现在需要更新背包里的金币数量，算出获得奖励后一共有多少金币。",
-        "任务": "请把新获得的金币奖励加入原来的金币数量中，并返回更新后的金币总数。",
-        "输入": "两个数字：coins 和 reward。",
-        "输出": "返回 coins + reward。",
-        "提示": "可以用一个变量表示新的金币总数，让它等于原来的金币数加上奖励金币数。"
+        "背景": "游戏角色背包里原本有一些金币。角色打败怪物后，会获得一笔新的金币奖励。系统需要把这笔奖励加入背包，更新角色当前拥有的金币数量。",
+        "任务": "请根据原来的金币数量和本次获得的奖励，计算更新后的金币总数。",
+        "输入": "两个数字：coins 和 reward，分别表示原有金币数量和新获得的金币奖励。",
+        "输出": "返回获得奖励后的金币总数。",
+        "提示": "可以用一个新变量表示更新后的金币数量。"
       },
       "starter_code": "function solution(coins, reward)\n    return 0\nend",
       "reference_code": "function solution(coins, reward)\n    local totalCoins = coins + reward\n    return totalCoins\nend",
@@ -119,11 +119,11 @@
       "title": "买铅笔和橡皮后还剩多少钱",
       "description": {
         "难度": "Normal",
-        "背景": "一名学生带着 money 元去文具店购物。他准备购买 pencilCount 支铅笔，每支铅笔的价格是 pencilPrice 元；同时还要购买 eraserCount 块橡皮，每块橡皮的价格是 eraserPrice 元。买完这些文具后，需要计算他还剩多少钱。",
-        "任务": "请先分别计算铅笔和橡皮的花费，再用总金额减去两部分花费，最后返回剩余金额。",
-        "输入": "五个数字：money、pencilPrice、pencilCount、eraserPrice、eraserCount。",
-        "输出": "返回剩余金额。",
-        "提示": "可以先计算铅笔总价，再计算橡皮总价，最后从 money 中依次减去这两部分花费。"
+        "背景": "一名学生带着固定金额去文具店购物。他打算购买若干支铅笔和若干块橡皮。两种文具的单价和购买数量都已经确定，结账后需要知道自己还剩多少钱。",
+        "任务": "请分别计算铅笔和橡皮的花费，再计算购物完成后的剩余金额。",
+        "输入": "五个数字：money、pencilPrice、pencilCount、eraserPrice、eraserCount，分别表示总金额、铅笔单价、铅笔数量、橡皮单价和橡皮数量。",
+        "输出": "返回买完这些文具后的剩余金额。",
+        "提示": "可以先分别保存两种文具的花费，再从总金额中扣除这些花费。"
       },
       "starter_code": "function solution(money, pencilPrice, pencilCount, eraserPrice, eraserCount)\n    return 0\nend",
       "reference_code": "function solution(money, pencilPrice, pencilCount, eraserPrice, eraserCount)\n    local pencilTotal = pencilPrice * pencilCount\n    local eraserTotal = eraserPrice * eraserCount\n    local leftMoney = money - pencilTotal - eraserTotal\n    return leftMoney\nend",
@@ -156,11 +156,11 @@
       "title": "跑步训练后累计跑了多少米",
       "description": {
         "难度": "Normal",
-        "背景": "一名运动员每天都会记录自己累计跑过的距离。在今天开始训练前，他已经累计跑了 beforeMeters 米。今天训练结束后，他又跑了 todayMeters 米。现在需要更新他的累计跑步距离。",
-        "任务": "请把今天新增的跑步距离加到原来的累计距离上，并返回新的累计距离。",
-        "输入": "两个数字：beforeMeters 和 todayMeters。",
-        "输出": "返回新的累计距离。",
-        "提示": "累计距离等于原来的距离加上今天新增的距离。可以用一个变量保存更新后的结果。"
+        "背景": "一名运动员每天都会记录自己的累计跑步距离。今天训练开始前，他已经有一段累计距离；今天训练结束后，又新增了一段跑步距离。教练需要更新他的累计训练数据。",
+        "任务": "请根据训练前的累计距离和今天新增的距离，计算训练结束后的累计跑步距离。",
+        "输入": "两个数字：beforeMeters 和 todayMeters，分别表示训练前累计距离和今天新增距离。",
+        "输出": "返回训练结束后的累计跑步距离。",
+        "提示": "可以把新的累计距离保存到变量中，再返回结果。"
       },
       "starter_code": "function solution(beforeMeters, todayMeters)\n    return 0\nend",
       "reference_code": "function solution(beforeMeters, todayMeters)\n    local totalMeters = beforeMeters + todayMeters\n    return totalMeters\nend",
@@ -181,76 +181,82 @@
       "sort_order": 6
     },
     {
-      "title": "两个同学换座位后座位编号如何交换",
+      "title": "两名同学换座位后更新座位统计卡",
       "description": {
         "难度": "Challenge",
-        "背景": "教室里有两名同学需要互换座位。第一名同学原来的座位编号是 seatA，第二名同学原来的座位编号是 seatB。换座位之后，第一名同学应该坐到第二名同学原来的座位，第二名同学也应该坐到第一名同学原来的座位。",
-        "任务": "请使用变量交换两个座位编号，并返回交换后的 seatA 和 seatB。",
-        "输入": "两个数字：seatA 和 seatB。",
-        "输出": "返回两个值：新的 seatA 和新的 seatB。",
-        "提示": "交换两个变量的值时，可以先用临时变量保存其中一个座位编号，避免原来的值被覆盖。"
+        "背景": "教室里两名同学临时交换座位。老师需要在座位统计卡上记录交换后的座位编号，并额外统计这两个座位编号的合计值、差值、平均值，以及一个用于分组核对的余数编号。这个记录会用于之后核对座位调整是否正确。",
+        "任务": "请先完成两名同学的座位编号交换，再根据交换后的编号完成多项统计计算。",
+        "输入": "三个数字：seatA、seatB 和 groupSize，分别表示两名同学原来的座位编号，以及分组核对时使用的小组大小。",
+        "输出": "返回六个值：交换后的 seatA、交换后的 seatB、座位编号合计值、座位编号平均值、两个座位编号的差值、分组核对余数。",
+        "提示": "这道题需要同时用到加法、减法、乘法、除法和取余。Lua 中取余运算符是 %。注意运算符优先级：乘法、除法、取余通常先于加法和减法执行；复杂计算建议拆成多个变量。"
       },
-      "starter_code": "function solution(seatA, seatB)\n    return seatA, seatB\nend",
-      "reference_code": "function solution(seatA, seatB)\n    local temp = seatA\n    seatA = seatB\n    seatB = temp\n    return seatA, seatB\nend",
+      "starter_code": "function solution(seatA, seatB, groupSize)\n    return seatA, seatB, 0, 0, 0, 0\nend",
+      "reference_code": "function solution(seatA, seatB, groupSize)\n    local temp = seatA\n    seatA = seatB\n    seatB = temp\n    local total = seatA + seatB\n    local average = total / 2\n    local gap = seatA - seatB\n    local checkCode = seatA * seatB\n    local remainder = checkCode % groupSize\n    return seatA, seatB, total, average, gap, remainder\nend",
       "test_cases": [
         [
-          3,
-          8
+          4,
+          8,
+          5
         ],
         [
-          1,
-          20
+          2,
+          20,
+          6
         ],
         [
           12,
-          12
+          12,
+          7
         ]
       ],
       "sort_order": 7
     },
     {
-      "title": "游戏角色先受伤再回血后剩多少血量",
+      "title": "游戏角色连续战斗后的最终血量结算",
       "description": {
         "难度": "Challenge",
-        "背景": "游戏角色当前有 hp 点血量。在一次战斗中，角色先受到了 damage 点伤害，血量会减少；随后角色使用药水恢复了 heal 点血量，血量又会增加。现在需要按照事情发生的先后顺序，计算角色最终剩下多少血量。",
-        "任务": "请先把角色当前血量保存到变量中，再依次处理受伤和回血两个变化，最后返回更新后的血量。",
-        "输入": "三个数字：hp、damage 和 heal。",
-        "输出": "返回 hp - damage + heal。",
-        "提示": "这道题需要按顺序更新变量：先减去受到的伤害，再加上恢复的血量。"
+        "背景": "游戏角色进入连续战斗时有一定血量。战斗中，角色会连续受到多次攻击；战斗结束后，角色使用若干瓶药水恢复血量。药水除了基础恢复效果外，还会根据规则产生额外恢复。系统还需要计算最终血量在分组显示时对应的余数编号。",
+        "任务": "请按照战斗流程，依次处理受到的总伤害、药水恢复、额外恢复和最终血量分组，返回最终血量和分组余数。",
+        "输入": "四个数字：hp、damage、heal 和 potionCount，分别表示初始血量、每次攻击造成的伤害、每瓶药水的基础恢复量、使用的药水数量。",
+        "输出": "返回两个值：最终血量和最终血量对应的分组余数。",
+        "提示": "这道题需要把多个步骤拆开：先处理伤害，再处理恢复，最后处理取余。注意运算符优先级，尤其是乘法、除法和取余。不要把所有计算挤在一行里。"
       },
-      "starter_code": "function solution(hp, damage, heal)\n    return 0\nend",
-      "reference_code": "function solution(hp, damage, heal)\n    local currentHp = hp\n    currentHp = currentHp - damage\n    currentHp = currentHp + heal\n    return currentHp\nend",
+      "starter_code": "function solution(hp, damage, heal, potionCount)\n    return 0, 0\nend",
+      "reference_code": "function solution(hp, damage, heal, potionCount)\n    local currentHp = hp\n    local totalDamage = damage * 2\n    currentHp = currentHp - totalDamage\n    local totalHeal = heal * potionCount\n    local bonusHeal = totalHeal / 2\n    currentHp = currentHp + totalHeal + bonusHeal\n    local remainder = currentHp % potionCount\n    return currentHp, remainder\nend",
       "test_cases": [
         [
           100,
           30,
-          15
+          10,
+          2
         ],
         [
           60,
-          20,
-          40
+          10,
+          8,
+          3
         ],
         [
-          10,
-          5,
-          0
+          45,
+          8,
+          6,
+          4
         ]
       ],
       "sort_order": 8
     },
     {
-      "title": "商店打包购买后计算总价和找零",
+      "title": "商店礼包活动后的折扣、打包费和找零结算",
       "description": {
         "难度": "Challenge",
-        "背景": "商店里出售一种固定价格的礼包，每个礼包的价格是 packPrice 元。学生带着 money 元去购买 packCount 个礼包。付款前需要先计算这些礼包的总价，付款后还需要计算应该找回多少钱。",
-        "任务": "请先根据礼包单价和购买数量计算总价，再用付款金额减去总价计算找零，最后同时返回总价和找零。",
-        "输入": "三个数字：money、packPrice 和 packCount。",
-        "输出": "返回两个值：总价和找零。",
-        "提示": "可以先用变量保存礼包总价，再用 money 减去总价得到找零金额，然后按顺序返回这两个值。"
+        "背景": "商店正在售卖同一种礼包，每个礼包价格相同。学生带着一定金额购买多个礼包。结账时，收银员需要先统计礼包原价总额，再计算活动优惠；同时，礼包按固定数量分组打包，不能凑成完整一组的零散礼包会产生额外打包费。最后还要根据学生支付的钱计算找零。",
+        "任务": "请完成一次完整的结账流程：计算原价总额、活动优惠、零散礼包数量、打包费、折后应付金额和找零金额。",
+        "输入": "三个数字：money、packPrice 和 packCount，分别表示学生支付金额、礼包单价和购买数量。",
+        "输出": "返回四个值：折后应付金额、找零金额、平均每个礼包折后金额、零散礼包数量。",
+        "提示": "这道题需要同时用到加法、减法、乘法、除法和取余。可以先处理单价和数量的乘法，再处理优惠的除法，接着用 % 找到零散礼包数量，最后再计算应付金额和找零。注意运算符优先级。"
       },
-      "starter_code": "function solution(money, packPrice, packCount)\n    return 0, 0\nend",
-      "reference_code": "function solution(money, packPrice, packCount)\n    local total = packPrice * packCount\n    local change = money - total\n    return total, change\nend",
+      "starter_code": "function solution(money, packPrice, packCount)\n    return 0, 0, 0, 0\nend",
+      "reference_code": "function solution(money, packPrice, packCount)\n    local total = packPrice * packCount\n    local discount = total / 10\n    local looseCount = packCount % 3\n    local packageFee = looseCount * 1\n    local finalTotal = total - discount + packageFee\n    local change = money - finalTotal\n    local average = finalTotal / packCount\n    return finalTotal, change, average, looseCount\nend",
       "test_cases": [
         [
           100,
@@ -259,7 +265,7 @@
         ],
         [
           50,
-          7,
+          5,
           6
         ],
         [
