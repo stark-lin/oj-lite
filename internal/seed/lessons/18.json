@@ -1,19 +1,370 @@
 {
   "title": "Week 09 - 查找与二分查找",
-  "description": "练习线性查找和位置返回。",
+  "description": "练习线性查找、位置查找和二分查找。",
   "sort_order": 18,
   "questions": [
     {
-      "title": "查找学生号码的位置",
+      "title": "在号码牌中查找指定学生是否存在",
       "description": {
-        "statement": "返回 target 在数组中第一次出现的 1 起始位置，如果不存在返回 0。",
-        "input": "一个数组表和一个目标数字。",
-        "output": "第一次出现的位置，或 0。"
+        "难度": "Simple",
+        "背景": "学生号码牌保存在数组里。",
+        "任务": "判断目标号码是否存在。",
+        "输入": "三个参数：号码数组 numbers、数量 n、目标 target。",
+        "输出": "存在返回 true，否则返回 false。",
+        "提示": "逐个比较数组中的号码。"
       },
-      "starter_code": "function solution(numbers, target)\n    return 0\nend",
-      "reference_code": "function solution(numbers, target)\n    for i = 1, #numbers do\n        if numbers[i] == target then\n            return i\n        end\n    end\n    return 0\nend",
-      "test_cases": [{"args": [[3, 5, 7], 5]}, {"args": [[10, 20, 30], 40]}, {"args": [[1, 1, 2], 1]}],
+      "starter_code": "function solution(numbers, n, target)\n    return false\nend",
+      "reference_code": "function solution(numbers, n, target)\n    for i = 1, n do\n        if numbers[i] == target then\n            return true\n        end\n    end\n    return false\nend",
+      "test_cases": [
+        [
+          [
+            3,
+            8,
+            12
+          ],
+          3,
+          8
+        ],
+        [
+          [
+            1,
+            2,
+            3
+          ],
+          3,
+          4
+        ],
+        [
+          [
+            9
+          ],
+          1,
+          9
+        ]
+      ],
       "sort_order": 1
+    },
+    {
+      "title": "在成绩单中查找是否有人拿到满分",
+      "description": {
+        "难度": "Simple",
+        "背景": "满分是 100 分。",
+        "任务": "判断成绩单中是否有人拿到满分。",
+        "输入": "两个参数：成绩数组 scores 和人数 n。",
+        "输出": "有 100 分返回 true，否则返回 false。",
+        "提示": "找到后可以立即返回。"
+      },
+      "starter_code": "function solution(scores, n)\n    return false\nend",
+      "reference_code": "function solution(scores, n)\n    for i = 1, n do\n        if scores[i] == 100 then\n            return true\n        end\n    end\n    return false\nend",
+      "test_cases": [
+        [
+          [
+            80,
+            100,
+            90
+          ],
+          3
+        ],
+        [
+          [
+            99,
+            98
+          ],
+          2
+        ],
+        [
+          [
+            100
+          ],
+          1
+        ]
+      ],
+      "sort_order": 2
+    },
+    {
+      "title": "在背包格子中查找目标物品数量",
+      "description": {
+        "难度": "Simple",
+        "背景": "背包每个格子存放某种物品数量。",
+        "任务": "查找第一个数量等于 target 的格子。",
+        "输入": "三个参数：物品数量数组 items、格子数 n、目标 target。",
+        "输出": "返回第一个位置；不存在返回 0。",
+        "提示": "position 初始为 0，找到后返回位置。"
+      },
+      "starter_code": "function solution(items, n, target)\n    return 0\nend",
+      "reference_code": "function solution(items, n, target)\n    for i = 1, n do\n        if items[i] == target then\n            return i\n        end\n    end\n    return 0\nend",
+      "test_cases": [
+        [
+          [
+            3,
+            0,
+            5,
+            2
+          ],
+          4,
+          5
+        ],
+        [
+          [
+            1,
+            1,
+            1
+          ],
+          3,
+          2
+        ],
+        [
+          [
+            7
+          ],
+          1,
+          7
+        ]
+      ],
+      "sort_order": 3
+    },
+    {
+      "title": "在补考名单中找到第一个不及格学生的位置",
+      "description": {
+        "难度": "Normal",
+        "背景": "低于 60 分的学生需要补考。",
+        "任务": "找出第一个不及格成绩的位置。",
+        "输入": "两个参数：成绩数组 scores 和人数 n。",
+        "输出": "返回第一个低于 60 的位置；没有则返回 0。",
+        "提示": "从前往后查找，第一次出现就是答案。"
+      },
+      "starter_code": "function solution(scores, n)\n    return 0\nend",
+      "reference_code": "function solution(scores, n)\n    for i = 1, n do\n        if scores[i] < 60 then\n            return i\n        end\n    end\n    return 0\nend",
+      "test_cases": [
+        [
+          [
+            80,
+            59,
+            70
+          ],
+          3
+        ],
+        [
+          [
+            60,
+            70
+          ],
+          2
+        ],
+        [
+          [
+            10
+          ],
+          1
+        ]
+      ],
+      "sort_order": 4
+    },
+    {
+      "title": "在比赛成绩中找到最后一个满分位置",
+      "description": {
+        "难度": "Normal",
+        "背景": "比赛成绩中可能有多个满分。",
+        "任务": "找出最后一个 100 分的位置。",
+        "输入": "两个参数：成绩数组 scores 和人数 n。",
+        "输出": "返回最后一个满分位置；没有则返回 0。",
+        "提示": "找到满分时不断更新 position。"
+      },
+      "starter_code": "function solution(scores, n)\n    return 0\nend",
+      "reference_code": "function solution(scores, n)\n    local position = 0\n    for i = 1, n do\n        if scores[i] == 100 then\n            position = i\n        end\n    end\n    return position\nend",
+      "test_cases": [
+        [
+          [
+            100,
+            80,
+            100
+          ],
+          3
+        ],
+        [
+          [
+            99,
+            98
+          ],
+          2
+        ],
+        [
+          [
+            100
+          ],
+          1
+        ]
+      ],
+      "sort_order": 5
+    },
+    {
+      "title": "在任务列表中查找第一个未完成任务编号",
+      "description": {
+        "难度": "Normal",
+        "背景": "任务数组中 1 表示完成，0 表示未完成。",
+        "任务": "找出第一个未完成任务的位置。",
+        "输入": "两个参数：任务状态数组 tasks 和任务数 n。",
+        "输出": "返回第一个 0 的位置；全部完成返回 0。",
+        "提示": "检查 tasks[i] 是否等于 0。"
+      },
+      "starter_code": "function solution(tasks, n)\n    return 0\nend",
+      "reference_code": "function solution(tasks, n)\n    for i = 1, n do\n        if tasks[i] == 0 then\n            return i\n        end\n    end\n    return 0\nend",
+      "test_cases": [
+        [
+          [
+            1,
+            1,
+            0,
+            1
+          ],
+          4
+        ],
+        [
+          [
+            1,
+            1
+          ],
+          2
+        ],
+        [
+          [
+            0
+          ],
+          1
+        ]
+      ],
+      "sort_order": 6
+    },
+    {
+      "title": "在有序图书编号中快速找到目标图书",
+      "description": {
+        "难度": "Challenge",
+        "背景": "图书编号已经从小到大排好序。",
+        "任务": "用二分查找寻找目标编号。",
+        "输入": "三个参数：有序编号数组 books、数量 n、目标 target。",
+        "输出": "返回目标位置；不存在返回 0。",
+        "提示": "每次只保留可能的一半区间。"
+      },
+      "starter_code": "function solution(books, n, target)\n    return 0\nend",
+      "reference_code": "function solution(books, n, target)\n    local left = 1\n    local right = n\n    while left <= right do\n        local mid = left\n        local gap = right - left\n        while gap >= 2 do\n            mid = mid + 1\n            gap = gap - 2\n        end\n        if books[mid] == target then\n            return mid\n        elseif target < books[mid] then\n            right = mid - 1\n        else\n            left = mid + 1\n        end\n    end\n    return 0\nend",
+      "test_cases": [
+        [
+          [
+            1,
+            3,
+            5,
+            7,
+            9
+          ],
+          5,
+          7
+        ],
+        [
+          [
+            2,
+            4,
+            6,
+            8
+          ],
+          4,
+          5
+        ],
+        [
+          [
+            10
+          ],
+          1,
+          10
+        ]
+      ],
+      "sort_order": 7
+    },
+    {
+      "title": "比较线性查找和二分查找需要检查多少次",
+      "description": {
+        "难度": "Challenge",
+        "背景": "同一个有序数组可以用两种方法查找。",
+        "任务": "统计线性查找和二分查找各检查了多少次。",
+        "输入": "三个参数：有序数组 numbers、数量 n、目标 target。",
+        "输出": "返回两个值：线性检查次数和二分检查次数。",
+        "提示": "找到目标或确定不存在时停止计数。"
+      },
+      "starter_code": "function solution(numbers, n, target)\n    return 0, 0\nend",
+      "reference_code": "function solution(numbers, n, target)\n    local linearChecks = 0\n    for i = 1, n do\n        linearChecks = linearChecks + 1\n        if numbers[i] == target then\n            break\n        end\n    end\n\n    local binaryChecks = 0\n    local left = 1\n    local right = n\n    while left <= right do\n        local mid = left\n        local gap = right - left\n        while gap >= 2 do\n            mid = mid + 1\n            gap = gap - 2\n        end\n        binaryChecks = binaryChecks + 1\n        if numbers[mid] == target then\n            break\n        elseif target < numbers[mid] then\n            right = mid - 1\n        else\n            left = mid + 1\n        end\n    end\n    return linearChecks, binaryChecks\nend",
+      "test_cases": [
+        [
+          [
+            1,
+            3,
+            5,
+            7,
+            9
+          ],
+          5,
+          9
+        ],
+        [
+          [
+            2,
+            4,
+            6,
+            8
+          ],
+          4,
+          5
+        ],
+        [
+          [
+            10
+          ],
+          1,
+          10
+        ]
+      ],
+      "sort_order": 8
+    },
+    {
+      "title": "在有序成绩表中查找目标分数的位置",
+      "description": {
+        "难度": "Challenge",
+        "背景": "成绩表已经从低到高排好序。",
+        "任务": "用二分查找目标分数。",
+        "输入": "三个参数：有序成绩数组 scores、人数 n、目标 target。",
+        "输出": "返回目标位置；不存在返回 0。",
+        "提示": "二分查找要求数组已经有序。"
+      },
+      "starter_code": "function solution(scores, n, target)\n    return 0\nend",
+      "reference_code": "function solution(scores, n, target)\n    local left = 1\n    local right = n\n    while left <= right do\n        local mid = left\n        local gap = right - left\n        while gap >= 2 do\n            mid = mid + 1\n            gap = gap - 2\n        end\n        if scores[mid] == target then\n            return mid\n        elseif target < scores[mid] then\n            right = mid - 1\n        else\n            left = mid + 1\n        end\n    end\n    return 0\nend",
+      "test_cases": [
+        [
+          [
+            50,
+            60,
+            70,
+            80,
+            90
+          ],
+          5,
+          70
+        ],
+        [
+          [
+            60,
+            75,
+            85
+          ],
+          3,
+          100
+        ],
+        [
+          [
+            88
+          ],
+          1,
+          88
+        ]
+      ],
+      "sort_order": 9
     }
   ]
 }

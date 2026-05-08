@@ -7,14 +7,17 @@ import (
 	"testing"
 	"time"
 
+	"oj-lite/internal/judge"
 	"oj-lite/internal/platform/config"
 	platformdb "oj-lite/internal/platform/db"
+	"oj-lite/internal/platform/logger"
 )
 
 func TestSeedDemoAccounts(t *testing.T) {
 	t.Parallel()
 
 	ctx := context.Background()
+	expectedQuestionCount := expectedEmbeddedQuestionCount(t)
 	database := openSeedTestDB(t, ctx)
 	defer database.Close()
 
@@ -35,8 +38,8 @@ func TestSeedDemoAccounts(t *testing.T) {
 	assertCountAtLeast(t, database, "SELECT COUNT(*) FROM classroom WHERE name = 'teacher_demo_classroom';", 1)
 	assertCountAtLeast(t, database, "SELECT COUNT(*) FROM classroom WHERE name = 'example_classroom';", 1)
 	assertCountEquals(t, database, "SELECT COUNT(*) FROM lesson;", embeddedLessonCount)
-	assertCountEquals(t, database, "SELECT COUNT(*) FROM question;", embeddedLessonCount)
-	assertCountEquals(t, database, "SELECT COUNT(*) FROM lesson_question;", embeddedLessonCount)
+	assertCountEquals(t, database, "SELECT COUNT(*) FROM question;", expectedQuestionCount)
+	assertCountEquals(t, database, "SELECT COUNT(*) FROM lesson_question;", expectedQuestionCount)
 	assertCountEquals(t, database, `
 		SELECT COUNT(*)
 		FROM lesson
@@ -48,7 +51,7 @@ func TestSeedDemoAccounts(t *testing.T) {
 			SELECT lesson_id
 			FROM lesson_question
 			GROUP BY lesson_id
-			HAVING COUNT(*) = 1
+			HAVING COUNT(*) > 0
 		);
 	`, embeddedLessonCount)
 	assertCountEquals(t, database, "SELECT COUNT(*) FROM lesson;", lessonCountAfterFirstSeed)
@@ -102,6 +105,34 @@ func TestSeedDemoAccounts(t *testing.T) {
 	}
 }
 
+func TestEmbeddedLessonReferenceCodeRuns(t *testing.T) {
+	t.Parallel()
+
+	lessons, err := loadEmbeddedLessons()
+	if err != nil {
+		t.Fatalf("load embedded lessons: %v", err)
+	}
+
+	engine := judge.New(logger.NewLogger("seed-test"))
+	for _, lesson := range lessons {
+		for _, question := range lesson.Questions {
+			report, err := engine.Run(context.Background(), judge.Request{
+				SourceCode:    question.ReferenceCode,
+				ReferenceCode: question.ReferenceCode,
+				TestCases:     question.TestCases,
+			})
+			if err != nil {
+				t.Fatalf("%s / %s: run reference code: %v", lesson.Title, question.Title, err)
+			}
+			for _, item := range report.Cases {
+				if !item.Comparison.Matched {
+					t.Fatalf("%s / %s case %d: %s", lesson.Title, question.Title, item.Index, item.Comparison.Reason)
+				}
+			}
+		}
+	}
+}
+
 func openSeedTestDB(t *testing.T, ctx context.Context) *sql.DB {
 	t.Helper()
 
@@ -143,6 +174,21 @@ func queryCount(t *testing.T, database *sql.DB, query string) int {
 	}
 
 	return got
+}
+
+func expectedEmbeddedQuestionCount(t *testing.T) int {
+	t.Helper()
+
+	lessons, err := loadEmbeddedLessons()
+	if err != nil {
+		t.Fatalf("load embedded lessons: %v", err)
+	}
+
+	count := 0
+	for _, lesson := range lessons {
+		count += len(lesson.Questions)
+	}
+	return count
 }
 
 func assertCountAtLeast(t *testing.T, database *sql.DB, query string, want int) {

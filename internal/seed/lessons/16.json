@@ -1,19 +1,354 @@
 {
   "title": "Week 08 - 数组统计与最值",
-  "description": "练习在数组中寻找最值。",
+  "description": "练习数组求和、计数、最大值、最小值和第二大值。",
   "sort_order": 16,
   "questions": [
     {
-      "title": "找出最高分",
+      "title": "计算班级成绩单的总分",
       "description": {
-        "statement": "返回成绩数组中的最大值。",
-        "input": "一个非空成绩数组表。",
-        "output": "最高分。"
+        "难度": "Simple",
+        "背景": "班级成绩保存在数组里。",
+        "任务": "计算前 n 个学生的成绩总和。",
+        "输入": "两个参数：成绩数组 scores 和人数 n。",
+        "输出": "返回总分。",
+        "提示": "遍历数组并累加。"
       },
-      "starter_code": "function solution(scores)\n    return 0\nend",
-      "reference_code": "function solution(scores)\n    local best = scores[1]\n    for i = 2, #scores do\n        if scores[i] > best then\n            best = scores[i]\n        end\n    end\n    return best\nend",
-      "test_cases": [{"args": [[80, 90, 75]]}, {"args": [[60, 70, 85]]}, {"args": [[99]]}],
+      "starter_code": "function solution(scores, n)\n    return 0\nend",
+      "reference_code": "function solution(scores, n)\n    local total = 0\n    for i = 1, n do\n        total = total + scores[i]\n    end\n    return total\nend",
+      "test_cases": [
+        [
+          [
+            80,
+            90,
+            70
+          ],
+          3
+        ],
+        [
+          [
+            100
+          ],
+          1
+        ],
+        [
+          [
+            60,
+            60,
+            60,
+            60
+          ],
+          4
+        ]
+      ],
       "sort_order": 1
+    },
+    {
+      "title": "计算每日金币数组的平均奖励",
+      "description": {
+        "难度": "Simple",
+        "背景": "每日金币奖励保存在数组中。",
+        "任务": "计算平均每日奖励。",
+        "输入": "两个参数：金币数组 coins 和天数 n。",
+        "输出": "返回平均值。",
+        "提示": "先求总和，再除以天数。"
+      },
+      "starter_code": "function solution(coins, n)\n    return 0\nend",
+      "reference_code": "function solution(coins, n)\n    local total = 0\n    for i = 1, n do\n        total = total + coins[i]\n    end\n    return total / n\nend",
+      "test_cases": [
+        [
+          [
+            10,
+            20,
+            30
+          ],
+          3
+        ],
+        [
+          [
+            5,
+            15
+          ],
+          2
+        ],
+        [
+          [
+            8
+          ],
+          1
+        ]
+      ],
+      "sort_order": 2
+    },
+    {
+      "title": "统计成绩单中有多少人及格",
+      "description": {
+        "难度": "Simple",
+        "背景": "及格线是 60 分。",
+        "任务": "统计前 n 个成绩中及格的人数。",
+        "输入": "两个参数：成绩数组 scores 和人数 n。",
+        "输出": "返回及格人数。",
+        "提示": "成绩大于等于 60 就计数。"
+      },
+      "starter_code": "function solution(scores, n)\n    return 0\nend",
+      "reference_code": "function solution(scores, n)\n    local count = 0\n    for i = 1, n do\n        if scores[i] >= 60 then\n            count = count + 1\n        end\n    end\n    return count\nend",
+      "test_cases": [
+        [
+          [
+            80,
+            50,
+            70
+          ],
+          3
+        ],
+        [
+          [
+            59,
+            60,
+            61
+          ],
+          3
+        ],
+        [
+          [
+            10
+          ],
+          1
+        ]
+      ],
+      "sort_order": 3
+    },
+    {
+      "title": "找出跳远比赛中成绩最好的选手",
+      "description": {
+        "难度": "Normal",
+        "背景": "跳远成绩越大排名越靠前。",
+        "任务": "找出最好成绩和选手位置。",
+        "输入": "两个参数：跳远成绩数组 jumps 和人数 n。",
+        "输出": "返回两个值：最好选手位置和最好成绩。",
+        "提示": "先假设第一个选手最好，再逐个比较。"
+      },
+      "starter_code": "function solution(jumps, n)\n    return 0, 0\nend",
+      "reference_code": "function solution(jumps, n)\n    local bestIndex = 1\n    local bestValue = jumps[1]\n    for i = 2, n do\n        if jumps[i] > bestValue then\n            bestValue = jumps[i]\n            bestIndex = i\n        end\n    end\n    return bestIndex, bestValue\nend",
+      "test_cases": [
+        [
+          [
+            120,
+            135,
+            128
+          ],
+          3
+        ],
+        [
+          [
+            150,
+            140
+          ],
+          2
+        ],
+        [
+          [
+            99
+          ],
+          1
+        ]
+      ],
+      "sort_order": 4
+    },
+    {
+      "title": "找出成绩单中的最低分和位置",
+      "description": {
+        "难度": "Normal",
+        "背景": "老师需要知道最低分出现在第几个位置。",
+        "任务": "找出最低分和它的位置。",
+        "输入": "两个参数：成绩数组 scores 和人数 n。",
+        "输出": "返回两个值：最低分位置和最低分。",
+        "提示": "比较时如果发现更小的分数，就更新答案。"
+      },
+      "starter_code": "function solution(scores, n)\n    return 0, 0\nend",
+      "reference_code": "function solution(scores, n)\n    local minIndex = 1\n    local minValue = scores[1]\n    for i = 2, n do\n        if scores[i] < minValue then\n            minValue = scores[i]\n            minIndex = i\n        end\n    end\n    return minIndex, minValue\nend",
+      "test_cases": [
+        [
+          [
+            80,
+            50,
+            70
+          ],
+          3
+        ],
+        [
+          [
+            59,
+            60,
+            61
+          ],
+          3
+        ],
+        [
+          [
+            100
+          ],
+          1
+        ]
+      ],
+      "sort_order": 5
+    },
+    {
+      "title": "统计游戏分数中超过目标线的人数",
+      "description": {
+        "难度": "Normal",
+        "背景": "游戏活动有一条目标分数线。",
+        "任务": "统计超过目标线的玩家数量。",
+        "输入": "三个参数：分数数组 points、人数 n、目标线 target。",
+        "输出": "返回超过 target 的数量。",
+        "提示": "题目要求超过，所以等于 target 不计入。"
+      },
+      "starter_code": "function solution(points, n, target)\n    return 0\nend",
+      "reference_code": "function solution(points, n, target)\n    local count = 0\n    for i = 1, n do\n        if points[i] > target then\n            count = count + 1\n        end\n    end\n    return count\nend",
+      "test_cases": [
+        [
+          [
+            100,
+            80,
+            120
+          ],
+          3,
+          90
+        ],
+        [
+          [
+            50,
+            50
+          ],
+          2,
+          50
+        ],
+        [
+          [
+            99
+          ],
+          1,
+          10
+        ]
+      ],
+      "sort_order": 6
+    },
+    {
+      "title": "成绩排行榜中找出亚军分数",
+      "description": {
+        "难度": "Challenge",
+        "背景": "排行榜中第一名分数最高，亚军是第二高的不同分数。",
+        "任务": "找出第二高的不同分数。",
+        "输入": "两个参数：成绩数组 scores 和人数 n。",
+        "输出": "返回亚军分数。",
+        "提示": "先找最高分，再找小于最高分的最大值。"
+      },
+      "starter_code": "function solution(scores, n)\n    return 0\nend",
+      "reference_code": "function solution(scores, n)\n    local maxValue = scores[1]\n    for i = 2, n do\n        if scores[i] > maxValue then\n            maxValue = scores[i]\n        end\n    end\n    local second = scores[1]\n    for i = 1, n do\n        if scores[i] < maxValue then\n            if second == maxValue or scores[i] > second then\n                second = scores[i]\n            end\n        end\n    end\n    return second\nend",
+      "test_cases": [
+        [
+          [
+            90,
+            100,
+            80
+          ],
+          3
+        ],
+        [
+          [
+            70,
+            95,
+            88,
+            60
+          ],
+          4
+        ],
+        [
+          [
+            5,
+            1
+          ],
+          2
+        ]
+      ],
+      "sort_order": 7
+    },
+    {
+      "title": "找出跳远比赛中第一名和第二名的成绩差",
+      "description": {
+        "难度": "Challenge",
+        "背景": "跳远成绩越大越好，需要比较前两名差距。",
+        "任务": "计算最高成绩和第二高不同成绩的差。",
+        "输入": "两个参数：跳远数组 jumps 和人数 n。",
+        "输出": "返回第一名成绩减第二名成绩。",
+        "提示": "可以复用寻找第二大值的方法。"
+      },
+      "starter_code": "function solution(jumps, n)\n    return 0\nend",
+      "reference_code": "function solution(jumps, n)\n    local best = jumps[1]\n    for i = 2, n do\n        if jumps[i] > best then\n            best = jumps[i]\n        end\n    end\n    local second = jumps[1]\n    for i = 1, n do\n        if jumps[i] < best then\n            if second == best or jumps[i] > second then\n                second = jumps[i]\n            end\n        end\n    end\n    return best - second\nend",
+      "test_cases": [
+        [
+          [
+            120,
+            135,
+            128
+          ],
+          3
+        ],
+        [
+          [
+            200,
+            150,
+            180
+          ],
+          3
+        ],
+        [
+          [
+            9,
+            1
+          ],
+          2
+        ]
+      ],
+      "sort_order": 8
+    },
+    {
+      "title": "按成绩区间统计优秀、及格和待提高人数",
+      "description": {
+        "难度": "Challenge",
+        "背景": "成绩分成优秀、及格和待提高三类。",
+        "任务": "统计每一类人数。",
+        "输入": "两个参数：成绩数组 scores 和人数 n。",
+        "输出": "返回三个值：优秀、及格、待提高人数。",
+        "提示": "85 分及以上优秀，60 到 84 及格，低于 60 待提高。"
+      },
+      "starter_code": "function solution(scores, n)\n    return 0, 0, 0\nend",
+      "reference_code": "function solution(scores, n)\n    local excellent = 0\n    local pass = 0\n    local improve = 0\n    for i = 1, n do\n        if scores[i] >= 85 then\n            excellent = excellent + 1\n        elseif scores[i] >= 60 then\n            pass = pass + 1\n        else\n            improve = improve + 1\n        end\n    end\n    return excellent, pass, improve\nend",
+      "test_cases": [
+        [
+          [
+            90,
+            80,
+            50
+          ],
+          3
+        ],
+        [
+          [
+            60,
+            85,
+            100,
+            59
+          ],
+          4
+        ],
+        [
+          [
+            10
+          ],
+          1
+        ]
+      ],
+      "sort_order": 9
     }
   ]
 }

@@ -1,19 +1,253 @@
 {
   "title": "Week 05 - 因数、倍数与质数",
-  "description": "练习枚举和质数判断。",
+  "description": "练习枚举、因数计数、质数判断和公倍数。",
   "sort_order": 10,
   "questions": [
     {
-      "title": "判断一个数是否为质数",
+      "title": "判断一个队伍人数能不能平均分成若干组",
       "description": {
-        "statement": "如果 n 是质数，返回 true。",
-        "input": "一个整数 n。",
-        "output": "质数返回 true，否则返回 false。"
+        "难度": "Simple",
+        "背景": "体育课上要把队伍平均分组。",
+        "任务": "判断人数是否能被组数整除。",
+        "输入": "两个数字：students 和 groups。",
+        "输出": "能平均分返回 true，否则返回 false。",
+        "提示": "如果 students % groups == 0，就能平均分。"
       },
-      "starter_code": "function solution(n)\n    return false\nend",
-      "reference_code": "function solution(n)\n    if n < 2 then\n        return false\n    end\n    for i = 2, n - 1 do\n        if n % i == 0 then\n            return false\n        end\n    end\n    return true\nend",
-      "test_cases": [[2], [9], [13], [1]],
+      "starter_code": "function solution(students, groups)\n    return false\nend",
+      "reference_code": "function solution(students, groups)\n    if students % groups == 0 then\n        return true\n    end\n    return false\nend",
+      "test_cases": [
+        [
+          24,
+          6
+        ],
+        [
+          25,
+          6
+        ],
+        [
+          12,
+          3
+        ]
+      ],
       "sort_order": 1
+    },
+    {
+      "title": "判断一个编号是否是另一个编号的倍数",
+      "description": {
+        "难度": "Simple",
+        "背景": "活动中有些编号是基础编号的倍数。",
+        "任务": "判断 a 是否是 b 的倍数。",
+        "输入": "两个数字：a 和 b。",
+        "输出": "如果 a 是 b 的倍数返回 true，否则返回 false。",
+        "提示": "倍数判断也使用取余。"
+      },
+      "starter_code": "function solution(a, b)\n    return false\nend",
+      "reference_code": "function solution(a, b)\n    if a % b == 0 then\n        return true\n    end\n    return false\nend",
+      "test_cases": [
+        [
+          18,
+          3
+        ],
+        [
+          20,
+          6
+        ],
+        [
+          7,
+          7
+        ]
+      ],
+      "sort_order": 2
+    },
+    {
+      "title": "找出一个拼图块数能否平均分给小组",
+      "description": {
+        "难度": "Simple",
+        "背景": "一盒拼图要平均分给几个小组。",
+        "任务": "判断拼图块数是否能平均分。",
+        "输入": "两个数字：pieces 和 groups。",
+        "输出": "可以平均分返回 true，否则返回 false。",
+        "提示": "问题和队伍平均分组的算法相同。"
+      },
+      "starter_code": "function solution(pieces, groups)\n    return false\nend",
+      "reference_code": "function solution(pieces, groups)\n    if pieces % groups == 0 then\n        return true\n    end\n    return false\nend",
+      "test_cases": [
+        [
+          30,
+          5
+        ],
+        [
+          31,
+          5
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "sort_order": 3
+    },
+    {
+      "title": "找出一个拼图块数的所有分法",
+      "description": {
+        "难度": "Normal",
+        "背景": "拼图块数固定，想知道每组可以分到多少块。",
+        "任务": "找出 pieces 的所有因数。",
+        "输入": "一个正整数：pieces。",
+        "输出": "返回一个数组，按从小到大保存所有因数。",
+        "提示": "发现一个因数后，把它放到结果数组的下一个位置。"
+      },
+      "starter_code": "function solution(pieces)\n    return {}\nend",
+      "reference_code": "function solution(pieces)\n    local ways = {}\n    local count = 0\n    for size = 1, pieces do\n        if pieces % size == 0 then\n            count = count + 1\n            ways[count] = size\n        end\n    end\n    return ways\nend",
+      "test_cases": [
+        [
+          6
+        ],
+        [
+          10
+        ],
+        [
+          1
+        ]
+      ],
+      "sort_order": 4
+    },
+    {
+      "title": "统计一个特殊编号有多少个因数",
+      "description": {
+        "难度": "Normal",
+        "背景": "特殊编号的因数越多，能分组的方法越多。",
+        "任务": "统计 number 的因数个数。",
+        "输入": "一个正整数：number。",
+        "输出": "返回因数数量。",
+        "提示": "从 1 到 number 逐个尝试。"
+      },
+      "starter_code": "function solution(number)\n    return 0\nend",
+      "reference_code": "function solution(number)\n    local count = 0\n    for i = 1, number do\n        if number % i == 0 then\n            count = count + 1\n        end\n    end\n    return count\nend",
+      "test_cases": [
+        [
+          12
+        ],
+        [
+          17
+        ],
+        [
+          1
+        ]
+      ],
+      "sort_order": 5
+    },
+    {
+      "title": "找出两个跑步周期第一次同时集合的时间",
+      "description": {
+        "难度": "Normal",
+        "背景": "两个小组分别每 a 分钟和 b 分钟集合一次。",
+        "任务": "找出第一次同时集合的时间。",
+        "输入": "两个正整数：a 和 b。",
+        "输出": "返回最小公倍数。",
+        "提示": "从较大的周期开始往后找第一个共同倍数。"
+      },
+      "starter_code": "function solution(a, b)\n    return 0\nend",
+      "reference_code": "function solution(a, b)\n    local time = a\n    if b > time then\n        time = b\n    end\n    while time % a ~= 0 or time % b ~= 0 do\n        time = time + 1\n    end\n    return time\nend",
+      "test_cases": [
+        [
+          3,
+          4
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          6,
+          8
+        ]
+      ],
+      "sort_order": 6
+    },
+    {
+      "title": "判断一个特殊编号是不是质数编号",
+      "description": {
+        "难度": "Challenge",
+        "背景": "只有恰好两个因数的编号是质数编号。",
+        "任务": "判断 number 是否是质数。",
+        "输入": "一个正整数：number。",
+        "输出": "是质数返回 true，否则返回 false。",
+        "提示": "先统计因数个数，再判断是否等于 2。"
+      },
+      "starter_code": "function solution(number)\n    return false\nend",
+      "reference_code": "function solution(number)\n    local factorCount = 0\n    for i = 1, number do\n        if number % i == 0 then\n            factorCount = factorCount + 1\n        end\n    end\n    if factorCount == 2 then\n        return true\n    end\n    return false\nend",
+      "test_cases": [
+        [
+          2
+        ],
+        [
+          17
+        ],
+        [
+          18
+        ],
+        [
+          1
+        ]
+      ],
+      "sort_order": 7
+    },
+    {
+      "title": "找出两个班人数的最大公共分组人数",
+      "description": {
+        "难度": "Challenge",
+        "背景": "两个班要用相同小组人数分组。",
+        "任务": "找出能同时整除两个班人数的最大人数。",
+        "输入": "两个正整数：a 和 b。",
+        "输出": "返回最大公因数。",
+        "提示": "从 1 枚举到较小人数，不断更新可行答案。"
+      },
+      "starter_code": "function solution(a, b)\n    return 0\nend",
+      "reference_code": "function solution(a, b)\n    local limit = a\n    if b < limit then\n        limit = b\n    end\n    local answer = 1\n    for groupSize = 1, limit do\n        if a % groupSize == 0 and b % groupSize == 0 then\n            answer = groupSize\n        end\n    end\n    return answer\nend",
+      "test_cases": [
+        [
+          24,
+          18
+        ],
+        [
+          7,
+          13
+        ],
+        [
+          20,
+          30
+        ]
+      ],
+      "sort_order": 8
+    },
+    {
+      "title": "找出两个闹钟第一次同时响起的分钟数",
+      "description": {
+        "难度": "Challenge",
+        "背景": "两个闹钟分别每 a 分钟和 b 分钟响一次。",
+        "任务": "找出它们第一次同时响的分钟数。",
+        "输入": "两个正整数：a 和 b。",
+        "输出": "返回最小公倍数。",
+        "提示": "这是共同倍数枚举问题。"
+      },
+      "starter_code": "function solution(a, b)\n    return 0\nend",
+      "reference_code": "function solution(a, b)\n    local minute = a\n    if b > minute then\n        minute = b\n    end\n    while minute % a ~= 0 or minute % b ~= 0 do\n        minute = minute + 1\n    end\n    return minute\nend",
+      "test_cases": [
+        [
+          4,
+          6
+        ],
+        [
+          9,
+          12
+        ],
+        [
+          5,
+          5
+        ]
+      ],
+      "sort_order": 9
     }
   ]
 }

@@ -1,19 +1,358 @@
 {
   "title": "Week 10 - 排序算法一",
-  "description": "练习简单选择排序。",
+  "description": "练习选择排序、冒泡排序和交换次数统计。",
   "sort_order": 20,
   "questions": [
     {
-      "title": "按身高从矮到高排队",
+      "title": "按身高给一排学生从矮到高排队",
       "description": {
-        "statement": "返回从小到大排序后的身高数组。",
-        "input": "一个身高数组表。",
-        "output": "排序后的数组表。"
+        "难度": "Simple",
+        "背景": "学生身高记录在数组中。",
+        "任务": "把身高从小到大排序。",
+        "输入": "两个参数：身高数组 values 和人数 n。",
+        "输出": "返回排序后的数组。",
+        "提示": "每一轮选择剩余数据中的最小值放到前面。"
       },
-      "starter_code": "function solution(heights)\n    return heights\nend",
-      "reference_code": "function solution(heights)\n    for i = 1, #heights - 1 do\n        local minIndex = i\n        for j = i + 1, #heights do\n            if heights[j] < heights[minIndex] then\n                minIndex = j\n            end\n        end\n        local temp = heights[i]\n        heights[i] = heights[minIndex]\n        heights[minIndex] = temp\n    end\n    return heights\nend",
-      "test_cases": [{"args": [[150, 140, 160]]}, {"args": [[3, 1, 2]]}, {"args": [[5]]}],
+      "starter_code": "function solution(values, n)\n    return values\nend",
+      "reference_code": "function solution(values, n)\n    for i = 1, n - 1 do\n        local minIndex = i\n        for j = i + 1, n do\n            if values[j] < values[minIndex] then\n                minIndex = j\n            end\n        end\n        local temp = values[i]\n        values[i] = values[minIndex]\n        values[minIndex] = temp\n    end\n    return values\nend",
+      "test_cases": [
+        [
+          [
+            150,
+            140,
+            160
+          ],
+          3
+        ],
+        [
+          [
+            120,
+            120,
+            110
+          ],
+          3
+        ],
+        [
+          [
+            99
+          ],
+          1
+        ]
+      ],
       "sort_order": 1
+    },
+    {
+      "title": "把游戏分数从低到高整理",
+      "description": {
+        "难度": "Simple",
+        "背景": "游戏分数需要从低到高显示。",
+        "任务": "对分数数组升序排序。",
+        "输入": "两个参数：分数数组 values 和数量 n。",
+        "输出": "返回排序后的数组。",
+        "提示": "仍然使用选择排序。"
+      },
+      "starter_code": "function solution(values, n)\n    return values\nend",
+      "reference_code": "function solution(values, n)\n    for i = 1, n - 1 do\n        local minIndex = i\n        for j = i + 1, n do\n            if values[j] < values[minIndex] then\n                minIndex = j\n            end\n        end\n        local temp = values[i]\n        values[i] = values[minIndex]\n        values[minIndex] = temp\n    end\n    return values\nend",
+      "test_cases": [
+        [
+          [
+            30,
+            10,
+            20
+          ],
+          3
+        ],
+        [
+          [
+            5,
+            1,
+            5
+          ],
+          3
+        ],
+        [
+          [
+            7
+          ],
+          1
+        ]
+      ],
+      "sort_order": 2
+    },
+    {
+      "title": "把跑步成绩从快到慢整理",
+      "description": {
+        "难度": "Simple",
+        "背景": "跑步用时越少表示越快。",
+        "任务": "把跑步用时从小到大排序。",
+        "输入": "两个参数：用时数组 values 和人数 n。",
+        "输出": "返回排序后的数组。",
+        "提示": "从快到慢就是用时从小到大。"
+      },
+      "starter_code": "function solution(values, n)\n    return values\nend",
+      "reference_code": "function solution(values, n)\n    for i = 1, n - 1 do\n        local minIndex = i\n        for j = i + 1, n do\n            if values[j] < values[minIndex] then\n                minIndex = j\n            end\n        end\n        local temp = values[i]\n        values[i] = values[minIndex]\n        values[minIndex] = temp\n    end\n    return values\nend",
+      "test_cases": [
+        [
+          [
+            15,
+            12,
+            18
+          ],
+          3
+        ],
+        [
+          [
+            9,
+            8,
+            10,
+            7
+          ],
+          4
+        ],
+        [
+          [
+            20
+          ],
+          1
+        ]
+      ],
+      "sort_order": 3
+    },
+    {
+      "title": "用选择排序整理游戏分数排行榜",
+      "description": {
+        "难度": "Normal",
+        "背景": "排行榜需要高分排在前面。",
+        "任务": "用选择排序把分数从高到低排序。",
+        "输入": "两个参数：分数数组 scores 和数量 n。",
+        "输出": "返回排序后的 scores。",
+        "提示": "每一轮选择剩余数据中的最大值。"
+      },
+      "starter_code": "function solution(scores, n)\n    return scores\nend",
+      "reference_code": "function solution(scores, n)\n    for i = 1, n - 1 do\n        local maxIndex = i\n        for j = i + 1, n do\n            if scores[j] > scores[maxIndex] then\n                maxIndex = j\n            end\n        end\n        local temp = scores[i]\n        scores[i] = scores[maxIndex]\n        scores[maxIndex] = temp\n    end\n    return scores\nend",
+      "test_cases": [
+        [
+          [
+            100,
+            80,
+            120
+          ],
+          3
+        ],
+        [
+          [
+            5,
+            9,
+            1,
+            7
+          ],
+          4
+        ],
+        [
+          [
+            10
+          ],
+          1
+        ]
+      ],
+      "sort_order": 4
+    },
+    {
+      "title": "用选择排序给图书编号从小到大排序",
+      "description": {
+        "难度": "Normal",
+        "背景": "图书编号需要按从小到大排列。",
+        "任务": "使用选择排序整理编号数组。",
+        "输入": "两个参数：编号数组 values 和数量 n。",
+        "输出": "返回排序后的数组。",
+        "提示": "记录最小值位置，然后交换。"
+      },
+      "starter_code": "function solution(values, n)\n    return values\nend",
+      "reference_code": "function solution(values, n)\n    for i = 1, n - 1 do\n        local minIndex = i\n        for j = i + 1, n do\n            if values[j] < values[minIndex] then\n                minIndex = j\n            end\n        end\n        local temp = values[i]\n        values[i] = values[minIndex]\n        values[minIndex] = temp\n    end\n    return values\nend",
+      "test_cases": [
+        [
+          [
+            5,
+            2,
+            8,
+            1
+          ],
+          4
+        ],
+        [
+          [
+            3,
+            3,
+            2
+          ],
+          3
+        ],
+        [
+          [
+            6
+          ],
+          1
+        ]
+      ],
+      "sort_order": 5
+    },
+    {
+      "title": "用选择排序找出每轮剩余数据中的最小值",
+      "description": {
+        "难度": "Normal",
+        "背景": "选择排序每一轮都会找出当前剩余部分的最小值。",
+        "任务": "记录每轮选出的最小值。",
+        "输入": "两个参数：数字数组 values 和数量 n。",
+        "输出": "返回每轮最小值组成的数组。",
+        "提示": "这个结果会和升序排序后的数组一致。"
+      },
+      "starter_code": "function solution(values, n)\n    return {}\nend",
+      "reference_code": "function solution(values, n)\n    local selected = {}\n    for i = 1, n do\n        local minIndex = i\n        for j = i + 1, n do\n            if values[j] < values[minIndex] then\n                minIndex = j\n            end\n        end\n        selected[i] = values[minIndex]\n        local temp = values[i]\n        values[i] = values[minIndex]\n        values[minIndex] = temp\n    end\n    return selected\nend",
+      "test_cases": [
+        [
+          [
+            5,
+            3,
+            8,
+            1
+          ],
+          4
+        ],
+        [
+          [
+            2,
+            2,
+            1
+          ],
+          3
+        ],
+        [
+          [
+            9
+          ],
+          1
+        ]
+      ],
+      "sort_order": 6
+    },
+    {
+      "title": "统计冒泡排序整理座位表时发生了多少次交换",
+      "description": {
+        "难度": "Challenge",
+        "背景": "冒泡排序会不断交换相邻的逆序元素。",
+        "任务": "统计升序冒泡排序的交换次数。",
+        "输入": "两个参数：座位编号数组 seats 和数量 n。",
+        "输出": "返回交换次数。",
+        "提示": "只要前一个比后一个大，就交换并计数。"
+      },
+      "starter_code": "function solution(seats, n)\n    return 0\nend",
+      "reference_code": "function solution(seats, n)\n    local swaps = 0\n    for pass = 1, n - 1 do\n        for i = 1, n - pass do\n            if seats[i] > seats[i + 1] then\n                local temp = seats[i]\n                seats[i] = seats[i + 1]\n                seats[i + 1] = temp\n                swaps = swaps + 1\n            end\n        end\n    end\n    return swaps\nend",
+      "test_cases": [
+        [
+          [
+            3,
+            2,
+            1
+          ],
+          3
+        ],
+        [
+          [
+            1,
+            2,
+            3
+          ],
+          3
+        ],
+        [
+          [
+            2,
+            1,
+            3
+          ],
+          3
+        ]
+      ],
+      "sort_order": 7
+    },
+    {
+      "title": "用冒泡排序把成绩从高到低排列",
+      "description": {
+        "难度": "Challenge",
+        "背景": "成绩排行榜需要从高到低。",
+        "任务": "用冒泡排序降序排列成绩。",
+        "输入": "两个参数：成绩数组 scores 和数量 n。",
+        "输出": "返回排序后的 scores。",
+        "提示": "如果前一个分数小于后一个，就交换。"
+      },
+      "starter_code": "function solution(scores, n)\n    return scores\nend",
+      "reference_code": "function solution(scores, n)\n    for pass = 1, n - 1 do\n        for i = 1, n - pass do\n            if scores[i] < scores[i + 1] then\n                local temp = scores[i]\n                scores[i] = scores[i + 1]\n                scores[i + 1] = temp\n            end\n        end\n    end\n    return scores\nend",
+      "test_cases": [
+        [
+          [
+            80,
+            100,
+            90
+          ],
+          3
+        ],
+        [
+          [
+            5,
+            1,
+            9,
+            7
+          ],
+          4
+        ],
+        [
+          [
+            10
+          ],
+          1
+        ]
+      ],
+      "sort_order": 8
+    },
+    {
+      "title": "比较选择排序和冒泡排序的交换次数",
+      "description": {
+        "难度": "Challenge",
+        "背景": "同一个数组用不同排序方法，交换次数可能不同。",
+        "任务": "分别统计选择排序和冒泡排序升序排列时的交换次数。",
+        "输入": "两个参数：数字数组 values 和数量 n。",
+        "输出": "返回两个值：选择排序交换次数和冒泡排序交换次数。",
+        "提示": "为了公平比较，先复制两份数组。"
+      },
+      "starter_code": "function solution(values, n)\n    return 0, 0\nend",
+      "reference_code": "function solution(values, n)\n    local a = {}\n    local b = {}\n    for i = 1, n do\n        a[i] = values[i]\n        b[i] = values[i]\n    end\n\n    local selectionSwaps = 0\n    for i = 1, n - 1 do\n        local minIndex = i\n        for j = i + 1, n do\n            if a[j] < a[minIndex] then\n                minIndex = j\n            end\n        end\n        if minIndex ~= i then\n            local temp = a[i]\n            a[i] = a[minIndex]\n            a[minIndex] = temp\n            selectionSwaps = selectionSwaps + 1\n        end\n    end\n\n    local bubbleSwaps = 0\n    for pass = 1, n - 1 do\n        for i = 1, n - pass do\n            if b[i] > b[i + 1] then\n                local temp = b[i]\n                b[i] = b[i + 1]\n                b[i + 1] = temp\n                bubbleSwaps = bubbleSwaps + 1\n            end\n        end\n    end\n\n    return selectionSwaps, bubbleSwaps\nend",
+      "test_cases": [
+        [
+          [
+            3,
+            2,
+            1
+          ],
+          3
+        ],
+        [
+          [
+            1,
+            3,
+            2
+          ],
+          3
+        ],
+        [
+          [
+            1,
+            2,
+            3
+          ],
+          3
+        ]
+      ],
+      "sort_order": 9
     }
   ]
 }

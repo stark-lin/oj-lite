@@ -1,19 +1,301 @@
 {
   "title": "Week 04 - 累加、平均与累计",
-  "description": "练习对数组表中的数值进行累加。",
+  "description": "练习求和、平均值、条件累计和达标判断。",
   "sort_order": 8,
   "questions": [
     {
-      "title": "计算金币奖励总数",
+      "title": "计算一周每天金币奖励的总数",
       "description": {
-        "statement": "返回数组中所有金币奖励的总和。",
-        "input": "一个由数字组成的数组表。",
-        "output": "总和。"
+        "难度": "Simple",
+        "背景": "游戏每天给玩家不同数量的金币。",
+        "任务": "计算前 n 天金币奖励总数。",
+        "输入": "两个参数：金币数组 rewards 和天数 n。",
+        "输出": "返回金币总数。",
+        "提示": "用 sum 从 0 开始逐天累加。"
       },
-      "starter_code": "function solution(values)\n    return 0\nend",
-      "reference_code": "function solution(values)\n    local total = 0\n    for i = 1, #values do\n        total = total + values[i]\n    end\n    return total\nend",
-      "test_cases": [{"args": [[1, 2, 3]]}, {"args": [[5, 5, 10]]}, {"args": [[7]]}],
+      "starter_code": "function solution(rewards, n)\n    return 0\nend",
+      "reference_code": "function solution(rewards, n)\n    local total = 0\n    for i = 1, n do\n        total = total + rewards[i]\n    end\n    return total\nend",
+      "test_cases": [
+        [
+          [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          7
+        ],
+        [
+          [
+            5,
+            5,
+            10
+          ],
+          3
+        ],
+        [
+          [
+            9
+          ],
+          1
+        ]
+      ],
       "sort_order": 1
+    },
+    {
+      "title": "计算 1 到 n 的楼梯编号总和",
+      "description": {
+        "难度": "Simple",
+        "背景": "楼梯每一级都有编号。",
+        "任务": "计算从 1 到 n 的编号总和。",
+        "输入": "一个正整数：n。",
+        "输出": "返回 1 + 2 + ... + n。",
+        "提示": "循环时把当前编号加到 sum 里。"
+      },
+      "starter_code": "function solution(n)\n    return 0\nend",
+      "reference_code": "function solution(n)\n    local sum = 0\n    for i = 1, n do\n        sum = sum + i\n    end\n    return sum\nend",
+      "test_cases": [
+        [
+          5
+        ],
+        [
+          10
+        ],
+        [
+          1
+        ]
+      ],
+      "sort_order": 2
+    },
+    {
+      "title": "计算几天训练一共跑了多少米",
+      "description": {
+        "难度": "Simple",
+        "背景": "运动员记录每天跑步距离。",
+        "任务": "计算前 n 天训练总距离。",
+        "输入": "两个参数：距离数组 meters 和天数 n。",
+        "输出": "返回总米数。",
+        "提示": "数组第 i 个数表示第 i 天跑的距离。"
+      },
+      "starter_code": "function solution(meters, n)\n    return 0\nend",
+      "reference_code": "function solution(meters, n)\n    local total = 0\n    for day = 1, n do\n        total = total + meters[day]\n    end\n    return total\nend",
+      "test_cases": [
+        [
+          [
+            400,
+            500,
+            600
+          ],
+          3
+        ],
+        [
+          [
+            1000,
+            800
+          ],
+          2
+        ],
+        [
+          [
+            250
+          ],
+          1
+        ]
+      ],
+      "sort_order": 3
+    },
+    {
+      "title": "计算班级几次小测的平均分",
+      "description": {
+        "难度": "Normal",
+        "背景": "班级进行了多次小测。",
+        "任务": "计算 n 次小测的平均分。",
+        "输入": "两个参数：成绩数组 scores 和次数 n。",
+        "输出": "返回平均分。",
+        "提示": "先求总分，再除以 n。"
+      },
+      "starter_code": "function solution(scores, n)\n    return 0\nend",
+      "reference_code": "function solution(scores, n)\n    local total = 0\n    for i = 1, n do\n        total = total + scores[i]\n    end\n    local average = total / n\n    return average\nend",
+      "test_cases": [
+        [
+          [
+            80,
+            90,
+            100
+          ],
+          3
+        ],
+        [
+          [
+            60,
+            70
+          ],
+          2
+        ],
+        [
+          [
+            88
+          ],
+          1
+        ]
+      ],
+      "sort_order": 4
+    },
+    {
+      "title": "每天存钱，计算第 n 天一共存了多少",
+      "description": {
+        "难度": "Normal",
+        "背景": "第 1 天存 1 元，第 2 天存 2 元，之后每天多存 1 元。",
+        "任务": "计算到第 n 天一共存了多少钱。",
+        "输入": "一个正整数：n。",
+        "输出": "返回累计存款。",
+        "提示": "这和计算 1 到 n 的和很像。"
+      },
+      "starter_code": "function solution(n)\n    return 0\nend",
+      "reference_code": "function solution(n)\n    local total = 0\n    for day = 1, n do\n        total = total + day\n    end\n    return total\nend",
+      "test_cases": [
+        [
+          3
+        ],
+        [
+          7
+        ],
+        [
+          1
+        ]
+      ],
+      "sort_order": 5
+    },
+    {
+      "title": "统计关卡奖励金币的总数和平均数",
+      "description": {
+        "难度": "Normal",
+        "背景": "玩家通过多个关卡，每关都有金币奖励。",
+        "任务": "计算金币总数和平均奖励。",
+        "输入": "两个参数：奖励数组 rewards 和关卡数 n。",
+        "输出": "返回两个值：总数和平均数。",
+        "提示": "一次循环求总数，循环后计算平均数。"
+      },
+      "starter_code": "function solution(rewards, n)\n    return 0, 0\nend",
+      "reference_code": "function solution(rewards, n)\n    local total = 0\n    for i = 1, n do\n        total = total + rewards[i]\n    end\n    local average = total / n\n    return total, average\nend",
+      "test_cases": [
+        [
+          [
+            10,
+            20,
+            30
+          ],
+          3
+        ],
+        [
+          [
+            5,
+            15
+          ],
+          2
+        ],
+        [
+          [
+            8
+          ],
+          1
+        ]
+      ],
+      "sort_order": 6
+    },
+    {
+      "title": "每天存钱，最早第几天达到买玩具目标",
+      "description": {
+        "难度": "Challenge",
+        "背景": "第 1 天存 1 元，第 2 天存 2 元，依次增加。",
+        "任务": "找出累计存款第一次达到目标的天数。",
+        "输入": "一个数字：target。",
+        "输出": "返回最早达到或超过 target 的天数。",
+        "提示": "用 while 一天一天累计，达到目标就停止。"
+      },
+      "starter_code": "function solution(target)\n    return 0\nend",
+      "reference_code": "function solution(target)\n    local day = 0\n    local total = 0\n    while total < target do\n        day = day + 1\n        total = total + day\n    end\n    return day\nend",
+      "test_cases": [
+        [
+          1
+        ],
+        [
+          6
+        ],
+        [
+          20
+        ]
+      ],
+      "sort_order": 7
+    },
+    {
+      "title": "连续爬楼梯，到第几层累计台阶超过目标",
+      "description": {
+        "难度": "Challenge",
+        "背景": "第 1 层有 1 级台阶，第 2 层有 2 级台阶，依次增加。",
+        "任务": "计算累计台阶第一次超过目标时到达的层数。",
+        "输入": "一个数字：target。",
+        "输出": "返回层数。",
+        "提示": "注意题目要求超过目标，不是达到目标。"
+      },
+      "starter_code": "function solution(target)\n    return 0\nend",
+      "reference_code": "function solution(target)\n    local floor = 0\n    local total = 0\n    while total <= target do\n        floor = floor + 1\n        total = total + floor\n    end\n    return floor\nend",
+      "test_cases": [
+        [
+          0
+        ],
+        [
+          5
+        ],
+        [
+          10
+        ]
+      ],
+      "sort_order": 8
+    },
+    {
+      "title": "游戏每日奖励累计到哪一天超过升级要求",
+      "description": {
+        "难度": "Challenge",
+        "背景": "玩家每天获得的经验值记录在数组中。",
+        "任务": "找出累计经验第一次超过升级要求的天数。",
+        "输入": "三个参数：经验数组 rewards、天数 n、升级要求 need。",
+        "输出": "返回天数；如果 n 天内没有超过，返回 0。",
+        "提示": "一边累加一边检查是否超过 need。"
+      },
+      "starter_code": "function solution(rewards, n, need)\n    return 0\nend",
+      "reference_code": "function solution(rewards, n, need)\n    local total = 0\n    for day = 1, n do\n        total = total + rewards[day]\n        if total > need then\n            return day\n        end\n    end\n    return 0\nend",
+      "test_cases": [
+        [
+          [
+            3,
+            4,
+            5
+          ],
+          3,
+          6
+        ],
+        [
+          [
+            2,
+            2,
+            2
+          ],
+          3,
+          10
+        ],
+        [
+          [
+            10
+          ],
+          1,
+          5
+        ]
+      ],
+      "sort_order": 9
     }
   ]
 }

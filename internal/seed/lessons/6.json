@@ -1,19 +1,224 @@
 {
   "title": "Week 03 - 计数与分类统计",
-  "description": "练习带条件的循环计数。",
+  "description": "练习条件计数、分类统计和余数分组。",
   "sort_order": 6,
   "questions": [
     {
-      "title": "统计从 1 到 n 有多少个偶数",
+      "title": "统计班级里有多少个偶数座位号",
       "description": {
-        "statement": "统计从 1 到 n 中出现了多少个偶数。",
-        "input": "一个正整数 n。",
-        "output": "偶数的数量。"
+        "难度": "Simple",
+        "背景": "教室座位从 1 开始编号。",
+        "任务": "统计 1 到 n 中偶数座位号的数量。",
+        "输入": "一个正整数：n。",
+        "输出": "返回偶数座位号数量。",
+        "提示": "能被 2 整除的编号是偶数。"
       },
       "starter_code": "function solution(n)\n    return 0\nend",
-      "reference_code": "function solution(n)\n    local count = 0\n    for i = 1, n do\n        if i % 2 == 0 then\n            count = count + 1\n        end\n    end\n    return count\nend",
-      "test_cases": [[5], [8], [1]],
+      "reference_code": "function solution(n)\n    local count = 0\n    for seat = 1, n do\n        if seat % 2 == 0 then\n            count = count + 1\n        end\n    end\n    return count\nend",
+      "test_cases": [
+        [
+          10
+        ],
+        [
+          9
+        ],
+        [
+          1
+        ]
+      ],
       "sort_order": 1
+    },
+    {
+      "title": "统计 1 到 50 中有多少个 5 的倍数",
+      "description": {
+        "难度": "Simple",
+        "背景": "老师要统计固定编号范围里的特殊编号。",
+        "任务": "统计 1 到 50 中能被 5 整除的数字数量。",
+        "输入": "不需要参数。",
+        "输出": "返回 5 的倍数数量。",
+        "提示": "从 1 循环到 50，遇到 5 的倍数就计数。"
+      },
+      "starter_code": "function solution()\n    return 0\nend",
+      "reference_code": "function solution()\n    local count = 0\n    for number = 1, 50 do\n        if number % 5 == 0 then\n            count = count + 1\n        end\n    end\n    return count\nend",
+      "test_cases": [
+        []
+      ],
+      "sort_order": 2
+    },
+    {
+      "title": "统计任务编号中有多少个奇数任务",
+      "description": {
+        "难度": "Simple",
+        "背景": "任务按 1 到 n 编号，奇数任务属于第一组。",
+        "任务": "统计奇数任务的数量。",
+        "输入": "一个正整数：n。",
+        "输出": "返回奇数编号数量。",
+        "提示": "除以 2 余 1 的编号是奇数。"
+      },
+      "starter_code": "function solution(n)\n    return 0\nend",
+      "reference_code": "function solution(n)\n    local count = 0\n    for task = 1, n do\n        if task % 2 == 1 then\n            count = count + 1\n        end\n    end\n    return count\nend",
+      "test_cases": [
+        [
+          7
+        ],
+        [
+          8
+        ],
+        [
+          2
+        ]
+      ],
+      "sort_order": 3
+    },
+    {
+      "title": "抽奖号码中有多少个幸运号码",
+      "description": {
+        "难度": "Normal",
+        "背景": "抽奖活动规定能被 6 整除的号码是幸运号码。",
+        "任务": "统计 1 到 n 中幸运号码的数量。",
+        "输入": "一个正整数：n。",
+        "输出": "返回幸运号码数量。",
+        "提示": "幸运号码要满足 number % 6 == 0。"
+      },
+      "starter_code": "function solution(n)\n    return 0\nend",
+      "reference_code": "function solution(n)\n    local count = 0\n    for number = 1, n do\n        if number % 6 == 0 then\n            count = count + 1\n        end\n    end\n    return count\nend",
+      "test_cases": [
+        [
+          20
+        ],
+        [
+          36
+        ],
+        [
+          5
+        ]
+      ],
+      "sort_order": 4
+    },
+    {
+      "title": "图书馆按编号统计普通图书数量",
+      "description": {
+        "难度": "Normal",
+        "背景": "图书馆把 5 的倍数编号标为特别图书。",
+        "任务": "统计 1 到 n 中普通图书的数量。",
+        "输入": "一个正整数：n。",
+        "输出": "返回不是 5 的倍数的编号数量。",
+        "提示": "不是特别图书就计入普通图书。"
+      },
+      "starter_code": "function solution(n)\n    return 0\nend",
+      "reference_code": "function solution(n)\n    local count = 0\n    for book = 1, n do\n        if book % 5 ~= 0 then\n            count = count + 1\n        end\n    end\n    return count\nend",
+      "test_cases": [
+        [
+          10
+        ],
+        [
+          12
+        ],
+        [
+          4
+        ]
+      ],
+      "sort_order": 5
+    },
+    {
+      "title": "统计运动员编号中能被 3 整除的人数",
+      "description": {
+        "难度": "Normal",
+        "背景": "运动员编号从 1 到 n，编号能被 3 整除的同学参加接力。",
+        "任务": "统计参加接力的人数。",
+        "输入": "一个正整数：n。",
+        "输出": "返回能被 3 整除的编号数量。",
+        "提示": "用 count 记录符合条件的人数。"
+      },
+      "starter_code": "function solution(n)\n    return 0\nend",
+      "reference_code": "function solution(n)\n    local count = 0\n    for athlete = 1, n do\n        if athlete % 3 == 0 then\n            count = count + 1\n        end\n    end\n    return count\nend",
+      "test_cases": [
+        [
+          9
+        ],
+        [
+          10
+        ],
+        [
+          2
+        ]
+      ],
+      "sort_order": 6
+    },
+    {
+      "title": "图书馆按编号分类统计三种等级图书数量",
+      "description": {
+        "难度": "Challenge",
+        "背景": "图书按照编号除以 3 的余数分成三类。",
+        "任务": "统计三类图书各有多少本。",
+        "输入": "一个正整数：n。",
+        "输出": "返回三个值：余数 0、余数 1、余数 2 的数量。",
+        "提示": "分别准备三个计数变量。"
+      },
+      "starter_code": "function solution(n)\n    return 0, 0, 0\nend",
+      "reference_code": "function solution(n)\n    local group0 = 0\n    local group1 = 0\n    local group2 = 0\n    for book = 1, n do\n        if book % 3 == 0 then\n            group0 = group0 + 1\n        elseif book % 3 == 1 then\n            group1 = group1 + 1\n        else\n            group2 = group2 + 1\n        end\n    end\n    return group0, group1, group2\nend",
+      "test_cases": [
+        [
+          6
+        ],
+        [
+          7
+        ],
+        [
+          10
+        ]
+      ],
+      "sort_order": 7
+    },
+    {
+      "title": "游戏任务按难度编号统计不同类型任务",
+      "description": {
+        "难度": "Challenge",
+        "背景": "游戏任务按编号循环分为 easy、normal、hard 三种。",
+        "任务": "统计每种难度的任务数量。",
+        "输入": "一个正整数：n。",
+        "输出": "返回三个值：easy、normal、hard 的数量。",
+        "提示": "编号余 3 为 1 是 easy，余 3 为 2 是 normal，余 3 为 0 是 hard。"
+      },
+      "starter_code": "function solution(n)\n    return 0, 0, 0\nend",
+      "reference_code": "function solution(n)\n    local easy = 0\n    local normal = 0\n    local hard = 0\n    for task = 1, n do\n        if task % 3 == 1 then\n            easy = easy + 1\n        elseif task % 3 == 2 then\n            normal = normal + 1\n        else\n            hard = hard + 1\n        end\n    end\n    return easy, normal, hard\nend",
+      "test_cases": [
+        [
+          5
+        ],
+        [
+          9
+        ],
+        [
+          10
+        ]
+      ],
+      "sort_order": 8
+    },
+    {
+      "title": "学生编号按余数分成三组并统计人数",
+      "description": {
+        "难度": "Challenge",
+        "背景": "学生按编号除以 3 的余数进入不同小组。",
+        "任务": "统计三组人数。",
+        "输入": "一个正整数：n。",
+        "输出": "返回三个值：A 组、B 组、C 组人数。",
+        "提示": "A 组对应余数 0，B 组对应余数 1，C 组对应余数 2。"
+      },
+      "starter_code": "function solution(n)\n    return 0, 0, 0\nend",
+      "reference_code": "function solution(n)\n    local groupA = 0\n    local groupB = 0\n    local groupC = 0\n    for student = 1, n do\n        if student % 3 == 0 then\n            groupA = groupA + 1\n        elseif student % 3 == 1 then\n            groupB = groupB + 1\n        else\n            groupC = groupC + 1\n        end\n    end\n    return groupA, groupB, groupC\nend",
+      "test_cases": [
+        [
+          3
+        ],
+        [
+          8
+        ],
+        [
+          11
+        ]
+      ],
+      "sort_order": 9
     }
   ]
 }

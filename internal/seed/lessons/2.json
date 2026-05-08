@@ -1,19 +1,274 @@
 {
   "title": "Week 01 - 变量",
-  "description": "练习顺序计算和变量更新。",
+  "description": "练习顺序计算、变量更新和变量交换。",
   "sort_order": 2,
   "questions": [
     {
       "title": "游戏角色受到攻击后还剩多少血量",
       "description": {
-        "statement": "返回游戏角色受到伤害后的剩余血量。",
-        "input": "两个数字：hp 和 damage。",
-        "output": "hp - damage。"
+        "难度": "Simple",
+        "背景": "游戏角色有初始血量，怪物攻击会造成伤害。",
+        "任务": "计算受到一次攻击后的剩余血量。",
+        "输入": "两个数字：hp 和 damage。",
+        "输出": "返回 hp - damage。",
+        "提示": "先用一个变量保存剩余血量，再返回它。"
       },
       "starter_code": "function solution(hp, damage)\n    return 0\nend",
       "reference_code": "function solution(hp, damage)\n    local remainHp = hp - damage\n    return remainHp\nend",
-      "test_cases": [[100, 25], [80, 35], [50, 0]],
+      "test_cases": [
+        [
+          100,
+          25
+        ],
+        [
+          80,
+          35
+        ],
+        [
+          50,
+          0
+        ]
+      ],
       "sort_order": 1
+    },
+    {
+      "title": "文具店买铅笔一共要花多少钱",
+      "description": {
+        "难度": "Simple",
+        "背景": "文具店里每支铅笔价格相同。",
+        "任务": "根据单价和数量计算总价。",
+        "输入": "两个数字：price 和 count。",
+        "输出": "返回 price * count。",
+        "提示": "总价等于单价乘以数量。"
+      },
+      "starter_code": "function solution(price, count)\n    return 0\nend",
+      "reference_code": "function solution(price, count)\n    local total = price * count\n    return total\nend",
+      "test_cases": [
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          4,
+          1
+        ]
+      ],
+      "sort_order": 2
+    },
+    {
+      "title": "操场长方形区域的面积是多少",
+      "description": {
+        "难度": "Simple",
+        "背景": "操场上画出了一个长方形训练区域。",
+        "任务": "计算这个长方形区域的面积。",
+        "输入": "两个数字：length 和 width。",
+        "输出": "返回 length * width。",
+        "提示": "长方形面积等于长乘宽。"
+      },
+      "starter_code": "function solution(length, width)\n    return 0\nend",
+      "reference_code": "function solution(length, width)\n    local area = length * width\n    return area\nend",
+      "test_cases": [
+        [
+          10,
+          6
+        ],
+        [
+          8,
+          8
+        ],
+        [
+          15,
+          4
+        ]
+      ],
+      "sort_order": 3
+    },
+    {
+      "title": "打怪获得金币后背包里共有多少金币",
+      "description": {
+        "难度": "Normal",
+        "背景": "角色打败怪物后获得新的金币奖励。",
+        "任务": "计算获得奖励后的金币总数。",
+        "输入": "两个数字：coins 和 reward。",
+        "输出": "返回 coins + reward。",
+        "提示": "把新奖励加到原来的金币数上。"
+      },
+      "starter_code": "function solution(coins, reward)\n    return 0\nend",
+      "reference_code": "function solution(coins, reward)\n    local totalCoins = coins + reward\n    return totalCoins\nend",
+      "test_cases": [
+        [
+          30,
+          12
+        ],
+        [
+          0,
+          50
+        ],
+        [
+          99,
+          1
+        ]
+      ],
+      "sort_order": 4
+    },
+    {
+      "title": "买铅笔和橡皮后还剩多少钱",
+      "description": {
+        "难度": "Normal",
+        "背景": "学生带着固定金额去文具店购物。",
+        "任务": "计算买完铅笔和橡皮后剩余的钱。",
+        "输入": "五个数字：money、pencilPrice、pencilCount、eraserPrice、eraserCount。",
+        "输出": "返回剩余金额。",
+        "提示": "先分别算两种文具花费，再从总金额中减去。"
+      },
+      "starter_code": "function solution(money, pencilPrice, pencilCount, eraserPrice, eraserCount)\n    return 0\nend",
+      "reference_code": "function solution(money, pencilPrice, pencilCount, eraserPrice, eraserCount)\n    local pencilTotal = pencilPrice * pencilCount\n    local eraserTotal = eraserPrice * eraserCount\n    local leftMoney = money - pencilTotal - eraserTotal\n    return leftMoney\nend",
+      "test_cases": [
+        [
+          50,
+          2,
+          6,
+          3,
+          4
+        ],
+        [
+          30,
+          1,
+          10,
+          2,
+          5
+        ],
+        [
+          100,
+          4,
+          8,
+          5,
+          6
+        ]
+      ],
+      "sort_order": 5
+    },
+    {
+      "title": "跑步训练后累计跑了多少米",
+      "description": {
+        "难度": "Normal",
+        "背景": "运动员每天记录自己已经跑过的总距离。",
+        "任务": "把今天跑的距离加入累计距离。",
+        "输入": "两个数字：beforeMeters 和 todayMeters。",
+        "输出": "返回新的累计距离。",
+        "提示": "累计量等于原来的值加上新增的值。"
+      },
+      "starter_code": "function solution(beforeMeters, todayMeters)\n    return 0\nend",
+      "reference_code": "function solution(beforeMeters, todayMeters)\n    local totalMeters = beforeMeters + todayMeters\n    return totalMeters\nend",
+      "test_cases": [
+        [
+          1200,
+          800
+        ],
+        [
+          0,
+          500
+        ],
+        [
+          3500,
+          1500
+        ]
+      ],
+      "sort_order": 6
+    },
+    {
+      "title": "两个同学换座位后座位编号如何交换",
+      "description": {
+        "难度": "Challenge",
+        "背景": "两个同学互换座位，需要更新各自的座位编号。",
+        "任务": "返回交换后的两个座位编号。",
+        "输入": "两个数字：seatA 和 seatB。",
+        "输出": "返回两个值：新的 seatA 和新的 seatB。",
+        "提示": "使用临时变量保存其中一个座位编号。"
+      },
+      "starter_code": "function solution(seatA, seatB)\n    return seatA, seatB\nend",
+      "reference_code": "function solution(seatA, seatB)\n    local temp = seatA\n    seatA = seatB\n    seatB = temp\n    return seatA, seatB\nend",
+      "test_cases": [
+        [
+          3,
+          8
+        ],
+        [
+          1,
+          20
+        ],
+        [
+          12,
+          12
+        ]
+      ],
+      "sort_order": 7
+    },
+    {
+      "title": "游戏角色先受伤再回血后剩多少血量",
+      "description": {
+        "难度": "Challenge",
+        "背景": "角色先被攻击，然后吃药水回血。",
+        "任务": "计算两次状态变化后的血量。",
+        "输入": "三个数字：hp、damage 和 heal。",
+        "输出": "返回 hp - damage + heal。",
+        "提示": "按事情发生的顺序更新血量。"
+      },
+      "starter_code": "function solution(hp, damage, heal)\n    return 0\nend",
+      "reference_code": "function solution(hp, damage, heal)\n    local currentHp = hp\n    currentHp = currentHp - damage\n    currentHp = currentHp + heal\n    return currentHp\nend",
+      "test_cases": [
+        [
+          100,
+          30,
+          15
+        ],
+        [
+          60,
+          20,
+          40
+        ],
+        [
+          10,
+          5,
+          0
+        ]
+      ],
+      "sort_order": 8
+    },
+    {
+      "title": "商店打包购买后计算总价和找零",
+      "description": {
+        "难度": "Challenge",
+        "背景": "商店里一个礼包有固定价格，学生购买多个礼包。",
+        "任务": "计算购买总价和找零。",
+        "输入": "三个数字：money、packPrice 和 packCount。",
+        "输出": "返回两个值：总价和找零。",
+        "提示": "先算总价，再用付款金额减去总价。"
+      },
+      "starter_code": "function solution(money, packPrice, packCount)\n    return 0, 0\nend",
+      "reference_code": "function solution(money, packPrice, packCount)\n    local total = packPrice * packCount\n    local change = money - total\n    return total, change\nend",
+      "test_cases": [
+        [
+          100,
+          12,
+          5
+        ],
+        [
+          50,
+          7,
+          6
+        ],
+        [
+          30,
+          10,
+          3
+        ]
+      ],
+      "sort_order": 9
     }
   ]
 }
