@@ -253,7 +253,7 @@
         "任务": "请完成一次完整的结账流程：计算原价总额、活动优惠、零散礼包数量、打包费、折后应付金额和找零金额。",
         "输入": "三个数字：money、packPrice 和 packCount，分别表示学生支付金额、礼包单价和购买数量。",
         "输出": "返回四个值：折后应付金额、找零金额、平均每个礼包折后金额、零散礼包数量。",
-        "提示": "这道题需要同时用到加法、减法、乘法、除法和取余。可以先处理单价和数量的乘法，再处理优惠的除法，接着用 % 找到零散礼包数量，最后再计算应付金额和找零。注意运算符优先级。"
+        "提示": "这道题需要同时用到加法、减法、乘法、除法和取余。注意运算符优先级。"
       },
       "starter_code": "function solution(money, packPrice, packCount)\n    return 0, 0, 0, 0\nend",
       "reference_code": "function solution(money, packPrice, packCount)\n    local total = packPrice * packCount\n    local discount = total / 10\n    local looseCount = packCount % 3\n    local packageFee = looseCount * 1\n    local finalTotal = total - discount + packageFee\n    local change = money - finalTotal\n    local average = finalTotal / packCount\n    return finalTotal, change, average, looseCount\nend",
