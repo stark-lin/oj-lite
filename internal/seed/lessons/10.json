@@ -7,11 +7,11 @@
       "title": "判断一个队伍人数能不能平均分成若干组",
       "description": {
         "难度": "Simple",
-        "背景": "体育课上要把队伍平均分组。",
-        "任务": "判断人数是否能被组数整除。",
+        "背景": "体育课上，老师准备把 students 名学生平均分成 groups 个小组。为了保证每个小组人数相同，不能有人多出来，也不能有小组少人。现在需要判断这些学生是否可以被平均分组。",
+        "任务": "请判断学生总人数是否能被小组数量整除，并返回判断结果。",
         "输入": "两个数字：students 和 groups。",
         "输出": "能平均分返回 true，否则返回 false。",
-        "提示": "如果 students % groups == 0，就能平均分。"
+        "提示": "如果 students % groups == 0，说明没有剩余学生，可以平均分成若干组。"
       },
       "starter_code": "function solution(students, groups)\n    return false\nend",
       "reference_code": "function solution(students, groups)\n    if students % groups == 0 then\n        return true\n    end\n    return false\nend",
@@ -35,11 +35,11 @@
       "title": "判断一个编号是否是另一个编号的倍数",
       "description": {
         "难度": "Simple",
-        "背景": "活动中有些编号是基础编号的倍数。",
-        "任务": "判断 a 是否是 b 的倍数。",
+        "背景": "学校活动中，有些任务编号需要根据基础编号进行分组。如果一个编号 a 能被基础编号 b 整除，就说明 a 是 b 的倍数，可以归入对应分组。",
+        "任务": "请判断 a 是否是 b 的倍数，并返回判断结果。",
         "输入": "两个数字：a 和 b。",
         "输出": "如果 a 是 b 的倍数返回 true，否则返回 false。",
-        "提示": "倍数判断也使用取余。"
+        "提示": "倍数判断可以使用取余运算。如果 a % b == 0，就说明 a 是 b 的倍数。"
       },
       "starter_code": "function solution(a, b)\n    return false\nend",
       "reference_code": "function solution(a, b)\n    if a % b == 0 then\n        return true\n    end\n    return false\nend",
@@ -60,14 +60,14 @@
       "sort_order": 2
     },
     {
-      "title": "找出一个拼图块数能否平均分给小组",
+      "title": "判断拼图块数能不能平均分给小组",
       "description": {
         "难度": "Simple",
-        "背景": "一盒拼图要平均分给几个小组。",
-        "任务": "判断拼图块数是否能平均分。",
+        "背景": "手工课上，老师准备把一盒拼图分给 groups 个小组。盒子里一共有 pieces 块拼图。为了让每个小组拿到相同数量的拼图，需要判断这些拼图块是否能够被平均分完。",
+        "任务": "请判断拼图块数是否能被小组数量整除，并返回是否可以平均分。",
         "输入": "两个数字：pieces 和 groups。",
         "输出": "可以平均分返回 true，否则返回 false。",
-        "提示": "问题和队伍平均分组的算法相同。"
+        "提示": "这个问题和队伍平均分组的判断方法相同。如果 pieces % groups == 0，就表示可以平均分。"
       },
       "starter_code": "function solution(pieces, groups)\n    return false\nend",
       "reference_code": "function solution(pieces, groups)\n    if pieces % groups == 0 then\n        return true\n    end\n    return false\nend",
@@ -91,11 +91,11 @@
       "title": "找出一个拼图块数的所有分法",
       "description": {
         "难度": "Normal",
-        "背景": "拼图块数固定，想知道每组可以分到多少块。",
-        "任务": "找出 pieces 的所有因数。",
+        "背景": "一盒拼图里有 pieces 块拼图。老师想知道如果要把这些拼图平均分给小组，每组可能分到多少块。只要某个数字能够整除 pieces，就表示它是一种可能的每组块数。",
+        "任务": "请找出 pieces 的所有因数，并把这些因数按从小到大的顺序放入数组后返回。",
         "输入": "一个正整数：pieces。",
         "输出": "返回一个数组，按从小到大保存所有因数。",
-        "提示": "发现一个因数后，把它放到结果数组的下一个位置。"
+        "提示": "可以从 1 枚举到 pieces。每当发现一个数字能够整除 pieces，就把它放到结果数组的下一个位置。"
       },
       "starter_code": "function solution(pieces)\n    return {}\nend",
       "reference_code": "function solution(pieces)\n    local ways = {}\n    local count = 0\n    for size = 1, pieces do\n        if pieces % size == 0 then\n            count = count + 1\n            ways[count] = size\n        end\n    end\n    return ways\nend",
@@ -116,11 +116,11 @@
       "title": "统计一个特殊编号有多少个因数",
       "description": {
         "难度": "Normal",
-        "背景": "特殊编号的因数越多，能分组的方法越多。",
-        "任务": "统计 number 的因数个数。",
+        "背景": "学校活动中，每个特殊编号都可以用不同的方式进行分组。如果一个数字能够整除 number，就说明它是 number 的一个因数。因数越多，表示这个编号可以对应更多种分组方式。",
+        "任务": "请统计 number 一共有多少个因数，并返回因数数量。",
         "输入": "一个正整数：number。",
         "输出": "返回因数数量。",
-        "提示": "从 1 到 number 逐个尝试。"
+        "提示": "可以从 1 到 number 逐个尝试。如果 number % i == 0，就说明 i 是 number 的因数，需要把计数变量加 1。"
       },
       "starter_code": "function solution(number)\n    return 0\nend",
       "reference_code": "function solution(number)\n    local count = 0\n    for i = 1, number do\n        if number % i == 0 then\n            count = count + 1\n        end\n    end\n    return count\nend",
@@ -138,14 +138,14 @@
       "sort_order": 5
     },
     {
-      "title": "找出两个跑步周期第一次同时集合的时间",
+      "title": "找出两个跑步小组第一次同时集合的时间",
       "description": {
         "难度": "Normal",
-        "背景": "两个小组分别每 a 分钟和 b 分钟集合一次。",
-        "任务": "找出第一次同时集合的时间。",
+        "背景": "操场上有两个跑步小组进行循环训练。第一个小组每 a 分钟集合一次，第二个小组每 b 分钟集合一次。两个小组从同一时间开始训练，现在需要找出它们第一次再次同时集合的时间。",
+        "任务": "请找出同时是 a 和 b 的倍数的最小时间，并返回这个时间。",
         "输入": "两个正整数：a 和 b。",
         "输出": "返回最小公倍数。",
-        "提示": "从较大的周期开始往后找第一个共同倍数。"
+        "提示": "可以先从 a 和 b 中较大的数开始尝试，逐个向后查找第一个同时能被 a 和 b 整除的数字。"
       },
       "starter_code": "function solution(a, b)\n    return 0\nend",
       "reference_code": "function solution(a, b)\n    local time = a\n    if b > time then\n        time = b\n    end\n    while time % a ~= 0 or time % b ~= 0 do\n        time = time + 1\n    end\n    return time\nend",
@@ -169,11 +169,11 @@
       "title": "判断一个特殊编号是不是质数编号",
       "description": {
         "难度": "Challenge",
-        "背景": "只有恰好两个因数的编号是质数编号。",
-        "任务": "判断 number 是否是质数。",
+        "背景": "在编号系统中，只有恰好拥有两个因数的编号才会被称为质数编号。这两个因数分别是 1 和它本身。现在需要根据输入的 number，判断它是否符合质数编号的规则。",
+        "任务": "请统计 number 的因数个数，并判断它是否恰好有两个因数。",
         "输入": "一个正整数：number。",
         "输出": "是质数返回 true，否则返回 false。",
-        "提示": "先统计因数个数，再判断是否等于 2。"
+        "提示": "可以先从 1 到 number 枚举所有可能的因数，并统计因数个数。最后判断因数个数是否等于 2。"
       },
       "starter_code": "function solution(number)\n    return false\nend",
       "reference_code": "function solution(number)\n    local factorCount = 0\n    for i = 1, number do\n        if number % i == 0 then\n            factorCount = factorCount + 1\n        end\n    end\n    if factorCount == 2 then\n        return true\n    end\n    return false\nend",
@@ -197,11 +197,11 @@
       "title": "找出两个班人数的最大公共分组人数",
       "description": {
         "难度": "Challenge",
-        "背景": "两个班要用相同小组人数分组。",
-        "任务": "找出能同时整除两个班人数的最大人数。",
+        "背景": "两个班分别有 a 名学生和 b 名学生。老师希望两个班都按照相同的小组人数进行分组，并且两个班都不能有人剩下。为了让每个小组尽可能大，需要找出同时能整除两个班人数的最大人数。",
+        "任务": "请找出 a 和 b 的最大公因数，并返回这个最大公共分组人数。",
         "输入": "两个正整数：a 和 b。",
         "输出": "返回最大公因数。",
-        "提示": "从 1 枚举到较小人数，不断更新可行答案。"
+        "提示": "可以从 1 枚举到两个班人数中较小的那个数。每找到一个能同时整除 a 和 b 的 groupSize，就更新答案。"
       },
       "starter_code": "function solution(a, b)\n    return 0\nend",
       "reference_code": "function solution(a, b)\n    local limit = a\n    if b < limit then\n        limit = b\n    end\n    local answer = 1\n    for groupSize = 1, limit do\n        if a % groupSize == 0 and b % groupSize == 0 then\n            answer = groupSize\n        end\n    end\n    return answer\nend",
@@ -225,11 +225,11 @@
       "title": "找出两个闹钟第一次同时响起的分钟数",
       "description": {
         "难度": "Challenge",
-        "背景": "两个闹钟分别每 a 分钟和 b 分钟响一次。",
-        "任务": "找出它们第一次同时响的分钟数。",
+        "背景": "有两个闹钟从同一时刻开始计时。第一个闹钟每 a 分钟响一次，第二个闹钟每 b 分钟响一次。现在想知道从开始计时后，它们第一次同时响起是在第几分钟。",
+        "任务": "请找出同时是 a 和 b 的倍数的最小分钟数，并返回这个结果。",
         "输入": "两个正整数：a 和 b。",
         "输出": "返回最小公倍数。",
-        "提示": "这是共同倍数枚举问题。"
+        "提示": "这是共同倍数枚举问题。可以从较大的周期开始，不断增加 minute，直到它能同时被 a 和 b 整除。"
       },
       "starter_code": "function solution(a, b)\n    return 0\nend",
       "reference_code": "function solution(a, b)\n    local minute = a\n    if b > minute then\n        minute = b\n    end\n    while minute % a ~= 0 or minute % b ~= 0 do\n        minute = minute + 1\n    end\n    return minute\nend",

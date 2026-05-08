@@ -7,11 +7,11 @@
       "title": "游戏角色受到攻击后还剩多少血量",
       "description": {
         "难度": "Simple",
-        "背景": "游戏角色有初始血量，怪物攻击会造成伤害。",
-        "任务": "计算受到一次攻击后的剩余血量。",
+        "背景": "一名游戏角色进入关卡时有一定的初始血量 hp。在战斗过程中，怪物发动了一次攻击，并造成 damage 点伤害。现在需要根据角色原来的血量和这次受到的伤害，计算角色被攻击后还剩下多少血量。",
+        "任务": "请先用变量保存角色受到攻击后的剩余血量，再返回这个剩余血量。",
         "输入": "两个数字：hp 和 damage。",
         "输出": "返回 hp - damage。",
-        "提示": "先用一个变量保存剩余血量，再返回它。"
+        "提示": "可以先创建一个变量表示剩余血量，让它等于初始血量减去受到的伤害，然后返回这个变量。"
       },
       "starter_code": "function solution(hp, damage)\n    return 0\nend",
       "reference_code": "function solution(hp, damage)\n    local remainHp = hp - damage\n    return remainHp\nend",
@@ -35,11 +35,11 @@
       "title": "文具店买铅笔一共要花多少钱",
       "description": {
         "难度": "Simple",
-        "背景": "文具店里每支铅笔价格相同。",
-        "任务": "根据单价和数量计算总价。",
+        "背景": "文具店里出售同一种铅笔，每支铅笔的价格都是 price 元。小明准备购买 count 支铅笔。为了知道自己一共需要支付多少钱，需要根据铅笔的单价和购买数量计算总价。",
+        "任务": "请计算购买这些铅笔一共需要花费多少钱，并返回计算出的总价。",
         "输入": "两个数字：price 和 count。",
         "输出": "返回 price * count。",
-        "提示": "总价等于单价乘以数量。"
+        "提示": "总价等于单价乘以数量。可以先用一个变量保存计算结果，再返回这个变量。"
       },
       "starter_code": "function solution(price, count)\n    return 0\nend",
       "reference_code": "function solution(price, count)\n    local total = price * count\n    return total\nend",
@@ -63,11 +63,11 @@
       "title": "操场长方形区域的面积是多少",
       "description": {
         "难度": "Simple",
-        "背景": "操场上画出了一个长方形训练区域。",
-        "任务": "计算这个长方形区域的面积。",
+        "背景": "学校操场上画出了一个长方形训练区域，这个区域的长是 length 米，宽是 width 米。为了安排训练活动，老师需要知道这个长方形区域的面积是多少。",
+        "任务": "请根据长方形的长和宽，计算这个训练区域的面积，并返回面积结果。",
         "输入": "两个数字：length 和 width。",
         "输出": "返回 length * width。",
-        "提示": "长方形面积等于长乘宽。"
+        "提示": "长方形面积等于长乘宽。可以用一个变量保存面积，再把它返回。"
       },
       "starter_code": "function solution(length, width)\n    return 0\nend",
       "reference_code": "function solution(length, width)\n    local area = length * width\n    return area\nend",
@@ -91,11 +91,11 @@
       "title": "打怪获得金币后背包里共有多少金币",
       "description": {
         "难度": "Normal",
-        "背景": "角色打败怪物后获得新的金币奖励。",
-        "任务": "计算获得奖励后的金币总数。",
+        "背景": "游戏角色的背包里原本有 coins 枚金币。在一次战斗中，角色打败了怪物，并获得了 reward 枚新的金币奖励。现在需要更新背包里的金币数量，算出获得奖励后一共有多少金币。",
+        "任务": "请把新获得的金币奖励加入原来的金币数量中，并返回更新后的金币总数。",
         "输入": "两个数字：coins 和 reward。",
         "输出": "返回 coins + reward。",
-        "提示": "把新奖励加到原来的金币数上。"
+        "提示": "可以用一个变量表示新的金币总数，让它等于原来的金币数加上奖励金币数。"
       },
       "starter_code": "function solution(coins, reward)\n    return 0\nend",
       "reference_code": "function solution(coins, reward)\n    local totalCoins = coins + reward\n    return totalCoins\nend",
@@ -119,11 +119,11 @@
       "title": "买铅笔和橡皮后还剩多少钱",
       "description": {
         "难度": "Normal",
-        "背景": "学生带着固定金额去文具店购物。",
-        "任务": "计算买完铅笔和橡皮后剩余的钱。",
+        "背景": "一名学生带着 money 元去文具店购物。他准备购买 pencilCount 支铅笔，每支铅笔的价格是 pencilPrice 元；同时还要购买 eraserCount 块橡皮，每块橡皮的价格是 eraserPrice 元。买完这些文具后，需要计算他还剩多少钱。",
+        "任务": "请先分别计算铅笔和橡皮的花费，再用总金额减去两部分花费，最后返回剩余金额。",
         "输入": "五个数字：money、pencilPrice、pencilCount、eraserPrice、eraserCount。",
         "输出": "返回剩余金额。",
-        "提示": "先分别算两种文具花费，再从总金额中减去。"
+        "提示": "可以先计算铅笔总价，再计算橡皮总价，最后从 money 中依次减去这两部分花费。"
       },
       "starter_code": "function solution(money, pencilPrice, pencilCount, eraserPrice, eraserCount)\n    return 0\nend",
       "reference_code": "function solution(money, pencilPrice, pencilCount, eraserPrice, eraserCount)\n    local pencilTotal = pencilPrice * pencilCount\n    local eraserTotal = eraserPrice * eraserCount\n    local leftMoney = money - pencilTotal - eraserTotal\n    return leftMoney\nend",
@@ -156,11 +156,11 @@
       "title": "跑步训练后累计跑了多少米",
       "description": {
         "难度": "Normal",
-        "背景": "运动员每天记录自己已经跑过的总距离。",
-        "任务": "把今天跑的距离加入累计距离。",
+        "背景": "一名运动员每天都会记录自己累计跑过的距离。在今天开始训练前，他已经累计跑了 beforeMeters 米。今天训练结束后，他又跑了 todayMeters 米。现在需要更新他的累计跑步距离。",
+        "任务": "请把今天新增的跑步距离加到原来的累计距离上，并返回新的累计距离。",
         "输入": "两个数字：beforeMeters 和 todayMeters。",
         "输出": "返回新的累计距离。",
-        "提示": "累计量等于原来的值加上新增的值。"
+        "提示": "累计距离等于原来的距离加上今天新增的距离。可以用一个变量保存更新后的结果。"
       },
       "starter_code": "function solution(beforeMeters, todayMeters)\n    return 0\nend",
       "reference_code": "function solution(beforeMeters, todayMeters)\n    local totalMeters = beforeMeters + todayMeters\n    return totalMeters\nend",
@@ -184,11 +184,11 @@
       "title": "两个同学换座位后座位编号如何交换",
       "description": {
         "难度": "Challenge",
-        "背景": "两个同学互换座位，需要更新各自的座位编号。",
-        "任务": "返回交换后的两个座位编号。",
+        "背景": "教室里有两名同学需要互换座位。第一名同学原来的座位编号是 seatA，第二名同学原来的座位编号是 seatB。换座位之后，第一名同学应该坐到第二名同学原来的座位，第二名同学也应该坐到第一名同学原来的座位。",
+        "任务": "请使用变量交换两个座位编号，并返回交换后的 seatA 和 seatB。",
         "输入": "两个数字：seatA 和 seatB。",
         "输出": "返回两个值：新的 seatA 和新的 seatB。",
-        "提示": "使用临时变量保存其中一个座位编号。"
+        "提示": "交换两个变量的值时，可以先用临时变量保存其中一个座位编号，避免原来的值被覆盖。"
       },
       "starter_code": "function solution(seatA, seatB)\n    return seatA, seatB\nend",
       "reference_code": "function solution(seatA, seatB)\n    local temp = seatA\n    seatA = seatB\n    seatB = temp\n    return seatA, seatB\nend",
@@ -212,11 +212,11 @@
       "title": "游戏角色先受伤再回血后剩多少血量",
       "description": {
         "难度": "Challenge",
-        "背景": "角色先被攻击，然后吃药水回血。",
-        "任务": "计算两次状态变化后的血量。",
+        "背景": "游戏角色当前有 hp 点血量。在一次战斗中，角色先受到了 damage 点伤害，血量会减少；随后角色使用药水恢复了 heal 点血量，血量又会增加。现在需要按照事情发生的先后顺序，计算角色最终剩下多少血量。",
+        "任务": "请先把角色当前血量保存到变量中，再依次处理受伤和回血两个变化，最后返回更新后的血量。",
         "输入": "三个数字：hp、damage 和 heal。",
         "输出": "返回 hp - damage + heal。",
-        "提示": "按事情发生的顺序更新血量。"
+        "提示": "这道题需要按顺序更新变量：先减去受到的伤害，再加上恢复的血量。"
       },
       "starter_code": "function solution(hp, damage, heal)\n    return 0\nend",
       "reference_code": "function solution(hp, damage, heal)\n    local currentHp = hp\n    currentHp = currentHp - damage\n    currentHp = currentHp + heal\n    return currentHp\nend",
@@ -243,11 +243,11 @@
       "title": "商店打包购买后计算总价和找零",
       "description": {
         "难度": "Challenge",
-        "背景": "商店里一个礼包有固定价格，学生购买多个礼包。",
-        "任务": "计算购买总价和找零。",
+        "背景": "商店里出售一种固定价格的礼包，每个礼包的价格是 packPrice 元。学生带着 money 元去购买 packCount 个礼包。付款前需要先计算这些礼包的总价，付款后还需要计算应该找回多少钱。",
+        "任务": "请先根据礼包单价和购买数量计算总价，再用付款金额减去总价计算找零，最后同时返回总价和找零。",
         "输入": "三个数字：money、packPrice 和 packCount。",
         "输出": "返回两个值：总价和找零。",
-        "提示": "先算总价，再用付款金额减去总价。"
+        "提示": "可以先用变量保存礼包总价，再用 money 减去总价得到找零金额，然后按顺序返回这两个值。"
       },
       "starter_code": "function solution(money, packPrice, packCount)\n    return 0, 0\nend",
       "reference_code": "function solution(money, packPrice, packCount)\n    local total = packPrice * packCount\n    local change = money - total\n    return total, change\nend",

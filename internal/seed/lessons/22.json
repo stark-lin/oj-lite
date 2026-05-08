@@ -7,11 +7,11 @@
       "title": "像整理扑克牌一样插入一个新分数",
       "description": {
         "难度": "Simple",
-        "背景": "已有分数从小到大排好，新分数要插入进去。",
-        "任务": "把新分数插入有序数组并保持有序。",
+        "背景": "老师已经把一组分数按照从小到大的顺序整理好，并保存在数组 scores 中。现在又收到一个新的分数 newScore，需要把它插入到原来的有序成绩单里，同时保证插入后的成绩单仍然保持从小到大的顺序。",
+        "任务": "请根据插入排序的思想，把 newScore 插入到有序数组 scores 的合适位置，并返回插入后的新数组。",
         "输入": "三个参数：有序数组 scores、原数量 n、新分数 newScore。",
         "输出": "返回插入后的新数组。",
-        "提示": "先复制较小元素，再放入新分数。"
+        "提示": "可以先把小于 newScore 的元素复制到结果数组中，再放入 newScore，最后复制剩下的元素。"
       },
       "starter_code": "function solution(scores, n, newScore)\n    return {}\nend",
       "reference_code": "function solution(scores, n, newScore)\n    local result = {}\n    local position = 1\n    while position <= n and scores[position] < newScore do\n        result[position] = scores[position]\n        position = position + 1\n    end\n    result[position] = newScore\n    for i = position, n do\n        result[i + 1] = scores[i]\n    end\n    return result\nend",
@@ -48,11 +48,11 @@
       "title": "在已排好队伍中插入一名新同学",
       "description": {
         "难度": "Simple",
-        "背景": "队伍已经按身高从矮到高排好。",
-        "任务": "插入一名新同学后保持队伍有序。",
+        "背景": "体育课上，队伍已经按照身高从矮到高排好，所有同学的身高保存在数组 heights 中。现在来了一名新同学，他的身高是 newHeight。老师需要把这名新同学插入到合适的位置，使队伍仍然保持从矮到高的顺序。",
+        "任务": "请把 newHeight 插入到已经有序的身高数组 heights 中，并返回插入后的新身高数组。",
         "输入": "三个参数：身高数组 heights、原人数 n、新身高 newHeight。",
         "输出": "返回插入后的身高数组。",
-        "提示": "找到第一个不小于新身高的位置。"
+        "提示": "可以从前往后查找第一个不小于 newHeight 的位置，把新身高放在这个位置，再把后面的身高依次后移。"
       },
       "starter_code": "function solution(heights, n, newHeight)\n    return {}\nend",
       "reference_code": "function solution(heights, n, newHeight)\n    local result = {}\n    local position = 1\n    while position <= n and heights[position] < newHeight do\n        result[position] = heights[position]\n        position = position + 1\n    end\n    result[position] = newHeight\n    for i = position, n do\n        result[i + 1] = heights[i]\n    end\n    return result\nend",
@@ -88,11 +88,11 @@
       "title": "找出排序后成绩单中的中间分数",
       "description": {
         "难度": "Simple",
-        "背景": "成绩已经从小到大排好。",
-        "任务": "读取中间位置的分数。",
+        "背景": "老师已经把成绩单按照从小到大的顺序排好，并保存在数组 scores 中。为了了解成绩的中间水平，需要读取位于中间位置的分数。如果学生人数是偶数，则按照题目规则返回靠左的那个中间分数。",
+        "任务": "请根据人数 n 找到成绩单的中间位置，并返回 scores 中对应位置的分数。",
         "输入": "两个参数：有序成绩数组 scores 和人数 n。",
         "输出": "返回中间分数；偶数人数返回靠左的中间分数。",
-        "提示": "用循环计算中间下标，避免使用 math 函数。"
+        "提示": "可以用循环计算中间下标，避免使用 math 函数。每次让计数前进两个位置时，中间下标前进一步。"
       },
       "starter_code": "function solution(scores, n)\n    return 0\nend",
       "reference_code": "function solution(scores, n)\n    local mid = 1\n    local count = 1\n    while count + 2 <= n do\n        mid = mid + 1\n        count = count + 2\n    end\n    return scores[mid]\nend",
@@ -127,11 +127,11 @@
       "title": "合并两个班已经排好序的成绩单",
       "description": {
         "难度": "Normal",
-        "背景": "两个班成绩都已经从小到大排好。",
-        "任务": "合并成一个仍然有序的新成绩单。",
+        "背景": "两个班分别整理好了自己的成绩单，两个数组 a 和 b 都已经按照从小到大的顺序排列。现在老师需要把两个班的成绩合并成一份总成绩单，并且合并后的成绩仍然保持从小到大的顺序。",
+        "任务": "请把两个已经有序的成绩数组 a 和 b 合并成一个新的有序数组，并返回合并结果。",
         "输入": "四个参数：数组 a、数量 n、数组 b、数量 m。",
         "输出": "返回合并后的数组。",
-        "提示": "用两个下标分别指向两个数组当前位置。"
+        "提示": "可以用两个下标分别指向两个数组当前要比较的位置，每次把较小的元素放入结果数组。"
       },
       "starter_code": "function solution(a, n, b, m)\n    return {}\nend",
       "reference_code": "function solution(a, n, b, m)\n    local result = {}\n    local i = 1\n    local j = 1\n    local k = 1\n    while i <= n and j <= m do\n        if a[i] <= b[j] then\n            result[k] = a[i]\n            i = i + 1\n        else\n            result[k] = b[j]\n            j = j + 1\n        end\n        k = k + 1\n    end\n    while i <= n do\n        result[k] = a[i]\n        i = i + 1\n        k = k + 1\n    end\n    while j <= m do\n        result[k] = b[j]\n        j = j + 1\n        k = k + 1\n    end\n    return result\nend",
@@ -176,11 +176,11 @@
       "title": "排序后找出成绩前三名",
       "description": {
         "难度": "Normal",
-        "背景": "成绩已经按从高到低排好。",
-        "任务": "读取前三名成绩。",
+        "背景": "一次比赛结束后，成绩已经按照从高到低的顺序排好，并保存在数组 scores 中。数组最前面的成绩就是排名最高的成绩。现在需要从这份已经排序的成绩单中取出前三名成绩，用于公布获奖名单。",
+        "任务": "请读取 scores 数组中的前 3 个成绩，并把它们按原顺序保存到新数组 top 中返回。",
         "输入": "两个参数：降序成绩数组 scores 和人数 n。",
         "输出": "返回前三名组成的数组。",
-        "提示": "题目保证 n 至少为 3。"
+        "提示": "题目保证 n 至少为 3。可以直接循环读取 scores[1]、scores[2] 和 scores[3]。"
       },
       "starter_code": "function solution(scores, n)\n    return {}\nend",
       "reference_code": "function solution(scores, n)\n    local top = {}\n    for i = 1, 3 do\n        top[i] = scores[i]\n    end\n    return top\nend",
@@ -218,11 +218,11 @@
       "title": "统计排序后有多少个不同的分数",
       "description": {
         "难度": "Normal",
-        "背景": "成绩已经从小到大排好，相同分数会挨在一起。",
-        "任务": "统计不同分数的数量。",
+        "背景": "老师已经把成绩按照从小到大的顺序排好，并保存在数组 scores 中。由于数组已经有序，相同的分数一定会相邻出现。现在需要统计这份成绩单中一共有多少种不同的分数。",
+        "任务": "请遍历有序成绩数组 scores，统计不同分数的数量，并返回统计结果。",
         "输入": "两个参数：有序成绩数组 scores 和人数 n。",
         "输出": "返回不同分数数量。",
-        "提示": "只在当前分数和前一个不同时计数。"
+        "提示": "如果 n 为 0，直接返回 0。否则先把第一个分数算作一种，之后只在当前分数和前一个分数不同时增加计数。"
       },
       "starter_code": "function solution(scores, n)\n    return 0\nend",
       "reference_code": "function solution(scores, n)\n    if n == 0 then\n        return 0\n    end\n    local count = 1\n    for i = 2, n do\n        if scores[i] ~= scores[i - 1] then\n            count = count + 1\n        end\n    end\n    return count\nend",
@@ -255,11 +255,11 @@
       "title": "处理成绩排行榜中的并列名次",
       "description": {
         "难度": "Challenge",
-        "背景": "相同成绩的同学名次相同，后面的名次要跳过。",
-        "任务": "根据降序成绩生成名次数组。",
+        "背景": "比赛成绩已经按照从高到低的顺序排列，并保存在数组 scores 中。排行榜规则规定：相同成绩的同学名次相同，后面的名次要按照实际位置跳过。例如两个同学并列第 1 名，那么下一名就是第 3 名。",
+        "任务": "请根据降序成绩数组 scores 生成对应的名次数组 ranks，并返回这个数组。",
         "输入": "两个参数：降序成绩数组 scores 和人数 n。",
         "输出": "返回名次数组 ranks。",
-        "提示": "如果当前成绩等于前一个成绩，名次也等于前一个名次。"
+        "提示": "如果当前成绩等于前一个成绩，当前名次就等于前一个名次；否则当前名次等于当前位置 i。"
       },
       "starter_code": "function solution(scores, n)\n    return {}\nend",
       "reference_code": "function solution(scores, n)\n    local ranks = {}\n    if n == 0 then\n        return ranks\n    end\n    ranks[1] = 1\n    for i = 2, n do\n        if scores[i] == scores[i - 1] then\n            ranks[i] = ranks[i - 1]\n        else\n            ranks[i] = i\n        end\n    end\n    return ranks\nend",
@@ -295,11 +295,11 @@
       "title": "合并两个有序图书编号表并保持有序",
       "description": {
         "难度": "Challenge",
-        "背景": "两个图书编号表都已经从小到大排列。",
-        "任务": "把两个编号表合并成一个有序表。",
+        "背景": "图书馆有两份图书编号表，数组 a 和数组 b 都已经按照从小到大的顺序排列。现在管理员需要把这两份编号表合并成一份完整编号表，并且合并后的编号仍然保持从小到大的顺序。",
+        "任务": "请合并两个有序图书编号数组 a 和 b，生成一个新的有序编号数组并返回。",
         "输入": "四个参数：数组 a、数量 n、数组 b、数量 m。",
         "输出": "返回合并后的编号数组。",
-        "提示": "这和合并两个有序成绩单的方法相同。"
+        "提示": "这和合并两个有序成绩单的方法相同。可以用两个下标分别比较两个数组当前的编号，把较小的编号放入结果数组。"
       },
       "starter_code": "function solution(a, n, b, m)\n    return {}\nend",
       "reference_code": "function solution(a, n, b, m)\n    local result = {}\n    local i = 1\n    local j = 1\n    local k = 1\n    while i <= n and j <= m do\n        if a[i] <= b[j] then\n            result[k] = a[i]\n            i = i + 1\n        else\n            result[k] = b[j]\n            j = j + 1\n        end\n        k = k + 1\n    end\n    while i <= n do\n        result[k] = a[i]\n        i = i + 1\n        k = k + 1\n    end\n    while j <= m do\n        result[k] = b[j]\n        j = j + 1\n        k = k + 1\n    end\n    return result\nend",
@@ -344,11 +344,11 @@
       "title": "排序后去掉重复编号并统计剩余数量",
       "description": {
         "难度": "Challenge",
-        "背景": "编号已经排序，重复编号会相邻。",
-        "任务": "生成去重后的编号数组，并统计数量。",
+        "背景": "一组编号已经按照从小到大的顺序排好，并保存在数组 ids 中。因为数组已经有序，所以重复编号一定会相邻出现。现在需要把重复编号去掉，只保留每种编号第一次出现的结果，并统计去重后还剩多少个编号。",
+        "任务": "请遍历有序编号数组 ids，生成去重后的数组 unique，并统计去重后的数量 count，最后同时返回 unique 和 count。",
         "输入": "两个参数：有序编号数组 ids 和数量 n。",
         "输出": "返回两个值：去重数组 unique 和剩余数量 count。",
-        "提示": "只在当前编号和前一个编号不同时加入新数组。"
+        "提示": "只在当前位置是第一个元素，或者当前编号和前一个编号不同时，才把当前编号加入 unique。"
       },
       "starter_code": "function solution(ids, n)\n    return {}, 0\nend",
       "reference_code": "function solution(ids, n)\n    local unique = {}\n    local count = 0\n    for i = 1, n do\n        if i == 1 or ids[i] ~= ids[i - 1] then\n            count = count + 1\n            unique[count] = ids[i]\n        end\n    end\n    return unique, count\nend",
