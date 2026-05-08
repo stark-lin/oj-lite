@@ -224,7 +224,7 @@
       font-size: var(--editor-font-size);
       line-height: var(--editor-line-height);
       white-space: pre;
-      tab-size: 2;
+      tab-size: 4;
     }
 
     .editor-highlight {
@@ -1216,7 +1216,7 @@
     renderStatusbar();
   }
 
-  const EDITOR_INDENT = '  ';
+  const EDITOR_INDENT = '    ';
 
   function replaceEditorSelection(textarea, insertion, start = textarea.selectionStart, end = textarea.selectionEnd) {
     pushEditorUndoSnapshot(textarea);
