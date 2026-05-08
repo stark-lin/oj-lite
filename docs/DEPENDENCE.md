@@ -64,7 +64,7 @@ end
 %% Layer 5
 %% =========================
 subgraph L5["Layer 5 - Runtime State"]
-    DATA[("data/oj-lite.db")]
+    DATA[("oj-lite.db")]
 end
 
 %% =========================
@@ -194,7 +194,7 @@ Notes:
 
 - `arch-go` enforces package imports, not database runtime behavior.
 - The dotted SQLite arrows remain architectural documentation for packages that
-  directly read or write `data/oj-lite.db` through `*sql.DB`.
+  directly read or write `oj-lite.db` through `*sql.DB`.
 - `internal/platform/clock` and `internal/platform/ids` are platform leaf
   packages. They have no current production imports but are included in
   `arch-go.yml` so dependency-rule coverage stays at 100%.

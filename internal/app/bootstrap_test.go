@@ -3,15 +3,11 @@ package app
 import (
 	"context"
 	"database/sql"
-	"path/filepath"
 	"testing"
 )
 
 func TestBootstrapWithOptionsSeedsFreshDatabaseByDefault(t *testing.T) {
-	t.Setenv("APP_NAME", "oj-lite-test")
-	t.Setenv("APP_ENV", "test")
-	t.Setenv("DB_PATH", filepath.Join(t.TempDir(), "oj-lite.db"))
-	t.Setenv("GIN_MODE", "test")
+	t.Chdir(t.TempDir())
 
 	application, err := BootstrapWithOptions(BootstrapOptions{})
 	if err != nil {
@@ -29,12 +25,7 @@ func TestBootstrapWithOptionsSeedsFreshDatabaseByDefault(t *testing.T) {
 }
 
 func TestBootstrapWithOptionsSkipsSeed(t *testing.T) {
-	dbPath := filepath.Join(t.TempDir(), "oj-lite.db")
-
-	t.Setenv("APP_NAME", "oj-lite-test")
-	t.Setenv("APP_ENV", "test")
-	t.Setenv("DB_PATH", dbPath)
-	t.Setenv("GIN_MODE", "test")
+	t.Chdir(t.TempDir())
 
 	application, err := BootstrapWithOptions(BootstrapOptions{
 		SkipSeed: true,

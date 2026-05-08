@@ -16,7 +16,7 @@ func TestOpenAndMigrate(t *testing.T) {
 	t.Parallel()
 
 	ctx := context.Background()
-	dbPath := filepath.Join(t.TempDir(), "data", "oj-lite.db")
+	dbPath := filepath.Join(t.TempDir(), "oj-lite.db")
 
 	database, err := Open(ctx, config.DBConfig{
 		Path:        dbPath,
@@ -52,7 +52,7 @@ func TestMigrateRejectsSchemaWithoutSingleClassroomConstraint(t *testing.T) {
 	t.Parallel()
 
 	ctx := context.Background()
-	dbPath := filepath.Join(t.TempDir(), "data", "missing_single_classroom.db")
+	dbPath := filepath.Join(t.TempDir(), "missing_single_classroom.db")
 
 	database, err := Open(ctx, config.DBConfig{
 		Path:        dbPath,
@@ -185,7 +185,7 @@ func TestMigrateRejectsLegacySchema(t *testing.T) {
 	t.Parallel()
 
 	ctx := context.Background()
-	dbPath := filepath.Join(t.TempDir(), "data", "legacy.db")
+	dbPath := filepath.Join(t.TempDir(), "legacy.db")
 
 	database, err := Open(ctx, config.DBConfig{
 		Path:        dbPath,
