@@ -1,0 +1,19 @@
+{
+  "title": "Week 04 - 累加、平均与累计",
+  "description": "练习对数组表中的数值进行累加。",
+  "sort_order": 8,
+  "questions": [
+    {
+      "title": "计算金币奖励总数",
+      "description": {
+        "statement": "返回数组中所有金币奖励的总和。",
+        "input": "一个由数字组成的数组表。",
+        "output": "总和。"
+      },
+      "starter_code": "function solution(values)\n    return 0\nend",
+      "reference_code": "function solution(values)\n    local total = 0\n    for i = 1, #values do\n        total = total + values[i]\n    end\n    return total\nend",
+      "test_cases": [{"args": [[1, 2, 3]]}, {"args": [[5, 5, 10]]}, {"args": [[7]]}],
+      "sort_order": 1
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "title": "Week 12 - Integrated Math Algorithm Projects",
+  "description": "Practice combining array statistics and classification.",
+  "sort_order": 23,
+  "questions": [
+    {
+      "title": "Class Score Analysis",
+      "description": {
+        "statement": "Return the total score and the number of passing scores.",
+        "input": "One array table of scores.",
+        "output": "Two return values: total and pass count."
+      },
+      "starter_code": "function solution(scores)\n    return 0, 0\nend",
+      "reference_code": "function solution(scores)\n    local total = 0\n    local passCount = 0\n    for i = 1, #scores do\n        total = total + scores[i]\n        if scores[i] >= 60 then\n            passCount = passCount + 1\n        end\n    end\n    return total, passCount\nend",
+      "test_cases": [{"args": [[80, 50, 70]]}, {"args": [[60, 60, 59]]}, {"args": [[100]]}],
+      "sort_order": 1
+    }
+  ]
+}

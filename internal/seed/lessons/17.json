@@ -1,0 +1,19 @@
+{
+  "title": "Week 09 - Search and Binary Search",
+  "description": "Practice linear search and position reporting.",
+  "sort_order": 17,
+  "questions": [
+    {
+      "title": "Search for a Student Number",
+      "description": {
+        "statement": "Return the first 1-based position of target in the array, or 0 if it is missing.",
+        "input": "An array table and a target number.",
+        "output": "The first position, or 0."
+      },
+      "starter_code": "function solution(numbers, target)\n    return 0\nend",
+      "reference_code": "function solution(numbers, target)\n    for i = 1, #numbers do\n        if numbers[i] == target then\n            return i\n        end\n    end\n    return 0\nend",
+      "test_cases": [{"args": [[3, 5, 7], 5]}, {"args": [[10, 20, 30], 40]}, {"args": [[1, 1, 2], 1]}],
+      "sort_order": 1
+    }
+  ]
+}

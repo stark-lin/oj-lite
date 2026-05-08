@@ -1,0 +1,19 @@
+{
+  "title": "Week 01 - Variables",
+  "description": "Practice sequential calculation and variable updates.",
+  "sort_order": 1,
+  "questions": [
+    {
+      "title": "How Much Health Is Left After an Attack",
+      "description": {
+        "statement": "Return the remaining health after a game character takes damage.",
+        "input": "Two numbers: hp and damage.",
+        "output": "hp - damage."
+      },
+      "starter_code": "function solution(hp, damage)\n    return 0\nend",
+      "reference_code": "function solution(hp, damage)\n    local remainHp = hp - damage\n    return remainHp\nend",
+      "test_cases": [[100, 25], [80, 35], [50, 0]],
+      "sort_order": 1
+    }
+  ]
+}

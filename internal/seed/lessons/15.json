@@ -1,0 +1,19 @@
+{
+  "title": "Week 08 - Array Statistics and Extremes",
+  "description": "Practice finding an extreme value in an array.",
+  "sort_order": 15,
+  "questions": [
+    {
+      "title": "Find the Highest Score",
+      "description": {
+        "statement": "Return the maximum value in the score array.",
+        "input": "One non-empty array table of scores.",
+        "output": "The highest score."
+      },
+      "starter_code": "function solution(scores)\n    return 0\nend",
+      "reference_code": "function solution(scores)\n    local best = scores[1]\n    for i = 2, #scores do\n        if scores[i] > best then\n            best = scores[i]\n        end\n    end\n    return best\nend",
+      "test_cases": [{"args": [[80, 90, 75]]}, {"args": [[60, 70, 85]]}, {"args": [[99]]}],
+      "sort_order": 1
+    }
+  ]
+}

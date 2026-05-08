@@ -1,0 +1,19 @@
+{
+  "title": "Week 04 - Sum, Average, and Accumulation",
+  "description": "Practice accumulating values from an array table.",
+  "sort_order": 7,
+  "questions": [
+    {
+      "title": "Calculate the Total Coin Reward",
+      "description": {
+        "statement": "Return the sum of all coin rewards in the array.",
+        "input": "One array table of numbers.",
+        "output": "The total sum."
+      },
+      "starter_code": "function solution(values)\n    return 0\nend",
+      "reference_code": "function solution(values)\n    local total = 0\n    for i = 1, #values do\n        total = total + values[i]\n    end\n    return total\nend",
+      "test_cases": [{"args": [[1, 2, 3]]}, {"args": [[5, 5, 10]]}, {"args": [[7]]}],
+      "sort_order": 1
+    }
+  ]
+}

@@ -22,6 +22,10 @@ func TestSeedDemoAccounts(t *testing.T) {
 		t.Fatalf("seed demo accounts: %v", err)
 	}
 
+	lessonCountAfterFirstSeed := queryCount(t, database, "SELECT COUNT(*) FROM lesson;")
+	questionCountAfterFirstSeed := queryCount(t, database, "SELECT COUNT(*) FROM question;")
+	lessonQuestionCountAfterFirstSeed := queryCount(t, database, "SELECT COUNT(*) FROM lesson_question;")
+
 	if err := SeedDemoAccounts(ctx, database); err != nil {
 		t.Fatalf("run idempotent demo seed: %v", err)
 	}
@@ -30,23 +34,26 @@ func TestSeedDemoAccounts(t *testing.T) {
 	assertTextValue(t, database, "SELECT role FROM user_account WHERE username = 'student';", "student")
 	assertCountAtLeast(t, database, "SELECT COUNT(*) FROM classroom WHERE name = 'teacher_demo_classroom';", 1)
 	assertCountAtLeast(t, database, "SELECT COUNT(*) FROM classroom WHERE name = 'example_classroom';", 1)
-	assertCountAtLeast(t, database, `
+	assertCountEquals(t, database, "SELECT COUNT(*) FROM lesson;", embeddedLessonCount)
+	assertCountEquals(t, database, "SELECT COUNT(*) FROM question;", embeddedLessonCount)
+	assertCountEquals(t, database, "SELECT COUNT(*) FROM lesson_question;", embeddedLessonCount)
+	assertCountEquals(t, database, `
 		SELECT COUNT(*)
 		FROM lesson
-		WHERE title = 'example_lesson';
-	`, 1)
-	assertCountAtLeast(t, database, `
+		WHERE sort_order BETWEEN 1 AND 24;
+	`, embeddedLessonCount)
+	assertCountEquals(t, database, `
 		SELECT COUNT(*)
-		FROM question
-		WHERE title = 'example_question';
-	`, 1)
-	assertCountAtLeast(t, database, `
-		SELECT COUNT(*)
-		FROM lesson_question lq
-		JOIN lesson l ON l.id = lq.lesson_id
-		JOIN question q ON q.id = lq.question_id
-		WHERE l.title = 'example_lesson' AND q.title = 'example_question';
-	`, 1)
+		FROM (
+			SELECT lesson_id
+			FROM lesson_question
+			GROUP BY lesson_id
+			HAVING COUNT(*) = 1
+		);
+	`, embeddedLessonCount)
+	assertCountEquals(t, database, "SELECT COUNT(*) FROM lesson;", lessonCountAfterFirstSeed)
+	assertCountEquals(t, database, "SELECT COUNT(*) FROM question;", questionCountAfterFirstSeed)
+	assertCountEquals(t, database, "SELECT COUNT(*) FROM lesson_question;", lessonQuestionCountAfterFirstSeed)
 	assertCountEquals(t, database, `
 		SELECT COUNT(*)
 		FROM enrollment e
@@ -55,7 +62,7 @@ func TestSeedDemoAccounts(t *testing.T) {
 		JOIN lesson l ON l.id = e.current_lesson_id
 		WHERE s.username = 'student'
 		  AND c.name = 'teacher_demo_classroom'
-		  AND l.title = 'example_lesson';
+		  AND l.sort_order = 1;
 	`, 1)
 	assertCountEquals(t, database, `
 		SELECT COUNT(*)
@@ -125,6 +132,17 @@ func assertTextValue(t *testing.T, database *sql.DB, query, want string) {
 	if got != want {
 		t.Fatalf("query %q = %q, want %q", query, got, want)
 	}
+}
+
+func queryCount(t *testing.T, database *sql.DB, query string) int {
+	t.Helper()
+
+	var got int
+	if err := database.QueryRowContext(context.Background(), query).Scan(&got); err != nil {
+		t.Fatalf("query %q: %v", query, err)
+	}
+
+	return got
 }
 
 func assertCountAtLeast(t *testing.T, database *sql.DB, query string, want int) {

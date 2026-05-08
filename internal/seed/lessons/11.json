@@ -1,0 +1,19 @@
+{
+  "title": "Week 06 - Quantity Relations and Double Enumeration",
+  "description": "Practice searching possible pairs with two variables.",
+  "sort_order": 11,
+  "questions": [
+    {
+      "title": "Count Ways to Buy Two Types of Candy",
+      "description": {
+        "statement": "Count how many non-negative pairs a and b satisfy a + b = total.",
+        "input": "One integer total.",
+        "output": "The number of valid pairs."
+      },
+      "starter_code": "function solution(total)\n    return 0\nend",
+      "reference_code": "function solution(total)\n    local count = 0\n    for a = 0, total do\n        local b = total - a\n        if b >= 0 then\n            count = count + 1\n        end\n    end\n    return count\nend",
+      "test_cases": [[3], [5], [0]],
+      "sort_order": 1
+    }
+  ]
+}

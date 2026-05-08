@@ -1,0 +1,19 @@
+{
+  "title": "Week 08 - 数组统计与最值",
+  "description": "练习在数组中寻找最值。",
+  "sort_order": 16,
+  "questions": [
+    {
+      "title": "找出最高分",
+      "description": {
+        "statement": "返回成绩数组中的最大值。",
+        "input": "一个非空成绩数组表。",
+        "output": "最高分。"
+      },
+      "starter_code": "function solution(scores)\n    return 0\nend",
+      "reference_code": "function solution(scores)\n    local best = scores[1]\n    for i = 2, #scores do\n        if scores[i] > best then\n            best = scores[i]\n        end\n    end\n    return best\nend",
+      "test_cases": [{"args": [[80, 90, 75]]}, {"args": [[60, 70, 85]]}, {"args": [[99]]}],
+      "sort_order": 1
+    }
+  ]
+}

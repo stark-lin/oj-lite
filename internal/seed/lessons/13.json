@@ -1,0 +1,19 @@
+{
+  "title": "Week 07 - Arrays and Table Data",
+  "description": "Practice array access by index.",
+  "sort_order": 13,
+  "questions": [
+    {
+      "title": "Read a Student Score from a Score Sheet",
+      "description": {
+        "statement": "Return the score at the given 1-based index.",
+        "input": "An array table of scores and one index.",
+        "output": "The score at that index."
+      },
+      "starter_code": "function solution(scores, index)\n    return 0\nend",
+      "reference_code": "function solution(scores, index)\n    return scores[index]\nend",
+      "test_cases": [{"args": [[80, 90, 75], 2]}, {"args": [[60, 70, 85], 3]}, {"args": [[99], 1]}],
+      "sort_order": 1
+    }
+  ]
+}

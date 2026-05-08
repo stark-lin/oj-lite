@@ -125,7 +125,7 @@ Demo accounts are initialized on first startup unless `--skip-seed` is used:
 - `teacher / teacher`
 - `student / student`
 
-The seed data also creates sample classrooms, a lesson, and a question so the full workflow can be tried immediately. Use `--skip-seed` when you want to start from an empty database schema.
+The seed data also creates sample classrooms and the embedded 24-lesson course under `internal/seed/lessons/` so the full workflow can be tried immediately. Use `--skip-seed` when you want to start from an empty database schema.
 
 Common environment variables:
 
@@ -317,7 +317,7 @@ go test ./...
 - `teacher / teacher`
 - `student / student`
 
-同时会写入示例班级、lesson 和 question，方便直接体验完整流程。
+同时会写入示例班级，以及 `internal/seed/lessons/` 中内置的 24 节课程，方便直接体验完整流程。
 
 常用环境变量：
 

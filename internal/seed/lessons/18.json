@@ -1,0 +1,19 @@
+{
+  "title": "Week 09 - 查找与二分查找",
+  "description": "练习线性查找和位置返回。",
+  "sort_order": 18,
+  "questions": [
+    {
+      "title": "查找学生号码的位置",
+      "description": {
+        "statement": "返回 target 在数组中第一次出现的 1 起始位置，如果不存在返回 0。",
+        "input": "一个数组表和一个目标数字。",
+        "output": "第一次出现的位置，或 0。"
+      },
+      "starter_code": "function solution(numbers, target)\n    return 0\nend",
+      "reference_code": "function solution(numbers, target)\n    for i = 1, #numbers do\n        if numbers[i] == target then\n            return i\n        end\n    end\n    return 0\nend",
+      "test_cases": [{"args": [[3, 5, 7], 5]}, {"args": [[10, 20, 30], 40]}, {"args": [[1, 1, 2], 1]}],
+      "sort_order": 1
+    }
+  ]
+}

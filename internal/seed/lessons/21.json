@@ -1,0 +1,19 @@
+{
+  "title": "Week 11 - Sorting Algorithms II and Applications",
+  "description": "Practice inserting a value into a sorted array.",
+  "sort_order": 21,
+  "questions": [
+    {
+      "title": "Insert a New Score into a Sorted List",
+      "description": {
+        "statement": "Return a new sorted array after inserting newScore into an already sorted array.",
+        "input": "A sorted array table and one new score.",
+        "output": "The sorted array after insertion."
+      },
+      "starter_code": "function solution(scores, newScore)\n    return scores\nend",
+      "reference_code": "function solution(scores, newScore)\n    local result = {}\n    local index = 1\n    local inserted = false\n    for i = 1, #scores do\n        if not inserted and newScore < scores[i] then\n            result[index] = newScore\n            index = index + 1\n            inserted = true\n        end\n        result[index] = scores[i]\n        index = index + 1\n    end\n    if not inserted then\n        result[index] = newScore\n    end\n    return result\nend",
+      "test_cases": [{"args": [[60, 70, 90], 80]}, {"args": [[2, 3, 4], 1]}, {"args": [[1, 2], 5]}],
+      "sort_order": 1
+    }
+  ]
+}

@@ -1,10 +1,14 @@
 package seed
 
 import (
+	"bytes"
 	"context"
 	"database/sql"
+	"encoding/json"
 	"errors"
 	"fmt"
+	"io"
+	"strings"
 
 	"oj-lite/internal/platform/password"
 	"oj-lite/internal/platform/user"
@@ -17,13 +21,7 @@ const (
 	demoStudentPassword  = "student"
 	demoClassroomName    = "teacher_demo_classroom"
 	exampleClassroomName = "example_classroom"
-	exampleLessonTitle   = "example_lesson"
-	exampleQuestionTitle = "example_question"
-	exampleQuestionDesc  = `{"Statement":"Return the sum of two numbers.","Input":"Two integers a and b.","Output":"Their sum."}`
-	exampleStarterCode   = "function solution(a, b)\n    return 0\nend"
-	exampleReferenceCode = "function solution(a, b)\n    return a + b\nend"
-	exampleTestCases     = `[[1,2],[3,4],[10,-3]]`
-	exampleLessonOrder   = 100
+	embeddedLessonCount  = 24
 )
 
 func SeedDemoAccounts(ctx context.Context, database *sql.DB) error {
@@ -55,38 +53,25 @@ func SeedDemoAccounts(ctx context.Context, database *sql.DB) error {
 		return err
 	}
 
-	exampleLessonID, err := ensureDemoLesson(
-		ctx,
-		tx,
-		exampleLessonTitle,
-		"An example lesson for the seeded classroom.",
-		exampleLessonOrder,
-	)
+	lessons, err := loadEmbeddedLessons()
 	if err != nil {
 		_ = tx.Rollback()
 		return err
 	}
 
-	exampleQuestionID, err := ensureDemoQuestion(
-		ctx,
-		tx,
-		exampleQuestionTitle,
-		exampleQuestionDesc,
-		exampleStarterCode,
-		exampleReferenceCode,
-		exampleTestCases,
-	)
-	if err != nil {
-		_ = tx.Rollback()
-		return err
+	var firstLessonID int64
+	for _, lesson := range lessons {
+		lessonID, err := ensureEmbeddedLesson(ctx, tx, lesson)
+		if err != nil {
+			_ = tx.Rollback()
+			return err
+		}
+		if firstLessonID == 0 {
+			firstLessonID = lessonID
+		}
 	}
 
-	if err := ensureDemoLessonQuestion(ctx, tx, exampleLessonID, exampleQuestionID, 1); err != nil {
-		_ = tx.Rollback()
-		return err
-	}
-
-	if err := ensureDemoEnrollment(ctx, tx, demoClassroomID, studentID, exampleLessonID); err != nil {
+	if err := ensureDemoEnrollment(ctx, tx, demoClassroomID, studentID, firstLessonID); err != nil {
 		_ = tx.Rollback()
 		return err
 	}
@@ -170,92 +155,263 @@ func ensureDemoClassroom(ctx context.Context, tx *sql.Tx, teacherID int64, name 
 	return classroomID, nil
 }
 
-func ensureDemoLesson(ctx context.Context, tx *sql.Tx, title, description string, sortOrder int) (int64, error) {
+type lessonFile struct {
+	Title       string               `json:"title"`
+	Description string               `json:"description"`
+	SortOrder   int                  `json:"sort_order"`
+	Questions   []lessonQuestionFile `json:"questions"`
+}
+
+type lessonQuestionFile struct {
+	Title         string          `json:"title"`
+	Description   json.RawMessage `json:"description"`
+	StarterCode   string          `json:"starter_code"`
+	ReferenceCode string          `json:"reference_code"`
+	TestCases     json.RawMessage `json:"test_cases"`
+	SortOrder     int             `json:"sort_order"`
+}
+
+type lessonSeed struct {
+	Title       string
+	Description string
+	SortOrder   int
+	Questions   []lessonQuestionSeed
+}
+
+type lessonQuestionSeed struct {
+	Title         string
+	Description   string
+	StarterCode   string
+	ReferenceCode string
+	TestCases     string
+	SortOrder     int
+}
+
+func loadEmbeddedLessons() ([]lessonSeed, error) {
+	lessons := make([]lessonSeed, 0, embeddedLessonCount)
+	for index := 1; index <= embeddedLessonCount; index++ {
+		name := fmt.Sprintf("%d.json", index)
+		content, err := readEmbeddedLesson(name)
+		if err != nil {
+			return nil, fmt.Errorf("read embedded lesson %q: %w", name, err)
+		}
+
+		lesson, err := decodeEmbeddedLesson(name, content, index)
+		if err != nil {
+			return nil, err
+		}
+		lessons = append(lessons, lesson)
+	}
+
+	return lessons, nil
+}
+
+func decodeEmbeddedLesson(name string, content []byte, expectedSortOrder int) (lessonSeed, error) {
+	decoder := json.NewDecoder(bytes.NewReader(content))
+	decoder.DisallowUnknownFields()
+
+	var raw lessonFile
+	if err := decoder.Decode(&raw); err != nil {
+		return lessonSeed{}, fmt.Errorf("decode embedded lesson %q: %w", name, err)
+	}
+
+	var extra json.RawMessage
+	if err := decoder.Decode(&extra); !errors.Is(err, io.EOF) {
+		if err != nil {
+			return lessonSeed{}, fmt.Errorf("decode embedded lesson %q trailing content: %w", name, err)
+		}
+		return lessonSeed{}, fmt.Errorf("decode embedded lesson %q: multiple JSON values", name)
+	}
+
+	return normalizeEmbeddedLesson(name, raw, expectedSortOrder)
+}
+
+func normalizeEmbeddedLesson(name string, raw lessonFile, expectedSortOrder int) (lessonSeed, error) {
+	title := strings.TrimSpace(raw.Title)
+	if title == "" {
+		return lessonSeed{}, fmt.Errorf("embedded lesson %q title is required", name)
+	}
+	if raw.SortOrder != expectedSortOrder {
+		return lessonSeed{}, fmt.Errorf("embedded lesson %q sort_order = %d, want %d", name, raw.SortOrder, expectedSortOrder)
+	}
+	if len(raw.Questions) == 0 {
+		return lessonSeed{}, fmt.Errorf("embedded lesson %q must contain at least one question", name)
+	}
+
+	seenSortOrders := make(map[int]struct{}, len(raw.Questions))
+	questions := make([]lessonQuestionSeed, 0, len(raw.Questions))
+	for index, item := range raw.Questions {
+		questionTitle := strings.TrimSpace(item.Title)
+		if questionTitle == "" {
+			return lessonSeed{}, fmt.Errorf("embedded lesson %q question %d title is required", name, index+1)
+		}
+		if item.SortOrder <= 0 {
+			return lessonSeed{}, fmt.Errorf("embedded lesson %q question %d sort_order must be positive", name, index+1)
+		}
+		if _, exists := seenSortOrders[item.SortOrder]; exists {
+			return lessonSeed{}, fmt.Errorf("embedded lesson %q question sort_order %d is duplicated", name, item.SortOrder)
+		}
+		seenSortOrders[item.SortOrder] = struct{}{}
+
+		description, err := compactJSONObject(item.Description)
+		if err != nil {
+			return lessonSeed{}, fmt.Errorf("embedded lesson %q question %d description: %w", name, index+1, err)
+		}
+
+		testCases, err := compactJSON(item.TestCases)
+		if err != nil {
+			return lessonSeed{}, fmt.Errorf("embedded lesson %q question %d test_cases: %w", name, index+1, err)
+		}
+
+		questions = append(questions, lessonQuestionSeed{
+			Title:         questionTitle,
+			Description:   description,
+			StarterCode:   item.StarterCode,
+			ReferenceCode: item.ReferenceCode,
+			TestCases:     testCases,
+			SortOrder:     item.SortOrder,
+		})
+	}
+
+	return lessonSeed{
+		Title:       title,
+		Description: raw.Description,
+		SortOrder:   raw.SortOrder,
+		Questions:   questions,
+	}, nil
+}
+
+func compactJSON(raw json.RawMessage) (string, error) {
+	raw = bytes.TrimSpace(raw)
+	if len(raw) == 0 || !json.Valid(raw) {
+		return "", fmt.Errorf("must be valid JSON")
+	}
+
+	var buffer bytes.Buffer
+	if err := json.Compact(&buffer, raw); err != nil {
+		return "", fmt.Errorf("must be valid JSON")
+	}
+
+	return buffer.String(), nil
+}
+
+func compactJSONObject(raw json.RawMessage) (string, error) {
+	normalized, err := compactJSON(raw)
+	if err != nil {
+		return "", err
+	}
+
+	var object map[string]any
+	if err := json.Unmarshal([]byte(normalized), &object); err != nil || object == nil {
+		return "", fmt.Errorf("must be a JSON object")
+	}
+
+	return normalized, nil
+}
+
+func ensureEmbeddedLesson(ctx context.Context, tx *sql.Tx, lesson lessonSeed) (int64, error) {
 	var lessonID int64
 	err := tx.QueryRowContext(ctx, `
 		SELECT id
 		FROM lesson
-		WHERE title = ?
+		WHERE sort_order = ?
 		LIMIT 1
-	`, title).Scan(&lessonID)
+	`, lesson.SortOrder).Scan(&lessonID)
 	if err == nil {
+		if _, err := tx.ExecContext(ctx, `
+			UPDATE lesson
+			SET title = ?, description = ?
+			WHERE id = ?
+		`, lesson.Title, lesson.Description, lessonID); err != nil {
+			return 0, fmt.Errorf("update embedded lesson %d: %w", lesson.SortOrder, err)
+		}
+
+		for _, question := range lesson.Questions {
+			if err := ensureEmbeddedQuestion(ctx, tx, lessonID, question); err != nil {
+				return 0, err
+			}
+		}
+
 		return lessonID, nil
 	}
 	if !errors.Is(err, sql.ErrNoRows) {
-		return 0, fmt.Errorf("find demo lesson: %w", err)
+		return 0, fmt.Errorf("find embedded lesson %d: %w", lesson.SortOrder, err)
 	}
 
 	result, err := tx.ExecContext(ctx, `
 		INSERT INTO lesson (title, description, sort_order)
 		VALUES (?, ?, ?)
-	`, title, description, sortOrder)
+	`, lesson.Title, lesson.Description, lesson.SortOrder)
 	if err != nil {
-		return 0, fmt.Errorf("insert demo lesson: %w", err)
+		return 0, fmt.Errorf("insert embedded lesson %d: %w", lesson.SortOrder, err)
 	}
 
 	lessonID, err = result.LastInsertId()
 	if err != nil {
-		return 0, fmt.Errorf("read inserted demo lesson id: %w", err)
+		return 0, fmt.Errorf("read inserted embedded lesson %d id: %w", lesson.SortOrder, err)
+	}
+
+	for _, question := range lesson.Questions {
+		if err := ensureEmbeddedQuestion(ctx, tx, lessonID, question); err != nil {
+			return 0, err
+		}
 	}
 
 	return lessonID, nil
 }
 
-func ensureDemoQuestion(
+func ensureEmbeddedQuestion(
 	ctx context.Context,
 	tx *sql.Tx,
-	title, description, starterCode, referenceCode, testCases string,
-) (int64, error) {
+	lessonID int64,
+	question lessonQuestionSeed,
+) error {
 	var questionID int64
 	err := tx.QueryRowContext(ctx, `
-		SELECT id
-		FROM question
-		WHERE title = ?
+		SELECT q.id
+		FROM lesson_question lq
+		JOIN question q
+		  ON q.id = lq.question_id
+		WHERE lq.lesson_id = ? AND lq.sort_order = ?
 		LIMIT 1
-	`, title).Scan(&questionID)
+	`, lessonID, question.SortOrder).Scan(&questionID)
 	if err == nil {
-		return questionID, nil
+		if _, err := tx.ExecContext(ctx, `
+			UPDATE question
+			SET title = ?,
+			    description = ?,
+			    starter_code = ?,
+			    reference_code = ?,
+			    test_cases = ?
+			WHERE id = ?
+		`, question.Title, question.Description, question.StarterCode, question.ReferenceCode, question.TestCases, questionID); err != nil {
+			return fmt.Errorf("update embedded question sort_order %d: %w", question.SortOrder, err)
+		}
+
+		return nil
 	}
 	if !errors.Is(err, sql.ErrNoRows) {
-		return 0, fmt.Errorf("find demo question: %w", err)
+		return fmt.Errorf("find embedded question sort_order %d: %w", question.SortOrder, err)
 	}
 
 	result, err := tx.ExecContext(ctx, `
 		INSERT INTO question (title, description, starter_code, reference_code, test_cases)
 		VALUES (?, ?, ?, ?, ?)
-	`, title, description, starterCode, referenceCode, testCases)
+	`, question.Title, question.Description, question.StarterCode, question.ReferenceCode, question.TestCases)
 	if err != nil {
-		return 0, fmt.Errorf("insert demo question: %w", err)
+		return fmt.Errorf("insert embedded question sort_order %d: %w", question.SortOrder, err)
 	}
 
 	questionID, err = result.LastInsertId()
 	if err != nil {
-		return 0, fmt.Errorf("read inserted demo question id: %w", err)
-	}
-
-	return questionID, nil
-}
-
-func ensureDemoLessonQuestion(ctx context.Context, tx *sql.Tx, lessonID, questionID int64, sortOrder int) error {
-	var lessonQuestionID int64
-	err := tx.QueryRowContext(ctx, `
-		SELECT id
-		FROM lesson_question
-		WHERE lesson_id = ? AND question_id = ?
-		LIMIT 1
-	`, lessonID, questionID).Scan(&lessonQuestionID)
-	if err == nil {
-		return nil
-	}
-	if !errors.Is(err, sql.ErrNoRows) {
-		return fmt.Errorf("find demo lesson question: %w", err)
+		return fmt.Errorf("read inserted embedded question sort_order %d id: %w", question.SortOrder, err)
 	}
 
 	if _, err := tx.ExecContext(ctx, `
 		INSERT INTO lesson_question (lesson_id, question_id, sort_order)
 		VALUES (?, ?, ?)
-	`, lessonID, questionID, sortOrder); err != nil {
-		return fmt.Errorf("insert demo lesson question: %w", err)
+	`, lessonID, questionID, question.SortOrder); err != nil {
+		return fmt.Errorf("insert embedded lesson question sort_order %d: %w", question.SortOrder, err)
 	}
 
 	return nil

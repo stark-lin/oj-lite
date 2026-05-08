@@ -1,0 +1,19 @@
+{
+  "title": "Week 03 - 计数与分类统计",
+  "description": "练习带条件的循环计数。",
+  "sort_order": 6,
+  "questions": [
+    {
+      "title": "统计从 1 到 n 有多少个偶数",
+      "description": {
+        "statement": "统计从 1 到 n 中出现了多少个偶数。",
+        "input": "一个正整数 n。",
+        "output": "偶数的数量。"
+      },
+      "starter_code": "function solution(n)\n    return 0\nend",
+      "reference_code": "function solution(n)\n    local count = 0\n    for i = 1, n do\n        if i % 2 == 0 then\n            count = count + 1\n        end\n    end\n    return count\nend",
+      "test_cases": [[5], [8], [1]],
+      "sort_order": 1
+    }
+  ]
+}

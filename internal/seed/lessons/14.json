@@ -1,0 +1,19 @@
+{
+  "title": "Week 07 - 数组与表格数据",
+  "description": "练习按下标访问数组。",
+  "sort_order": 14,
+  "questions": [
+    {
+      "title": "读取成绩单中某个学生的分数",
+      "description": {
+        "statement": "返回给定 1 起始下标位置上的分数。",
+        "input": "一个成绩数组表和一个下标。",
+        "output": "该下标上的分数。"
+      },
+      "starter_code": "function solution(scores, index)\n    return 0\nend",
+      "reference_code": "function solution(scores, index)\n    return scores[index]\nend",
+      "test_cases": [{"args": [[80, 90, 75], 2]}, {"args": [[60, 70, 85], 3]}, {"args": [[99], 1]}],
+      "sort_order": 1
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "title": "Week 05 - 因数、倍数与质数",
+  "description": "练习枚举和质数判断。",
+  "sort_order": 10,
+  "questions": [
+    {
+      "title": "判断一个数是否为质数",
+      "description": {
+        "statement": "如果 n 是质数，返回 true。",
+        "input": "一个整数 n。",
+        "output": "质数返回 true，否则返回 false。"
+      },
+      "starter_code": "function solution(n)\n    return false\nend",
+      "reference_code": "function solution(n)\n    if n < 2 then\n        return false\n    end\n    for i = 2, n - 1 do\n        if n % i == 0 then\n            return false\n        end\n    end\n    return true\nend",
+      "test_cases": [[2], [9], [13], [1]],
+      "sort_order": 1
+    }
+  ]
+}

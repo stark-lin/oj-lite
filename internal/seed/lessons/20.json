@@ -1,0 +1,19 @@
+{
+  "title": "Week 10 - 排序算法一",
+  "description": "练习简单选择排序。",
+  "sort_order": 20,
+  "questions": [
+    {
+      "title": "按身高从矮到高排队",
+      "description": {
+        "statement": "返回从小到大排序后的身高数组。",
+        "input": "一个身高数组表。",
+        "output": "排序后的数组表。"
+      },
+      "starter_code": "function solution(heights)\n    return heights\nend",
+      "reference_code": "function solution(heights)\n    for i = 1, #heights - 1 do\n        local minIndex = i\n        for j = i + 1, #heights do\n            if heights[j] < heights[minIndex] then\n                minIndex = j\n            end\n        end\n        local temp = heights[i]\n        heights[i] = heights[minIndex]\n        heights[minIndex] = temp\n    end\n    return heights\nend",
+      "test_cases": [{"args": [[150, 140, 160]]}, {"args": [[3, 1, 2]]}, {"args": [[5]]}],
+      "sort_order": 1
+    }
+  ]
+}

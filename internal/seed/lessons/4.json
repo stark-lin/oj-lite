@@ -1,0 +1,19 @@
+{
+  "title": "Week 02 - 判断与循环",
+  "description": "练习基础条件判断。",
+  "sort_order": 4,
+  "questions": [
+    {
+      "title": "判断考试成绩是否达到及格线",
+      "description": {
+        "statement": "如果分数达到及格线，返回 true。",
+        "input": "一个数字：score。",
+        "output": "score 至少为 60 时返回 true，否则返回 false。"
+      },
+      "starter_code": "function solution(score)\n    return false\nend",
+      "reference_code": "function solution(score)\n    if score >= 60 then\n        return true\n    end\n    return false\nend",
+      "test_cases": [[75], [60], [59]],
+      "sort_order": 1
+    }
+  ]
+}

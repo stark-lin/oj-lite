@@ -17,7 +17,6 @@ import (
 	"oj-lite/internal/platform/logger"
 	platformpassword "oj-lite/internal/platform/password"
 	"oj-lite/internal/platform/session"
-	"oj-lite/internal/seed"
 )
 
 func TestTeacherSimpleCRUDRoutes(t *testing.T) {
@@ -1371,9 +1370,7 @@ func newTestApp(t *testing.T) *App {
 	if err := platformdb.Migrate(context.Background(), database); err != nil {
 		t.Fatalf("migrate test database: %v", err)
 	}
-	if err := seed.SeedDemoAccounts(context.Background(), database); err != nil {
-		t.Fatalf("seed test database: %v", err)
-	}
+	seedTestAccounts(t, database)
 
 	sessions, err := session.NewManager()
 	if err != nil {
@@ -1381,6 +1378,37 @@ func newTestApp(t *testing.T) *App {
 	}
 
 	return NewApp(cfg, logger.NewLogger("app-test"), database, sessions)
+}
+
+func seedTestAccounts(t *testing.T, database *sql.DB) {
+	t.Helper()
+
+	insertTestAccount(t, database, "teacher", "teacher", "teacher")
+	insertTestAccount(t, database, "student", "student", "student")
+}
+
+func insertTestAccount(t *testing.T, database *sql.DB, username, rawPassword, role string) int64 {
+	t.Helper()
+
+	passwordHash, err := platformpassword.Hash(rawPassword)
+	if err != nil {
+		t.Fatalf("hash test account password: %v", err)
+	}
+
+	result, err := database.ExecContext(context.Background(), `
+		INSERT INTO user_account (username, password_hash, role, status)
+		VALUES (?, ?, ?, 'active')
+	`, username, passwordHash, role)
+	if err != nil {
+		t.Fatalf("insert test account: %v", err)
+	}
+
+	id, err := result.LastInsertId()
+	if err != nil {
+		t.Fatalf("test account last insert id: %v", err)
+	}
+
+	return id
 }
 
 func shutdownTestApp(t *testing.T, app *App) {

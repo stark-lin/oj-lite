@@ -57,7 +57,7 @@ Infrastructure layer:
 - `internal/progress/`: teacher progress and submission queries.
 - `internal/judge/`: Lua execution engine, test-case runner, result comparison, and structured reports.
 - `internal/scheduler/`: background pending-submission claiming, concurrency-limited execution, and result writeback.
-- `internal/seed/`: idempotent demo account, classroom, lesson, and question seeding.
+- `internal/seed/`: idempotent demo account, classroom, and embedded lesson-course seeding.
 
 ### `binary_res/`
 

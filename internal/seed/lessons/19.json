@@ -1,0 +1,19 @@
+{
+  "title": "Week 10 - Sorting Algorithms I",
+  "description": "Practice simple selection sorting.",
+  "sort_order": 19,
+  "questions": [
+    {
+      "title": "Line Up Students by Height",
+      "description": {
+        "statement": "Return the heights sorted from small to large.",
+        "input": "One array table of heights.",
+        "output": "A sorted array table."
+      },
+      "starter_code": "function solution(heights)\n    return heights\nend",
+      "reference_code": "function solution(heights)\n    for i = 1, #heights - 1 do\n        local minIndex = i\n        for j = i + 1, #heights do\n            if heights[j] < heights[minIndex] then\n                minIndex = j\n            end\n        end\n        local temp = heights[i]\n        heights[i] = heights[minIndex]\n        heights[minIndex] = temp\n    end\n    return heights\nend",
+      "test_cases": [{"args": [[150, 140, 160]]}, {"args": [[3, 1, 2]]}, {"args": [[5]]}],
+      "sort_order": 1
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "title": "Week 06 - 数量关系与双变量枚举",
+  "description": "练习用两个变量枚举可能方案。",
+  "sort_order": 12,
+  "questions": [
+    {
+      "title": "两种糖果一共有多少种买法",
+      "description": {
+        "statement": "统计有多少组非负整数 a 和 b 满足 a + b = total。",
+        "input": "一个整数 total。",
+        "output": "有效方案数量。"
+      },
+      "starter_code": "function solution(total)\n    return 0\nend",
+      "reference_code": "function solution(total)\n    local count = 0\n    for a = 0, total do\n        local b = total - a\n        if b >= 0 then\n            count = count + 1\n        end\n    end\n    return count\nend",
+      "test_cases": [[3], [5], [0]],
+      "sort_order": 1
+    }
+  ]
+}

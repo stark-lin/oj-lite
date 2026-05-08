@@ -1,0 +1,19 @@
+{
+  "title": "Week 03 - Counting and Classification",
+  "description": "Practice loop counting with a condition.",
+  "sort_order": 5,
+  "questions": [
+    {
+      "title": "Count Even Numbers from 1 to n",
+      "description": {
+        "statement": "Count how many even numbers appear from 1 through n.",
+        "input": "One positive integer n.",
+        "output": "The count of even numbers."
+      },
+      "starter_code": "function solution(n)\n    return 0\nend",
+      "reference_code": "function solution(n)\n    local count = 0\n    for i = 1, n do\n        if i % 2 == 0 then\n            count = count + 1\n        end\n    end\n    return count\nend",
+      "test_cases": [[5], [8], [1]],
+      "sort_order": 1
+    }
+  ]
+}

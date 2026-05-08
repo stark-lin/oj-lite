@@ -1,0 +1,19 @@
+{
+  "title": "Week 12 - 综合数学算法项目",
+  "description": "练习组合数组统计和分类计数。",
+  "sort_order": 24,
+  "questions": [
+    {
+      "title": "班级成绩分析",
+      "description": {
+        "statement": "返回总分和及格分数的数量。",
+        "input": "一个成绩数组表。",
+        "output": "两个返回值：总分和及格数量。"
+      },
+      "starter_code": "function solution(scores)\n    return 0, 0\nend",
+      "reference_code": "function solution(scores)\n    local total = 0\n    local passCount = 0\n    for i = 1, #scores do\n        total = total + scores[i]\n        if scores[i] >= 60 then\n            passCount = passCount + 1\n        end\n    end\n    return total, passCount\nend",
+      "test_cases": [{"args": [[80, 50, 70]]}, {"args": [[60, 60, 59]]}, {"args": [[100]]}],
+      "sort_order": 1
+    }
+  ]
+}

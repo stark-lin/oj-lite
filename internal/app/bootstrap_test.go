@@ -24,6 +24,8 @@ func TestBootstrapWithOptionsSeedsFreshDatabaseByDefault(t *testing.T) {
 		FROM user_account
 		WHERE username IN ('teacher', 'student');
 	`, 2)
+	assertCountEquals(t, application.DB(), "SELECT COUNT(*) FROM lesson;", 24)
+	assertCountEquals(t, application.DB(), "SELECT COUNT(*) FROM lesson_question;", 24)
 }
 
 func TestBootstrapWithOptionsSkipsSeed(t *testing.T) {
