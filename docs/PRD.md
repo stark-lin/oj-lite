@@ -67,6 +67,7 @@ Responsibilities:
 - Teacher and student business login, logout, `GET /api/me`, and password changes.
 - Local admin page and teacher / lesson JSON management APIs.
 - Demo data initialization.
+- Embedded Lua Basic Algorithms bilingual example course.
 - Classroom model: `classroom`, `lesson`, `question`, `lesson_question`, `enrollment`, and `submission`.
 - Lua function-based judging.
 - Asynchronous submission scheduling.
@@ -109,6 +110,23 @@ The current scope does not include:
 - `LessonQuestion`
 - `Submission`
 
+## Example Course
+
+The demo seed includes a complete Lua Basic Algorithms bilingual example course so a new local deployment can be tried without authoring content first.
+
+Course shape:
+
+- Audience: students who have completed Scratch and are moving into text-based programming.
+- Duration: 12 weeks.
+- Lesson count: 24 lessons, with one English lesson and one Chinese lesson for each week.
+- Question count: 216 questions, with 9 questions per lesson.
+- Difficulty structure: each lesson contains Simple, Normal, and Challenge questions.
+- Lesson order: odd-numbered lessons are English; even-numbered lessons are Chinese.
+- Content source: lesson JSON files live under `internal/seed/lessons/`.
+- Teaching outline: [EXAMPLE_LESSONS_EN.md](EXAMPLE_LESSONS_EN.md) and [EXAMPLE_LESSONS_CN.md](EXAMPLE_LESSONS_CN.md).
+
+The example course is demo and starter content, not a product requirement that every deployment must use. Deployments can skip the seed data with `--skip-seed` and maintain their own lesson JSON through the local admin interface.
+
 ## Judging Model
 
 The system uses Lua function-based judging. Student code is expected to define:
@@ -145,11 +163,12 @@ The current MVP should satisfy:
 - A student can only access the current lesson.
 - A student can submit code and receive an asynchronous judge result.
 - A teacher can view classroom-level submissions and completion state.
+- A seeded local deployment includes a usable example classroom and the full 24-lesson bilingual example course.
 - The service can run independently on a local machine or LAN.
 
 ## Current Implementation Notes
 
-The repository currently includes service startup, database initialization, session handling, login/logout, `GET /api/me`, password changes, protected teacher/student pages, the local admin page, admin teacher management, admin lesson JSON management, teacher classroom/student/lesson/question/lesson-question/current-lesson/progress/submission APIs, and student current-lesson/question/submission read and create APIs.
+The repository currently includes service startup, database initialization, session handling, login/logout, `GET /api/me`, password changes, protected teacher/student pages, the local admin page, admin teacher management, admin lesson JSON management, teacher classroom/student/lesson/question/lesson-question/current-lesson/progress/submission APIs, student current-lesson/question/submission read and create APIs, and embedded example-course seeding.
 
 The background scheduler and judge runner are wired in. The current student HTTP submission flow can create a submission, schedule it, judge it asynchronously, and write the result back.
 

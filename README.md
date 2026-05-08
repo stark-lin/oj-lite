@@ -50,6 +50,7 @@ The repository currently provides a runnable classroom practice loop:
 - Background scheduler and judge pipeline for asynchronous submissions.
 - Embedded admin, teacher, student, and login pages.
 - SQLite initialization plus an independent demo seed module.
+- Embedded Lua Basic Algorithms bilingual example course: 12 weeks, 24 lessons, and 216 questions.
 
 Important boundaries:
 
@@ -125,7 +126,15 @@ Demo accounts are initialized on first startup unless `--skip-seed` is used:
 - `teacher / teacher`
 - `student / student`
 
-The seed data also creates sample classrooms and the embedded 24-lesson course under `internal/seed/lessons/` so the full workflow can be tried immediately. Use `--skip-seed` when you want to start from an empty database schema.
+The seed data also creates sample classrooms and the embedded Lua Basic Algorithms bilingual example course under `internal/seed/lessons/` so the full workflow can be tried immediately. Use `--skip-seed` when you want to start from an empty database schema.
+
+The example course is designed for students moving from Scratch to text-based programming:
+
+- 12 weeks, with one English lesson and one Chinese lesson per week.
+- 24 lessons total, ordered by fixed lesson numbers.
+- 9 questions per lesson, split into Simple, Normal, and Challenge levels.
+- 216 questions total, all using the Lua function-based judging model.
+- Teaching outlines are documented in [docs/EXAMPLE_LESSONS_EN.md](docs/EXAMPLE_LESSONS_EN.md) and [docs/EXAMPLE_LESSONS_CN.md](docs/EXAMPLE_LESSONS_CN.md).
 
 Common environment variables:
 
@@ -191,6 +200,7 @@ docs/           Product, API, permission, ER, and other supplemental docs
 - [docs/API_REF.md](docs/API_REF.md): API contract
 - [docs/ER.md](docs/ER.md): core data model
 - [docs/DEPENDENCE.md](docs/DEPENDENCE.md): package dependency graph and architecture check workflow
+- [docs/EXAMPLE_LESSONS_EN.md](docs/EXAMPLE_LESSONS_EN.md) / [docs/EXAMPLE_LESSONS_CN.md](docs/EXAMPLE_LESSONS_CN.md): bundled example course teaching outline
 - [docs/FILES.md](docs/FILES.md): repository layout summary
 
 ### Roadmap
@@ -258,6 +268,7 @@ end
 - 后台 scheduler + judge 异步判题链路。
 - 内嵌 admin、teacher、student 和 login 页面。
 - SQLite 初始化，以及独立的 demo seed 模块。
+- 内置 Lua 基础算法双语示例课程：12 周、24 节 lesson、216 道题。
 
 重要边界：
 
@@ -318,6 +329,14 @@ go test ./...
 - `student / student`
 
 同时会写入示例班级，以及 `internal/seed/lessons/` 中内置的 24 节课程，方便直接体验完整流程。
+
+这套示例课程面向从 Scratch 过渡到文本编程的学生：
+
+- 共 12 周，每周一节 English lesson 和一节中文 lesson。
+- 共 24 节 lesson，使用固定 lesson 编号排序。
+- 每节 lesson 固定 9 道题，分为 Simple、Normal、Challenge 三档。
+- 共 216 道题，全部使用 Lua 函数式判题模型。
+- 教学大纲见 [docs/EXAMPLE_LESSONS_EN.md](docs/EXAMPLE_LESSONS_EN.md) 和 [docs/EXAMPLE_LESSONS_CN.md](docs/EXAMPLE_LESSONS_CN.md)。
 
 常用环境变量：
 
@@ -383,6 +402,8 @@ docs/           产品、接口、权限、ER 等补充文档
 - [docs/API_DESCRIBE.md](docs/API_DESCRIBE.md)：路由总览与当前实现状态
 - [docs/API_REF.md](docs/API_REF.md)：接口契约
 - [docs/ER.md](docs/ER.md)：核心数据模型
+- [docs/DEPENDENCE.md](docs/DEPENDENCE.md)：包依赖图与架构检查流程
+- [docs/EXAMPLE_LESSONS_EN.md](docs/EXAMPLE_LESSONS_EN.md) / [docs/EXAMPLE_LESSONS_CN.md](docs/EXAMPLE_LESSONS_CN.md)：内置示例课程教学大纲
 - [docs/FILES.md](docs/FILES.md)：仓库结构摘要
 
 ### Roadmap
