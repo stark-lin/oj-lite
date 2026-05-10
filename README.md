@@ -89,7 +89,7 @@ Start the service:
 go run ./cmd/server
 ```
 
-By default, the service listens on `0.0.0.0:8080` and stores data at `data/oj-lite.db`.
+On first startup, the service creates `config.json` if it does not exist. By default, it listens on `0.0.0.0:8080` and stores data at `oj-lite.db` in the current working directory.
 
 Start without demo seed data:
 
@@ -136,27 +136,41 @@ The example course is designed for students moving from Scratch to text-based pr
 - 216 questions total, all using the Lua function-based judging model.
 - Teaching outlines are documented in [docs/EXAMPLE_LESSONS_EN.md](docs/EXAMPLE_LESSONS_EN.md) and [docs/EXAMPLE_LESSONS_CN.md](docs/EXAMPLE_LESSONS_CN.md).
 
-Common environment variables:
+Configuration file:
 
-- `APP_NAME`: default `oj-lite`
-- `APP_ENV`: default `local`
-- `HTTP_HOST`: default `0.0.0.0`
-- `HTTP_PORT`: default `8080`
-- `GIN_MODE`: default `debug`
-- `HTTP_READ_TIMEOUT`: default `5s`
-- `HTTP_WRITE_TIMEOUT`: default `10s`
-- `HTTP_IDLE_TIMEOUT`: default `60s`
-- `HTTP_SHUTDOWN_TIMEOUT`: default `10s`
-- `DB_PATH`: default `data/oj-lite.db`
-- `DB_BUSY_TIMEOUT`: default `5s`
-- `SCHEDULER_CONCURRENCY`: default `4`
-- `SCHEDULER_FETCH_BATCH_SIZE`: defaults to `SCHEDULER_CONCURRENCY`
-- `SCHEDULER_IDLE_SLEEP`: default `1s`
+The service reads settings from `config.json`. If the file is missing, startup writes this default file first:
+
+```json
+{
+  "app": {
+    "name": "oj-lite",
+    "env": "local"
+  },
+  "http": {
+    "host": "0.0.0.0",
+    "port": 8080,
+    "gin_mode": "debug",
+    "read_timeout": "5s",
+    "write_timeout": "10s",
+    "idle_timeout": "60s",
+    "shutdown_timeout": "10s"
+  },
+  "db": {
+    "path": "oj-lite.db",
+    "busy_timeout": "5s"
+  },
+  "scheduler": {
+    "concurrency": 4,
+    "fetch_batch_size": 4,
+    "idle_sleep": "1s"
+  }
+}
+```
 
 Notes:
 
 - Database initialization currently supports creating the final schema only from an empty database.
-- If an existing local `data/oj-lite.db` uses an incompatible old schema, delete it and start the service again.
+- If an existing local `oj-lite.db` uses an incompatible old schema, delete it and start the service again.
 
 ### Use Cases And Non-goals
 
@@ -307,7 +321,7 @@ end
 go run ./cmd/server
 ```
 
-默认监听 `0.0.0.0:8080`，默认数据库路径为 `data/oj-lite.db`。
+首次启动时，如果当前运行目录下没有 `config.json`，服务会先写入默认配置文件。默认监听 `0.0.0.0:8080`，默认数据库路径为当前运行目录下的 `oj-lite.db`。
 
 启动后可以访问：
 
@@ -338,27 +352,41 @@ go test ./...
 - 共 216 道题，全部使用 Lua 函数式判题模型。
 - 教学大纲见 [docs/EXAMPLE_LESSONS_EN.md](docs/EXAMPLE_LESSONS_EN.md) 和 [docs/EXAMPLE_LESSONS_CN.md](docs/EXAMPLE_LESSONS_CN.md)。
 
-常用环境变量：
+配置文件：
 
-- `APP_NAME`：默认 `oj-lite`
-- `APP_ENV`：默认 `local`
-- `HTTP_HOST`：默认 `0.0.0.0`
-- `HTTP_PORT`：默认 `8080`
-- `GIN_MODE`：默认 `debug`
-- `HTTP_READ_TIMEOUT`：默认 `5s`
-- `HTTP_WRITE_TIMEOUT`：默认 `10s`
-- `HTTP_IDLE_TIMEOUT`：默认 `60s`
-- `HTTP_SHUTDOWN_TIMEOUT`：默认 `10s`
-- `DB_PATH`：默认 `data/oj-lite.db`
-- `DB_BUSY_TIMEOUT`：默认 `5s`
-- `SCHEDULER_CONCURRENCY`：默认 `4`
-- `SCHEDULER_FETCH_BATCH_SIZE`：默认与 `SCHEDULER_CONCURRENCY` 相同
-- `SCHEDULER_IDLE_SLEEP`：默认 `1s`
+服务从 `config.json` 读取配置。如果文件不存在，启动时会先写入以下默认配置：
+
+```json
+{
+  "app": {
+    "name": "oj-lite",
+    "env": "local"
+  },
+  "http": {
+    "host": "0.0.0.0",
+    "port": 8080,
+    "gin_mode": "debug",
+    "read_timeout": "5s",
+    "write_timeout": "10s",
+    "idle_timeout": "60s",
+    "shutdown_timeout": "10s"
+  },
+  "db": {
+    "path": "oj-lite.db",
+    "busy_timeout": "5s"
+  },
+  "scheduler": {
+    "concurrency": 4,
+    "fetch_batch_size": 4,
+    "idle_sleep": "1s"
+  }
+}
+```
 
 说明：
 
 - 当前数据库初始化只支持空库直接创建最终 schema，不支持旧 schema 的增量迁移。
-- 如果本地已有不兼容的旧版 `data/oj-lite.db`，需要删除后重新启动。
+- 如果本地已有不兼容的旧版 `oj-lite.db`，需要删除后重新启动。
 
 ### 适用场景与非目标
 

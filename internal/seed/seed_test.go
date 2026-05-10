@@ -137,7 +137,7 @@ func openSeedTestDB(t *testing.T, ctx context.Context) *sql.DB {
 	t.Helper()
 
 	database, err := platformdb.Open(ctx, config.DBConfig{
-		Path:        filepath.Join(t.TempDir(), "data", "seed.db"),
+		Path:        filepath.Join(t.TempDir(), "seed.db"),
 		BusyTimeout: 5 * time.Second,
 	})
 	if err != nil {

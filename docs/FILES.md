@@ -15,7 +15,7 @@ oj-lite/
 └─ internal/
 ```
 
-After startup, the service creates `data/oj-lite.db` and SQLite WAL/SHM files by default. That directory is runtime data, not source structure.
+After startup, the service creates `oj-lite.db` and SQLite WAL/SHM files in the current working directory by default. Those files are runtime data, not source structure.
 
 ## Directories
 
@@ -38,7 +38,7 @@ Application wiring layer:
 Infrastructure layer:
 
 - `auth/`: business login, logout, `GET /api/me`, password changes, and current-user context helpers.
-- `config/`: environment-variable configuration.
+- `config/`: JSON file configuration.
 - `db/`: SQLite connection, migration, and embedded SQL.
 - `httpx/`: shared response and error output helpers.
 - `middleware/`: request id, logging, auth, and recover middleware.

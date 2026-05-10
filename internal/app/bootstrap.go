@@ -23,7 +23,11 @@ func Bootstrap() (*App, error) {
 }
 
 func BootstrapWithOptions(options BootstrapOptions) (*App, error) {
-	cfg := config.Load()
+	cfg, err := config.Load()
+	if err != nil {
+		return nil, err
+	}
+
 	log := logger.NewLogger(cfg.App.Name)
 
 	databaseExists, err := databaseFileExists(cfg.DB.Path)

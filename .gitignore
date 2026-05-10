@@ -26,13 +26,11 @@ go.work.sum
 # =========================
 # Local database / runtime data
 # =========================
-data/*.db
-data/*.db-*
-data/*.sqlite
-data/*.sqlite3
-
-# Keep data directory if needed
-!data/.gitkeep
+/config.json
+/oj-lite.db
+/oj-lite.db-*
+/*.sqlite
+/*.sqlite3
 
 # =========================
 # Logs
