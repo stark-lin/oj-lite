@@ -36,7 +36,24 @@ function solution(...)
 end
 ```
 
-Each question stores `description`, `starter_code`, `reference_code`, and `test_cases`. During judging, the reference solution generates the expected result, then the student's return values are compared against it.
+Each question stores `description`, `starter_code`, `reference_code`, and `test_cases`. During judging, the student and reference functions are executed independently for each test case and their return values are compared.
+
+Student and reference code are not executed in a full Lua runtime. Each invocation runs in a fresh restricted Lua state with no standard libraries opened, a judge-provided `print` function, and a fixed 2-second execution timeout. See [docs/JUDGE_MODEL.md](docs/JUDGE_MODEL.md) for the exact scheduler and sandbox model.
+
+### Design Rationale
+
+`oj-lite` is intentionally designed as a small, single-binary classroom practice system.
+
+The project optimizes for:
+
+- Local or LAN deployment.
+- Low operational complexity.
+- SQLite-backed persistence and submission coordination.
+- Bounded background judging.
+- Lua-only function-style exercises.
+- Clear teacher/student permission boundaries.
+
+It does not try to be a public online judge, a contest system, or a multi-tenant LMS. Choices such as SQLite, in-process restricted Lua execution, loopback-only admin access, and embedded pages are deliberate trade-offs for this target environment.
 
 ### Current Features
 
@@ -76,6 +93,21 @@ The current API state is documented in [docs/API_DESCRIBE.md](docs/API_DESCRIBE.
 - [gopher-lua](https://github.com/yuin/gopher-lua)
 
 The application is a monolith. HTTP routing, authentication, judging, scheduling, database initialization, and embedded pages all run in the same process.
+
+### CI/CD
+
+The repository includes a GitHub Actions workflow at [`.github/workflows/ci-cd.yml`](.github/workflows/ci-cd.yml). Its check job runs on pull requests, pushes to `main`, and manual dispatch, and performs:
+
+- `gofmt` verification.
+- Architecture dependency checks with `arch-go`.
+- `go vet ./...`.
+- `go test ./...`.
+
+After the checks pass on a push to `main`, the workflow builds packaged single-binary artifacts for Windows amd64, Linux amd64, Linux arm64, and macOS arm64. It publishes those artifacts in a generated `main-<run_number>-<run_attempt>` GitHub Release.
+
+These are main-branch build releases. The repository does not currently define a separate semver/tag release policy or publish checksums/version metadata.
+
+The automated test suite includes API integration tests for loopback admin access and teacher/student authorization boundaries, plus judge and scheduler tests for restricted Lua execution and submission lifecycle behavior.
 
 ### Quick Start
 
@@ -187,6 +219,7 @@ Not a good fit:
 - General multi-language online judging.
 - Multi-tenant organization collaboration.
 - Full production security for public internet exposure.
+- A production-grade metrics, tracing, or monitoring stack.
 - A complete LMS or production-grade admin console.
 
 ### Repository Layout
@@ -208,12 +241,14 @@ docs/           Product, API, permission, ER, and other supplemental docs
 ```
 
 ### Documentation
+
+- [docs/PERMISSION.md](docs/PERMISSION.md): permission and threat boundary model, including trusted roles, object-level authorization, and database constraints
+- [docs/JUDGE_MODEL.md](docs/JUDGE_MODEL.md): Lua judging model, scheduler lifecycle, sandbox limits, and isolation trade-offs
+- [docs/DEPENDENCE.md](docs/DEPENDENCE.md): package dependency graph and architecture check workflow
 - [docs/PRD.md](docs/PRD.md): product goals, scope, and non-goals
-- [docs/PERMISSION.md](docs/PERMISSION.md): permission boundaries and key validation rules
 - [docs/API_DESCRIBE.md](docs/API_DESCRIBE.md): route overview and current implementation status
 - [docs/API_REF.md](docs/API_REF.md): API contract
 - [docs/ER.md](docs/ER.md): core data model
-- [docs/DEPENDENCE.md](docs/DEPENDENCE.md): package dependency graph and architecture check workflow
 - [docs/EXAMPLE_LESSONS_EN.md](docs/EXAMPLE_LESSONS_EN.md) / [docs/EXAMPLE_LESSONS_CN.md](docs/EXAMPLE_LESSONS_CN.md): bundled example course teaching outline
 - [docs/FILES.md](docs/FILES.md): repository layout summary
 
@@ -268,7 +303,24 @@ function solution(...)
 end
 ```
 
-题目保存 `description`、`starter_code`、`reference_code` 和 `test_cases`，判题时会先运行参考实现生成期望结果，再比较学生代码返回值。
+题目保存 `description`、`starter_code`、`reference_code` 和 `test_cases`，判题时会针对每个测试用例分别独立执行学生实现和参考实现，并比较两者的返回值。
+
+学生代码与参考代码不会运行在完整 Lua runtime 中。每次执行都会创建一个新的受限 Lua state，不打开标准库，只注入判题器提供的 `print` 函数，并应用固定的单次执行 2 秒超时。完整的调度与 sandbox 模型见 [docs/JUDGE_MODEL.md](docs/JUDGE_MODEL.md)。
+
+### 设计理由
+
+`oj-lite` 有意设计为一个规模小、单二进制部署的课堂练习系统。
+
+项目优先考虑：
+
+- 本机或局域网部署。
+- 低运维复杂度。
+- 基于 SQLite 的持久化与提交协调。
+- 有界的后台判题并发。
+- 仅支持 Lua 函数式练习。
+- 清晰的 teacher/student 权限边界。
+
+它不试图成为公开 OJ、竞赛系统或多租户 LMS。SQLite、进程内受限 Lua 执行、仅 loopback 的 admin 入口和内嵌页面，都是针对目标环境作出的明确取舍。
 
 ### 当前能力
 
@@ -308,6 +360,21 @@ end
 - [gopher-lua](https://github.com/yuin/gopher-lua)
 
 整体形态是一个单体服务，HTTP、鉴权、判题调度、数据库初始化和页面都在同一个进程内完成。
+
+### CI/CD
+
+仓库包含 GitHub Actions workflow [`.github/workflows/ci-cd.yml`](.github/workflows/ci-cd.yml)。其中检查任务会在 pull request、推送到 `main` 以及手动触发时运行，执行：
+
+- `gofmt` 校验。
+- 使用 `arch-go` 的架构依赖检查。
+- `go vet ./...`。
+- `go test ./...`。
+
+推送到 `main` 且检查通过后，workflow 会为 Windows amd64、Linux amd64、Linux arm64 和 macOS arm64 构建并打包单二进制产物，并将产物发布到自动生成的 `main-<run_number>-<run_attempt>` GitHub Release。
+
+这些 release 表示主线构建产物；仓库当前尚未定义单独的 semver/tag 正式发布策略，也未发布 checksum 或 version metadata。
+
+自动化测试包含本机 admin loopback 访问和 teacher/student 授权边界的 API 集成测试，以及受限 Lua 执行与 submission 生命周期的 judge/scheduler 测试。
 
 ### 快速开始
 
@@ -403,6 +470,7 @@ go test ./...
 - 多语言通用 OJ。
 - 多租户、组织级协作平台。
 - 面向公网的完整生产安全方案。
+- 生产级 metrics、tracing 或 monitoring 体系。
 - 完整 LMS 或生产级 admin console。
 
 ### 仓库结构
@@ -425,12 +493,13 @@ docs/           产品、接口、权限、ER 等补充文档
 
 ### 文档
 
+- [docs/PERMISSION.md](docs/PERMISSION.md)：权限与威胁边界模型，包括可信角色、对象级授权和数据库约束
+- [docs/JUDGE_MODEL.md](docs/JUDGE_MODEL.md)：Lua 判题模型、调度生命周期、sandbox 限制与隔离取舍
+- [docs/DEPENDENCE.md](docs/DEPENDENCE.md)：包依赖图与架构检查流程
 - [docs/PRD.md](docs/PRD.md)：产品目标、范围与非目标
-- [docs/PERMISSION.md](docs/PERMISSION.md)：权限边界与关键校验规则
 - [docs/API_DESCRIBE.md](docs/API_DESCRIBE.md)：路由总览与当前实现状态
 - [docs/API_REF.md](docs/API_REF.md)：接口契约
 - [docs/ER.md](docs/ER.md)：核心数据模型
-- [docs/DEPENDENCE.md](docs/DEPENDENCE.md)：包依赖图与架构检查流程
 - [docs/EXAMPLE_LESSONS_EN.md](docs/EXAMPLE_LESSONS_EN.md) / [docs/EXAMPLE_LESSONS_CN.md](docs/EXAMPLE_LESSONS_CN.md)：内置示例课程教学大纲
 - [docs/FILES.md](docs/FILES.md)：仓库结构摘要
 

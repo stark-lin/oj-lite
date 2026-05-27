@@ -1,6 +1,8 @@
-# Permission Model
+# Permission and Threat Boundary Model
 
-This document keeps the permission boundaries and validation rules that the implementation must preserve.
+This document defines the permission boundaries, trust assumptions, object-level validation rules, and database constraints that the implementation must preserve.
+
+The primary threat model is student privilege escalation in a local or LAN classroom deployment. The system does not attempt to defend against malicious teachers, local maintainers, or deployers. Judge execution restrictions are documented separately in [JUDGE_MODEL.md](JUDGE_MODEL.md).
 
 ## Trust Boundaries
 
@@ -10,12 +12,11 @@ Trusted side:
 - Deployer.
 - Loopback-only local admin entry point.
 - Teacher.
+- Lesson/question content maintained through local admin, including `reference_code`.
 
 Untrusted side:
 
 - Student.
-
-The design focus is preventing student privilege escalation. It does not attempt to defend against malicious teachers, local maintainers, or deployers.
 
 ## Role Boundaries
 
@@ -25,6 +26,8 @@ The design focus is preventing student privilege escalation. It does not attempt
 - Does not participate in classroom activity.
 - Is not stored in the business `user_account` table.
 - Is currently restricted by loopback IP and has no separate admin session.
+
+The current admin entry point is a local maintenance surface for the intended deployment model, not remote admin authentication.
 
 The current admin can:
 
@@ -85,6 +88,8 @@ The following fields are not trusted inputs:
 ### 4. Content Writes Are Centralized In Local Admin
 
 Lesson and question creation, replacement, and deletion only happen through `/admin/lessons`. The teacher side currently reads global lessons and questions but does not write them.
+
+`reference_code` belongs to this trusted content side. The judge runs it under the same restricted Lua execution model as student code, but the permission model does not treat malicious authoring by local admin or deployer as an adversarial boundary.
 
 ## Object-level Validation
 
