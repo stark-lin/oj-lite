@@ -10,7 +10,7 @@ oj-lite/
 ├─ arch-go.yml
 ├─ go.mod
 ├─ go.sum
-├─ binary_res/
+├─ docs/
 ├─ cmd/
 └─ internal/
 ```
@@ -59,12 +59,13 @@ Infrastructure layer:
 - `internal/scheduler/`: background pending-submission claiming, concurrency-limited execution, and result writeback.
 - `internal/seed/`: idempotent demo account, classroom, and embedded lesson-course seeding.
 
-### `binary_res/`
+### `docs/`
 
 Design and reference documentation:
 
 - `PRD.md`: product scope.
-- `PERMISSION.md`: permission rules.
+- `PERMISSION.md`: permission and threat boundary model.
+- `JUDGE_MODEL.md`: judging, scheduling, and restricted Lua execution model.
 - `API_DESCRIBE.md`: route overview.
 - `API_REF.md`: API contract.
 - `ER.md`: data model.
