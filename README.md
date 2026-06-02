@@ -52,8 +52,11 @@ The project optimizes for:
 - Bounded background judging.
 - Lua-only function-style exercises.
 - Clear teacher/student permission boundaries.
+- An IDE-like student workspace and terminal-style judge feedback that introduce real development workflow vocabulary.
 
 It does not try to be a public online judge, a contest system, or a multi-tenant LMS. Choices such as SQLite, in-process restricted Lua execution, loopback-only admin access, and embedded pages are deliberate trade-offs for this target environment.
+
+The student workspace deliberately resembles a small IDE: it places the problem list, prompt, line-numbered Lua editor with syntax highlighting, submit/reset controls, and result pane in one working view. Judge details are deliberately presented in an ASCII terminal style, with sections such as `JUDGE RESULT`, `CASE`, `INPUT`, `EXPECTED`, `ACTUAL`, and `STDOUT`. The judge still persists and returns structured report data; the ASCII formatting is a UI presentation choice intended to familiarize students with the edit-run-inspect cycle and terminology they will later encounter in real IDE and terminal workflows.
 
 ### Current Features
 
@@ -65,6 +68,7 @@ The repository currently provides a runnable classroom practice loop:
 - Teacher APIs for classrooms, students, lesson/question reads, lesson-question order, current lessons, progress, and submissions.
 - Student APIs for current lesson, question reading, submission creation, submission lists, and submission details.
 - Background scheduler and judge pipeline for asynchronous submissions.
+- IDE-like student workspace with a line-numbered, syntax-highlighted Lua editor and ASCII terminal-style judge report view.
 - Embedded admin, teacher, student, and login pages.
 - SQLite initialization plus an independent demo seed module.
 - Embedded Lua Basic Algorithms bilingual example course: 12 weeks, 24 lessons, and 216 questions.
@@ -319,8 +323,11 @@ end
 - 有界的后台判题并发。
 - 仅支持 Lua 函数式练习。
 - 清晰的 teacher/student 权限边界。
+- 通过 IDE-like 学生工作区和终端风格判题反馈，引入真实开发流程中的常用概念。
 
 它不试图成为公开 OJ、竞赛系统或多租户 LMS。SQLite、进程内受限 Lua 执行、仅 loopback 的 admin 入口和内嵌页面，都是针对目标环境作出的明确取舍。
+
+学生工作区有意采用简化的 IDE-like 布局：题目列表、题面、带行号与 Lua 语法高亮的编辑器、提交/重置操作以及结果面板处于同一个工作视图中。判题详情有意使用 ASCII 终端风格展示，包含 `JUDGE RESULT`、`CASE`、`INPUT`、`EXPECTED`、`ACTUAL`、`STDOUT` 等字段。judge 仍然保存并返回结构化报告数据；ASCII 格式属于 UI 展示选择，目的是让学生提前熟悉“编辑 - 运行 - 检查结果”的循环，以及今后进入真实 IDE 和 terminal 工作流时会遇到的术语。
 
 ### 当前能力
 
@@ -332,6 +339,7 @@ end
 - 教师侧班级、学生、lesson/question 读取、lesson-question、current lesson、progress、submissions 接口。
 - 学生侧当前 lesson、题目读取、提交列表、提交创建与提交详情接口。
 - 后台 scheduler + judge 异步判题链路。
+- IDE-like 学生工作区，提供带行号和语法高亮的 Lua 编辑器，以及 ASCII 终端风格 judge report 视图。
 - 内嵌 admin、teacher、student 和 login 页面。
 - SQLite 初始化，以及独立的 demo seed 模块。
 - 内置 Lua 基础算法双语示例课程：12 周、24 节 lesson、216 道题。

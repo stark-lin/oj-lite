@@ -39,6 +39,30 @@ The implementation currently applies these limits:
 
 The Lua execution limits are hard-coded in `internal/judge`; the stale recovery interval is hard-coded in `internal/scheduler`. Scheduler concurrency and claim batch size are configurable; their default values are both `4`.
 
+## Judge Report Presentation
+
+Judge execution produces structured report data that is persisted with the submission and exposed through the API. The browser UI intentionally renders that data as a monospaced ASCII terminal-style report rather than displaying raw JSON.
+
+The shared UI renderer used by student and teacher views produces sections and labels such as:
+
+```text
+== JUDGE RESULT ==================================================
+VERDICT:   ACCEPTED
+PASSED:    2 / 2 cases
+
+-- CASE 01 --------------------------------------------------------
+STATUS:    PASSED
+INPUT:     ...
+EXPECTED:  ...
+ACTUAL:    ...
+REASON:    ...
+STDOUT:    ...
+
+== END ============================================================
+```
+
+This output format is a presentation-layer teaching choice. Together with the student's IDE-like workspace, line-numbered editor, and syntax highlighting, it exposes students to the edit-run-inspect workflow and terminology used in later IDE and terminal-based programming work. It does not replace the structured `judge_report` or `stdout_buffer` representation in storage and APIs.
+
 ## Security Boundary
 
 This is a lightweight in-process restricted runtime:
