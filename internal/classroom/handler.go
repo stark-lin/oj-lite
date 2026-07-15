@@ -101,7 +101,7 @@ func (handler *handler) CreateClassroom(c *gin.Context) {
 
 	classroom, err := handler.service.CreateClassroom(c.Request.Context(), currentUser.ID, request.Name)
 	if err != nil {
-		handler.log.Errorf("create classroom failed: teacher_id=%d err=%v", currentUser.ID, err)
+		handler.log.Error("create classroom failed", "teacher_id", currentUser.ID, "err", err)
 		httpx.AbortInternal(c, err)
 		return
 	}
@@ -120,7 +120,7 @@ func (handler *handler) ListClassrooms(c *gin.Context) {
 
 	classrooms, err := handler.service.ListClassrooms(c.Request.Context(), currentUser.ID)
 	if err != nil {
-		handler.log.Errorf("list classrooms failed: teacher_id=%d err=%v", currentUser.ID, err)
+		handler.log.Error("list classrooms failed", "teacher_id", currentUser.ID, "err", err)
 		httpx.AbortInternal(c, err)
 		return
 	}
@@ -154,7 +154,7 @@ func (handler *handler) GetClassroom(c *gin.Context) {
 			return
 		}
 
-		handler.log.Errorf("get classroom failed: teacher_id=%d classroom_id=%d err=%v", currentUser.ID, classroomID, err)
+		handler.log.Error("get classroom failed", "teacher_id", currentUser.ID, "classroom_id", classroomID, "err", err)
 		httpx.AbortInternal(c, err)
 		return
 	}
@@ -183,7 +183,7 @@ func (handler *handler) DeleteClassroom(c *gin.Context) {
 			return
 		}
 
-		handler.log.Errorf("delete classroom failed: teacher_id=%d classroom_id=%d err=%v", currentUser.ID, classroomID, err)
+		handler.log.Error("delete classroom failed", "teacher_id", currentUser.ID, "classroom_id", classroomID, "err", err)
 		httpx.AbortInternal(c, err)
 		return
 	}
@@ -233,7 +233,7 @@ func (handler *handler) CreateStudent(c *gin.Context) {
 			return
 		}
 
-		handler.log.Errorf("create student failed: teacher_id=%d classroom_id=%d err=%v", currentUser.ID, classroomID, err)
+		handler.log.Error("create student failed", "teacher_id", currentUser.ID, "classroom_id", classroomID, "err", err)
 		httpx.AbortInternal(c, err)
 		return
 	}
@@ -262,7 +262,7 @@ func (handler *handler) ListStudents(c *gin.Context) {
 			return
 		}
 
-		handler.log.Errorf("list students failed: teacher_id=%d classroom_id=%d err=%v", currentUser.ID, classroomID, err)
+		handler.log.Error("list students failed", "teacher_id", currentUser.ID, "classroom_id", classroomID, "err", err)
 		httpx.AbortInternal(c, err)
 		return
 	}
@@ -300,7 +300,7 @@ func (handler *handler) GetStudent(c *gin.Context) {
 			return
 		}
 
-		handler.log.Errorf("get student failed: teacher_id=%d classroom_id=%d student_id=%d err=%v", currentUser.ID, classroomID, studentID, err)
+		handler.log.Error("get student failed", "teacher_id", currentUser.ID, "classroom_id", classroomID, "student_id", studentID, "err", err)
 		httpx.AbortInternal(c, err)
 		return
 	}
@@ -345,7 +345,7 @@ func (handler *handler) RenameStudent(c *gin.Context) {
 			return
 		}
 
-		handler.log.Errorf("rename student failed: teacher_id=%d classroom_id=%d student_id=%d err=%v", currentUser.ID, classroomID, studentID, err)
+		handler.log.Error("rename student failed", "teacher_id", currentUser.ID, "classroom_id", classroomID, "student_id", studentID, "err", err)
 		httpx.AbortInternal(c, err)
 		return
 	}
@@ -387,7 +387,7 @@ func (handler *handler) ResetStudentPassword(c *gin.Context) {
 			return
 		}
 
-		handler.log.Errorf("reset student password failed: teacher_id=%d classroom_id=%d student_id=%d err=%v", currentUser.ID, classroomID, studentID, err)
+		handler.log.Error("reset student password failed", "teacher_id", currentUser.ID, "classroom_id", classroomID, "student_id", studentID, "err", err)
 		httpx.AbortInternal(c, err)
 		return
 	}
@@ -420,7 +420,7 @@ func (handler *handler) RemoveStudent(c *gin.Context) {
 			return
 		}
 
-		handler.log.Errorf("remove student failed: teacher_id=%d classroom_id=%d student_id=%d err=%v", currentUser.ID, classroomID, studentID, err)
+		handler.log.Error("remove student failed", "teacher_id", currentUser.ID, "classroom_id", classroomID, "student_id", studentID, "err", err)
 		httpx.AbortInternal(c, err)
 		return
 	}
@@ -449,7 +449,7 @@ func (handler *handler) ListClassroomLessons(c *gin.Context) {
 			return
 		}
 
-		handler.log.Errorf("list classroom lessons failed: teacher_id=%d classroom_id=%d err=%v", currentUser.ID, classroomID, err)
+		handler.log.Error("list classroom lessons failed", "teacher_id", currentUser.ID, "classroom_id", classroomID, "err", err)
 		httpx.AbortInternal(c, err)
 		return
 	}
@@ -492,7 +492,7 @@ func (handler *handler) AdvanceCurrentLesson(c *gin.Context) {
 			return
 		}
 
-		handler.log.Errorf("set current lesson failed: teacher_id=%d classroom_id=%d lesson_id=%d err=%v", currentUser.ID, classroomID, request.LessonID, err)
+		handler.log.Error("set current lesson failed", "teacher_id", currentUser.ID, "classroom_id", classroomID, "lesson_id", request.LessonID, "err", err)
 		httpx.AbortInternal(c, err)
 		return
 	}
@@ -521,11 +521,11 @@ func (handler *handler) GetCurrentLesson(c *gin.Context) {
 			return
 		}
 
-		handler.log.Errorf(
-			"get current lesson failed: student_id=%d classroom_id=%d err=%v",
-			currentUser.ID,
-			currentUser.ClassroomID,
-			err,
+		handler.log.Error(
+			"get current lesson failed",
+			"student_id", currentUser.ID,
+			"classroom_id", currentUser.ClassroomID,
+			"err", err,
 		)
 		httpx.AbortInternal(c, err)
 		return
@@ -537,7 +537,7 @@ func (handler *handler) GetCurrentLesson(c *gin.Context) {
 }
 
 func (handler *handler) notImplemented(c *gin.Context, action string) {
-	handler.log.Warnf("classroom scaffold hit: action=%s method=%s path=%s", action, c.Request.Method, c.FullPath())
+	handler.log.Warn("classroom scaffold hit", "action", action, "method", c.Request.Method, "path", c.FullPath())
 	httpx.AbortNotImplemented(c, "classroom scaffold endpoint is not implemented yet", gin.H{
 		"module": "classroom",
 		"action": action,

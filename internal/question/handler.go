@@ -90,7 +90,7 @@ func (handler *handler) CreateQuestion(c *gin.Context) {
 			return
 		}
 
-		handler.log.Errorf("create question failed: teacher_id=%d err=%v", currentUser.ID, err)
+		handler.log.Error("create question failed", "teacher_id", currentUser.ID, "err", err)
 		httpx.AbortInternal(c, err)
 		return
 	}
@@ -109,7 +109,7 @@ func (handler *handler) ListQuestions(c *gin.Context) {
 
 	questions, err := handler.service.ListQuestions(c.Request.Context())
 	if err != nil {
-		handler.log.Errorf("list questions failed: teacher_id=%d err=%v", currentUser.ID, err)
+		handler.log.Error("list questions failed", "teacher_id", currentUser.ID, "err", err)
 		httpx.AbortInternal(c, err)
 		return
 	}
@@ -143,7 +143,7 @@ func (handler *handler) GetQuestion(c *gin.Context) {
 			return
 		}
 
-		handler.log.Errorf("get question failed: teacher_id=%d question_id=%d err=%v", currentUser.ID, questionID, err)
+		handler.log.Error("get question failed", "teacher_id", currentUser.ID, "question_id", questionID, "err", err)
 		httpx.AbortInternal(c, err)
 		return
 	}
@@ -182,12 +182,12 @@ func (handler *handler) GetStudentQuestion(c *gin.Context) {
 			return
 		}
 
-		handler.log.Errorf(
-			"get student question failed: student_id=%d classroom_id=%d lesson_question_id=%d err=%v",
-			currentUser.ID,
-			currentUser.ClassroomID,
-			lessonQuestionID,
-			err,
+		handler.log.Error(
+			"get student question failed",
+			"student_id", currentUser.ID,
+			"classroom_id", currentUser.ClassroomID,
+			"lesson_question_id", lessonQuestionID,
+			"err", err,
 		)
 		httpx.AbortInternal(c, err)
 		return
@@ -199,7 +199,7 @@ func (handler *handler) GetStudentQuestion(c *gin.Context) {
 }
 
 func (handler *handler) notImplemented(c *gin.Context, action string) {
-	handler.log.Warnf("question scaffold hit: action=%s method=%s path=%s", action, c.Request.Method, c.FullPath())
+	handler.log.Warn("question scaffold hit", "action", action, "method", c.Request.Method, "path", c.FullPath())
 	httpx.AbortNotImplemented(c, "question scaffold endpoint is not implemented yet", gin.H{
 		"module": "question",
 		"action": action,

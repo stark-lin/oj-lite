@@ -63,7 +63,7 @@ func (handler *handler) Login(c *gin.Context) {
 			handler.sessions.ClearAPISessionCookie(c)
 			httpx.AbortUnauthorized(c, "invalid username or password")
 		default:
-			handler.log.Errorf("login failed: username=%s err=%v", request.Username, err)
+			handler.log.Error("login failed", "username", request.Username, "err", err)
 			httpx.AbortInternal(c, err)
 		}
 		return
@@ -71,7 +71,7 @@ func (handler *handler) Login(c *gin.Context) {
 
 	claims := handler.sessions.NewClaims(result.User.ID, result.User.Role, result.ClassroomID)
 	if err := handler.sessions.SetAPISessionCookie(c, claims); err != nil {
-		handler.log.Errorf("set api session cookie failed: user_id=%d err=%v", result.User.ID, err)
+		handler.log.Error("set api session cookie failed", "user_id", result.User.ID, "err", err)
 		httpx.AbortInternal(c, err)
 		return
 	}
@@ -103,7 +103,7 @@ func (handler *handler) GetMe(c *gin.Context) {
 			return
 		}
 
-		handler.log.Errorf("get current user failed: user_id=%d err=%v", currentUser.ID, err)
+		handler.log.Error("get current user failed", "user_id", currentUser.ID, "err", err)
 		httpx.AbortInternal(c, err)
 		return
 	}
@@ -147,7 +147,7 @@ func (handler *handler) ChangePassword(c *gin.Context) {
 		case errs.IsUnavailable(err):
 			httpx.AbortNotFound(c, "change password is unavailable")
 		default:
-			handler.log.Errorf("change password failed: user_id=%d err=%v", currentUser.ID, err)
+			handler.log.Error("change password failed", "user_id", currentUser.ID, "err", err)
 			httpx.AbortInternal(c, err)
 		}
 		return
@@ -155,7 +155,7 @@ func (handler *handler) ChangePassword(c *gin.Context) {
 
 	claims := handler.sessions.NewClaims(currentUser.ID, currentUser.Role, currentUser.ClassroomID)
 	if err := handler.sessions.SetAPISessionCookie(c, claims); err != nil {
-		handler.log.Errorf("refresh api session cookie after password change failed: user_id=%d err=%v", currentUser.ID, err)
+		handler.log.Error("refresh api session cookie after password change failed", "user_id", currentUser.ID, "err", err)
 		httpx.AbortInternal(c, err)
 		return
 	}
@@ -166,7 +166,7 @@ func (handler *handler) ChangePassword(c *gin.Context) {
 }
 
 func (handler *handler) notImplemented(c *gin.Context, action string) {
-	handler.log.Warnf("auth scaffold hit: action=%s method=%s path=%s", action, c.Request.Method, c.FullPath())
+	handler.log.Warn("auth scaffold hit", "action", action, "method", c.Request.Method, "path", c.FullPath())
 	httpx.AbortNotImplemented(c, "auth scaffold endpoint is not implemented yet", gin.H{
 		"module": "auth",
 		"action": action,

@@ -71,6 +71,8 @@ Responsibilities:
 - Classroom model: `classroom`, `lesson`, `question`, `lesson_question`, `enrollment`, and `submission`.
 - Lua function-based judging.
 - Asynchronous submission scheduling.
+- IDE-like student workspace with a line-numbered, syntax-highlighted Lua editor.
+- Terminal-style ASCII judge report presentation for student and teacher result inspection.
 - Protected teacher and student pages.
 - Local admin page.
 
@@ -99,6 +101,24 @@ The current scope does not include:
 - Lesson and question writes are centralized in local admin; the teacher side is read-only for content.
 - Low deployment and maintenance complexity takes priority over breadth.
 - The permission model focuses on preventing student privilege escalation.
+- The student UI intentionally introduces an IDE-like edit-run-inspect workflow rather than presenting exercises as isolated form inputs.
+- Judge results intentionally use a terminal-style ASCII presentation in the UI so students become familiar with execution-result vocabulary before moving to full IDE and terminal workflows.
+
+## Learning Experience Design
+
+The student page is intentionally shaped like a compact programming workspace. It combines:
+
+- A current-lesson problem list.
+- A problem statement pane.
+- A Lua editor pane with line numbers and syntax highlighting.
+- Submit and reset actions with modified/saved state.
+- A result pane and status bar.
+
+This is not intended to reproduce every capability of a full IDE. It is a deliberate bridge from guided classroom exercises to the working pattern students will later use in real editors and IDEs: select a task, edit code, run or submit it, read results, and iterate.
+
+Judge details are rendered as a monospaced, ASCII terminal-style report in both student and teacher views. The rendered view labels fields such as `JUDGE RESULT`, `CASE`, `VERDICT`, `INPUT`, `EXPECTED`, `ACTUAL`, `REASON`, and `STDOUT`. This presentation is intended to make test execution and debugging output legible while building familiarity with the vocabulary and visual conventions of terminal-based feedback.
+
+The underlying judge report remains structured JSON for persistence and API delivery. ASCII formatting is a presentation-layer choice, not the judge's stored data model.
 
 ## Core Objects
 
@@ -148,9 +168,9 @@ Each question stores:
 
 Judging flow:
 
-1. Run `reference_code` against the same `test_cases` to generate expected results.
-2. Run the student's `source_code` against the same `test_cases`.
-3. Compare the reference and student return values.
+1. For each test case, execute the student's `source_code` and trusted `reference_code` independently.
+2. Compare their return values.
+3. Capture stdout and runtime information for the structured report.
 4. Produce a verdict, stdout buffer, error message, and judge report.
 5. Write the final result back to the submission.
 

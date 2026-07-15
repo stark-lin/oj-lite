@@ -58,7 +58,7 @@ func (handler *handler) GetClassroomProgress(c *gin.Context) {
 			return
 		}
 
-		handler.log.Errorf("get classroom progress failed: teacher_id=%d classroom_id=%d err=%v", currentUser.ID, classroomID, err)
+		handler.log.Error("get classroom progress failed", "teacher_id", currentUser.ID, "classroom_id", classroomID, "err", err)
 		httpx.AbortInternal(c, err)
 		return
 	}
@@ -94,7 +94,7 @@ func (handler *handler) ListClassroomSubmissions(c *gin.Context) {
 			return
 		}
 
-		handler.log.Errorf("list classroom submissions failed: teacher_id=%d classroom_id=%d err=%v", currentUser.ID, classroomID, err)
+		handler.log.Error("list classroom submissions failed", "teacher_id", currentUser.ID, "classroom_id", classroomID, "err", err)
 		httpx.AbortInternal(c, err)
 		return
 	}
@@ -132,7 +132,7 @@ func (handler *handler) GetClassroomSubmission(c *gin.Context) {
 			return
 		}
 
-		handler.log.Errorf("get classroom submission failed: teacher_id=%d classroom_id=%d submission_id=%d err=%v", currentUser.ID, classroomID, submissionID, err)
+		handler.log.Error("get classroom submission failed", "teacher_id", currentUser.ID, "classroom_id", classroomID, "submission_id", submissionID, "err", err)
 		httpx.AbortInternal(c, err)
 		return
 	}
@@ -165,7 +165,7 @@ func (handler *handler) DeleteClassroomSubmission(c *gin.Context) {
 			return
 		}
 
-		handler.log.Errorf("delete classroom submission failed: teacher_id=%d classroom_id=%d submission_id=%d err=%v", currentUser.ID, classroomID, submissionID, err)
+		handler.log.Error("delete classroom submission failed", "teacher_id", currentUser.ID, "classroom_id", classroomID, "submission_id", submissionID, "err", err)
 		httpx.AbortInternal(c, err)
 		return
 	}
@@ -176,7 +176,7 @@ func (handler *handler) DeleteClassroomSubmission(c *gin.Context) {
 }
 
 func (handler *handler) notImplemented(c *gin.Context, action string) {
-	handler.log.Warnf("progress scaffold hit: action=%s method=%s path=%s", action, c.Request.Method, c.FullPath())
+	handler.log.Warn("progress scaffold hit", "action", action, "method", c.Request.Method, "path", c.FullPath())
 	httpx.AbortNotImplemented(c, "progress scaffold endpoint is not implemented yet", gin.H{
 		"module": "progress",
 		"action": action,

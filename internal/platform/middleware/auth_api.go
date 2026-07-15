@@ -17,7 +17,7 @@ func APIAuth(sessions *session.Manager, log *logger.Logger, allowedRoles ...stri
 		if err != nil {
 			sessions.ClearAPISessionCookie(c)
 			if !session.IsMissingSession(err) {
-				log.Warnf("read api session cookie failed: path=%s err=%v", c.FullPath(), err)
+				log.Warn("read api session cookie failed", "path", c.FullPath(), "err", err)
 			}
 			httpx.AbortUnauthorized(c, "missing or invalid api session")
 			return
@@ -37,7 +37,7 @@ func APIAuth(sessions *session.Manager, log *logger.Logger, allowedRoles ...stri
 		if sessions.ShouldRefresh(claims) {
 			refreshed := sessions.RefreshClaims(claims)
 			if err := sessions.SetAPISessionCookie(c, refreshed); err != nil {
-				log.Errorf("refresh api session cookie failed: user_id=%d err=%v", claims.UserID, err)
+				log.Error("refresh api session cookie failed", "user_id", claims.UserID, "err", err)
 				httpx.AbortInternal(c, err)
 				return
 			}
