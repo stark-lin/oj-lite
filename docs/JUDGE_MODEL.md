@@ -58,11 +58,6 @@ ACTUAL:    ...
 REASON:    ...
 STDOUT:    ...
 
-== END ============================================================
-```
-
-This output format is a presentation-layer teaching choice. Together with the student's IDE-like workspace, line-numbered editor, and syntax highlighting, it exposes students to the edit-run-inspect workflow and terminology used in later IDE and terminal-based programming work. It does not replace the structured `judge_report` or `stdout_buffer` representation in storage and APIs.
-
 ## Security Boundary
 
 This is a lightweight in-process restricted runtime:
