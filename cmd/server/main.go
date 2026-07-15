@@ -42,11 +42,11 @@ func run() int {
 	}
 
 	if err := runApplication(application); err != nil {
-		application.Logger().Errorf("server exited with error: %v", err)
+		application.Logger().Error("server exited with error", "err", err)
 		return 1
 	}
 
-	application.Logger().Infof("server stopped")
+	application.Logger().Info("server stopped")
 	return 0
 }
 
@@ -92,7 +92,7 @@ func runApplication(application *app.App) error {
 		}
 	case <-ctx.Done():
 		cancel()
-		application.Logger().Infof("shutdown signal received")
+		application.Logger().Info("shutdown signal received")
 	}
 
 	<-schedulerDone

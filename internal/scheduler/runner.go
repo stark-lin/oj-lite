@@ -43,7 +43,7 @@ func (runner *runner) run(ctx context.Context) {
 
 		claimed, err := runner.service.claimPendingSubmissions(ctx, runner.cfg.FetchBatchSize)
 		if err != nil {
-			runner.log.Errorf("scheduler claim failed: %v", err)
+			runner.log.Error("scheduler claim failed", "err", err)
 			if !sleepWithContext(ctx, runner.cfg.IdleSleep) {
 				return
 			}
@@ -70,7 +70,7 @@ func (runner *runner) run(ctx context.Context) {
 				defer func() { <-slotSem }()
 
 				if err := runner.service.processClaimedScript(ctx, s); err != nil {
-					runner.log.Errorf("submission %d ended with error: %v", s.ID, err)
+					runner.log.Error("submission ended with error", "submission_id", s.ID, "err", err)
 				}
 			}(script)
 		}

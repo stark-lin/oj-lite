@@ -13,7 +13,7 @@ import (
 
 func Recovery(log *logger.Logger) gin.HandlerFunc {
 	return gin.CustomRecovery(func(c *gin.Context, recovered any) {
-		log.Errorf("panic recovered: %v", recovered)
+		log.Error("panic recovered", "panic", recovered)
 		httpx.AbortInternal(c, fmt.Errorf("panic: %v", recovered))
 	})
 }

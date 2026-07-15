@@ -16,7 +16,7 @@ func (app *App) newRouter() *gin.Engine {
 
 	router := gin.New()
 	if err := router.SetTrustedProxies(nil); err != nil {
-		app.log.Warnf("set trusted proxies failed: %v", err)
+		app.log.Warn("set trusted proxies failed", "err", err)
 	}
 
 	router.Use(

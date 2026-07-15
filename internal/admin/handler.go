@@ -107,7 +107,7 @@ func (handler *handler) CreateTeacher(c *gin.Context) {
 			return
 		}
 
-		handler.log.Errorf("create teacher failed: err=%v", err)
+		handler.log.Error("create teacher failed", "err", err)
 		httpx.AbortInternal(c, err)
 		return
 	}
@@ -120,7 +120,7 @@ func (handler *handler) CreateTeacher(c *gin.Context) {
 func (handler *handler) ListTeachers(c *gin.Context) {
 	teachers, err := handler.service.ListTeachers(c.Request.Context())
 	if err != nil {
-		handler.log.Errorf("list teachers failed: err=%v", err)
+		handler.log.Error("list teachers failed", "err", err)
 		httpx.AbortInternal(c, err)
 		return
 	}
@@ -148,7 +148,7 @@ func (handler *handler) GetTeacher(c *gin.Context) {
 			return
 		}
 
-		handler.log.Errorf("get teacher failed: teacher_id=%d err=%v", teacherID, err)
+		handler.log.Error("get teacher failed", "teacher_id", teacherID, "err", err)
 		httpx.AbortInternal(c, err)
 		return
 	}
@@ -189,7 +189,7 @@ func (handler *handler) UpdateTeacher(c *gin.Context) {
 			return
 		}
 
-		handler.log.Errorf("update teacher failed: teacher_id=%d err=%v", teacherID, err)
+		handler.log.Error("update teacher failed", "teacher_id", teacherID, "err", err)
 		httpx.AbortInternal(c, err)
 		return
 	}
@@ -221,7 +221,7 @@ func (handler *handler) ResetTeacherPassword(c *gin.Context) {
 			return
 		}
 
-		handler.log.Errorf("reset teacher password failed: teacher_id=%d err=%v", teacherID, err)
+		handler.log.Error("reset teacher password failed", "teacher_id", teacherID, "err", err)
 		httpx.AbortInternal(c, err)
 		return
 	}
@@ -242,7 +242,7 @@ func (handler *handler) DeleteTeacher(c *gin.Context) {
 			return
 		}
 
-		handler.log.Errorf("delete teacher failed: teacher_id=%d err=%v", teacherID, err)
+		handler.log.Error("delete teacher failed", "teacher_id", teacherID, "err", err)
 		httpx.AbortInternal(c, err)
 		return
 	}
@@ -262,7 +262,7 @@ func (handler *handler) CreateLesson(c *gin.Context) {
 			return
 		}
 
-		handler.log.Errorf("create lesson failed: err=%v", err)
+		handler.log.Error("create lesson failed", "err", err)
 		httpx.AbortInternal(c, err)
 		return
 	}
@@ -275,7 +275,7 @@ func (handler *handler) CreateLesson(c *gin.Context) {
 func (handler *handler) ListLessons(c *gin.Context) {
 	lessons, err := handler.service.ListLessons(c.Request.Context())
 	if err != nil {
-		handler.log.Errorf("list lessons failed: err=%v", err)
+		handler.log.Error("list lessons failed", "err", err)
 		httpx.AbortInternal(c, err)
 		return
 	}
@@ -303,7 +303,7 @@ func (handler *handler) GetLesson(c *gin.Context) {
 			return
 		}
 
-		handler.log.Errorf("get lesson failed: lesson_id=%d err=%v", lessonID, err)
+		handler.log.Error("get lesson failed", "lesson_id", lessonID, "err", err)
 		httpx.AbortInternal(c, err)
 		return
 	}
@@ -338,7 +338,7 @@ func (handler *handler) ReplaceLesson(c *gin.Context) {
 			return
 		}
 
-		handler.log.Errorf("replace lesson failed: lesson_id=%d err=%v", lessonID, err)
+		handler.log.Error("replace lesson failed", "lesson_id", lessonID, "err", err)
 		httpx.AbortInternal(c, err)
 		return
 	}
@@ -365,7 +365,7 @@ func (handler *handler) DeleteLesson(c *gin.Context) {
 			return
 		}
 
-		handler.log.Errorf("delete lesson failed: lesson_id=%d err=%v", lessonID, err)
+		handler.log.Error("delete lesson failed", "lesson_id", lessonID, "err", err)
 		httpx.AbortInternal(c, err)
 		return
 	}

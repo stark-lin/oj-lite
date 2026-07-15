@@ -83,7 +83,7 @@ func (handler *handler) CreateLesson(c *gin.Context) {
 			return
 		}
 
-		handler.log.Errorf("create lesson failed: teacher_id=%d err=%v", currentUser.ID, err)
+		handler.log.Error("create lesson failed", "teacher_id", currentUser.ID, "err", err)
 		httpx.AbortInternal(c, err)
 		return
 	}
@@ -102,7 +102,7 @@ func (handler *handler) ListLessons(c *gin.Context) {
 
 	lessons, err := handler.service.ListLessons(c.Request.Context())
 	if err != nil {
-		handler.log.Errorf("list lessons failed: teacher_id=%d err=%v", currentUser.ID, err)
+		handler.log.Error("list lessons failed", "teacher_id", currentUser.ID, "err", err)
 		httpx.AbortInternal(c, err)
 		return
 	}
@@ -136,7 +136,7 @@ func (handler *handler) GetLesson(c *gin.Context) {
 			return
 		}
 
-		handler.log.Errorf("get lesson failed: teacher_id=%d lesson_id=%d err=%v", currentUser.ID, lessonID, err)
+		handler.log.Error("get lesson failed", "teacher_id", currentUser.ID, "lesson_id", lessonID, "err", err)
 		httpx.AbortInternal(c, err)
 		return
 	}
@@ -165,7 +165,7 @@ func (handler *handler) ListQuestions(c *gin.Context) {
 			return
 		}
 
-		handler.log.Errorf("list lesson questions failed: teacher_id=%d lesson_id=%d err=%v", currentUser.ID, lessonID, err)
+		handler.log.Error("list lesson questions failed", "teacher_id", currentUser.ID, "lesson_id", lessonID, "err", err)
 		httpx.AbortInternal(c, err)
 		return
 	}
@@ -181,7 +181,7 @@ func (handler *handler) ListQuestions(c *gin.Context) {
 }
 
 func (handler *handler) notImplemented(c *gin.Context, action string) {
-	handler.log.Warnf("lesson scaffold hit: action=%s method=%s path=%s", action, c.Request.Method, c.FullPath())
+	handler.log.Warn("lesson scaffold hit", "action", action, "method", c.Request.Method, "path", c.FullPath())
 	httpx.AbortNotImplemented(c, "lesson scaffold endpoint is not implemented yet", gin.H{
 		"module": "lesson",
 		"action": action,

@@ -59,7 +59,7 @@ func (app *App) serveProtectedPage(c *gin.Context, role, page string) {
 	if app.apiSession.ShouldRefresh(claims) {
 		refreshed := app.apiSession.RefreshClaims(claims)
 		if err := app.apiSession.SetAPISessionCookie(c, refreshed); err != nil {
-			app.log.Errorf("refresh page session cookie failed: user_id=%d err=%v", claims.UserID, err)
+			app.log.Error("refresh page session cookie failed", "user_id", claims.UserID, "err", err)
 			c.AbortWithStatus(http.StatusInternalServerError)
 			return
 		}
@@ -71,7 +71,7 @@ func (app *App) serveProtectedPage(c *gin.Context, role, page string) {
 func (app *App) renderEmbeddedHTML(c *gin.Context, name string) {
 	content, err := readEmbeddedHTML(name)
 	if err != nil {
-		app.log.Errorf("read embedded html failed: name=%s err=%v", name, err)
+		app.log.Error("read embedded html failed", "name", name, "err", err)
 		c.AbortWithStatus(http.StatusInternalServerError)
 		return
 	}
@@ -82,7 +82,7 @@ func (app *App) renderEmbeddedHTML(c *gin.Context, name string) {
 func (app *App) renderEmbeddedAsset(c *gin.Context, name, contentType string) {
 	content, err := readEmbeddedAsset(name)
 	if err != nil {
-		app.log.Errorf("read embedded asset failed: name=%s err=%v", name, err)
+		app.log.Error("read embedded asset failed", "name", name, "err", err)
 		c.AbortWithStatus(http.StatusNotFound)
 		return
 	}

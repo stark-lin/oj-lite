@@ -20,14 +20,14 @@ func Logging(log *logger.Logger) gin.HandlerFunc {
 		c.Next()
 
 		requestID, _ := c.Get(httpx.ContextKeyRequestID)
-		log.Infof(
-			"request_id=%v method=%s path=%s status=%d latency=%s client_ip=%s",
-			requestID,
-			method,
-			path,
-			c.Writer.Status(),
-			time.Since(startedAt),
-			c.ClientIP(),
+		log.Info(
+			"http request completed",
+			"request_id", requestID,
+			"method", method,
+			"path", path,
+			"status", c.Writer.Status(),
+			"latency", time.Since(startedAt),
+			"client_ip", c.ClientIP(),
 		)
 	}
 }

@@ -46,9 +46,9 @@ func BootstrapWithOptions(options BootstrapOptions) (*App, error) {
 	}
 
 	if options.SkipSeed {
-		log.Infof("demo seed skipped")
+		log.Info("demo seed skipped", "reason", "disabled")
 	} else if databaseExists {
-		log.Infof("demo seed skipped for existing database")
+		log.Info("demo seed skipped", "reason", "existing_database")
 	} else {
 		if err := seed.SeedDemoAccounts(context.Background(), database); err != nil {
 			_ = database.Close()
@@ -56,7 +56,7 @@ func BootstrapWithOptions(options BootstrapOptions) (*App, error) {
 		}
 	}
 
-	log.Infof("database initialized at %s", cfg.DB.Path)
+	log.Info("database initialized", "path", cfg.DB.Path)
 
 	apiSession, err := session.NewManager()
 	if err != nil {

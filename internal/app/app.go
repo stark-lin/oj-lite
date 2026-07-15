@@ -86,7 +86,7 @@ func (app *App) Router() *gin.Engine {
 }
 
 func (app *App) Run() error {
-	app.log.Infof("http server listening on %s", app.server.Addr)
+	app.log.Info("http server listening", "address", app.server.Addr)
 
 	err := app.server.ListenAndServe()
 	if err != nil && !errors.Is(err, http.ErrServerClosed) {

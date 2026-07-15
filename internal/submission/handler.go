@@ -82,12 +82,12 @@ func (handler *handler) CreateSubmission(c *gin.Context) {
 			httpx.AbortNotFound(c, "question not found")
 			return
 		default:
-			handler.log.Errorf(
-				"create submission failed: student_id=%d classroom_id=%d lesson_question_id=%d err=%v",
-				currentUser.ID,
-				currentUser.ClassroomID,
-				request.LessonQuestionID,
-				err,
+			handler.log.Error(
+				"create submission failed",
+				"student_id", currentUser.ID,
+				"classroom_id", currentUser.ClassroomID,
+				"lesson_question_id", request.LessonQuestionID,
+				"err", err,
 			)
 			httpx.AbortInternal(c, err)
 			return
@@ -113,7 +113,7 @@ func (handler *handler) ListSubmissions(c *gin.Context) {
 			return
 		}
 
-		handler.log.Errorf("list submissions failed: student_id=%d classroom_id=%d err=%v", currentUser.ID, currentUser.ClassroomID, err)
+		handler.log.Error("list submissions failed", "student_id", currentUser.ID, "classroom_id", currentUser.ClassroomID, "err", err)
 		httpx.AbortInternal(c, err)
 		return
 	}
@@ -147,12 +147,12 @@ func (handler *handler) ListQuestionSubmissions(c *gin.Context) {
 			return
 		}
 
-		handler.log.Errorf(
-			"list question submissions failed: student_id=%d classroom_id=%d lesson_question_id=%d err=%v",
-			currentUser.ID,
-			currentUser.ClassroomID,
-			lessonQuestionID,
-			err,
+		handler.log.Error(
+			"list question submissions failed",
+			"student_id", currentUser.ID,
+			"classroom_id", currentUser.ClassroomID,
+			"lesson_question_id", lessonQuestionID,
+			"err", err,
 		)
 		httpx.AbortInternal(c, err)
 		return
@@ -187,12 +187,12 @@ func (handler *handler) GetSubmission(c *gin.Context) {
 			return
 		}
 
-		handler.log.Errorf(
-			"get submission failed: student_id=%d classroom_id=%d submission_id=%d err=%v",
-			currentUser.ID,
-			currentUser.ClassroomID,
-			submissionID,
-			err,
+		handler.log.Error(
+			"get submission failed",
+			"student_id", currentUser.ID,
+			"classroom_id", currentUser.ClassroomID,
+			"submission_id", submissionID,
+			"err", err,
 		)
 		httpx.AbortInternal(c, err)
 		return
@@ -204,7 +204,7 @@ func (handler *handler) GetSubmission(c *gin.Context) {
 }
 
 func (handler *handler) notImplemented(c *gin.Context, action string) {
-	handler.log.Warnf("submission scaffold hit: action=%s method=%s path=%s", action, c.Request.Method, c.FullPath())
+	handler.log.Warn("submission scaffold hit", "action", action, "method", c.Request.Method, "path", c.FullPath())
 	httpx.AbortNotImplemented(c, "submission scaffold endpoint is not implemented yet", gin.H{
 		"module": "submission",
 		"action": action,
