@@ -11,30 +11,22 @@ import (
 )
 
 func (app *App) registerPageRoutes(router gin.IRouter) {
-	router.GET("/assets/app.css", app.serveAppCSS)
-	router.GET("/assets/app.js", app.serveAppJS)
-	router.GET("/assets/vendor/marked.min.js", app.serveMarkedJS)
-	router.GET("/assets/vendor/purify.min.js", app.serveDOMPurifyJS)
+	router.GET("/assets/app.css", app.embeddedAssetHandler("app.css", "text/css; charset=utf-8"))
+	for _, name := range []string{"app.js", "admin.js", "login.js", "student.js", "teacher.js"} {
+		router.GET("/assets/"+name, app.embeddedAssetHandler(name, "application/javascript; charset=utf-8"))
+	}
+	router.GET("/assets/vendor/marked.min.js", app.embeddedAssetHandler("vendor/marked.min.js", "application/javascript; charset=utf-8"))
+	router.GET("/assets/vendor/purify.min.js", app.embeddedAssetHandler("vendor/purify.min.js", "application/javascript; charset=utf-8"))
 	router.GET("/", app.serveLoginPage)
 	router.GET("/admin", middleware.AdminAuth(), app.serveAdminPage)
 	router.GET("/teacher", app.serveTeacherPage)
 	router.GET("/student", app.serveStudentPage)
 }
 
-func (app *App) serveAppCSS(c *gin.Context) {
-	app.renderEmbeddedAsset(c, "app.css", "text/css; charset=utf-8")
-}
-
-func (app *App) serveAppJS(c *gin.Context) {
-	app.renderEmbeddedAsset(c, "app.js", "application/javascript; charset=utf-8")
-}
-
-func (app *App) serveMarkedJS(c *gin.Context) {
-	app.renderEmbeddedAsset(c, "vendor/marked.min.js", "application/javascript; charset=utf-8")
-}
-
-func (app *App) serveDOMPurifyJS(c *gin.Context) {
-	app.renderEmbeddedAsset(c, "vendor/purify.min.js", "application/javascript; charset=utf-8")
+func (app *App) embeddedAssetHandler(name, contentType string) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		app.renderEmbeddedAsset(c, name, contentType)
+	}
 }
 
 func (app *App) serveLoginPage(c *gin.Context) {

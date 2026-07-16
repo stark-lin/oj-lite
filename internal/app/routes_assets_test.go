@@ -19,12 +19,27 @@ func TestEmbeddedAssetRoutes(t *testing.T) {
 		t.Fatalf("GET /assets/app.css body missing expected design token")
 	}
 
-	jsResponse := performRequest(t, app, http.MethodGet, "/assets/app.js", nil, nil)
-	if jsResponse.Code != http.StatusOK {
-		t.Fatalf("GET /assets/app.js status = %d, want %d body=%s", jsResponse.Code, http.StatusOK, jsResponse.Body.String())
+	javascriptAssets := []struct {
+		path   string
+		marker []byte
+	}{
+		{path: "/assets/app.js", marker: []byte("window.OJLite")},
+		{path: "/assets/admin.js", marker: []byte("handleCreateTeacher")},
+		{path: "/assets/login.js", marker: []byte("loginForm")},
+		{path: "/assets/student.js", marker: []byte("submitCurrentCode")},
+		{path: "/assets/teacher.js", marker: []byte("createClassAction")},
 	}
-	if !bytes.Contains(jsResponse.Body.Bytes(), []byte("window.OJLite")) {
-		t.Fatalf("GET /assets/app.js body missing expected namespace")
+	for _, asset := range javascriptAssets {
+		response := performRequest(t, app, http.MethodGet, asset.path, nil, nil)
+		if response.Code != http.StatusOK {
+			t.Fatalf("GET %s status = %d, want %d body=%s", asset.path, response.Code, http.StatusOK, response.Body.String())
+		}
+		if contentType := response.Header().Get("Content-Type"); contentType != "application/javascript; charset=utf-8" {
+			t.Fatalf("GET %s content type = %q", asset.path, contentType)
+		}
+		if !bytes.Contains(response.Body.Bytes(), asset.marker) {
+			t.Fatalf("GET %s body missing marker %q", asset.path, asset.marker)
+		}
 	}
 
 	vendorAssets := []struct {
@@ -44,6 +59,31 @@ func TestEmbeddedAssetRoutes(t *testing.T) {
 		}
 		if !bytes.Contains(response.Body.Bytes(), asset.marker) {
 			t.Fatalf("GET %s body missing version marker %q", asset.path, asset.marker)
+		}
+	}
+}
+
+func TestPagesLoadDedicatedScriptsAfterSharedApp(t *testing.T) {
+	pageScripts := map[string]string{
+		"admin.html":   "/assets/admin.js",
+		"login.html":   "/assets/login.js",
+		"student.html": "/assets/student.js",
+		"teacher.html": "/assets/teacher.js",
+	}
+
+	for pageName, scriptPath := range pageScripts {
+		page, err := readEmbeddedHTML(pageName)
+		if err != nil {
+			t.Fatalf("read %s: %v", pageName, err)
+		}
+
+		appIndex := bytes.Index(page, []byte(`/assets/app.js`))
+		pageScriptIndex := bytes.Index(page, []byte(scriptPath))
+		if appIndex < 0 || pageScriptIndex < appIndex {
+			t.Fatalf("%s must load %s after app.js", pageName, scriptPath)
+		}
+		if bytes.Contains(page, []byte("<script>")) {
+			t.Fatalf("%s must not contain inline JavaScript", pageName)
 		}
 	}
 }

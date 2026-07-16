@@ -52,6 +52,10 @@
     return items.find((item) => item.id === id) || null;
   }
 
+  function collectElementsById(...ids) {
+    return Object.fromEntries(ids.map((id) => [id, document.getElementById(id)]));
+  }
+
   function sortByIDAsc(items) {
     return items.slice().sort((a, b) => (Number(a?.id) || 0) - (Number(b?.id) || 0));
   }
@@ -78,6 +82,10 @@
     }
     if (typeof value === 'object') return value;
     return fallback;
+  }
+
+  function normalizeStringValue(value, fallback = '') {
+    return typeof value === 'string' ? value : fallback;
   }
 
   async function parseJSONSafe(response) {
@@ -120,6 +128,10 @@
     } catch (error) {
       void error;
     }
+  }
+
+  function redirectToLogin() {
+    window.location.href = '/';
   }
 
   function formatDateTime(value) {
@@ -1118,6 +1130,7 @@
     ApiError,
     buildLineNumbers,
     clamp,
+    collectElementsById,
     createColumnResizer,
     createApiRequest,
     deepClone,
@@ -1132,9 +1145,11 @@
     latestVerdictPillClass,
     normalizeJSONValue,
     normalizeJudgeReport,
+    normalizeStringValue,
     normalizeStdoutBuffer,
     parseJSONSafe,
     renderMarkdown,
+    redirectToLogin,
     renderJudgeReportPlaceholder,
     renderJudgeReportTerminal,
     sortByIDAsc,

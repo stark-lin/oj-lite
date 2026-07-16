@@ -34,7 +34,7 @@ func TestAdminPageRoute(t *testing.T) {
 	}
 
 	body := response.Body.String()
-	if !bytes.Contains([]byte(body), []byte("Admin")) || !bytes.Contains([]byte(body), []byte("Teacher Management")) {
+	if !bytes.Contains([]byte(body), []byte("Admin")) || !bytes.Contains([]byte(body), []byte(`/assets/admin.js`)) {
 		t.Fatalf("GET /admin body missing expected markers: %s", body)
 	}
 }

@@ -18,7 +18,8 @@ There are no currently registered public routes that still return `501 not_imple
 | `GET` | `/teacher` | `available` | Teacher page; requires a valid teacher session |
 | `GET` | `/student` | `available` | Student page; requires a valid student session |
 | `GET` | `/assets/app.css` | `available` | Embedded page stylesheet |
-| `GET` | `/assets/app.js` | `available` | Embedded page script |
+| `GET` | `/assets/app.js` | `available` | Embedded shared page script |
+| `GET` | `/assets/{admin,login,student,teacher}.js` | `available` | Embedded page-specific scripts |
 | `GET` | `/healthz` | `available` | Health check |
 
 ## Auth
