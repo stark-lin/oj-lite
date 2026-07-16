@@ -5,14 +5,7 @@
   "questions": [
     {
       "title": "Calculate the Sum of Stair Numbers from 1 to n",
-      "description": {
-        "difficulty": "Simple",
-        "background": "A staircase is numbered from step 1 to step n. The teacher wants students to calculate the sum of all stair numbers.",
-        "task": "Calculate the sum of the numbers from 1 to n.",
-        "input": "One positive integer: n.",
-        "output": "Return the sum from 1 to n.",
-        "hint": "You can use a variable to store the accumulated result."
-      },
+      "description": "## Difficulty\n\nSimple\n\n## Background\n\nA staircase is numbered from step 1 to step n. The teacher wants students to calculate the sum of all stair numbers.\n\n## Task\n\nCalculate the sum of the numbers from 1 to n.\n\n## Input\n\nOne positive integer: n.\n\n## Output\n\nReturn the sum from 1 to n.\n\n## Hint\n\nYou can use a variable to store the accumulated result.",
       "starter_code": "function solution(n)\n    return 0\nend",
       "reference_code": "function solution(n)\n    local sum = 0\n\n    for i = 1, n do\n        sum = sum + i\n    end\n\n    return sum\nend",
       "test_cases": [
@@ -30,14 +23,7 @@
     },
     {
       "title": "Calculate the Total Fixed Coin Reward Over Several Days",
-      "description": {
-        "difficulty": "Simple",
-        "background": "A game gives the player the same number of reward coins every day. The player logs in for days consecutive days and receives reward coins each day.",
-        "task": "Calculate how many coins the player receives in total.",
-        "input": "Two numbers: reward and days.",
-        "output": "Return the total number of coins.",
-        "hint": "You can add each day's reward one by one."
-      },
+      "description": "## Difficulty\n\nSimple\n\n## Background\n\nA game gives the player the same number of reward coins every day. The player logs in for days consecutive days and receives reward coins each day.\n\n## Task\n\nCalculate how many coins the player receives in total.\n\n## Input\n\nTwo numbers: reward and days.\n\n## Output\n\nReturn the total number of coins.\n\n## Hint\n\nYou can add each day's reward one by one.",
       "starter_code": "function solution(reward, days)\n    return 0\nend",
       "reference_code": "function solution(reward, days)\n    local sum = 0\n\n    for i = 1, days do\n        sum = sum + reward\n    end\n\n    return sum\nend",
       "test_cases": [
@@ -58,14 +44,7 @@
     },
     {
       "title": "Calculate the Total Distance Run Over Several Trainings",
-      "description": {
-        "difficulty": "Simple",
-        "background": "A student runs the same distance, distance meters, each day and trains for days days. The teacher wants to know how many meters the student ran in total.",
-        "task": "Calculate the total training distance.",
-        "input": "Two numbers: distance and days.",
-        "output": "Return the total distance.",
-        "hint": "Each day's distance should be added to the total."
-      },
+      "description": "## Difficulty\n\nSimple\n\n## Background\n\nA student runs the same distance, distance meters, each day and trains for days days. The teacher wants to know how many meters the student ran in total.\n\n## Task\n\nCalculate the total training distance.\n\n## Input\n\nTwo numbers: distance and days.\n\n## Output\n\nReturn the total distance.\n\n## Hint\n\nEach day's distance should be added to the total.",
       "starter_code": "function solution(distance, days)\n    return 0\nend",
       "reference_code": "function solution(distance, days)\n    local total = 0\n\n    for i = 1, days do\n        total = total + distance\n    end\n\n    return total\nend",
       "test_cases": [
@@ -86,14 +65,7 @@
     },
     {
       "title": "Calculate the Sum of All Even Numbers from 1 to n",
-      "description": {
-        "difficulty": "Normal",
-        "background": "The teacher selects the even numbers from 1 to n and wants to know what these even numbers add up to.",
-        "task": "Calculate the sum of all even numbers from 1 to n.",
-        "input": "One positive integer: n.",
-        "output": "Return the sum of the even numbers.",
-        "hint": "Check whether a number meets the condition first, then decide whether to add it to the sum."
-      },
+      "description": "## Difficulty\n\nNormal\n\n## Background\n\nThe teacher selects the even numbers from 1 to n and wants to know what these even numbers add up to.\n\n## Task\n\nCalculate the sum of all even numbers from 1 to n.\n\n## Input\n\nOne positive integer: n.\n\n## Output\n\nReturn the sum of the even numbers.\n\n## Hint\n\nCheck whether a number meets the condition first, then decide whether to add it to the sum.",
       "starter_code": "function solution(n)\n    return 0\nend",
       "reference_code": "function solution(n)\n    local sum = 0\n\n    for i = 1, n do\n        if i % 2 == 0 then\n            sum = sum + i\n        end\n    end\n\n    return sum\nend",
       "test_cases": [
@@ -111,14 +83,7 @@
     },
     {
       "title": "Count Reward Levels and Calculate Total Reward Coins",
-      "description": {
-        "difficulty": "Normal",
-        "background": "A game has n levels. Whenever a level number is a multiple of step, the player receives reward coins.",
-        "task": "Count the reward levels and calculate the total number of reward coins.",
-        "input": "Three numbers: n, step, and reward.",
-        "output": "Return the reward level count and the total coin count in order.",
-        "hint": "Counting and accumulation can be done in the same loop."
-      },
+      "description": "## Difficulty\n\nNormal\n\n## Background\n\nA game has n levels. Whenever a level number is a multiple of step, the player receives reward coins.\n\n## Task\n\nCount the reward levels and calculate the total number of reward coins.\n\n## Input\n\nThree numbers: n, step, and reward.\n\n## Output\n\nReturn the reward level count and the total coin count in order.\n\n## Hint\n\nCounting and accumulation can be done in the same loop.",
       "starter_code": "function solution(n, step, reward)\n    return 0, 0\nend",
       "reference_code": "function solution(n, step, reward)\n    local count = 0\n    local sum = 0\n\n    for i = 1, n do\n        if i % step == 0 then\n            count = count + 1\n            sum = sum + reward\n        end\n    end\n\n    return count, sum\nend",
       "test_cases": [
@@ -142,14 +107,7 @@
     },
     {
       "title": "Calculate Quiz Total, Average, and Pass Status",
-      "description": {
-        "difficulty": "Normal",
-        "background": "A student takes three quizzes. The teacher needs to calculate the total score and average score, then decide whether the average reaches passLine.",
-        "task": "Use the three scores to calculate the total, average, and pass result.",
-        "input": "Four numbers: score1, score2, score3, and passLine.",
-        "output": "Return the total score, average score, and whether the average reaches the line, in order.",
-        "hint": "Calculate the total first, use it to calculate the average, then decide whether the average reaches the line."
-      },
+      "description": "## Difficulty\n\nNormal\n\n## Background\n\nA student takes three quizzes. The teacher needs to calculate the total score and average score, then decide whether the average reaches passLine.\n\n## Task\n\nUse the three scores to calculate the total, average, and pass result.\n\n## Input\n\nFour numbers: score1, score2, score3, and passLine.\n\n## Output\n\nReturn the total score, average score, and whether the average reaches the line, in order.\n\n## Hint\n\nCalculate the total first, use it to calculate the average, then decide whether the average reaches the line.",
       "starter_code": "function solution(score1, score2, score3, passLine)\n    return 0, 0, false\nend",
       "reference_code": "function solution(score1, score2, score3, passLine)\n    local total = score1 + score2 + score3\n    local average = total / 3\n    local passed = false\n\n    if average >= passLine then\n        passed = true\n    end\n\n    return total, average, passed\nend",
       "test_cases": [
@@ -176,14 +134,7 @@
     },
     {
       "title": "Find the Earliest Day a Growing Daily Savings Plan Reaches the Target",
-      "description": {
-        "difficulty": "Challenge",
-        "background": "A student starts saving money on day 1. On the first day the student saves start; each later day, the student saves increase more than the previous day. Now the student wants to know the earliest day the savings total reaches target or more.",
-        "task": "Simulate the daily savings process and return the earliest day that reaches the target.",
-        "input": "Three numbers: start, increase, and target.",
-        "output": "Return the earliest day that reaches the target.",
-        "hint": "Each day, update both the amount saved that day and the total amount saved so far."
-      },
+      "description": "## Difficulty\n\nChallenge\n\n## Background\n\nA student starts saving money on day 1. On the first day the student saves start; each later day, the student saves increase more than the previous day. Now the student wants to know the earliest day the savings total reaches target or more.\n\n## Task\n\nSimulate the daily savings process and return the earliest day that reaches the target.\n\n## Input\n\nThree numbers: start, increase, and target.\n\n## Output\n\nReturn the earliest day that reaches the target.\n\n## Hint\n\nEach day, update both the amount saved that day and the total amount saved so far.",
       "starter_code": "function solution(start, increase, target)\n    return 0\nend",
       "reference_code": "function solution(start, increase, target)\n    local day = 0\n    local current = start\n    local total = 0\n\n    while total < target do\n        total = total + current\n        current = current + increase\n        day = day + 1\n    end\n\n    return day\nend",
       "test_cases": [
@@ -207,14 +158,7 @@
     },
     {
       "title": "Accumulate Coins Through Levels and Return the Level That Reaches the Upgrade Target",
-      "description": {
-        "difficulty": "Challenge",
-        "background": "A player clears levels in sequence. Level i gives i times base coins. Upgrading requires total coins to reach target. The game has n levels.",
-        "task": "Calculate the earliest level at which the player reaches the upgrade requirement; if the target is still not reached after n levels, return 0.",
-        "input": "Three numbers: n, base, and target.",
-        "output": "Return the earliest level number that reaches the target; if it is not reached, return 0.",
-        "hint": "After each level, update the accumulated coins and check whether the target has been reached."
-      },
+      "description": "## Difficulty\n\nChallenge\n\n## Background\n\nA player clears levels in sequence. Level i gives i times base coins. Upgrading requires total coins to reach target. The game has n levels.\n\n## Task\n\nCalculate the earliest level at which the player reaches the upgrade requirement; if the target is still not reached after n levels, return 0.\n\n## Input\n\nThree numbers: n, base, and target.\n\n## Output\n\nReturn the earliest level number that reaches the target; if it is not reached, return 0.\n\n## Hint\n\nAfter each level, update the accumulated coins and check whether the target has been reached.",
       "starter_code": "function solution(n, base, target)\n    return 0\nend",
       "reference_code": "function solution(n, base, target)\n    local total = 0\n\n    for i = 1, n do\n        total = total + i * base\n        if total >= target then\n            return i\n        end\n    end\n\n    return 0\nend",
       "test_cases": [
@@ -238,14 +182,7 @@
     },
     {
       "title": "Count, Sum, and Average Numbers That Meet Conditions",
-      "description": {
-        "difficulty": "Challenge",
-        "background": "The teacher selects numbers from 1 to n. A number is selected only if it satisfies both conditions: it is a multiple of k and it is greater than limit.",
-        "task": "Count the selected numbers, calculate their sum, and calculate their average.",
-        "input": "Three numbers: n, k, and limit.",
-        "output": "Return the count, sum, and average in order. If no number is selected, return 0 for the average.",
-        "hint": "Filter by the conditions first, then maintain both count and sum."
-      },
+      "description": "## Difficulty\n\nChallenge\n\n## Background\n\nThe teacher selects numbers from 1 to n. A number is selected only if it satisfies both conditions: it is a multiple of k and it is greater than limit.\n\n## Task\n\nCount the selected numbers, calculate their sum, and calculate their average.\n\n## Input\n\nThree numbers: n, k, and limit.\n\n## Output\n\nReturn the count, sum, and average in order. If no number is selected, return 0 for the average.\n\n## Hint\n\nFilter by the conditions first, then maintain both count and sum.",
       "starter_code": "function solution(n, k, limit)\n    return 0, 0, 0\nend",
       "reference_code": "function solution(n, k, limit)\n    local count = 0\n    local sum = 0\n\n    for i = 1, n do\n        if i % k == 0 and i > limit then\n            count = count + 1\n            sum = sum + i\n        end\n    end\n\n    local average = 0\n    if count > 0 then\n        average = sum / count\n    end\n\n    return count, sum, average\nend",
       "test_cases": [

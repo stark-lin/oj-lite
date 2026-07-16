@@ -15,8 +15,7 @@ import (
 )
 
 var (
-	errInvalidDescription = errors.New("invalid description JSON")
-	errInvalidTestCases   = errors.New("invalid test_cases JSON")
+	errInvalidTestCases = errors.New("invalid test_cases JSON")
 )
 
 type handler struct {
@@ -70,19 +69,12 @@ func (handler *handler) CreateQuestion(c *gin.Context) {
 	question, err := handler.service.CreateQuestion(
 		c.Request.Context(),
 		request.Title,
+		request.Description,
 		request.StarterCode,
 		request.ReferenceCode,
-		request.Description,
 		request.TestCases,
 	)
 	if err != nil {
-		if errors.Is(err, errInvalidDescription) {
-			httpx.AbortNotFoundDetails(c, "description must be a valid JSON object", gin.H{
-				"field": "description",
-			})
-			return
-		}
-
 		if errors.Is(err, errInvalidTestCases) {
 			httpx.AbortNotFoundDetails(c, "test_cases must be valid JSON", gin.H{
 				"field": "test_cases",

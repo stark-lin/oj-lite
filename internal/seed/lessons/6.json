@@ -5,14 +5,7 @@
   "questions": [
     {
       "title": "统计 1 到 n 中有多少个偶数",
-      "description": {
-        "难度": "Simple",
-        "背景": "老师给出一个正整数 n，让同学们从 1 数到 n，并统计其中有多少个编号是偶数。",
-        "任务": "请统计 1 到 n 中偶数的数量，并返回结果。",
-        "输入": "一个正整数：n。",
-        "输出": "返回 1 到 n 中偶数的数量。",
-        "提示": "可以一边循环检查数字，一边用计数变量记录符合条件的数量。"
-      },
+      "description": "## 难度\n\nSimple\n\n## 背景\n\n老师给出一个正整数 n，让同学们从 1 数到 n，并统计其中有多少个编号是偶数。\n\n## 任务\n\n请统计 1 到 n 中偶数的数量，并返回结果。\n\n## 输入\n\n一个正整数：n。\n\n## 输出\n\n返回 1 到 n 中偶数的数量。\n\n## 提示\n\n可以一边循环检查数字，一边用计数变量记录符合条件的数量。",
       "starter_code": "function solution(n)\n    return 0\nend",
       "reference_code": "function solution(n)\n    local count = 0\n\n    for i = 1, n do\n        if i % 2 == 0 then\n            count = count + 1\n        end\n    end\n\n    return count\nend",
       "test_cases": [
@@ -24,14 +17,7 @@
     },
     {
       "title": "统计 1 到 n 中有多少个 5 的倍数",
-      "description": {
-        "难度": "Simple",
-        "背景": "学校活动中，每隔 5 个编号就会安排一个特殊任务。现在老师想知道从 1 到 n 中一共有多少个编号是 5 的倍数。",
-        "任务": "请统计 1 到 n 中能被 5 整除的数字数量。",
-        "输入": "一个正整数：n。",
-        "输出": "返回 5 的倍数数量。",
-        "提示": "检查每个数字是否能被指定数字整除。"
-      },
+      "description": "## 难度\n\nSimple\n\n## 背景\n\n学校活动中，每隔 5 个编号就会安排一个特殊任务。现在老师想知道从 1 到 n 中一共有多少个编号是 5 的倍数。\n\n## 任务\n\n请统计 1 到 n 中能被 5 整除的数字数量。\n\n## 输入\n\n一个正整数：n。\n\n## 输出\n\n返回 5 的倍数数量。\n\n## 提示\n\n检查每个数字是否能被指定数字整除。",
       "starter_code": "function solution(n)\n    return 0\nend",
       "reference_code": "function solution(n)\n    local count = 0\n\n    for i = 1, n do\n        if i % 5 == 0 then\n            count = count + 1\n        end\n    end\n\n    return count\nend",
       "test_cases": [
@@ -43,14 +29,7 @@
     },
     {
       "title": "统计任务编号中有多少个奇数任务",
-      "description": {
-        "难度": "Simple",
-        "背景": "游戏任务从 1 编号到 n。编号为奇数的任务是普通任务，编号为偶数的任务是特殊任务。系统需要统计普通任务数量。",
-        "任务": "请统计 1 到 n 中有多少个奇数编号。",
-        "输入": "一个正整数：n。",
-        "输出": "返回奇数编号的数量。",
-        "提示": "可以根据除以 2 后的余数判断编号类型。"
-      },
+      "description": "## 难度\n\nSimple\n\n## 背景\n\n游戏任务从 1 编号到 n。编号为奇数的任务是普通任务，编号为偶数的任务是特殊任务。系统需要统计普通任务数量。\n\n## 任务\n\n请统计 1 到 n 中有多少个奇数编号。\n\n## 输入\n\n一个正整数：n。\n\n## 输出\n\n返回奇数编号的数量。\n\n## 提示\n\n可以根据除以 2 后的余数判断编号类型。",
       "starter_code": "function solution(n)\n    return 0\nend",
       "reference_code": "function solution(n)\n    local count = 0\n\n    for i = 1, n do\n        if i % 2 ~= 0 then\n            count = count + 1\n        end\n    end\n\n    return count\nend",
       "test_cases": [
@@ -62,14 +41,7 @@
     },
     {
       "title": "统计既是偶数又大于目标值的编号数量",
-      "description": {
-        "难度": "Normal",
-        "背景": "老师要从 1 到 n 的编号中挑出一部分学生。挑选规则是：编号必须是偶数，并且编号要大于 target。",
-        "任务": "请统计 1 到 n 中满足这两个条件的编号数量。",
-        "输入": "两个数字：n 和 target。",
-        "输出": "返回满足条件的编号数量。",
-        "提示": "先确定一个编号需要同时满足哪些条件，再决定是否计数。"
-      },
+      "description": "## 难度\n\nNormal\n\n## 背景\n\n老师要从 1 到 n 的编号中挑出一部分学生。挑选规则是：编号必须是偶数，并且编号要大于 target。\n\n## 任务\n\n请统计 1 到 n 中满足这两个条件的编号数量。\n\n## 输入\n\n两个数字：n 和 target。\n\n## 输出\n\n返回满足条件的编号数量。\n\n## 提示\n\n先确定一个编号需要同时满足哪些条件，再决定是否计数。",
       "starter_code": "function solution(n, target)\n    return 0\nend",
       "reference_code": "function solution(n, target)\n    local count = 0\n\n    for i = 1, n do\n        if i % 2 == 0 and i > target then\n            count = count + 1\n        end\n    end\n\n    return count\nend",
       "test_cases": [
@@ -81,14 +53,7 @@
     },
     {
       "title": "统计游戏关卡中能获得奖励金币的关卡数量",
-      "description": {
-        "难度": "Normal",
-        "背景": "一个游戏有 n 个关卡。系统规定：从 rewardStep 的倍数关卡开始发放奖励，但只有关卡编号达到 minLevel 或以上时才算有效奖励关卡。",
-        "任务": "请统计 1 到 n 中有多少个关卡可以获得奖励金币。",
-        "输入": "三个数字：n、rewardStep 和 minLevel。",
-        "输出": "返回可以获得奖励的关卡数量。",
-        "提示": "一个关卡需要同时满足编号规则和最低关卡要求。"
-      },
+      "description": "## 难度\n\nNormal\n\n## 背景\n\n一个游戏有 n 个关卡。系统规定：从 rewardStep 的倍数关卡开始发放奖励，但只有关卡编号达到 minLevel 或以上时才算有效奖励关卡。\n\n## 任务\n\n请统计 1 到 n 中有多少个关卡可以获得奖励金币。\n\n## 输入\n\n三个数字：n、rewardStep 和 minLevel。\n\n## 输出\n\n返回可以获得奖励的关卡数量。\n\n## 提示\n\n一个关卡需要同时满足编号规则和最低关卡要求。",
       "starter_code": "function solution(n, rewardStep, minLevel)\n    return 0\nend",
       "reference_code": "function solution(n, rewardStep, minLevel)\n    local count = 0\n\n    for i = 1, n do\n        if i % rewardStep == 0 and i >= minLevel then\n            count = count + 1\n        end\n    end\n\n    return count\nend",
       "test_cases": [
@@ -100,14 +65,7 @@
     },
     {
       "title": "统计能被 3 整除但不是偶数的人数",
-      "description": {
-        "难度": "Normal",
-        "背景": "学生编号从 1 到 n。老师要找出一种特殊编号：它能被 3 整除，但不能是偶数。",
-        "任务": "请统计 1 到 n 中满足规则的编号数量。",
-        "输入": "一个正整数：n。",
-        "输出": "返回满足条件的编号数量。",
-        "提示": "可以把倍数判断和奇偶判断放在同一次检查里。"
-      },
+      "description": "## 难度\n\nNormal\n\n## 背景\n\n学生编号从 1 到 n。老师要找出一种特殊编号：它能被 3 整除，但不能是偶数。\n\n## 任务\n\n请统计 1 到 n 中满足规则的编号数量。\n\n## 输入\n\n一个正整数：n。\n\n## 输出\n\n返回满足条件的编号数量。\n\n## 提示\n\n可以把倍数判断和奇偶判断放在同一次检查里。",
       "starter_code": "function solution(n)\n    return 0\nend",
       "reference_code": "function solution(n)\n    local count = 0\n\n    for i = 1, n do\n        if i % 3 == 0 and i % 2 ~= 0 then\n            count = count + 1\n        end\n    end\n\n    return count\nend",
       "test_cases": [
@@ -119,14 +77,7 @@
     },
     {
       "title": "学生编号按余数分成三组并统计人数",
-      "description": {
-        "难度": "Challenge",
-        "背景": "老师要把编号从 1 到 n 的学生分成三组。每个学生根据编号除以 3 后的余数进入不同小组。",
-        "任务": "请统计余数为 0、余数为 1、余数为 2 的学生人数。",
-        "输入": "一个正整数：n。",
-        "输出": "依次返回余数为 0、1、2 的人数。",
-        "提示": "可以准备多个计数变量，每个变量负责一种分类。"
-      },
+      "description": "## 难度\n\nChallenge\n\n## 背景\n\n老师要把编号从 1 到 n 的学生分成三组。每个学生根据编号除以 3 后的余数进入不同小组。\n\n## 任务\n\n请统计余数为 0、余数为 1、余数为 2 的学生人数。\n\n## 输入\n\n一个正整数：n。\n\n## 输出\n\n依次返回余数为 0、1、2 的人数。\n\n## 提示\n\n可以准备多个计数变量，每个变量负责一种分类。",
       "starter_code": "function solution(n)\n    return 0, 0, 0\nend",
       "reference_code": "function solution(n)\n    local count0 = 0\n    local count1 = 0\n    local count2 = 0\n\n    for i = 1, n do\n        if i % 3 == 0 then\n            count0 = count0 + 1\n        elseif i % 3 == 1 then\n            count1 = count1 + 1\n        else\n            count2 = count2 + 1\n        end\n    end\n\n    return count0, count1, count2\nend",
       "test_cases": [
@@ -138,14 +89,7 @@
     },
     {
       "title": "游戏任务按编号规则统计普通、困难和隐藏任务数量",
-      "description": {
-        "难度": "Challenge",
-        "背景": "游戏任务从 1 编号到 n。编号是 10 的倍数时为隐藏任务；不是隐藏任务但能被 3 整除时为困难任务；其他任务为普通任务。",
-        "任务": "请统计普通任务、困难任务和隐藏任务的数量。",
-        "输入": "一个正整数：n。",
-        "输出": "依次返回普通任务数量、困难任务数量、隐藏任务数量。",
-        "提示": "分类时要注意规则的先后顺序。"
-      },
+      "description": "## 难度\n\nChallenge\n\n## 背景\n\n游戏任务从 1 编号到 n。编号是 10 的倍数时为隐藏任务；不是隐藏任务但能被 3 整除时为困难任务；其他任务为普通任务。\n\n## 任务\n\n请统计普通任务、困难任务和隐藏任务的数量。\n\n## 输入\n\n一个正整数：n。\n\n## 输出\n\n依次返回普通任务数量、困难任务数量、隐藏任务数量。\n\n## 提示\n\n分类时要注意规则的先后顺序。",
       "starter_code": "function solution(n)\n    return 0, 0, 0\nend",
       "reference_code": "function solution(n)\n    local normal = 0\n    local hard = 0\n    local hidden = 0\n\n    for i = 1, n do\n        if i % 10 == 0 then\n            hidden = hidden + 1\n        elseif i % 3 == 0 then\n            hard = hard + 1\n        else\n            normal = normal + 1\n        end\n    end\n\n    return normal, hard, hidden\nend",
       "test_cases": [
@@ -157,14 +101,7 @@
     },
     {
       "title": "比较两种奖励规则分别能选中多少编号",
-      "description": {
-        "难度": "Challenge",
-        "背景": "游戏系统有两种奖励规则。第一种规则会奖励 a 的倍数编号，第二种规则会奖励 b 的倍数编号。策划想知道哪种规则能选中更多编号。",
-        "任务": "请统计 1 到 n 中分别符合两种规则的编号数量，并返回数量更多的规则。",
-        "输入": "三个数字：n、a 和 b。",
-        "输出": "第一种规则更多返回 \"first\"，第二种规则更多返回 \"second\"，一样多返回 \"same\"。",
-        "提示": "先分别统计两种规则的数量，最后再比较统计结果。"
-      },
+      "description": "## 难度\n\nChallenge\n\n## 背景\n\n游戏系统有两种奖励规则。第一种规则会奖励 a 的倍数编号，第二种规则会奖励 b 的倍数编号。策划想知道哪种规则能选中更多编号。\n\n## 任务\n\n请统计 1 到 n 中分别符合两种规则的编号数量，并返回数量更多的规则。\n\n## 输入\n\n三个数字：n、a 和 b。\n\n## 输出\n\n第一种规则更多返回 \"first\"，第二种规则更多返回 \"second\"，一样多返回 \"same\"。\n\n## 提示\n\n先分别统计两种规则的数量，最后再比较统计结果。",
       "starter_code": "function solution(n, a, b)\n    return \"\"\nend",
       "reference_code": "function solution(n, a, b)\n    local countA = 0\n    local countB = 0\n\n    for i = 1, n do\n        if i % a == 0 then\n            countA = countA + 1\n        end\n\n        if i % b == 0 then\n            countB = countB + 1\n        end\n    end\n\n    if countA > countB then\n        return \"first\"\n    elseif countB > countA then\n        return \"second\"\n    end\n\n    return \"same\"\nend",
       "test_cases": [

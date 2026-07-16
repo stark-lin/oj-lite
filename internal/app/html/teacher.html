@@ -105,6 +105,8 @@
     </footer>
   </div>
 
+  <script src="/assets/vendor/marked.min.js"></script>
+  <script src="/assets/vendor/purify.min.js"></script>
   <script src="/assets/app.js"></script>
   <script>
     const {
@@ -113,13 +115,13 @@
       deepClone,
       escapeHtml,
       formatDateTime,
-      formatQuestionDescriptionValue,
       formatStdoutBuffer,
       latestVerdictLabel,
       latestVerdictPillClass,
       normalizeJudgeReport,
       normalizeStdoutBuffer,
       renderJudgeReportTerminal,
+      renderMarkdown,
       sortByIDAsc,
       sortBySortOrder,
       statusPillClass,
@@ -168,42 +170,12 @@
     };
 
     function normalizeQuestionDescription(value) {
-      if (!value) return {};
-
-      if (typeof value === 'string') {
-        const trimmed = value.trim();
-        if (!trimmed) return {};
-        try {
-          const parsed = JSON.parse(trimmed);
-          if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) {
-            return parsed;
-          }
-        } catch (error) {
-          void error;
-        }
-        return { Description: value };
-      }
-
-      if (typeof value === 'object' && !Array.isArray(value)) {
-        return value;
-      }
-
-      return {};
+      return typeof value === 'string' ? value : '';
     }
 
     function renderQuestionDescriptionBlocks(description) {
-      const entries = Object.entries(normalizeQuestionDescription(description));
-      if (!entries.length) {
-        return ui.detailBlock('Description', '—', { prose: true });
-      }
-
-      return entries.map(([title, value]) => {
-        return ui.detailBlock(
-          title,
-          escapeHtml(formatQuestionDescriptionValue(value)),
-          { prose: typeof value === 'string' }
-        );
-      }).join('');
+      const body = `<article class="markdown-body">${renderMarkdown(normalizeQuestionDescription(description))}</article>`;
+      return ui.detailBlock('Description', body, { prose: true });
     }
 
     function normalizeClassroom(item) {
@@ -871,7 +843,7 @@
         ${ui.contentSection({
           title: 'Prompt',
           meta: lesson?.title || 'Question bank',
-          contentCount: Object.keys(normalizeQuestionDescription(question.description)).length + 3,
+          contentCount: 4,
           body: `
             ${renderQuestionDescriptionBlocks(question.description)}
             ${ui.detailGrid([

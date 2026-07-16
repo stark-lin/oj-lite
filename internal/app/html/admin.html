@@ -150,7 +150,7 @@
         lessonQuestionId: Number(item?.lesson_question_id) || 0,
         id: Number(item?.id) || 0,
         title: item?.title || '',
-        description: normalizeJSONValue(item?.description, {}),
+        description: typeof item?.description === 'string' ? item.description : '',
         starterCode: item?.starter_code || '',
         referenceCode: item?.reference_code || '',
         testCases: normalizeJSONValue(item?.test_cases, []),
@@ -167,7 +167,7 @@
         questions: (lesson?.questions || []).map((question) => {
           const payload = {
             title: question?.title || '',
-            description: normalizeJSONValue(question?.description, {}),
+            description: typeof question?.description === 'string' ? question.description : '',
             starter_code: question?.starterCode || '',
             reference_code: question?.referenceCode || '',
             test_cases: normalizeJSONValue(question?.testCases, []),

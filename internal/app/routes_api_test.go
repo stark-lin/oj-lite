@@ -128,7 +128,7 @@ func TestTeacherSimpleCRUDRoutes(t *testing.T) {
 		t,
 		app.db,
 		"Question A",
-		`{"statement":"Sum numbers","input":"Two integers a and b.","output":"Return their sum."}`,
+		"## Statement\n\nSum numbers\n\n## Input\n\nTwo integers a and b.\n\n## Output\n\nReturn their sum.",
 		"function solution(a,b)\n  return 0\nend",
 		"function solution(a,b)\n  return a+b\nend",
 	)
@@ -141,17 +141,17 @@ func TestTeacherSimpleCRUDRoutes(t *testing.T) {
 	var questionsEnvelope struct {
 		Data struct {
 			Questions []struct {
-				ID          int64           `json:"id"`
-				Title       string          `json:"title"`
-				Description json.RawMessage `json:"description"`
+				ID          int64  `json:"id"`
+				Title       string `json:"title"`
+				Description string `json:"description"`
 			} `json:"questions"`
 		} `json:"data"`
 	}
 	decodeJSON(t, listQuestions.Body.Bytes(), &questionsEnvelope)
 	var listedQuestion *struct {
-		ID          int64           `json:"id"`
-		Title       string          `json:"title"`
-		Description json.RawMessage `json:"description"`
+		ID          int64  `json:"id"`
+		Title       string `json:"title"`
+		Description string `json:"description"`
 	}
 	for index := range questionsEnvelope.Data.Questions {
 		item := &questionsEnvelope.Data.Questions[index]
@@ -163,8 +163,8 @@ func TestTeacherSimpleCRUDRoutes(t *testing.T) {
 	if listedQuestion == nil || listedQuestion.Title != "Question A" {
 		t.Fatalf("GET /api/teacher/questions missing created question: %#v", questionsEnvelope.Data.Questions)
 	}
-	if string(listedQuestion.Description) != `{"statement":"Sum numbers","input":"Two integers a and b.","output":"Return their sum."}` {
-		t.Fatalf("listed question description = %s, want compact JSON object", listedQuestion.Description)
+	if listedQuestion.Description != "## Statement\n\nSum numbers\n\n## Input\n\nTwo integers a and b.\n\n## Output\n\nReturn their sum." {
+		t.Fatalf("listed question description = %q, want Markdown", listedQuestion.Description)
 	}
 
 	getQuestion := performRequest(
@@ -182,13 +182,13 @@ func TestTeacherSimpleCRUDRoutes(t *testing.T) {
 	var getQuestionEnvelope struct {
 		Data struct {
 			Question struct {
-				Description json.RawMessage `json:"description"`
+				Description string `json:"description"`
 			} `json:"question"`
 		} `json:"data"`
 	}
 	decodeJSON(t, getQuestion.Body.Bytes(), &getQuestionEnvelope)
-	if string(getQuestionEnvelope.Data.Question.Description) != `{"statement":"Sum numbers","input":"Two integers a and b.","output":"Return their sum."}` {
-		t.Fatalf("get question description = %s, want compact JSON object", getQuestionEnvelope.Data.Question.Description)
+	if getQuestionEnvelope.Data.Question.Description != listedQuestion.Description {
+		t.Fatalf("get question description = %q, want Markdown", getQuestionEnvelope.Data.Question.Description)
 	}
 }
 
@@ -392,7 +392,7 @@ func TestStudentCurrentLessonRoutes(t *testing.T) {
 		t,
 		app.db,
 		"Student Question 1",
-		`{"Statement":"Describe question one","Input":"Sample input 1","Output":"Sample output 1"}`,
+		"## Statement\n\nDescribe question one\n\n## Input\n\nSample input 1\n\n## Output\n\nSample output 1",
 		"function solution()\n    return 1\nend",
 		"function solution()\n    return 2\nend",
 	)
@@ -400,7 +400,7 @@ func TestStudentCurrentLessonRoutes(t *testing.T) {
 		t,
 		app.db,
 		"Student Question 2",
-		`{"Statement":"Describe question two","Input":"Sample input 2","Output":"Sample output 2"}`,
+		"## Statement\n\nDescribe question two\n\n## Input\n\nSample input 2\n\n## Output\n\nSample output 2",
 		"function solution()\n    return 3\nend",
 		"function solution()\n    return 4\nend",
 	)
@@ -483,12 +483,12 @@ func TestStudentCurrentLessonRoutes(t *testing.T) {
 	if questionEnvelope.Data.Question["starter_code"] != "function solution()\n    return 1\nend" {
 		t.Fatalf("student question starter_code = %v, want starter code preserved", questionEnvelope.Data.Question["starter_code"])
 	}
-	description, ok := questionEnvelope.Data.Question["description"].(map[string]any)
+	description, ok := questionEnvelope.Data.Question["description"].(string)
 	if !ok {
-		t.Fatalf("student question description = %#v, want JSON object", questionEnvelope.Data.Question["description"])
+		t.Fatalf("student question description = %#v, want Markdown string", questionEnvelope.Data.Question["description"])
 	}
-	if description["Statement"] != "Describe question one" || description["Input"] != "Sample input 1" || description["Output"] != "Sample output 1" {
-		t.Fatalf("student question description = %#v, want structured content", description)
+	if description != "## Statement\n\nDescribe question one\n\n## Input\n\nSample input 1\n\n## Output\n\nSample output 1" {
+		t.Fatalf("student question description = %q, want Markdown", description)
 	}
 	if _, exists := questionEnvelope.Data.Question["reference_code"]; exists {
 		t.Fatalf("student question unexpectedly exposed reference_code: %#v", questionEnvelope.Data.Question)

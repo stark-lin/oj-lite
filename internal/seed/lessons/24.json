@@ -5,14 +5,7 @@
   "questions": [
     {
       "title": "班级成绩分析系统：总分、平均分和及格人数",
-      "description": {
-        "难度": "Simple",
-        "背景": "老师把班级成绩保存在 scores 数组中。现在需要做一个基础成绩分析。",
-        "任务": "请计算总分、平均分和及格人数。",
-        "输入": "一个数组 scores 和一个数字 n。",
-        "输出": "依次返回总分、平均分和及格人数。",
-        "提示": "一次遍历中可以同时完成求和和计数。"
-      },
+      "description": "## 难度\n\nSimple\n\n## 背景\n\n老师把班级成绩保存在 scores 数组中。现在需要做一个基础成绩分析。\n\n## 任务\n\n请计算总分、平均分和及格人数。\n\n## 输入\n\n一个数组 scores 和一个数字 n。\n\n## 输出\n\n依次返回总分、平均分和及格人数。\n\n## 提示\n\n一次遍历中可以同时完成求和和计数。",
       "starter_code": "function solution(scores, n)\n    return 0, 0, 0\nend",
       "reference_code": "function solution(scores, n)\n    local sum = 0\n    local passCount = 0\n\n    for i = 1, n do\n        sum = sum + scores[i]\n        if scores[i] >= 60 then\n            passCount = passCount + 1\n        end\n    end\n\n    local average = sum / n\n    return sum, average, passCount\nend",
       "test_cases": [
@@ -33,14 +26,7 @@
     },
     {
       "title": "游戏积分分析系统：最高分、最低分和平均分",
-      "description": {
-        "难度": "Simple",
-        "背景": "玩家多次游戏的积分保存在 points 数组中。系统要分析最高分、最低分和平均分。",
-        "任务": "请计算最高分、最低分和平均分。",
-        "输入": "一个数组 points 和一个数字 n。",
-        "输出": "依次返回最高分、最低分和平均分。",
-        "提示": "最大值和最小值可以在同一次遍历中更新。"
-      },
+      "description": "## 难度\n\nSimple\n\n## 背景\n\n玩家多次游戏的积分保存在 points 数组中。系统要分析最高分、最低分和平均分。\n\n## 任务\n\n请计算最高分、最低分和平均分。\n\n## 输入\n\n一个数组 points 和一个数字 n。\n\n## 输出\n\n依次返回最高分、最低分和平均分。\n\n## 提示\n\n最大值和最小值可以在同一次遍历中更新。",
       "starter_code": "function solution(points, n)\n    return 0, 0, 0\nend",
       "reference_code": "function solution(points, n)\n    local maxValue = points[1]\n    local minValue = points[1]\n    local sum = 0\n\n    for i = 1, n do\n        sum = sum + points[i]\n\n        if points[i] > maxValue then\n            maxValue = points[i]\n        end\n\n        if points[i] < minValue then\n            minValue = points[i]\n        end\n    end\n\n    return maxValue, minValue, sum / n\nend",
       "test_cases": [
@@ -61,14 +47,7 @@
     },
     {
       "title": "每日存钱记录系统：总额、最高单日和达标判断",
-      "description": {
-        "难度": "Simple",
-        "背景": "学生每天存的钱保存在 savings 数组中。他想知道总共存了多少钱，哪一天存得最多，以及是否达到 target 元目标。",
-        "任务": "请计算存钱总额、最高单日存款，并判断是否达标。",
-        "输入": "一个数组 savings，一个数字 n 和一个数字 target。",
-        "输出": "依次返回总额、最高单日存款和是否达标。",
-        "提示": "累计总额和寻找最大值可以同时完成。"
-      },
+      "description": "## 难度\n\nSimple\n\n## 背景\n\n学生每天存的钱保存在 savings 数组中。他想知道总共存了多少钱，哪一天存得最多，以及是否达到 target 元目标。\n\n## 任务\n\n请计算存钱总额、最高单日存款，并判断是否达标。\n\n## 输入\n\n一个数组 savings，一个数字 n 和一个数字 target。\n\n## 输出\n\n依次返回总额、最高单日存款和是否达标。\n\n## 提示\n\n累计总额和寻找最大值可以同时完成。",
       "starter_code": "function solution(savings, n, target)\n    return 0, 0, false\nend",
       "reference_code": "function solution(savings, n, target)\n    local total = 0\n    local maxDay = savings[1]\n\n    for i = 1, n do\n        total = total + savings[i]\n\n        if savings[i] > maxDay then\n            maxDay = savings[i]\n        end\n    end\n\n    local reached = false\n    if total >= target then\n        reached = true\n    end\n\n    return total, maxDay, reached\nend",
       "test_cases": [
@@ -92,14 +71,7 @@
     },
     {
       "title": "游戏排行榜系统：排序、前三名和入榜判断",
-      "description": {
-        "难度": "Normal",
-        "背景": "游戏排行榜保存了已有玩家分数 scores。系统需要把分数从高到低排序，取出前三名，并判断 newScore 能否进入前三名。",
-        "任务": "请完成排行榜排序、前三名提取和新分数入榜判断。",
-        "输入": "一个数组 scores，一个数字 n 和一个数字 newScore，保证 n 至少为 3。",
-        "输出": "依次返回第一名、第二名、第三名和 newScore 是否能进入前三。",
-        "提示": "排序后，第三名就是判断入榜的关键边界。"
-      },
+      "description": "## 难度\n\nNormal\n\n## 背景\n\n游戏排行榜保存了已有玩家分数 scores。系统需要把分数从高到低排序，取出前三名，并判断 newScore 能否进入前三名。\n\n## 任务\n\n请完成排行榜排序、前三名提取和新分数入榜判断。\n\n## 输入\n\n一个数组 scores，一个数字 n 和一个数字 newScore，保证 n 至少为 3。\n\n## 输出\n\n依次返回第一名、第二名、第三名和 newScore 是否能进入前三。\n\n## 提示\n\n排序后，第三名就是判断入榜的关键边界。",
       "starter_code": "function solution(scores, n, newScore)\n    return 0, 0, 0, false\nend",
       "reference_code": "function solution(scores, n, newScore)\n    for i = 1, n - 1 do\n        local maxIndex = i\n\n        for j = i + 1, n do\n            if scores[j] > scores[maxIndex] then\n                maxIndex = j\n            end\n        end\n\n        local temp = scores[i]\n        scores[i] = scores[maxIndex]\n        scores[maxIndex] = temp\n    end\n\n    local canEnter = false\n    if newScore >= scores[3] then\n        canEnter = true\n    end\n\n    return scores[1], scores[2], scores[3], canEnter\nend",
       "test_cases": [
@@ -123,14 +95,7 @@
     },
     {
       "title": "图书编号管理系统：查找、排序和分类统计",
-      "description": {
-        "难度": "Normal",
-        "背景": "图书编号 books 原本顺序混乱。管理员想知道 target 编号原来是否存在，同时把编号排序，并统计奇数编号和偶数编号的数量。",
-        "任务": "请查找 target 的原始位置，统计奇偶数量，并把 books 从小到大排序。",
-        "输入": "一个数组 books，一个数字 n 和一个数字 target。",
-        "输出": "依次返回 target 原始位置、奇数编号数量、偶数编号数量和排序后的 books 数组。找不到 target 时位置返回 0。",
-        "提示": "查找和分类可以先做，排序可以后做。"
-      },
+      "description": "## 难度\n\nNormal\n\n## 背景\n\n图书编号 books 原本顺序混乱。管理员想知道 target 编号原来是否存在，同时把编号排序，并统计奇数编号和偶数编号的数量。\n\n## 任务\n\n请查找 target 的原始位置，统计奇偶数量，并把 books 从小到大排序。\n\n## 输入\n\n一个数组 books，一个数字 n 和一个数字 target。\n\n## 输出\n\n依次返回 target 原始位置、奇数编号数量、偶数编号数量和排序后的 books 数组。找不到 target 时位置返回 0。\n\n## 提示\n\n查找和分类可以先做，排序可以后做。",
       "starter_code": "function solution(books, n, target)\n    return 0, 0, 0, books\nend",
       "reference_code": "function solution(books, n, target)\n    local position = 0\n    local oddCount = 0\n    local evenCount = 0\n\n    for i = 1, n do\n        if books[i] == target and position == 0 then\n            position = i\n        end\n\n        if books[i] % 2 == 0 then\n            evenCount = evenCount + 1\n        else\n            oddCount = oddCount + 1\n        end\n    end\n\n    for i = 1, n - 1 do\n        local minIndex = i\n\n        for j = i + 1, n do\n            if books[j] < books[minIndex] then\n                minIndex = j\n            end\n        end\n\n        local temp = books[i]\n        books[i] = books[minIndex]\n        books[minIndex] = temp\n    end\n\n    return position, oddCount, evenCount, books\nend",
       "test_cases": [
@@ -154,14 +119,7 @@
     },
     {
       "title": "运动会成绩系统：最高成绩、排名和分段统计",
-      "description": {
-        "难度": "Normal",
-        "背景": "运动会成绩保存在 scores 数组中。成绩越高排名越靠前。老师想知道最高成绩、targetScore 的排名，以及高分、中等、待提高三个分段的人数。",
-        "任务": "请统计分段人数，把成绩从高到低排序，并找出 targetScore 的第一个排名。",
-        "输入": "一个数组 scores，一个数字 n 和一个数字 targetScore。",
-        "输出": "依次返回最高成绩、targetScore 排名、高分人数、中等人数、待提高人数。找不到 targetScore 时排名返回 0。",
-        "提示": "可以先分类统计，再排序查找排名。"
-      },
+      "description": "## 难度\n\nNormal\n\n## 背景\n\n运动会成绩保存在 scores 数组中。成绩越高排名越靠前。老师想知道最高成绩、targetScore 的排名，以及高分、中等、待提高三个分段的人数。\n\n## 任务\n\n请统计分段人数，把成绩从高到低排序，并找出 targetScore 的第一个排名。\n\n## 输入\n\n一个数组 scores，一个数字 n 和一个数字 targetScore。\n\n## 输出\n\n依次返回最高成绩、targetScore 排名、高分人数、中等人数、待提高人数。找不到 targetScore 时排名返回 0。\n\n## 提示\n\n可以先分类统计，再排序查找排名。",
       "starter_code": "function solution(scores, n, targetScore)\n    return 0, 0, 0, 0, 0\nend",
       "reference_code": "function solution(scores, n, targetScore)\n    local high = 0\n    local middle = 0\n    local low = 0\n\n    for i = 1, n do\n        if scores[i] >= 90 then\n            high = high + 1\n        elseif scores[i] >= 60 then\n            middle = middle + 1\n        else\n            low = low + 1\n        end\n    end\n\n    for i = 1, n - 1 do\n        for j = 1, n - i do\n            if scores[j] < scores[j + 1] then\n                local temp = scores[j]\n                scores[j] = scores[j + 1]\n                scores[j + 1] = temp\n            end\n        end\n    end\n\n    local best = scores[1]\n    local rank = 0\n\n    for i = 1, n do\n        if scores[i] == targetScore and rank == 0 then\n            rank = i\n        end\n    end\n\n    return best, rank, high, middle, low\nend",
       "test_cases": [
@@ -185,14 +143,7 @@
     },
     {
       "title": "购物方案系统：在预算内找出数量最多且剩余最少的买法",
-      "description": {
-        "难度": "Challenge",
-        "背景": "商店里有两种商品，价格分别是 priceA 和 priceB。学生有 budget 元，希望买到的商品总数量尽可能多；如果总数量相同，则希望剩余金额尽可能少。",
-        "任务": "请枚举所有不超过预算的购买方案，并找出最优买法。",
-        "输入": "三个数字：priceA、priceB 和 budget。",
-        "输出": "依次返回商品 A 数量、商品 B 数量、商品总数量和剩余金额。",
-        "提示": "把问题拆成枚举方案、判断预算、比较数量和比较剩余金额。"
-      },
+      "description": "## 难度\n\nChallenge\n\n## 背景\n\n商店里有两种商品，价格分别是 priceA 和 priceB。学生有 budget 元，希望买到的商品总数量尽可能多；如果总数量相同，则希望剩余金额尽可能少。\n\n## 任务\n\n请枚举所有不超过预算的购买方案，并找出最优买法。\n\n## 输入\n\n三个数字：priceA、priceB 和 budget。\n\n## 输出\n\n依次返回商品 A 数量、商品 B 数量、商品总数量和剩余金额。\n\n## 提示\n\n把问题拆成枚举方案、判断预算、比较数量和比较剩余金额。",
       "starter_code": "function solution(priceA, priceB, budget)\n    return 0, 0, 0, budget\nend",
       "reference_code": "function solution(priceA, priceB, budget)\n    local bestA = 0\n    local bestB = 0\n    local bestCount = 0\n    local bestLeft = budget\n\n    for a = 0, budget do\n        for b = 0, budget do\n            local cost = a * priceA + b * priceB\n\n            if cost <= budget then\n                local count = a + b\n                local left = budget - cost\n\n                if count > bestCount then\n                    bestCount = count\n                    bestLeft = left\n                    bestA = a\n                    bestB = b\n                elseif count == bestCount and left < bestLeft then\n                    bestLeft = left\n                    bestA = a\n                    bestB = b\n                end\n            end\n        end\n    end\n\n    return bestA, bestB, bestCount, bestLeft\nend",
       "test_cases": [
@@ -216,14 +167,7 @@
     },
     {
       "title": "骰子可能性系统：统计所有点数和并找出出现次数最多的结果",
-      "description": {
-        "难度": "Challenge",
-        "背景": "两个骰子的点数都从 1 到 diceMax。系统需要统计每种点数和出现的次数，并找出出现次数最多的点数和。",
-        "任务": "请枚举两个骰子的所有情况，统计点数和次数，并返回出现次数最多的点数和及其次数。",
-        "输入": "一个数字：diceMax。",
-        "输出": "依次返回出现次数最多的点数和、该点数和出现次数。",
-        "提示": "可以用数组把每种点数和出现的次数记录下来，再找最大次数。"
-      },
+      "description": "## 难度\n\nChallenge\n\n## 背景\n\n两个骰子的点数都从 1 到 diceMax。系统需要统计每种点数和出现的次数，并找出出现次数最多的点数和。\n\n## 任务\n\n请枚举两个骰子的所有情况，统计点数和次数，并返回出现次数最多的点数和及其次数。\n\n## 输入\n\n一个数字：diceMax。\n\n## 输出\n\n依次返回出现次数最多的点数和、该点数和出现次数。\n\n## 提示\n\n可以用数组把每种点数和出现的次数记录下来，再找最大次数。",
       "starter_code": "function solution(diceMax)\n    return 0, 0\nend",
       "reference_code": "function solution(diceMax)\n    local counts = {}\n\n    for sum = 2, diceMax * 2 do\n        counts[sum] = 0\n    end\n\n    for a = 1, diceMax do\n        for b = 1, diceMax do\n            local sum = a + b\n            counts[sum] = counts[sum] + 1\n        end\n    end\n\n    local bestSum = 2\n    local bestCount = counts[2]\n\n    for sum = 3, diceMax * 2 do\n        if counts[sum] > bestCount then\n            bestCount = counts[sum]\n            bestSum = sum\n        end\n    end\n\n    return bestSum, bestCount\nend",
       "test_cases": [
@@ -241,14 +185,7 @@
     },
     {
       "title": "综合成绩排名系统：排序、并列名次和查找学生排名",
-      "description": {
-        "难度": "Challenge",
-        "背景": "班级中每名学生都有一个编号 ids 和一个成绩 scores。老师需要根据成绩从高到低排序；如果成绩相同，则获得相同名次；最后查找 targetId 学生的成绩和名次。",
-        "任务": "请同时排序学生编号和成绩，处理并列名次，并返回目标学生的成绩和名次。",
-        "输入": "一个学生编号数组 ids，一个成绩数组 scores，一个数字 n 和一个数字 targetId。",
-        "输出": "如果找到目标学生，依次返回目标学生成绩和名次；如果找不到，返回 0 和 0。",
-        "提示": "排序成绩时，学生编号要跟着对应成绩一起交换。排序后再根据相邻成绩计算并列名次。"
-      },
+      "description": "## 难度\n\nChallenge\n\n## 背景\n\n班级中每名学生都有一个编号 ids 和一个成绩 scores。老师需要根据成绩从高到低排序；如果成绩相同，则获得相同名次；最后查找 targetId 学生的成绩和名次。\n\n## 任务\n\n请同时排序学生编号和成绩，处理并列名次，并返回目标学生的成绩和名次。\n\n## 输入\n\n一个学生编号数组 ids，一个成绩数组 scores，一个数字 n 和一个数字 targetId。\n\n## 输出\n\n如果找到目标学生，依次返回目标学生成绩和名次；如果找不到，返回 0 和 0。\n\n## 提示\n\n排序成绩时，学生编号要跟着对应成绩一起交换。排序后再根据相邻成绩计算并列名次。",
       "starter_code": "function solution(ids, scores, n, targetId)\n    return 0, 0\nend",
       "reference_code": "function solution(ids, scores, n, targetId)\n    for i = 1, n - 1 do\n        local maxIndex = i\n\n        for j = i + 1, n do\n            if scores[j] > scores[maxIndex] then\n                maxIndex = j\n            end\n        end\n\n        local tempScore = scores[i]\n        scores[i] = scores[maxIndex]\n        scores[maxIndex] = tempScore\n\n        local tempId = ids[i]\n        ids[i] = ids[maxIndex]\n        ids[maxIndex] = tempId\n    end\n\n    local currentRank = 1\n\n    for i = 1, n do\n        if i == 1 then\n            currentRank = 1\n        elseif scores[i] < scores[i - 1] then\n            currentRank = i\n        end\n\n        if ids[i] == targetId then\n            return scores[i], currentRank\n        end\n    end\n\n    return 0, 0\nend",
       "test_cases": [

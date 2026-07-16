@@ -420,6 +420,8 @@
     </footer>
   </div>
 
+  <script src="/assets/vendor/marked.min.js"></script>
+  <script src="/assets/vendor/purify.min.js"></script>
   <script src="/assets/app.js"></script>
   <script>
 (() => {
@@ -431,12 +433,12 @@
     createApiRequest,
     deepClone: clone,
     escapeHtml,
-    formatQuestionDescriptionValue,
     highlightLua,
     normalizeJudgeReport,
     normalizeStdoutBuffer,
     renderJudgeReportPlaceholder,
     renderJudgeReportTerminal,
+    renderMarkdown,
     ui
   } = window.OJLite;
 
@@ -579,7 +581,7 @@
       badgeLabel: '#' + sortOrder,
       status: '',
       difficulty: '—',
-      description: {},
+      description: '',
       starterCode: '',
       detailLoaded: false,
       detailLoading: false,
@@ -614,22 +616,11 @@
   }
 
   function normalizeQuestionDescription(value) {
-    if (!value || typeof value !== 'object' || Array.isArray(value)) {
-      return {};
-    }
-    return value;
+    return typeof value === 'string' ? value : '';
   }
 
   function renderQuestionDescriptionSections(description) {
-    const entries = Object.entries(normalizeQuestionDescription(description));
-    if (!entries.length) {
-      return ui.problemSection('Description', '<pre class="problem-example">—</pre>');
-    }
-
-    return entries.map(([title, value]) => ui.problemSection(
-      title,
-      `<pre class="problem-example">${escapeHtml(formatQuestionDescriptionValue(value))}</pre>`
-    )).join('');
+    return `<article class="markdown-body problem-markdown">${renderMarkdown(normalizeQuestionDescription(description))}</article>`;
   }
 
   function applyQuestionDetail(question, detail) {

@@ -5,14 +5,7 @@
   "questions": [
     {
       "title": "计算 1 到 n 的楼梯编号总和",
-      "description": {
-        "难度": "Simple",
-        "背景": "楼梯从第 1 级一直编号到第 n 级。老师想让同学们计算所有楼梯编号加起来是多少。",
-        "任务": "请计算 1 到 n 的数字总和。",
-        "输入": "一个正整数：n。",
-        "输出": "返回 1 到 n 的总和。",
-        "提示": "可以用一个变量保存累计结果。"
-      },
+      "description": "## 难度\n\nSimple\n\n## 背景\n\n楼梯从第 1 级一直编号到第 n 级。老师想让同学们计算所有楼梯编号加起来是多少。\n\n## 任务\n\n请计算 1 到 n 的数字总和。\n\n## 输入\n\n一个正整数：n。\n\n## 输出\n\n返回 1 到 n 的总和。\n\n## 提示\n\n可以用一个变量保存累计结果。",
       "starter_code": "function solution(n)\n    return 0\nend",
       "reference_code": "function solution(n)\n    local sum = 0\n\n    for i = 1, n do\n        sum = sum + i\n    end\n\n    return sum\nend",
       "test_cases": [
@@ -24,14 +17,7 @@
     },
     {
       "title": "计算连续几天固定金币奖励的总数",
-      "description": {
-        "难度": "Simple",
-        "背景": "游戏每天都会给玩家相同数量的金币奖励。玩家连续登录 days 天，每天获得 reward 个金币。",
-        "任务": "请计算玩家一共获得多少金币。",
-        "输入": "两个数字：reward 和 days。",
-        "输出": "返回金币总数。",
-        "提示": "可以把每天的奖励一次次累加起来。"
-      },
+      "description": "## 难度\n\nSimple\n\n## 背景\n\n游戏每天都会给玩家相同数量的金币奖励。玩家连续登录 days 天，每天获得 reward 个金币。\n\n## 任务\n\n请计算玩家一共获得多少金币。\n\n## 输入\n\n两个数字：reward 和 days。\n\n## 输出\n\n返回金币总数。\n\n## 提示\n\n可以把每天的奖励一次次累加起来。",
       "starter_code": "function solution(reward, days)\n    return 0\nend",
       "reference_code": "function solution(reward, days)\n    local sum = 0\n\n    for i = 1, days do\n        sum = sum + reward\n    end\n\n    return sum\nend",
       "test_cases": [
@@ -43,14 +29,7 @@
     },
     {
       "title": "计算几次训练一共跑了多少米",
-      "description": {
-        "难度": "Simple",
-        "背景": "学生每天跑相同距离 distance 米，一共训练 days 天。老师想知道他总共跑了多少米。",
-        "任务": "请计算训练总距离。",
-        "输入": "两个数字：distance 和 days。",
-        "输出": "返回总距离。",
-        "提示": "每一天的距离都要加入总数。"
-      },
+      "description": "## 难度\n\nSimple\n\n## 背景\n\n学生每天跑相同距离 distance 米，一共训练 days 天。老师想知道他总共跑了多少米。\n\n## 任务\n\n请计算训练总距离。\n\n## 输入\n\n两个数字：distance 和 days。\n\n## 输出\n\n返回总距离。\n\n## 提示\n\n每一天的距离都要加入总数。",
       "starter_code": "function solution(distance, days)\n    return 0\nend",
       "reference_code": "function solution(distance, days)\n    local total = 0\n\n    for i = 1, days do\n        total = total + distance\n    end\n\n    return total\nend",
       "test_cases": [
@@ -62,14 +41,7 @@
     },
     {
       "title": "计算 1 到 n 中所有偶数编号的总和",
-      "description": {
-        "难度": "Normal",
-        "背景": "老师从 1 到 n 的编号中挑出偶数编号，并想知道这些偶数编号加起来是多少。",
-        "任务": "请计算 1 到 n 中所有偶数的总和。",
-        "输入": "一个正整数：n。",
-        "输出": "返回偶数编号的总和。",
-        "提示": "先判断编号是否符合条件，再决定是否加入总和。"
-      },
+      "description": "## 难度\n\nNormal\n\n## 背景\n\n老师从 1 到 n 的编号中挑出偶数编号，并想知道这些偶数编号加起来是多少。\n\n## 任务\n\n请计算 1 到 n 中所有偶数的总和。\n\n## 输入\n\n一个正整数：n。\n\n## 输出\n\n返回偶数编号的总和。\n\n## 提示\n\n先判断编号是否符合条件，再决定是否加入总和。",
       "starter_code": "function solution(n)\n    return 0\nend",
       "reference_code": "function solution(n)\n    local sum = 0\n\n    for i = 1, n do\n        if i % 2 == 0 then\n            sum = sum + i\n        end\n    end\n\n    return sum\nend",
       "test_cases": [
@@ -81,14 +53,7 @@
     },
     {
       "title": "统计并计算能获得奖励的关卡金币总数",
-      "description": {
-        "难度": "Normal",
-        "背景": "一个游戏有 n 个关卡。每当关卡编号是 step 的倍数时，玩家可以获得 reward 个金币。",
-        "任务": "请统计奖励关卡数量，并计算所有奖励金币的总数。",
-        "输入": "三个数字：n、step 和 reward。",
-        "输出": "依次返回奖励关卡数量和金币总数。",
-        "提示": "同一个循环里可以同时完成计数和累加。"
-      },
+      "description": "## 难度\n\nNormal\n\n## 背景\n\n一个游戏有 n 个关卡。每当关卡编号是 step 的倍数时，玩家可以获得 reward 个金币。\n\n## 任务\n\n请统计奖励关卡数量，并计算所有奖励金币的总数。\n\n## 输入\n\n三个数字：n、step 和 reward。\n\n## 输出\n\n依次返回奖励关卡数量和金币总数。\n\n## 提示\n\n同一个循环里可以同时完成计数和累加。",
       "starter_code": "function solution(n, step, reward)\n    return 0, 0\nend",
       "reference_code": "function solution(n, step, reward)\n    local count = 0\n    local sum = 0\n\n    for i = 1, n do\n        if i % step == 0 then\n            count = count + 1\n            sum = sum + reward\n        end\n    end\n\n    return count, sum\nend",
       "test_cases": [
@@ -100,14 +65,7 @@
     },
     {
       "title": "计算几次小测总分、平均分和是否达标",
-      "description": {
-        "难度": "Normal",
-        "背景": "学生参加了三次小测。老师需要计算总分和平均分，并判断平均分是否达到 passLine。",
-        "任务": "请根据三次成绩计算总分、平均分和达标结果。",
-        "输入": "四个数字：score1、score2、score3 和 passLine。",
-        "输出": "依次返回总分、平均分、是否达标。",
-        "提示": "先算总分，再用总分计算平均分，最后判断平均分是否达标。"
-      },
+      "description": "## 难度\n\nNormal\n\n## 背景\n\n学生参加了三次小测。老师需要计算总分和平均分，并判断平均分是否达到 passLine。\n\n## 任务\n\n请根据三次成绩计算总分、平均分和达标结果。\n\n## 输入\n\n四个数字：score1、score2、score3 和 passLine。\n\n## 输出\n\n依次返回总分、平均分、是否达标。\n\n## 提示\n\n先算总分，再用总分计算平均分，最后判断平均分是否达标。",
       "starter_code": "function solution(score1, score2, score3, passLine)\n    return 0, 0, false\nend",
       "reference_code": "function solution(score1, score2, score3, passLine)\n    local total = score1 + score2 + score3\n    local average = total / 3\n    local passed = false\n\n    if average >= passLine then\n        passed = true\n    end\n\n    return total, average, passed\nend",
       "test_cases": [
@@ -119,14 +77,7 @@
     },
     {
       "title": "每天存钱金额递增，最早第几天达到目标",
-      "description": {
-        "难度": "Challenge",
-        "背景": "学生从第一天开始存钱。第一天存 start 元，之后每天比前一天多存 increase 元。现在他想知道最早第几天可以存到 target 元或更多。",
-        "任务": "请模拟每天存钱的过程，并返回最早达到目标的天数。",
-        "输入": "三个数字：start、increase 和 target。",
-        "输出": "返回最早达到目标的天数。",
-        "提示": "每天都需要更新当天存的钱和已经存下的总钱数。"
-      },
+      "description": "## 难度\n\nChallenge\n\n## 背景\n\n学生从第一天开始存钱。第一天存 start 元，之后每天比前一天多存 increase 元。现在他想知道最早第几天可以存到 target 元或更多。\n\n## 任务\n\n请模拟每天存钱的过程，并返回最早达到目标的天数。\n\n## 输入\n\n三个数字：start、increase 和 target。\n\n## 输出\n\n返回最早达到目标的天数。\n\n## 提示\n\n每天都需要更新当天存的钱和已经存下的总钱数。",
       "starter_code": "function solution(start, increase, target)\n    return 0\nend",
       "reference_code": "function solution(start, increase, target)\n    local day = 0\n    local current = start\n    local total = 0\n\n    while total < target do\n        total = total + current\n        current = current + increase\n        day = day + 1\n    end\n\n    return day\nend",
       "test_cases": [
@@ -138,14 +89,7 @@
     },
     {
       "title": "连续闯关累计金币，超过升级要求时输出关卡数",
-      "description": {
-        "难度": "Challenge",
-        "背景": "玩家连续闯关。第 i 关可以获得 i 乘以 base 个金币。升级需要累计金币达到 target。游戏一共有 n 关。",
-        "任务": "请计算玩家最早在第几关达到升级要求；如果 n 关结束后仍未达到，返回 0。",
-        "输入": "三个数字：n、base 和 target。",
-        "输出": "返回最早达到目标的关卡编号；如果没有达到，返回 0。",
-        "提示": "每过一关都要更新累计金币，并检查是否已经达到目标。"
-      },
+      "description": "## 难度\n\nChallenge\n\n## 背景\n\n玩家连续闯关。第 i 关可以获得 i 乘以 base 个金币。升级需要累计金币达到 target。游戏一共有 n 关。\n\n## 任务\n\n请计算玩家最早在第几关达到升级要求；如果 n 关结束后仍未达到，返回 0。\n\n## 输入\n\n三个数字：n、base 和 target。\n\n## 输出\n\n返回最早达到目标的关卡编号；如果没有达到，返回 0。\n\n## 提示\n\n每过一关都要更新累计金币，并检查是否已经达到目标。",
       "starter_code": "function solution(n, base, target)\n    return 0\nend",
       "reference_code": "function solution(n, base, target)\n    local total = 0\n\n    for i = 1, n do\n        total = total + i * base\n        if total >= target then\n            return i\n        end\n    end\n\n    return 0\nend",
       "test_cases": [
@@ -157,14 +101,7 @@
     },
     {
       "title": "统计满足条件的数字数量、总和和平均值",
-      "description": {
-        "难度": "Challenge",
-        "背景": "老师从 1 到 n 中挑选数字。一个数字只有同时满足两个条件才会被选中：它是 k 的倍数，并且大于 limit。",
-        "任务": "请统计被选中的数字数量、总和和平均值。",
-        "输入": "三个数字：n、k 和 limit。",
-        "输出": "依次返回数量、总和和平均值。如果没有数字被选中，平均值返回 0。",
-        "提示": "先完成条件筛选，再同时维护数量和总和。"
-      },
+      "description": "## 难度\n\nChallenge\n\n## 背景\n\n老师从 1 到 n 中挑选数字。一个数字只有同时满足两个条件才会被选中：它是 k 的倍数，并且大于 limit。\n\n## 任务\n\n请统计被选中的数字数量、总和和平均值。\n\n## 输入\n\n三个数字：n、k 和 limit。\n\n## 输出\n\n依次返回数量、总和和平均值。如果没有数字被选中，平均值返回 0。\n\n## 提示\n\n先完成条件筛选，再同时维护数量和总和。",
       "starter_code": "function solution(n, k, limit)\n    return 0, 0, 0\nend",
       "reference_code": "function solution(n, k, limit)\n    local count = 0\n    local sum = 0\n\n    for i = 1, n do\n        if i % k == 0 and i > limit then\n            count = count + 1\n            sum = sum + i\n        end\n    end\n\n    local average = 0\n    if count > 0 then\n        average = sum / count\n    end\n\n    return count, sum, average\nend",
       "test_cases": [

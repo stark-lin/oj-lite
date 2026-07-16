@@ -5,14 +5,7 @@
   "questions": [
     {
       "title": "Search a Number-Card Array for a Target Student",
-      "description": {
-        "difficulty": "Simple",
-        "background": "The teacher stores student number cards for an activity in the array numbers. Now the teacher needs to confirm whether student number target is in the list.",
-        "task": "Search the array to decide whether target exists.",
-        "input": "One array numbers, one number n, and one number target.",
-        "output": "Return true if target is found; otherwise return false.",
-        "hint": "You can start from the first position and check one item at a time."
-      },
+      "description": "## Difficulty\n\nSimple\n\n## Background\n\nThe teacher stores student number cards for an activity in the array numbers. Now the teacher needs to confirm whether student number target is in the list.\n\n## Task\n\nSearch the array to decide whether target exists.\n\n## Input\n\nOne array numbers, one number n, and one number target.\n\n## Output\n\nReturn true if target is found; otherwise return false.\n\n## Hint\n\nYou can start from the first position and check one item at a time.",
       "starter_code": "function solution(numbers, n, target)\n    return false\nend",
       "reference_code": "function solution(numbers, n, target)\n    for i = 1, n do\n        if numbers[i] == target then\n            return true\n        end\n    end\n    return false\nend",
       "test_cases": [
@@ -48,14 +41,7 @@
     },
     {
       "title": "Search a Score Sheet for a Perfect Score",
-      "description": {
-        "difficulty": "Simple",
-        "background": "After an exam, the teacher wants to know whether anyone in the score sheet scores has received 100 points.",
-        "task": "Search the array for a score of 100.",
-        "input": "One array scores and one number n.",
-        "output": "Return true if someone has a score of 100; otherwise return false.",
-        "hint": "The search target is fixed as the perfect score."
-      },
+      "description": "## Difficulty\n\nSimple\n\n## Background\n\nAfter an exam, the teacher wants to know whether anyone in the score sheet scores has received 100 points.\n\n## Task\n\nSearch the array for a score of 100.\n\n## Input\n\nOne array scores and one number n.\n\n## Output\n\nReturn true if someone has a score of 100; otherwise return false.\n\n## Hint\n\nThe search target is fixed as the perfect score.",
       "starter_code": "function solution(scores, n)\n    return false\nend",
       "reference_code": "function solution(scores, n)\n    for i = 1, n do\n        if scores[i] == 100 then\n            return true\n        end\n    end\n    return false\nend",
       "test_cases": [
@@ -86,14 +72,7 @@
     },
     {
       "title": "Find the Position of a Target Item Count in Backpack Slots",
-      "description": {
-        "difficulty": "Simple",
-        "background": "Each slot in a game backpack stores the count of one item type, and all counts are stored in the array items. The player wants to find the first slot whose count equals target.",
-        "task": "Return the first position whose count equals target.",
-        "input": "One array items, one number n, and one number target.",
-        "output": "If found, return the position; if not found, return 0.",
-        "hint": "After finding the first target, you can return the position directly."
-      },
+      "description": "## Difficulty\n\nSimple\n\n## Background\n\nEach slot in a game backpack stores the count of one item type, and all counts are stored in the array items. The player wants to find the first slot whose count equals target.\n\n## Task\n\nReturn the first position whose count equals target.\n\n## Input\n\nOne array items, one number n, and one number target.\n\n## Output\n\nIf found, return the position; if not found, return 0.\n\n## Hint\n\nAfter finding the first target, you can return the position directly.",
       "starter_code": "function solution(items, n, target)\n    return 0\nend",
       "reference_code": "function solution(items, n, target)\n    for i = 1, n do\n        if items[i] == target then\n            return i\n        end\n    end\n    return 0\nend",
       "test_cases": [
@@ -128,14 +107,7 @@
     },
     {
       "title": "Find the First Failing Student in a Retake List",
-      "description": {
-        "difficulty": "Normal",
-        "background": "The teacher stores student scores in the array scores. Students with scores below passLine need to retake the exam, and the teacher wants to find the first student who needs a retake.",
-        "task": "Return the first position whose score is below passLine.",
-        "input": "One array scores, one number n, and one number passLine.",
-        "output": "If a failing student is found, return the position; otherwise return 0.",
-        "hint": "The search condition is whether the score is below the score line."
-      },
+      "description": "## Difficulty\n\nNormal\n\n## Background\n\nThe teacher stores student scores in the array scores. Students with scores below passLine need to retake the exam, and the teacher wants to find the first student who needs a retake.\n\n## Task\n\nReturn the first position whose score is below passLine.\n\n## Input\n\nOne array scores, one number n, and one number passLine.\n\n## Output\n\nIf a failing student is found, return the position; otherwise return 0.\n\n## Hint\n\nThe search condition is whether the score is below the score line.",
       "starter_code": "function solution(scores, n, passLine)\n    return 0\nend",
       "reference_code": "function solution(scores, n, passLine)\n    for i = 1, n do\n        if scores[i] < passLine then\n            return i\n        end\n    end\n    return 0\nend",
       "test_cases": [
@@ -171,14 +143,7 @@
     },
     {
       "title": "Find the Last Perfect-Score Position in Competition Results",
-      "description": {
-        "difficulty": "Normal",
-        "background": "Competition scores are stored in the array scores. Multiple players may have scored 100, and the judge wants to know the position of the last perfect score.",
-        "task": "Return the position of the last 100 score.",
-        "input": "One array scores and one number n.",
-        "output": "If a score of 100 exists, return the last perfect-score position; otherwise return 0.",
-        "hint": "You can continue traversing the entire array and keep updating the found position."
-      },
+      "description": "## Difficulty\n\nNormal\n\n## Background\n\nCompetition scores are stored in the array scores. Multiple players may have scored 100, and the judge wants to know the position of the last perfect score.\n\n## Task\n\nReturn the position of the last 100 score.\n\n## Input\n\nOne array scores and one number n.\n\n## Output\n\nIf a score of 100 exists, return the last perfect-score position; otherwise return 0.\n\n## Hint\n\nYou can continue traversing the entire array and keep updating the found position.",
       "starter_code": "function solution(scores, n)\n    return 0\nend",
       "reference_code": "function solution(scores, n)\n    local position = 0\n\n    for i = 1, n do\n        if scores[i] == 100 then\n            position = i\n        end\n    end\n\n    return position\nend",
       "test_cases": [
@@ -210,14 +175,7 @@
     },
     {
       "title": "Search for a Target Score and Count How Many Checks Were Made",
-      "description": {
-        "difficulty": "Normal",
-        "background": "The teacher searches a score sheet for target and also wants to know how many scores were checked before finding it.",
-        "task": "Find the first position of target and count the number of checks.",
-        "input": "One array scores, one number n, and one number target.",
-        "output": "Return the target position and check count in order. If not found, return 0 for the position and n for the check count.",
-        "hint": "Update the check count every time a position is checked."
-      },
+      "description": "## Difficulty\n\nNormal\n\n## Background\n\nThe teacher searches a score sheet for target and also wants to know how many scores were checked before finding it.\n\n## Task\n\nFind the first position of target and count the number of checks.\n\n## Input\n\nOne array scores, one number n, and one number target.\n\n## Output\n\nReturn the target position and check count in order. If not found, return 0 for the position and n for the check count.\n\n## Hint\n\nUpdate the check count every time a position is checked.",
       "starter_code": "function solution(scores, n, target)\n    return 0, 0\nend",
       "reference_code": "function solution(scores, n, target)\n    local position = 0\n    local checks = 0\n    local i = 1\n\n    while i <= n and position == 0 do\n        checks = checks + 1\n        if scores[i] == target then\n            position = i\n        end\n        i = i + 1\n    end\n\n    return position, checks\nend",
       "test_cases": [
@@ -252,14 +210,7 @@
     },
     {
       "title": "Use Binary Search to Quickly Find a Target Book in Sorted Book Numbers",
-      "description": {
-        "difficulty": "Challenge",
-        "background": "Library book numbers are already stored from small to large in the array books. The administrator wants to use a faster method to find target.",
-        "task": "Use binary search to return the target book position and count the number of checks.",
-        "input": "One sorted array books, one number n, and one number target.",
-        "output": "Return the target position and check count in order. If not found, return 0 for the position.",
-        "hint": "Check the middle position each time, then shrink the search range for the next check."
-      },
+      "description": "## Difficulty\n\nChallenge\n\n## Background\n\nLibrary book numbers are already stored from small to large in the array books. The administrator wants to use a faster method to find target.\n\n## Task\n\nUse binary search to return the target book position and count the number of checks.\n\n## Input\n\nOne sorted array books, one number n, and one number target.\n\n## Output\n\nReturn the target position and check count in order. If not found, return 0 for the position.\n\n## Hint\n\nCheck the middle position each time, then shrink the search range for the next check.",
       "starter_code": "function solution(books, n, target)\n    return 0, 0\nend",
       "reference_code": "function solution(books, n, target)\n    local left = 1\n    local right = n\n    local position = 0\n    local checks = 0\n\n    while left <= right and position == 0 do\n        local mid = (left + right) / 2\n        if mid % 1 ~= 0 then\n            mid = mid - 0.5\n        end\n        checks = checks + 1\n\n        if books[mid] == target then\n            position = mid\n        elseif target < books[mid] then\n            right = mid - 1\n        else\n            left = mid + 1\n        end\n    end\n\n    return position, checks\nend",
       "test_cases": [
@@ -298,14 +249,7 @@
     },
     {
       "title": "Compare How Many Checks Linear Search and Binary Search Need",
-      "description": {
-        "difficulty": "Challenge",
-        "background": "The same sorted number list can be searched with linear search or binary search. The teacher wants students to compare how many checks each method uses when searching for target.",
-        "task": "Use linear search and binary search separately to search for target, then return the check counts for both methods.",
-        "input": "One sorted array numbers, one number n, and one number target.",
-        "output": "Return the linear-search check count, binary-search check count, linear-search position, and binary-search position in order. Positions are 0 when not found.",
-        "hint": "Simulate the two methods separately and record each method's check count."
-      },
+      "description": "## Difficulty\n\nChallenge\n\n## Background\n\nThe same sorted number list can be searched with linear search or binary search. The teacher wants students to compare how many checks each method uses when searching for target.\n\n## Task\n\nUse linear search and binary search separately to search for target, then return the check counts for both methods.\n\n## Input\n\nOne sorted array numbers, one number n, and one number target.\n\n## Output\n\nReturn the linear-search check count, binary-search check count, linear-search position, and binary-search position in order. Positions are 0 when not found.\n\n## Hint\n\nSimulate the two methods separately and record each method's check count.",
       "starter_code": "function solution(numbers, n, target)\n    return 0, 0, 0, 0\nend",
       "reference_code": "function solution(numbers, n, target)\n    local linearChecks = 0\n    local linearPosition = 0\n    local i = 1\n\n    while i <= n and linearPosition == 0 do\n        linearChecks = linearChecks + 1\n        if numbers[i] == target then\n            linearPosition = i\n        end\n        i = i + 1\n    end\n\n    local left = 1\n    local right = n\n    local binaryChecks = 0\n    local binaryPosition = 0\n\n    while left <= right and binaryPosition == 0 do\n        local mid = (left + right) / 2\n        if mid % 1 ~= 0 then\n            mid = mid - 0.5\n        end\n        binaryChecks = binaryChecks + 1\n\n        if numbers[mid] == target then\n            binaryPosition = mid\n        elseif target < numbers[mid] then\n            right = mid - 1\n        else\n            left = mid + 1\n        end\n    end\n\n    return linearChecks, binaryChecks, linearPosition, binaryPosition\nend",
       "test_cases": [
@@ -345,14 +289,7 @@
     },
     {
       "title": "Search a Sorted Score Table for a Target Score or Insertion Position",
-      "description": {
-        "difficulty": "Challenge",
-        "background": "The score table scores is already sorted from small to large. The teacher wants to find whether target exists; if it does not exist, the teacher also wants to know where target should be inserted to keep the score table sorted.",
-        "task": "Use binary search to complete the search and return the target state and position.",
-        "input": "One sorted array scores, one number n, and one number target.",
-        "output": "If target is found, return true and the target position; if not found, return false and the insertion position.",
-        "hint": "After the search ends, the remaining boundary position can help determine the insertion position."
-      },
+      "description": "## Difficulty\n\nChallenge\n\n## Background\n\nThe score table scores is already sorted from small to large. The teacher wants to find whether target exists; if it does not exist, the teacher also wants to know where target should be inserted to keep the score table sorted.\n\n## Task\n\nUse binary search to complete the search and return the target state and position.\n\n## Input\n\nOne sorted array scores, one number n, and one number target.\n\n## Output\n\nIf target is found, return true and the target position; if not found, return false and the insertion position.\n\n## Hint\n\nAfter the search ends, the remaining boundary position can help determine the insertion position.",
       "starter_code": "function solution(scores, n, target)\n    return false, 0\nend",
       "reference_code": "function solution(scores, n, target)\n    local left = 1\n    local right = n\n    local position = 0\n\n    while left <= right and position == 0 do\n        local mid = (left + right) / 2\n        if mid % 1 ~= 0 then\n            mid = mid - 0.5\n        end\n\n        if scores[mid] == target then\n            position = mid\n        elseif target < scores[mid] then\n            right = mid - 1\n        else\n            left = mid + 1\n        end\n    end\n\n    if position > 0 then\n        return true, position\n    end\n\n    return false, left\nend",
       "test_cases": [

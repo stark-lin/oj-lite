@@ -36,7 +36,7 @@ function solution(...)
 end
 ```
 
-Each question stores `description`, `starter_code`, `reference_code`, and `test_cases`. During judging, the student and reference functions are executed independently for each test case and their return values are compared.
+Each question stores a Markdown `description` together with `starter_code`, `reference_code`, and `test_cases`. The Markdown parser and HTML sanitizer are bundled locally, so rendering does not depend on a CDN at runtime. During judging, the student and reference functions are executed independently for each test case and their return values are compared.
 
 Student and reference code are not executed in a full Lua runtime. Each invocation runs in a fresh restricted Lua state with no standard libraries opened, a judge-provided `print` function, and a fixed 2-second execution timeout. See [docs/JUDGE_MODEL.md](docs/JUDGE_MODEL.md) for the exact scheduler and sandbox model.
 
@@ -303,7 +303,7 @@ function solution(...)
 end
 ```
 
-题目保存 `description`、`starter_code`、`reference_code` 和 `test_cases`，判题时会针对每个测试用例分别独立执行学生实现和参考实现，并比较两者的返回值。
+题目的 `description` 使用 Markdown，并同时保存 `starter_code`、`reference_code` 和 `test_cases`。Markdown 解析器与 HTML 清洗器均随程序本地提供，运行时不依赖 CDN。判题时会针对每个测试用例分别独立执行学生实现和参考实现，并比较两者的返回值。
 
 学生代码与参考代码不会运行在完整 Lua runtime 中。每次执行都会创建一个新的受限 Lua state，不打开标准库，只注入判题器提供的 `print` 函数，并应用固定的单次执行 2 秒超时。完整的调度与 sandbox 模型见 [docs/JUDGE_MODEL.md](docs/JUDGE_MODEL.md)。
 

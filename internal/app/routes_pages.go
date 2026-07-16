@@ -13,6 +13,8 @@ import (
 func (app *App) registerPageRoutes(router gin.IRouter) {
 	router.GET("/assets/app.css", app.serveAppCSS)
 	router.GET("/assets/app.js", app.serveAppJS)
+	router.GET("/assets/vendor/marked.min.js", app.serveMarkedJS)
+	router.GET("/assets/vendor/purify.min.js", app.serveDOMPurifyJS)
 	router.GET("/", app.serveLoginPage)
 	router.GET("/admin", middleware.AdminAuth(), app.serveAdminPage)
 	router.GET("/teacher", app.serveTeacherPage)
@@ -25,6 +27,14 @@ func (app *App) serveAppCSS(c *gin.Context) {
 
 func (app *App) serveAppJS(c *gin.Context) {
 	app.renderEmbeddedAsset(c, "app.js", "application/javascript; charset=utf-8")
+}
+
+func (app *App) serveMarkedJS(c *gin.Context) {
+	app.renderEmbeddedAsset(c, "vendor/marked.min.js", "application/javascript; charset=utf-8")
+}
+
+func (app *App) serveDOMPurifyJS(c *gin.Context) {
+	app.renderEmbeddedAsset(c, "vendor/purify.min.js", "application/javascript; charset=utf-8")
 }
 
 func (app *App) serveLoginPage(c *gin.Context) {

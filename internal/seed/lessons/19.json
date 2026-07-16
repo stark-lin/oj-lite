@@ -5,14 +5,7 @@
   "questions": [
     {
       "title": "Swap Two Adjacent Height Values That Are Out of Order",
-      "description": {
-        "difficulty": "Simple",
-        "background": "A line of students' heights is stored in the array heights. The teacher notices that the student at position index and the student at position index + 1 may be out of order. If the first is taller than the second, they need to be swapped.",
-        "task": "Check two adjacent heights and swap them if their order is wrong.",
-        "input": "One array heights and one number index.",
-        "output": "Return the processed heights array.",
-        "hint": "Only two adjacent positions need to be compared."
-      },
+      "description": "## Difficulty\n\nSimple\n\n## Background\n\nA line of students' heights is stored in the array heights. The teacher notices that the student at position index and the student at position index + 1 may be out of order. If the first is taller than the second, they need to be swapped.\n\n## Task\n\nCheck two adjacent heights and swap them if their order is wrong.\n\n## Input\n\nOne array heights and one number index.\n\n## Output\n\nReturn the processed heights array.\n\n## Hint\n\nOnly two adjacent positions need to be compared.",
       "starter_code": "function solution(heights, index)\n    return heights\nend",
       "reference_code": "function solution(heights, index)\n    if heights[index] > heights[index + 1] then\n        local temp = heights[index]\n        heights[index] = heights[index + 1]\n        heights[index + 1] = temp\n    end\n\n    return heights\nend",
       "test_cases": [
@@ -44,14 +37,7 @@
     },
     {
       "title": "Find the Position of the Minimum Value in a Score List",
-      "description": {
-        "difficulty": "Simple",
-        "background": "The first step of selection sort usually needs to find the position of the minimum value in a group of data.",
-        "task": "Find the position of the minimum score in the scores array.",
-        "input": "One array scores and one number n.",
-        "output": "Return the position of the minimum value.",
-        "hint": "You can first assume the first position is the minimum, then compare each item."
-      },
+      "description": "## Difficulty\n\nSimple\n\n## Background\n\nThe first step of selection sort usually needs to find the position of the minimum value in a group of data.\n\n## Task\n\nFind the position of the minimum score in the scores array.\n\n## Input\n\nOne array scores and one number n.\n\n## Output\n\nReturn the position of the minimum value.\n\n## Hint\n\nYou can first assume the first position is the minimum, then compare each item.",
       "starter_code": "function solution(scores, n)\n    return 0\nend",
       "reference_code": "function solution(scores, n)\n    local minIndex = 1\n\n    for i = 2, n do\n        if scores[i] < scores[minIndex] then\n            minIndex = i\n        end\n    end\n\n    return minIndex\nend",
       "test_cases": [
@@ -83,14 +69,7 @@
     },
     {
       "title": "Complete the First Round of Selection Sort",
-      "description": {
-        "difficulty": "Simple",
-        "background": "Each round of selection sort finds the smallest value in the remaining data and puts it at the current front position.",
-        "task": "Complete the first round of selection sort by swapping the minimum value into position 1.",
-        "input": "One array numbers and one number n.",
-        "output": "Return the numbers array after the first round.",
-        "hint": "Find the minimum position first, then swap it with the first position."
-      },
+      "description": "## Difficulty\n\nSimple\n\n## Background\n\nEach round of selection sort finds the smallest value in the remaining data and puts it at the current front position.\n\n## Task\n\nComplete the first round of selection sort by swapping the minimum value into position 1.\n\n## Input\n\nOne array numbers and one number n.\n\n## Output\n\nReturn the numbers array after the first round.\n\n## Hint\n\nFind the minimum position first, then swap it with the first position.",
       "starter_code": "function solution(numbers, n)\n    return numbers\nend",
       "reference_code": "function solution(numbers, n)\n    local minIndex = 1\n\n    for i = 2, n do\n        if numbers[i] < numbers[minIndex] then\n            minIndex = i\n        end\n    end\n\n    local temp = numbers[1]\n    numbers[1] = numbers[minIndex]\n    numbers[minIndex] = temp\n\n    return numbers\nend",
       "test_cases": [
@@ -125,14 +104,7 @@
     },
     {
       "title": "Use Selection Sort to Organize a Game Score Ranking",
-      "description": {
-        "difficulty": "Normal",
-        "background": "Game scores are stored in the array scores. The system needs to arrange the scores from low to high so it is easy to view the ranking from bottom to top.",
-        "task": "Use selection sort to sort scores from small to large.",
-        "input": "One array scores and one number n.",
-        "output": "Return the sorted scores array.",
-        "hint": "In each round, put the smallest value from the remaining data at the current front position."
-      },
+      "description": "## Difficulty\n\nNormal\n\n## Background\n\nGame scores are stored in the array scores. The system needs to arrange the scores from low to high so it is easy to view the ranking from bottom to top.\n\n## Task\n\nUse selection sort to sort scores from small to large.\n\n## Input\n\nOne array scores and one number n.\n\n## Output\n\nReturn the sorted scores array.\n\n## Hint\n\nIn each round, put the smallest value from the remaining data at the current front position.",
       "starter_code": "function solution(scores, n)\n    return scores\nend",
       "reference_code": "function solution(scores, n)\n    for i = 1, n - 1 do\n        local minIndex = i\n\n        for j = i + 1, n do\n            if scores[j] < scores[minIndex] then\n                minIndex = j\n            end\n        end\n\n        local temp = scores[i]\n        scores[i] = scores[minIndex]\n        scores[minIndex] = temp\n    end\n\n    return scores\nend",
       "test_cases": [
@@ -165,14 +137,7 @@
     },
     {
       "title": "Use Selection Sort to Sort Book Numbers from Small to Large",
-      "description": {
-        "difficulty": "Normal",
-        "background": "The library receives a batch of new books, and the book numbers are out of order. The administrator needs to arrange the book numbers from small to large.",
-        "task": "Use selection sort to organize the books array.",
-        "input": "One array books and one number n.",
-        "output": "Return the books array sorted from small to large.",
-        "hint": "The sorting process needs to find the smallest number in the current range many times."
-      },
+      "description": "## Difficulty\n\nNormal\n\n## Background\n\nThe library receives a batch of new books, and the book numbers are out of order. The administrator needs to arrange the book numbers from small to large.\n\n## Task\n\nUse selection sort to organize the books array.\n\n## Input\n\nOne array books and one number n.\n\n## Output\n\nReturn the books array sorted from small to large.\n\n## Hint\n\nThe sorting process needs to find the smallest number in the current range many times.",
       "starter_code": "function solution(books, n)\n    return books\nend",
       "reference_code": "function solution(books, n)\n    for i = 1, n - 1 do\n        local minIndex = i\n\n        for j = i + 1, n do\n            if books[j] < books[minIndex] then\n                minIndex = j\n            end\n        end\n\n        local temp = books[i]\n        books[i] = books[minIndex]\n        books[minIndex] = temp\n    end\n\n    return books\nend",
       "test_cases": [
@@ -204,14 +169,7 @@
     },
     {
       "title": "Complete One Left-to-Right Pass of Bubble Sort",
-      "description": {
-        "difficulty": "Normal",
-        "background": "Bubble sort repeatedly compares adjacent data and swaps them if their order is wrong. After one pass, larger data moves toward the back.",
-        "task": "Complete one left-to-right bubble pass on numbers and count the swaps in this pass.",
-        "input": "One array numbers and one number n.",
-        "output": "Return the processed numbers array and the swap count in order.",
-        "hint": "Do only one pass of adjacent comparisons; full sorting is not needed."
-      },
+      "description": "## Difficulty\n\nNormal\n\n## Background\n\nBubble sort repeatedly compares adjacent data and swaps them if their order is wrong. After one pass, larger data moves toward the back.\n\n## Task\n\nComplete one left-to-right bubble pass on numbers and count the swaps in this pass.\n\n## Input\n\nOne array numbers and one number n.\n\n## Output\n\nReturn the processed numbers array and the swap count in order.\n\n## Hint\n\nDo only one pass of adjacent comparisons; full sorting is not needed.",
       "starter_code": "function solution(numbers, n)\n    return numbers, 0\nend",
       "reference_code": "function solution(numbers, n)\n    local swaps = 0\n\n    for i = 1, n - 1 do\n        if numbers[i] > numbers[i + 1] then\n            local temp = numbers[i]\n            numbers[i] = numbers[i + 1]\n            numbers[i + 1] = temp\n            swaps = swaps + 1\n        end\n    end\n\n    return numbers, swaps\nend",
       "test_cases": [
@@ -244,14 +202,7 @@
     },
     {
       "title": "Use Bubble Sort to Arrange Scores from High to Low",
-      "description": {
-        "difficulty": "Challenge",
-        "background": "Competition scores are stored in the array scores. The leaderboard needs to show scores from high to low.",
-        "task": "Use bubble sort to sort scores from large to small.",
-        "input": "One array scores and one number n.",
-        "output": "Return the scores array sorted from high to low.",
-        "hint": "When comparing adjacent values, the larger score should move toward the front."
-      },
+      "description": "## Difficulty\n\nChallenge\n\n## Background\n\nCompetition scores are stored in the array scores. The leaderboard needs to show scores from high to low.\n\n## Task\n\nUse bubble sort to sort scores from large to small.\n\n## Input\n\nOne array scores and one number n.\n\n## Output\n\nReturn the scores array sorted from high to low.\n\n## Hint\n\nWhen comparing adjacent values, the larger score should move toward the front.",
       "starter_code": "function solution(scores, n)\n    return scores\nend",
       "reference_code": "function solution(scores, n)\n    for i = 1, n - 1 do\n        for j = 1, n - i do\n            if scores[j] < scores[j + 1] then\n                local temp = scores[j]\n                scores[j] = scores[j + 1]\n                scores[j + 1] = temp\n            end\n        end\n    end\n\n    return scores\nend",
       "test_cases": [
@@ -284,14 +235,7 @@
     },
     {
       "title": "Count Swaps When Bubble Sorting a Seat Table",
-      "description": {
-        "difficulty": "Challenge",
-        "background": "Seat numbers are stored in the array seats. The teacher wants to use bubble sort to arrange the numbers from small to large and also wants to know how many seat swaps happen.",
-        "task": "Use bubble sort to organize seats and count the total number of swaps.",
-        "input": "One array seats and one number n.",
-        "output": "Return the sorted seats array and the swap count in order.",
-        "hint": "Increase the swap count only when an adjacent swap actually happens."
-      },
+      "description": "## Difficulty\n\nChallenge\n\n## Background\n\nSeat numbers are stored in the array seats. The teacher wants to use bubble sort to arrange the numbers from small to large and also wants to know how many seat swaps happen.\n\n## Task\n\nUse bubble sort to organize seats and count the total number of swaps.\n\n## Input\n\nOne array seats and one number n.\n\n## Output\n\nReturn the sorted seats array and the swap count in order.\n\n## Hint\n\nIncrease the swap count only when an adjacent swap actually happens.",
       "starter_code": "function solution(seats, n)\n    return seats, 0\nend",
       "reference_code": "function solution(seats, n)\n    local swaps = 0\n\n    for i = 1, n - 1 do\n        for j = 1, n - i do\n            if seats[j] > seats[j + 1] then\n                local temp = seats[j]\n                seats[j] = seats[j + 1]\n                seats[j + 1] = temp\n                swaps = swaps + 1\n            end\n        end\n    end\n\n    return seats, swaps\nend",
       "test_cases": [
@@ -325,14 +269,7 @@
     },
     {
       "title": "Compare Selection Sort and Bubble Sort Swap Counts on the Same Data",
-      "description": {
-        "difficulty": "Challenge",
-        "background": "The same data can be organized with selection sort or bubble sort. The teacher wants to compare how many swaps the two sorting methods make on the same data.",
-        "task": "Copy the original array, sort one copy with selection sort and one copy with bubble sort from small to large, then return the two swap counts.",
-        "input": "One array numbers and one number n.",
-        "output": "Return the selection-sort swap count and bubble-sort swap count in order.",
-        "hint": "The two sorts need to operate on their own arrays so they do not affect each other."
-      },
+      "description": "## Difficulty\n\nChallenge\n\n## Background\n\nThe same data can be organized with selection sort or bubble sort. The teacher wants to compare how many swaps the two sorting methods make on the same data.\n\n## Task\n\nCopy the original array, sort one copy with selection sort and one copy with bubble sort from small to large, then return the two swap counts.\n\n## Input\n\nOne array numbers and one number n.\n\n## Output\n\nReturn the selection-sort swap count and bubble-sort swap count in order.\n\n## Hint\n\nThe two sorts need to operate on their own arrays so they do not affect each other.",
       "starter_code": "function solution(numbers, n)\n    return 0, 0\nend",
       "reference_code": "function solution(numbers, n)\n    local a = {}\n    local b = {}\n\n    for i = 1, n do\n        a[i] = numbers[i]\n        b[i] = numbers[i]\n    end\n\n    local selectionSwaps = 0\n    for i = 1, n - 1 do\n        local minIndex = i\n        for j = i + 1, n do\n            if a[j] < a[minIndex] then\n                minIndex = j\n            end\n        end\n\n        if minIndex ~= i then\n            local temp = a[i]\n            a[i] = a[minIndex]\n            a[minIndex] = temp\n            selectionSwaps = selectionSwaps + 1\n        end\n    end\n\n    local bubbleSwaps = 0\n    for i = 1, n - 1 do\n        for j = 1, n - i do\n            if b[j] > b[j + 1] then\n                local temp = b[j]\n                b[j] = b[j + 1]\n                b[j + 1] = temp\n                bubbleSwaps = bubbleSwaps + 1\n            end\n        end\n    end\n\n    return selectionSwaps, bubbleSwaps\nend",
       "test_cases": [

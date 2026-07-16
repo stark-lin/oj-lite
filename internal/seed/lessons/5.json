@@ -5,14 +5,7 @@
   "questions": [
     {
       "title": "Count How Many Even Numbers There Are from 1 to n",
-      "description": {
-        "difficulty": "Simple",
-        "background": "The teacher gives a positive integer n and asks students to count from 1 to n, then count how many of the numbers are even.",
-        "task": "Count the even numbers from 1 to n and return the result.",
-        "input": "One positive integer: n.",
-        "output": "Return the number of even numbers from 1 to n.",
-        "hint": "Loop through the numbers and use a count variable to record how many meet the condition."
-      },
+      "description": "## Difficulty\n\nSimple\n\n## Background\n\nThe teacher gives a positive integer n and asks students to count from 1 to n, then count how many of the numbers are even.\n\n## Task\n\nCount the even numbers from 1 to n and return the result.\n\n## Input\n\nOne positive integer: n.\n\n## Output\n\nReturn the number of even numbers from 1 to n.\n\n## Hint\n\nLoop through the numbers and use a count variable to record how many meet the condition.",
       "starter_code": "function solution(n)\n    return 0\nend",
       "reference_code": "function solution(n)\n    local count = 0\n\n    for i = 1, n do\n        if i % 2 == 0 then\n            count = count + 1\n        end\n    end\n\n    return count\nend",
       "test_cases": [
@@ -30,14 +23,7 @@
     },
     {
       "title": "Count How Many Multiples of 5 There Are from 1 to n",
-      "description": {
-        "difficulty": "Simple",
-        "background": "In a school activity, a special task is arranged every 5 numbers. Now the teacher wants to know how many numbers from 1 to n are multiples of 5.",
-        "task": "Count how many numbers from 1 to n are divisible by 5.",
-        "input": "One positive integer: n.",
-        "output": "Return the number of multiples of 5.",
-        "hint": "Check whether each number can be divided evenly by the target number."
-      },
+      "description": "## Difficulty\n\nSimple\n\n## Background\n\nIn a school activity, a special task is arranged every 5 numbers. Now the teacher wants to know how many numbers from 1 to n are multiples of 5.\n\n## Task\n\nCount how many numbers from 1 to n are divisible by 5.\n\n## Input\n\nOne positive integer: n.\n\n## Output\n\nReturn the number of multiples of 5.\n\n## Hint\n\nCheck whether each number can be divided evenly by the target number.",
       "starter_code": "function solution(n)\n    return 0\nend",
       "reference_code": "function solution(n)\n    local count = 0\n\n    for i = 1, n do\n        if i % 5 == 0 then\n            count = count + 1\n        end\n    end\n\n    return count\nend",
       "test_cases": [
@@ -55,14 +41,7 @@
     },
     {
       "title": "Count How Many Odd Task Numbers There Are",
-      "description": {
-        "difficulty": "Simple",
-        "background": "Game tasks are numbered from 1 to n. Odd-numbered tasks are normal tasks, and even-numbered tasks are special tasks. The system needs to count the normal tasks.",
-        "task": "Count how many odd numbers there are from 1 to n.",
-        "input": "One positive integer: n.",
-        "output": "Return the number of odd task numbers.",
-        "hint": "You can use the remainder after division by 2 to decide the number type."
-      },
+      "description": "## Difficulty\n\nSimple\n\n## Background\n\nGame tasks are numbered from 1 to n. Odd-numbered tasks are normal tasks, and even-numbered tasks are special tasks. The system needs to count the normal tasks.\n\n## Task\n\nCount how many odd numbers there are from 1 to n.\n\n## Input\n\nOne positive integer: n.\n\n## Output\n\nReturn the number of odd task numbers.\n\n## Hint\n\nYou can use the remainder after division by 2 to decide the number type.",
       "starter_code": "function solution(n)\n    return 0\nend",
       "reference_code": "function solution(n)\n    local count = 0\n\n    for i = 1, n do\n        if i % 2 ~= 0 then\n            count = count + 1\n        end\n    end\n\n    return count\nend",
       "test_cases": [
@@ -80,14 +59,7 @@
     },
     {
       "title": "Count Numbers That Are Even and Greater Than the Target",
-      "description": {
-        "difficulty": "Normal",
-        "background": "The teacher wants to select some students from the numbers 1 to n. The rule is that a number must be even and must be greater than target.",
-        "task": "Count how many numbers from 1 to n satisfy both conditions.",
-        "input": "Two numbers: n and target.",
-        "output": "Return the number of values that satisfy the conditions.",
-        "hint": "First decide which conditions a number must satisfy, then decide whether to count it."
-      },
+      "description": "## Difficulty\n\nNormal\n\n## Background\n\nThe teacher wants to select some students from the numbers 1 to n. The rule is that a number must be even and must be greater than target.\n\n## Task\n\nCount how many numbers from 1 to n satisfy both conditions.\n\n## Input\n\nTwo numbers: n and target.\n\n## Output\n\nReturn the number of values that satisfy the conditions.\n\n## Hint\n\nFirst decide which conditions a number must satisfy, then decide whether to count it.",
       "starter_code": "function solution(n, target)\n    return 0\nend",
       "reference_code": "function solution(n, target)\n    local count = 0\n\n    for i = 1, n do\n        if i % 2 == 0 and i > target then\n            count = count + 1\n        end\n    end\n\n    return count\nend",
       "test_cases": [
@@ -108,14 +80,7 @@
     },
     {
       "title": "Count Game Levels That Can Receive Reward Coins",
-      "description": {
-        "difficulty": "Normal",
-        "background": "A game has n levels. The system gives rewards starting from levels that are multiples of rewardStep, but a reward level is valid only when its level number is at least minLevel.",
-        "task": "Count how many levels from 1 to n can receive reward coins.",
-        "input": "Three numbers: n, rewardStep, and minLevel.",
-        "output": "Return the number of levels that can receive rewards.",
-        "hint": "A level must satisfy both the number rule and the minimum-level requirement."
-      },
+      "description": "## Difficulty\n\nNormal\n\n## Background\n\nA game has n levels. The system gives rewards starting from levels that are multiples of rewardStep, but a reward level is valid only when its level number is at least minLevel.\n\n## Task\n\nCount how many levels from 1 to n can receive reward coins.\n\n## Input\n\nThree numbers: n, rewardStep, and minLevel.\n\n## Output\n\nReturn the number of levels that can receive rewards.\n\n## Hint\n\nA level must satisfy both the number rule and the minimum-level requirement.",
       "starter_code": "function solution(n, rewardStep, minLevel)\n    return 0\nend",
       "reference_code": "function solution(n, rewardStep, minLevel)\n    local count = 0\n\n    for i = 1, n do\n        if i % rewardStep == 0 and i >= minLevel then\n            count = count + 1\n        end\n    end\n\n    return count\nend",
       "test_cases": [
@@ -139,14 +104,7 @@
     },
     {
       "title": "Count Numbers Divisible by 3 but Not Even",
-      "description": {
-        "difficulty": "Normal",
-        "background": "Student numbers run from 1 to n. The teacher wants to find a special kind of number: it is divisible by 3, but it must not be even.",
-        "task": "Count how many numbers from 1 to n satisfy the rule.",
-        "input": "One positive integer: n.",
-        "output": "Return the number of values that satisfy the condition.",
-        "hint": "You can put the multiple check and the odd-even check in the same test."
-      },
+      "description": "## Difficulty\n\nNormal\n\n## Background\n\nStudent numbers run from 1 to n. The teacher wants to find a special kind of number: it is divisible by 3, but it must not be even.\n\n## Task\n\nCount how many numbers from 1 to n satisfy the rule.\n\n## Input\n\nOne positive integer: n.\n\n## Output\n\nReturn the number of values that satisfy the condition.\n\n## Hint\n\nYou can put the multiple check and the odd-even check in the same test.",
       "starter_code": "function solution(n)\n    return 0\nend",
       "reference_code": "function solution(n)\n    local count = 0\n\n    for i = 1, n do\n        if i % 3 == 0 and i % 2 ~= 0 then\n            count = count + 1\n        end\n    end\n\n    return count\nend",
       "test_cases": [
@@ -164,14 +122,7 @@
     },
     {
       "title": "Split Student Numbers into Three Remainder Groups and Count Them",
-      "description": {
-        "difficulty": "Challenge",
-        "background": "The teacher wants to split students numbered from 1 to n into three groups. Each student enters a group based on the remainder after dividing the number by 3.",
-        "task": "Count the numbers with remainder 0, remainder 1, and remainder 2.",
-        "input": "One positive integer: n.",
-        "output": "Return the counts for remainders 0, 1, and 2 in order.",
-        "hint": "Prepare multiple count variables, with each variable responsible for one category."
-      },
+      "description": "## Difficulty\n\nChallenge\n\n## Background\n\nThe teacher wants to split students numbered from 1 to n into three groups. Each student enters a group based on the remainder after dividing the number by 3.\n\n## Task\n\nCount the numbers with remainder 0, remainder 1, and remainder 2.\n\n## Input\n\nOne positive integer: n.\n\n## Output\n\nReturn the counts for remainders 0, 1, and 2 in order.\n\n## Hint\n\nPrepare multiple count variables, with each variable responsible for one category.",
       "starter_code": "function solution(n)\n    return 0, 0, 0\nend",
       "reference_code": "function solution(n)\n    local count0 = 0\n    local count1 = 0\n    local count2 = 0\n\n    for i = 1, n do\n        if i % 3 == 0 then\n            count0 = count0 + 1\n        elseif i % 3 == 1 then\n            count1 = count1 + 1\n        else\n            count2 = count2 + 1\n        end\n    end\n\n    return count0, count1, count2\nend",
       "test_cases": [
@@ -189,14 +140,7 @@
     },
     {
       "title": "Count Normal, Hard, and Hidden Game Tasks by Number Rules",
-      "description": {
-        "difficulty": "Challenge",
-        "background": "Game tasks are numbered from 1 to n. A task is hidden if its number is a multiple of 10; if it is not hidden but is divisible by 3, it is hard; all other tasks are normal.",
-        "task": "Count the numbers of normal tasks, hard tasks, and hidden tasks.",
-        "input": "One positive integer: n.",
-        "output": "Return the normal count, hard count, and hidden count in order.",
-        "hint": "Pay attention to the order of the classification rules."
-      },
+      "description": "## Difficulty\n\nChallenge\n\n## Background\n\nGame tasks are numbered from 1 to n. A task is hidden if its number is a multiple of 10; if it is not hidden but is divisible by 3, it is hard; all other tasks are normal.\n\n## Task\n\nCount the numbers of normal tasks, hard tasks, and hidden tasks.\n\n## Input\n\nOne positive integer: n.\n\n## Output\n\nReturn the normal count, hard count, and hidden count in order.\n\n## Hint\n\nPay attention to the order of the classification rules.",
       "starter_code": "function solution(n)\n    return 0, 0, 0\nend",
       "reference_code": "function solution(n)\n    local normal = 0\n    local hard = 0\n    local hidden = 0\n\n    for i = 1, n do\n        if i % 10 == 0 then\n            hidden = hidden + 1\n        elseif i % 3 == 0 then\n            hard = hard + 1\n        else\n            normal = normal + 1\n        end\n    end\n\n    return normal, hard, hidden\nend",
       "test_cases": [
@@ -214,14 +158,7 @@
     },
     {
       "title": "Compare How Many Numbers Two Reward Rules Select",
-      "description": {
-        "difficulty": "Challenge",
-        "background": "A game system has two reward rules. The first rule rewards numbers that are multiples of a, and the second rule rewards numbers that are multiples of b. The designer wants to know which rule selects more numbers.",
-        "task": "Count how many numbers from 1 to n match each rule, then return the rule with the larger count.",
-        "input": "Three numbers: n, a, and b.",
-        "output": "Return \"first\" if the first rule has more matches, \"second\" if the second rule has more matches, and \"same\" if they have the same count.",
-        "hint": "Count the two rules separately first, then compare the results."
-      },
+      "description": "## Difficulty\n\nChallenge\n\n## Background\n\nA game system has two reward rules. The first rule rewards numbers that are multiples of a, and the second rule rewards numbers that are multiples of b. The designer wants to know which rule selects more numbers.\n\n## Task\n\nCount how many numbers from 1 to n match each rule, then return the rule with the larger count.\n\n## Input\n\nThree numbers: n, a, and b.\n\n## Output\n\nReturn \"first\" if the first rule has more matches, \"second\" if the second rule has more matches, and \"same\" if they have the same count.\n\n## Hint\n\nCount the two rules separately first, then compare the results.",
       "starter_code": "function solution(n, a, b)\n    return \"\"\nend",
       "reference_code": "function solution(n, a, b)\n    local countA = 0\n    local countB = 0\n\n    for i = 1, n do\n        if i % a == 0 then\n            countA = countA + 1\n        end\n\n        if i % b == 0 then\n            countB = countB + 1\n        end\n    end\n\n    if countA > countB then\n        return \"first\"\n    elseif countB > countA then\n        return \"second\"\n    end\n\n    return \"same\"\nend",
       "test_cases": [

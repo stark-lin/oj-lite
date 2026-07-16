@@ -89,7 +89,7 @@ Additional notes:
 - `classroom` uses the global lesson order. The current lesson is defined by `classroom.current_lesson_id`.
 - The current implementation uses a unique index on `enrollment(student_id)`, so each student belongs to only one classroom.
 - `ENROLLMENT.current_lesson_id` is kept in sync with `classroom.current_lesson_id` and is retained as part of submission ownership.
-- `QUESTION.description` is stored and returned as JSON-object text. Older text descriptions are wrapped into an object by DTO conversion.
+- `QUESTION.description` stores Markdown text and is returned as a JSON string. Existing database rows are not automatically migrated.
 - `QUESTION.test_cases` is stored as JSON text and parsed by the judge runner.
 - `LESSON_QUESTION` maintains the lesson-question relationship and order within a lesson.
 - `SUBMISSION` stores three ownership links: `enrollment_id`, `lesson_id`, and `lesson_question_id`.

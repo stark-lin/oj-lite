@@ -164,7 +164,7 @@ Each question stores:
 - `reference_code`
 - `test_cases`
 
-`description` is stored and returned as a JSON object. `test_cases` is stored as JSON text. The judge runner supports array cases, `{"input":[...]}`, `{"args":[...]}`, and scalar single-value cases.
+Question `description` is stored and returned as a Markdown string. The browser renders it with the locally bundled marked parser and sanitizes the generated HTML with the locally bundled DOMPurify before insertion. `test_cases` is stored as JSON text. The judge runner supports array cases, `{"input":[...]}`, `{"args":[...]}`, and scalar single-value cases.
 
 Judging flow:
 

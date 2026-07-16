@@ -19,6 +19,27 @@
       .replaceAll("'", '&#39;');
   }
 
+  function renderMarkdown(value) {
+    const source = String(value ?? '');
+    if (!source.trim()) {
+      return '<p class="markdown-empty">—</p>';
+    }
+
+    const parse = window.marked?.parse;
+    const sanitize = window.DOMPurify?.sanitize;
+    if (typeof parse !== 'function' || typeof sanitize !== 'function') {
+      return `<pre class="markdown-fallback">${escapeHtml(source)}</pre>`;
+    }
+
+    try {
+      const rendered = parse(source, { async: false, gfm: true });
+      return sanitize(rendered, { USE_PROFILES: { html: true } });
+    } catch (error) {
+      void error;
+      return `<pre class="markdown-fallback">${escapeHtml(source)}</pre>`;
+    }
+  }
+
   function clamp(value, min, max) {
     return Math.min(Math.max(value, min), max);
   }
@@ -211,12 +232,6 @@
     }
 
     return html || ' ';
-  }
-
-  function formatQuestionDescriptionValue(value) {
-    if (typeof value === 'string') return value;
-    if (value == null) return '—';
-    return JSON.stringify(value, null, 2);
   }
 
   function normalizeStdoutBuffer(value) {
@@ -1083,7 +1098,6 @@
     buildJudgeResultMeta,
     formatDateTime,
     formatJSONValue,
-    formatQuestionDescriptionValue,
     formatStdoutBuffer,
     highlightLua,
     latestVerdictLabel,
@@ -1092,6 +1106,7 @@
     normalizeJudgeReport,
     normalizeStdoutBuffer,
     parseJSONSafe,
+    renderMarkdown,
     renderJudgeReportPlaceholder,
     renderJudgeReportTerminal,
     sortByIDAsc,

@@ -5,14 +5,7 @@
   "questions": [
     {
       "title": "在号码牌数组中查找指定学生是否存在",
-      "description": {
-        "难度": "Simple",
-        "背景": "老师把参加活动的学生号码牌存在数组 numbers 中。现在需要确认 target 号学生是否在名单里。",
-        "任务": "请在数组中查找 target 是否存在。",
-        "输入": "一个数组 numbers，一个数字 n 和一个数字 target。",
-        "输出": "如果找到 target，返回 true；否则返回 false。",
-        "提示": "可以从第一个位置开始，一个一个检查。"
-      },
+      "description": "## 难度\n\nSimple\n\n## 背景\n\n老师把参加活动的学生号码牌存在数组 numbers 中。现在需要确认 target 号学生是否在名单里。\n\n## 任务\n\n请在数组中查找 target 是否存在。\n\n## 输入\n\n一个数组 numbers，一个数字 n 和一个数字 target。\n\n## 输出\n\n如果找到 target，返回 true；否则返回 false。\n\n## 提示\n\n可以从第一个位置开始，一个一个检查。",
       "starter_code": "function solution(numbers, n, target)\n    return false\nend",
       "reference_code": "function solution(numbers, n, target)\n    for i = 1, n do\n        if numbers[i] == target then\n            return true\n        end\n    end\n    return false\nend",
       "test_cases": [
@@ -36,14 +29,7 @@
     },
     {
       "title": "在成绩单中查找是否有人拿到满分",
-      "description": {
-        "难度": "Simple",
-        "背景": "一次考试结束后，老师想知道成绩单 scores 中是否有人拿到了 100 分。",
-        "任务": "请查找数组中是否存在 100 分。",
-        "输入": "一个数组 scores 和一个数字 n。",
-        "输出": "如果有人拿到 100 分，返回 true；否则返回 false。",
-        "提示": "查找目标固定为满分。"
-      },
+      "description": "## 难度\n\nSimple\n\n## 背景\n\n一次考试结束后，老师想知道成绩单 scores 中是否有人拿到了 100 分。\n\n## 任务\n\n请查找数组中是否存在 100 分。\n\n## 输入\n\n一个数组 scores 和一个数字 n。\n\n## 输出\n\n如果有人拿到 100 分，返回 true；否则返回 false。\n\n## 提示\n\n查找目标固定为满分。",
       "starter_code": "function solution(scores, n)\n    return false\nend",
       "reference_code": "function solution(scores, n)\n    for i = 1, n do\n        if scores[i] == 100 then\n            return true\n        end\n    end\n    return false\nend",
       "test_cases": [
@@ -64,14 +50,7 @@
     },
     {
       "title": "在背包格子中查找目标物品数量的位置",
-      "description": {
-        "难度": "Simple",
-        "背景": "游戏背包中每个格子存放一种物品的数量，所有数量保存在 items 数组中。玩家想找到第一个数量等于 target 的格子。",
-        "任务": "请返回第一个数量等于 target 的位置。",
-        "输入": "一个数组 items，一个数字 n 和一个数字 target。",
-        "输出": "如果找到，返回位置；如果没有找到，返回 0。",
-        "提示": "找到第一个目标后，可以直接返回位置。"
-      },
+      "description": "## 难度\n\nSimple\n\n## 背景\n\n游戏背包中每个格子存放一种物品的数量，所有数量保存在 items 数组中。玩家想找到第一个数量等于 target 的格子。\n\n## 任务\n\n请返回第一个数量等于 target 的位置。\n\n## 输入\n\n一个数组 items，一个数字 n 和一个数字 target。\n\n## 输出\n\n如果找到，返回位置；如果没有找到，返回 0。\n\n## 提示\n\n找到第一个目标后，可以直接返回位置。",
       "starter_code": "function solution(items, n, target)\n    return 0\nend",
       "reference_code": "function solution(items, n, target)\n    for i = 1, n do\n        if items[i] == target then\n            return i\n        end\n    end\n    return 0\nend",
       "test_cases": [
@@ -95,14 +74,7 @@
     },
     {
       "title": "在补考名单中找到第一个不及格学生的位置",
-      "description": {
-        "难度": "Normal",
-        "背景": "老师把学生成绩保存在 scores 数组中。成绩低于 passLine 的学生需要参加补考，老师想找到第一个需要补考的学生。",
-        "任务": "请返回第一个低于 passLine 的成绩位置。",
-        "输入": "一个数组 scores，一个数字 n 和一个数字 passLine。",
-        "输出": "如果找到不及格学生，返回位置；如果没有，返回 0。",
-        "提示": "查找时要判断的是成绩是否低于分数线。"
-      },
+      "description": "## 难度\n\nNormal\n\n## 背景\n\n老师把学生成绩保存在 scores 数组中。成绩低于 passLine 的学生需要参加补考，老师想找到第一个需要补考的学生。\n\n## 任务\n\n请返回第一个低于 passLine 的成绩位置。\n\n## 输入\n\n一个数组 scores，一个数字 n 和一个数字 passLine。\n\n## 输出\n\n如果找到不及格学生，返回位置；如果没有，返回 0。\n\n## 提示\n\n查找时要判断的是成绩是否低于分数线。",
       "starter_code": "function solution(scores, n, passLine)\n    return 0\nend",
       "reference_code": "function solution(scores, n, passLine)\n    for i = 1, n do\n        if scores[i] < passLine then\n            return i\n        end\n    end\n    return 0\nend",
       "test_cases": [
@@ -126,14 +98,7 @@
     },
     {
       "title": "在比赛成绩中找到最后一个满分位置",
-      "description": {
-        "难度": "Normal",
-        "背景": "比赛成绩保存在 scores 数组中。可能有多个选手拿到 100 分，裁判想知道最后一个满分出现在第几个位置。",
-        "任务": "请返回最后一个 100 分的位置。",
-        "输入": "一个数组 scores 和一个数字 n。",
-        "输出": "如果存在 100 分，返回最后一个满分位置；如果不存在，返回 0。",
-        "提示": "可以继续遍历完整个数组，并不断更新找到的位置。"
-      },
+      "description": "## 难度\n\nNormal\n\n## 背景\n\n比赛成绩保存在 scores 数组中。可能有多个选手拿到 100 分，裁判想知道最后一个满分出现在第几个位置。\n\n## 任务\n\n请返回最后一个 100 分的位置。\n\n## 输入\n\n一个数组 scores 和一个数字 n。\n\n## 输出\n\n如果存在 100 分，返回最后一个满分位置；如果不存在，返回 0。\n\n## 提示\n\n可以继续遍历完整个数组，并不断更新找到的位置。",
       "starter_code": "function solution(scores, n)\n    return 0\nend",
       "reference_code": "function solution(scores, n)\n    local position = 0\n\n    for i = 1, n do\n        if scores[i] == 100 then\n            position = i\n        end\n    end\n\n    return position\nend",
       "test_cases": [
@@ -154,14 +119,7 @@
     },
     {
       "title": "查找目标分数并统计一共检查了多少次",
-      "description": {
-        "难度": "Normal",
-        "背景": "老师在成绩单中查找 target 分数，同时想知道找到它之前一共检查了多少个成绩。",
-        "任务": "请查找 target 的第一个位置，并统计检查次数。",
-        "输入": "一个数组 scores，一个数字 n 和一个数字 target。",
-        "输出": "依次返回目标位置和检查次数。如果没有找到，目标位置返回 0，检查次数返回 n。",
-        "提示": "每检查一个位置，检查次数都要更新。"
-      },
+      "description": "## 难度\n\nNormal\n\n## 背景\n\n老师在成绩单中查找 target 分数，同时想知道找到它之前一共检查了多少个成绩。\n\n## 任务\n\n请查找 target 的第一个位置，并统计检查次数。\n\n## 输入\n\n一个数组 scores，一个数字 n 和一个数字 target。\n\n## 输出\n\n依次返回目标位置和检查次数。如果没有找到，目标位置返回 0，检查次数返回 n。\n\n## 提示\n\n每检查一个位置，检查次数都要更新。",
       "starter_code": "function solution(scores, n, target)\n    return 0, 0\nend",
       "reference_code": "function solution(scores, n, target)\n    local position = 0\n    local checks = 0\n    local i = 1\n\n    while i <= n and position == 0 do\n        checks = checks + 1\n        if scores[i] == target then\n            position = i\n        end\n        i = i + 1\n    end\n\n    return position, checks\nend",
       "test_cases": [
@@ -185,14 +143,7 @@
     },
     {
       "title": "在有序图书编号中用二分查找快速找到目标图书",
-      "description": {
-        "难度": "Challenge",
-        "背景": "图书馆的图书编号已经按从小到大的顺序保存在 books 数组中。管理员希望用更快的方法查找目标图书编号 target。",
-        "任务": "请使用二分查找返回目标图书的位置，并统计查找次数。",
-        "输入": "一个有序数组 books，一个数字 n 和一个数字 target。",
-        "输出": "依次返回目标位置和查找次数。如果没有找到，位置返回 0。",
-        "提示": "每次检查中间位置，然后缩小下一次查找的范围。"
-      },
+      "description": "## 难度\n\nChallenge\n\n## 背景\n\n图书馆的图书编号已经按从小到大的顺序保存在 books 数组中。管理员希望用更快的方法查找目标图书编号 target。\n\n## 任务\n\n请使用二分查找返回目标图书的位置，并统计查找次数。\n\n## 输入\n\n一个有序数组 books，一个数字 n 和一个数字 target。\n\n## 输出\n\n依次返回目标位置和查找次数。如果没有找到，位置返回 0。\n\n## 提示\n\n每次检查中间位置，然后缩小下一次查找的范围。",
       "starter_code": "function solution(books, n, target)\n    return 0, 0\nend",
       "reference_code": "function solution(books, n, target)\n    local left = 1\n    local right = n\n    local position = 0\n    local checks = 0\n\n    while left <= right and position == 0 do\n        local mid = (left + right) / 2\n        if mid % 1 ~= 0 then\n            mid = mid - 0.5\n        end\n        checks = checks + 1\n\n        if books[mid] == target then\n            position = mid\n        elseif target < books[mid] then\n            right = mid - 1\n        else\n            left = mid + 1\n        end\n    end\n\n    return position, checks\nend",
       "test_cases": [
@@ -216,14 +167,7 @@
     },
     {
       "title": "比较线性查找和二分查找分别需要检查多少次",
-      "description": {
-        "难度": "Challenge",
-        "背景": "同一组有序编号可以用线性查找，也可以用二分查找。老师想让学生比较两种方法在查找 target 时分别检查了多少次。",
-        "任务": "请分别使用线性查找和二分查找查找 target，并返回两种方法的检查次数。",
-        "输入": "一个有序数组 numbers，一个数字 n 和一个数字 target。",
-        "输出": "依次返回线性查找检查次数、二分查找检查次数、线性查找位置、二分查找位置。找不到时位置为 0。",
-        "提示": "两种方法要分开模拟，并各自记录检查次数。"
-      },
+      "description": "## 难度\n\nChallenge\n\n## 背景\n\n同一组有序编号可以用线性查找，也可以用二分查找。老师想让学生比较两种方法在查找 target 时分别检查了多少次。\n\n## 任务\n\n请分别使用线性查找和二分查找查找 target，并返回两种方法的检查次数。\n\n## 输入\n\n一个有序数组 numbers，一个数字 n 和一个数字 target。\n\n## 输出\n\n依次返回线性查找检查次数、二分查找检查次数、线性查找位置、二分查找位置。找不到时位置为 0。\n\n## 提示\n\n两种方法要分开模拟，并各自记录检查次数。",
       "starter_code": "function solution(numbers, n, target)\n    return 0, 0, 0, 0\nend",
       "reference_code": "function solution(numbers, n, target)\n    local linearChecks = 0\n    local linearPosition = 0\n    local i = 1\n\n    while i <= n and linearPosition == 0 do\n        linearChecks = linearChecks + 1\n        if numbers[i] == target then\n            linearPosition = i\n        end\n        i = i + 1\n    end\n\n    local left = 1\n    local right = n\n    local binaryChecks = 0\n    local binaryPosition = 0\n\n    while left <= right and binaryPosition == 0 do\n        local mid = (left + right) / 2\n        if mid % 1 ~= 0 then\n            mid = mid - 0.5\n        end\n        binaryChecks = binaryChecks + 1\n\n        if numbers[mid] == target then\n            binaryPosition = mid\n        elseif target < numbers[mid] then\n            right = mid - 1\n        else\n            left = mid + 1\n        end\n    end\n\n    return linearChecks, binaryChecks, linearPosition, binaryPosition\nend",
       "test_cases": [
@@ -247,14 +191,7 @@
     },
     {
       "title": "在有序成绩表中查找目标分数或插入位置",
-      "description": {
-        "难度": "Challenge",
-        "背景": "成绩表 scores 已经按从小到大排序。老师想查找 target 是否存在；如果不存在，还想知道 target 应该插入到第几个位置，才能保持成绩表有序。",
-        "任务": "请使用二分查找完成查找，并返回目标状态和位置。",
-        "输入": "一个有序数组 scores，一个数字 n 和一个数字 target。",
-        "输出": "如果找到 target，返回 true 和目标位置；如果找不到，返回 false 和应该插入的位置。",
-        "提示": "查找结束后，剩下的边界位置可以帮助判断插入位置。"
-      },
+      "description": "## 难度\n\nChallenge\n\n## 背景\n\n成绩表 scores 已经按从小到大排序。老师想查找 target 是否存在；如果不存在，还想知道 target 应该插入到第几个位置，才能保持成绩表有序。\n\n## 任务\n\n请使用二分查找完成查找，并返回目标状态和位置。\n\n## 输入\n\n一个有序数组 scores，一个数字 n 和一个数字 target。\n\n## 输出\n\n如果找到 target，返回 true 和目标位置；如果找不到，返回 false 和应该插入的位置。\n\n## 提示\n\n查找结束后，剩下的边界位置可以帮助判断插入位置。",
       "starter_code": "function solution(scores, n, target)\n    return false, 0\nend",
       "reference_code": "function solution(scores, n, target)\n    local left = 1\n    local right = n\n    local position = 0\n\n    while left <= right and position == 0 do\n        local mid = (left + right) / 2\n        if mid % 1 ~= 0 then\n            mid = mid - 0.5\n        end\n\n        if scores[mid] == target then\n            position = mid\n        elseif target < scores[mid] then\n            right = mid - 1\n        else\n            left = mid + 1\n        end\n    end\n\n    if position > 0 then\n        return true, position\n    end\n\n    return false, left\nend",
       "test_cases": [
