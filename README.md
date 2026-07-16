@@ -201,6 +201,8 @@ The service reads settings from `config.json`. If the file is missing, startup w
 
 Notes:
 
+- `app.name` controls the name shown in browser page titles and on the login page. The browser reads it from `/healthz` at runtime; if that request fails, no application name is shown.
+- Restart the service after changing `config.json`, then reload the page.
 - Database initialization currently supports creating the final schema only from an empty database.
 - If an existing local `oj-lite.db` uses an incompatible old schema, delete it and start the service again.
 
@@ -452,6 +454,8 @@ go test ./...
 
 说明：
 
+- `app.name` 控制浏览器页面标题和登录页显示的系统名称。浏览器会在运行时通过 `/healthz` 获取；请求失败时不显示系统名称。
+- 修改 `config.json` 后需要重启服务并刷新页面。
 - 当前数据库初始化只支持空库直接创建最终 schema，不支持旧 schema 的增量迁移。
 - 如果本地已有不兼容的旧版 `oj-lite.db`，需要删除后重新启动。
 

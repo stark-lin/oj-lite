@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>OJ Lite · Login</title>
+  <title>Login</title>
   <link rel="stylesheet" href="/assets/app.css" />
   <style>
     body {
@@ -60,9 +60,9 @@
     .notice--error { color: var(--error); }
   </style>
 </head>
-<body>
+<body data-app-title="Login">
   <main class="auth">
-    <div class="auth__brand">OJ Lite</div>
+    <div class="auth__brand" data-app-name hidden></div>
     <div class="card">
       <form class="form" id="loginForm">
         <div id="loginFieldsMount"></div>

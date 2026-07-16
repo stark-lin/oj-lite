@@ -94,6 +94,34 @@
     }
   }
 
+  function applyAppName(value) {
+    const appName = typeof value === 'string' ? value.trim() : '';
+    const title = document.body?.dataset.appTitle || '';
+
+    document.title = appName && title ? `${appName} · ${title}` : title;
+    document.querySelectorAll('[data-app-name]').forEach((element) => {
+      element.textContent = appName;
+      element.hidden = !appName;
+    });
+  }
+
+  async function loadAppName() {
+    applyAppName('');
+
+    try {
+      const response = await fetch('/healthz', {
+        credentials: 'same-origin',
+        headers: { Accept: 'application/json' }
+      });
+      if (!response.ok) return;
+
+      const payload = await parseJSONSafe(response);
+      applyAppName(payload?.data?.service);
+    } catch (error) {
+      void error;
+    }
+  }
+
   function formatDateTime(value) {
     if (!value) return '—';
     const timestamp = Date.parse(value);
@@ -1116,4 +1144,6 @@
     verdictPillClass,
     ui
   };
+
+  void loadAppName();
 }());

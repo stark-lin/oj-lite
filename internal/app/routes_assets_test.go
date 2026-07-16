@@ -2,6 +2,7 @@ package app
 
 import (
 	"bytes"
+	"encoding/json"
 	"net/http"
 	"testing"
 )
@@ -76,5 +77,68 @@ func TestMarkdownPagesLoadLocalDependenciesBeforeApp(t *testing.T) {
 	sanitizeIndex := bytes.Index(appJS, []byte("sanitize(rendered"))
 	if parseIndex < 0 || sanitizeIndex < parseIndex {
 		t.Fatal("app.js must sanitize rendered Markdown before returning it")
+	}
+}
+
+func TestPagesLoadConfiguredAppNameFromHealthz(t *testing.T) {
+	app := newTestApp(t)
+	defer shutdownTestApp(t, app)
+
+	healthResponse := performRequest(t, app, http.MethodGet, "/healthz", nil, nil)
+	if healthResponse.Code != http.StatusOK {
+		t.Fatalf("GET /healthz status = %d, want %d body=%s", healthResponse.Code, http.StatusOK, healthResponse.Body.String())
+	}
+
+	var healthPayload struct {
+		Data struct {
+			Service string `json:"service"`
+		} `json:"data"`
+	}
+	if err := json.Unmarshal(healthResponse.Body.Bytes(), &healthPayload); err != nil {
+		t.Fatalf("decode GET /healthz response: %v", err)
+	}
+	if healthPayload.Data.Service != app.Config().App.Name {
+		t.Fatalf("GET /healthz service = %q, want %q", healthPayload.Data.Service, app.Config().App.Name)
+	}
+
+	pages := map[string]string{
+		"login.html":   "Login",
+		"admin.html":   "Admin Workspace",
+		"teacher.html": "Teacher Workspace",
+		"student.html": "Student Workspace",
+	}
+	for name, title := range pages {
+		page, err := readEmbeddedHTML(name)
+		if err != nil {
+			t.Fatalf("read %s: %v", name, err)
+		}
+		if bytes.Contains(page, []byte("OJ Lite")) {
+			t.Fatalf("%s must not contain a hard-coded app name", name)
+		}
+		if !bytes.Contains(page, []byte(`data-app-title="`+title+`"`)) {
+			t.Fatalf("%s body missing runtime app title metadata", name)
+		}
+	}
+
+	loginPage, err := readEmbeddedHTML("login.html")
+	if err != nil {
+		t.Fatalf("read login.html: %v", err)
+	}
+	if !bytes.Contains(loginPage, []byte("data-app-name hidden")) {
+		t.Fatal("login.html app name must remain hidden until /healthz succeeds")
+	}
+
+	appJS, err := readEmbeddedAsset("app.js")
+	if err != nil {
+		t.Fatalf("read app.js: %v", err)
+	}
+	for _, marker := range [][]byte{
+		[]byte("fetch('/healthz'"),
+		[]byte("payload?.data?.service"),
+		[]byte("element.hidden = !appName"),
+	} {
+		if !bytes.Contains(appJS, marker) {
+			t.Fatalf("app.js missing runtime app name marker %q", marker)
+		}
 	}
 }
