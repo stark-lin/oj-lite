@@ -102,7 +102,6 @@ func (app *App) Run() error {
 		"access_urls", accessURLs,
 	)
 
-
 	err = app.server.Serve(listener)
 	if err != nil && !errors.Is(err, http.ErrServerClosed) {
 		return err
