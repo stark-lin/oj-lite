@@ -31,7 +31,8 @@ Application wiring layer:
 - Initializes the database.
 - Registers page, admin, auth, teacher, and student routes.
 - Provides the embedded login page, local admin page, teacher page, and student page.
-- Provides embedded `/assets/app.css`, shared `/assets/app.js`, page-specific scripts, and locally bundled Markdown vendor scripts under `/assets/vendor/`.
+- Provides the embedded Web UI under `html/`: shared tokens and component styles plus component renderers live together in `html/ui/`, page-only styles live in `html/pages/`, and page scripts remain next to the HTML entry points.
+- Serves the shared `/assets/app.css`, `/assets/app.js`, and `/assets/components.js` entries, page-specific styles and scripts, and locally bundled Markdown vendor scripts under `/assets/vendor/`.
 
 ### `internal/platform/`
 

@@ -103,7 +103,7 @@ The repository includes a GitHub Actions workflow at [`.github/workflows/ci-cd.y
 - `go vet ./...`.
 - `go test ./...`.
 
-After the checks pass on a push to `main`, the workflow builds packaged single-binary artifacts for Windows amd64, Linux amd64, Linux arm64, and macOS arm64. It publishes those artifacts in a generated `main-<run_number>-<run_attempt>` GitHub Release.
+After the checks pass on a push to `main`, the workflow builds packaged single-binary artifacts for Windows amd64, Linux amd64, Linux arm64, macOS amd64, and macOS arm64. It publishes those artifacts in a generated `main-<run_number>-<run_attempt>` GitHub Release.
 
 These are main-branch build releases. The repository does not currently define a separate semver/tag release policy or publish checksums/version metadata.
 
@@ -121,7 +121,7 @@ Start the service:
 go run ./cmd/server
 ```
 
-On first startup, the service creates `config.json` if it does not exist. By default, it listens on `0.0.0.0:8080` and stores data at `oj-lite.db` in the current working directory.
+On first startup, the service creates `config.json` if it does not exist. By default, it listens on `0.0.0.0:8080` and stores data at `oj-lite.db` in the current working directory. Once the HTTP listener is ready, the startup log prints an `access_urls` list containing the local URL and the detected network URLs that other users can open. Network access still depends on the host firewall allowing the configured port.
 
 Start without demo seed data:
 
@@ -372,7 +372,7 @@ end
 - `go vet ./...`。
 - `go test ./...`。
 
-推送到 `main` 且检查通过后，workflow 会为 Windows amd64、Linux amd64、Linux arm64 和 macOS arm64 构建并打包单二进制产物，并将产物发布到自动生成的 `main-<run_number>-<run_attempt>` GitHub Release。
+推送到 `main` 且检查通过后，workflow 会为 Windows amd64、Linux amd64、Linux arm64、macOS amd64 和 macOS arm64 构建并打包单二进制产物，并将产物发布到自动生成的 `main-<run_number>-<run_attempt>` GitHub Release。
 
 这些 release 表示主线构建产物；仓库当前尚未定义单独的 semver/tag 正式发布策略，也未发布 checksum 或 version metadata。
 
@@ -390,7 +390,7 @@ end
 go run ./cmd/server
 ```
 
-首次启动时，如果当前运行目录下没有 `config.json`，服务会先写入默认配置文件。默认监听 `0.0.0.0:8080`，默认数据库路径为当前运行目录下的 `oj-lite.db`。
+首次启动时，如果当前运行目录下没有 `config.json`，服务会先写入默认配置文件。默认监听 `0.0.0.0:8080`，默认数据库路径为当前运行目录下的 `oj-lite.db`。HTTP 端口监听成功后，启动日志的 `access_urls` 会列出本机地址和检测到的局域网地址，其他用户可以直接打开其中的局域网地址；是否能从其他设备访问仍取决于主机防火墙是否放行配置的端口。
 
 启动后可以访问：
 

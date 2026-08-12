@@ -5,43 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Teacher Workspace</title>
   <link rel="stylesheet" href="/assets/app.css" />
-  <style>
-    :root {
-      --editor-line-height: 1.6;
-      --editor-font-size: 13px;
-      --editor-padding-y: 14px;
-      --editor-padding-x: 16px;
-      --gutter-width: 48px;
-    }
-
-    .column__body--scope {
-      overflow-y: auto;
-      overflow-x: hidden;
-      grid-auto-rows: max-content;
-      align-content: start;
-    }
-
-    #studentManagementEntry {
-      gap: 8px;
-      padding: 12px;
-    }
-
-    #detailTitle { color: var(--text-muted); }
-
-    #detailMeta {
-      font-size: var(--text-md);
-      color: var(--text);
-      font-weight: var(--weight-semibold);
-    }
-
-  </style>
+  <link rel="stylesheet" href="/assets/pages/teacher.css" />
 </head>
 <body class="dashboard-page teacher-page" data-app-title="Teacher Workspace">
   <div class="app">
     <main class="workspace" id="workspace">
       <section class="column column--classes">
-        <div class="column__header">
-          <div class="column__title">Classes</div>
+        <div class="panel-header">
+          <div class="panel-title">Classes</div>
           <div class="header-actions">
             <span class="pane-meta" id="classCountMeta"></span>
             <button class="action-button" id="createClassBtn" type="button">Create Class</button>
@@ -52,11 +23,11 @@
         </div>
       </section>
 
-      <div class="divider" data-divider="1" title="Drag to resize columns"></div>
+      <div class="resizer resizer--vertical" data-resizer="1" title="Drag to resize columns"></div>
 
       <section class="column column--scope">
-        <div class="column__header">
-          <div class="column__title">Class Scope</div>
+        <div class="panel-header">
+          <div class="panel-title">Class Scope</div>
           <div class="header-actions">
             <span class="pane-meta" id="scopeMeta"></span>
             <button class="action-button" id="deleteClassBtn" type="button" disabled>Delete Class</button>
@@ -68,11 +39,11 @@
         </div>
       </section>
 
-      <div class="divider" data-divider="2" title="Drag to resize columns"></div>
+      <div class="resizer resizer--vertical" data-resizer="2" title="Drag to resize columns"></div>
 
       <section class="column column--browser">
-        <div class="column__header">
-          <div class="column__title" id="browserColumnTitle">Questions</div>
+        <div class="panel-header">
+          <div class="panel-title" id="browserColumnTitle">Questions</div>
           <div class="header-actions">
             <span class="pane-meta" id="browserMeta"></span>
           </div>
@@ -82,11 +53,11 @@
         </div>
       </section>
 
-      <div class="divider" data-divider="3" title="Drag to resize columns"></div>
+      <div class="resizer resizer--vertical" data-resizer="3" title="Drag to resize columns"></div>
 
       <section class="column column--detail">
-        <div class="column__header">
-          <div class="column__title" id="detailTitle"></div>
+        <div class="panel-header">
+          <div class="panel-title" id="detailTitle"></div>
           <div class="pane-meta" id="detailMeta"></div>
         </div>
         <div class="column__body scroll-frame" id="detailBody"></div>
@@ -108,6 +79,7 @@
   <script src="/assets/vendor/marked.min.js"></script>
   <script src="/assets/vendor/purify.min.js"></script>
   <script src="/assets/app.js"></script>
+  <script src="/assets/components.js"></script>
   <script src="/assets/teacher.js"></script>
 </body>
 </html>

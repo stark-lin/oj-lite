@@ -91,8 +91,10 @@ Public login and local admin APIs:
 - `GET /admin`: local admin page; loopback only.
 - `GET /teacher`: teacher page; requires a valid teacher session, otherwise redirects to `/`.
 - `GET /student`: student page; requires a valid student session, otherwise redirects to `/`.
-- `GET /assets/app.css`: embedded page stylesheet.
+- `GET /assets/app.css`: embedded shared design tokens, base styles, and component styles.
 - `GET /assets/app.js`: embedded shared page script.
+- `GET /assets/components.js`: embedded shared UI renderers and resizer interactions; pages load it after `app.js`.
+- `GET /assets/pages/{admin,login,student,teacher}.css`: page-specific layout and responsive styles.
 - `GET /assets/{admin,login,student,teacher}.js`: embedded page-specific scripts.
 
 ## Auth API

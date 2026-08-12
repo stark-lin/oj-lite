@@ -11,7 +11,11 @@ import (
 )
 
 func (app *App) registerPageRoutes(router gin.IRouter) {
-	router.GET("/assets/app.css", app.embeddedAssetHandler("app.css", "text/css; charset=utf-8"))
+	router.GET("/assets/app.css", app.embeddedAssetHandler("ui/styles.css", "text/css; charset=utf-8"))
+	for _, name := range []string{"admin.css", "login.css", "student.css", "teacher.css"} {
+		router.GET("/assets/pages/"+name, app.embeddedAssetHandler("pages/"+name, "text/css; charset=utf-8"))
+	}
+	router.GET("/assets/components.js", app.embeddedAssetHandler("ui/components.js", "application/javascript; charset=utf-8"))
 	for _, name := range []string{"app.js", "admin.js", "login.js", "student.js", "teacher.js"} {
 		router.GET("/assets/"+name, app.embeddedAssetHandler(name, "application/javascript; charset=utf-8"))
 	}

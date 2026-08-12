@@ -5,13 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin Workspace</title>
   <link rel="stylesheet" href="/assets/app.css" />
+  <link rel="stylesheet" href="/assets/pages/admin.css" />
 </head>
 <body class="dashboard-page admin-page" data-app-title="Admin Workspace">
   <div class="app">
     <main class="workspace" id="workspace">
       <section class="column column--nav">
-        <div class="column__header">
-          <div class="column__title">Modules</div>
+        <div class="panel-header">
+          <div class="panel-title">Modules</div>
           <div class="header-actions">
             <span class="pane-meta">2 entries</span>
           </div>
@@ -21,11 +22,11 @@
         </div>
       </section>
 
-      <div class="divider" data-divider="1"></div>
+      <div class="resizer resizer--vertical" data-resizer="1"></div>
 
       <section class="column column--list">
-        <div class="column__header">
-          <div class="column__title" id="listTitle">List</div>
+        <div class="panel-header">
+          <div class="panel-title" id="listTitle">List</div>
           <div class="header-actions" id="listHeaderActions"></div>
         </div>
         <div class="column__body">
@@ -34,11 +35,11 @@
         </div>
       </section>
 
-      <div class="divider" data-divider="2"></div>
+      <div class="resizer resizer--vertical" data-resizer="2"></div>
 
       <section class="column column--detail">
-        <div class="column__header">
-          <div class="column__title" id="detailTitle">Detail</div>
+        <div class="panel-header">
+          <div class="panel-title" id="detailTitle">Detail</div>
           <div class="pane-meta" id="detailMeta">No selection</div>
         </div>
         <div class="column__body" id="detailBody"></div>
@@ -57,6 +58,7 @@
   </div>
 
   <script src="/assets/app.js"></script>
+  <script src="/assets/components.js"></script>
   <script src="/assets/admin.js"></script>
 </body>
 </html>

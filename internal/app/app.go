@@ -6,6 +6,7 @@ import (
 	"context"
 	"database/sql"
 	"errors"
+	"net"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -86,9 +87,22 @@ func (app *App) Router() *gin.Engine {
 }
 
 func (app *App) Run() error {
-	app.log.Info("http server listening", "address", app.server.Addr)
+	listener, err := net.Listen("tcp", app.server.Addr)
+	if err != nil {
+		return err
+	}
 
-	err := app.server.ListenAndServe()
+	accessURLs, discoverErr := discoverHTTPAccessURLs(app.cfg.HTTP.Host, listener.Addr())
+	if discoverErr != nil {
+		app.log.Warn("network address discovery failed", "err", discoverErr)
+	}
+	app.log.Info(
+		"http server listening",
+		"address", listener.Addr().String(),
+		"access_urls", accessURLs,
+	)
+
+	err = app.server.Serve(listener)
 	if err != nil && !errors.Is(err, http.ErrServerClosed) {
 		return err
 	}

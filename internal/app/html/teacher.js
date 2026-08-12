@@ -399,12 +399,12 @@ const el = {
     'teacherName',
     'statusRight'
   ),
-  dividers: Array.from(document.querySelectorAll('.divider'))
+  resizers: Array.from(document.querySelectorAll('.resizer[data-resizer]'))
 };
 
 const columns = createColumnResizer({
   workspace: el.workspace,
-  dividers: el.dividers,
+  resizers: el.resizers,
   widths: state.ui.widths,
   defaultWidths: DEFAULT_WIDTHS,
   minWidths: MIN_WIDTHS,
@@ -744,15 +744,17 @@ function renderQuestionDetail() {
       `
     })}
 
-    <section class="section question-code-section">
-      <div class="section__body">
-        <div class="code-toolbar">
-          ${ui.paneMeta(state.ui.inspectorMode === 'reference' ? 'Reference code' : 'Starter code')}
-          <button id="toggleCodeBtn" type="button">${state.ui.inspectorMode === 'reference' ? 'Show starter' : 'Show reference'}</button>
-        </div>
+    ${ui.section({
+      header: false,
+      extraClass: 'question-code-section',
+      body: `
+        ${ui.codeToolbar([
+          ui.paneMeta(state.ui.inspectorMode === 'reference' ? 'Reference code' : 'Starter code'),
+          ui.actionButton(state.ui.inspectorMode === 'reference' ? 'Show starter' : 'Show reference', { id: 'toggleCodeBtn' })
+        ])}
         ${ui.luaCodeBlock(content, { padTrailingNewline: true })}
-      </div>
-    </section>
+      `
+    })}
   `;
 
   document.getElementById('toggleCodeBtn')?.addEventListener('click', () => {
@@ -805,10 +807,10 @@ function renderStudentDetail() {
         ${ui.detailBlock('Stdout', escapeHtml(formatStdoutBuffer(selectedSubmission.stdoutBuffer)))}
         ${ui.detailBlock('Error Message', escapeHtml(selectedSubmission.errorMessage || '—'))}
         ${ui.detailBlock('Judge Report', renderJudgeReportTerminal(selectedSubmission.judgeReport, selectedSubmission), { extraClass: 'detail-block__content--terminal' })}
-        <div class="code-toolbar">
-          ${ui.paneMeta('Source code')}
-          ${ui.actionButton('Delete Submission', { 'data-delete-submission-id': selectedSubmission.id })}
-        </div>
+        ${ui.codeToolbar([
+          ui.paneMeta('Source code'),
+          ui.actionButton('Delete Submission', { 'data-delete-submission-id': selectedSubmission.id })
+        ])}
         ${ui.luaCodeBlock(selectedSubmission.sourceCode || '')}
       `)}
     </div>
@@ -834,8 +836,8 @@ function renderStudentDetail() {
       meta: classItem.name,
       contentCount: 4,
       body: `
-        <div class="form-grid">
-          ${ui.fieldActionRow({
+        ${ui.formGrid([
+          ui.fieldActionRow({
             label: 'Username',
             inputAttrs: {
               id: 'renameStudentInput',
@@ -844,8 +846,8 @@ function renderStudentDetail() {
               value: student.username
             },
             actionHtml: ui.actionButton('Reset', { 'data-confirm-rename-student-id': student.id })
-          })}
-          ${ui.fieldActionRow({
+          }),
+          ui.fieldActionRow({
             label: 'Password',
             password: true,
             inputAttrs: {
@@ -855,11 +857,9 @@ function renderStudentDetail() {
               placeholder: 'New password'
             },
             actionHtml: ui.actionButton('Reset', { 'data-confirm-reset-password-student-id': student.id })
-          })}
-        </div>
-        <div class="form-actions">
-          ${ui.actionButton('Remove Student', { 'data-remove-student-id': student.id })}
-        </div>
+          })
+        ])}
+        ${ui.formActions(ui.actionButton('Remove Student', { 'data-remove-student-id': student.id }))}
       `
     })}
 

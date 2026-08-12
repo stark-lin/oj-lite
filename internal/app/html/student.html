@@ -5,377 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Student Workspace</title>
   <link rel="stylesheet" href="/assets/app.css" />
-  <style>
-    :root {
-      --surface-neutral: var(--surface-3);
-      --surface-sidebar: var(--surface-1);
-      --surface-sidebar-header: var(--surface-1);
-      --surface-problem: var(--surface-3);
-      --surface-problem-header: var(--surface-3);
-      --surface-editor: var(--surface-4);
-      --surface-editor-header: var(--surface-4);
-      --surface-output: var(--surface-code);
-      --surface-output-header: var(--surface-code);
-      --gutter-bg: var(--surface-1);
-      --gutter-text: var(--text-faint);
-      --sidebar-width: 264px;
-      --problem-width: 380px;
-      --result-height: 208px;
-      --splitter-size: var(--divider-size);
-      --editor-line-height: 1.6;
-      --editor-font-size: 14px;
-      --editor-padding-y: 16px;
-      --editor-padding-x: 16px;
-      --gutter-width: 52px;
-    }
-
-    .workspace { grid-template-columns: var(--sidebar-width) var(--splitter-size) minmax(0, 1fr); }
-
-    .main {
-      min-width: 0;
-      min-height: 0;
-      display: grid;
-      grid-template-rows: minmax(0, 1fr) var(--splitter-size) var(--result-height);
-    }
-
-    .editor-shell {
-      min-height: 0;
-      display: grid;
-      grid-template-columns: minmax(280px, var(--problem-width)) var(--splitter-size) minmax(0, 1fr);
-    }
-
-    .sidebar {
-      background: var(--surface-sidebar);
-      display: grid;
-      grid-template-rows: auto 1fr;
-      min-height: 0;
-    }
-
-    .sidebar__header {
-      display: flex;
-      align-items: center;
-      height: var(--section-bar-height);
-      padding: 0 12px;
-      border-bottom: 1px solid var(--border);
-      background: var(--surface-sidebar-header);
-    }
-
-    .problem-list {
-      overflow: auto;
-      padding: 6px;
-    }
-
-    .problem-item {
-      width: 100%;
-      display: grid;
-      grid-template-columns: 10px minmax(0, 1fr) auto;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 8px;
-      border-radius: var(--radius-sm);
-      border: 1px solid transparent;
-      background: transparent;
-      text-align: left;
-      margin-bottom: 2px;
-    }
-
-    .problem-item:hover { background: rgba(177, 186, 196, 0.08); }
-
-    .problem-item.is-active {
-      background: rgba(47, 129, 247, 0.14);
-      border-color: rgba(47, 129, 247, 0.24);
-    }
-
-    .problem-item__dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: var(--text-faint);
-    }
-
-    .problem-item[data-state="accepted"] .problem-item__dot { background: var(--success); }
-    .problem-item[data-state="wrong_answer"] .problem-item__dot { background: var(--warning); }
-    .problem-item[data-state="runtime_error"] .problem-item__dot,
-    .problem-item[data-state="system_error"] .problem-item__dot { background: var(--danger); }
-    .problem-item[data-state="judging"] .problem-item__dot,
-    .problem-item[data-state="pending"] .problem-item__dot { background: var(--accent); }
-
-    .problem-item__body { min-width: 0; }
-
-    .problem-item__title {
-      font-size: var(--text-md);
-      color: var(--text);
-      margin-bottom: 3px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .problem-item__meta {
-      font-size: var(--text-sm);
-      color: var(--text-faint);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .problem-item__badge {
-      font-size: var(--text-xs);
-      padding: 2px 6px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      color: var(--text-faint);
-      white-space: nowrap;
-      background: transparent;
-    }
-
-    .problem-pane,
-    .editor-pane,
-    .result-pane {
-      min-width: 0;
-      min-height: 0;
-    }
-
-    .problem-pane {
-      background: var(--surface-problem);
-      display: grid;
-      grid-template-rows: var(--section-bar-height) 1fr;
-    }
-
-    .problem-pane__header { background: var(--surface-problem-header); }
-
-    .problem-content {
-      overflow: auto;
-      padding: 16px;
-      display: grid;
-      gap: 12px;
-      align-content: start;
-      font-size: var(--text-lg);
-      color: var(--text);
-    }
-
-    .problem-section {
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      background: rgba(255, 255, 255, 0.02);
-      padding: 12px;
-    }
-
-    .problem-section__title { margin: 0 0 8px; }
-
-    .problem-description {
-      margin: 0;
-      font-size: var(--text-lg);
-      line-height: 1.7;
-      white-space: pre-wrap;
-    }
-
-    .problem-example {
-      margin: 0;
-      font-family: var(--font-mono);
-      font-size: var(--text-md);
-      line-height: 1.6;
-      white-space: pre-wrap;
-      color: var(--text);
-    }
-
-    .editor-pane {
-      display: grid;
-      grid-template-rows: var(--section-bar-height) 1fr;
-      background: var(--surface-editor);
-    }
-
-    .editor-pane__header { background: var(--surface-editor-header); }
-
-    .editor-pane__controls {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .editor-pane__controls > button {
-      height: 26px;
-      padding: 0 10px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .editor-surface {
-      min-height: 0;
-      display: grid;
-      grid-template-columns: var(--gutter-width) minmax(0, 1fr);
-    }
-
-    .editor-stack {
-      position: relative;
-      min-width: 0;
-      min-height: 0;
-      background: var(--surface-editor);
-    }
-
-    .editor,
-    .editor-highlight {
-      position: absolute;
-      inset: 0;
-      margin: 0;
-      padding: var(--editor-padding-y) var(--editor-padding-x);
-      font-family: var(--font-mono);
-      font-size: var(--editor-font-size);
-      line-height: var(--editor-line-height);
-      white-space: pre;
-      tab-size: 4;
-    }
-
-    .editor-highlight {
-      overflow: auto;
-      pointer-events: none;
-      background: var(--surface-editor);
-      color: var(--text);
-      scrollbar-width: none;
-    }
-
-    .editor-highlight::-webkit-scrollbar { display: none; }
-
-    .editor {
-      width: 100%;
-      height: 100%;
-      border: 0;
-      outline: none;
-      resize: none;
-      background: transparent;
-      color: transparent;
-      -webkit-text-fill-color: transparent;
-      overflow: auto;
-      caret-color: #ffffff;
-      z-index: 1;
-    }
-
-    .editor::selection { background: rgba(47, 129, 247, 0.28); }
-
-    .result-pane {
-      background: var(--surface-output);
-      display: grid;
-      grid-template-rows: var(--section-bar-height) 1fr;
-    }
-
-    .result-pane__header { background: var(--surface-output-header); }
-
-    .result-content {
-      min-width: 0;
-      min-height: 0;
-      overflow: auto;
-      padding: 12px;
-      background: var(--surface-output);
-    }
-
-    .result-section + .result-section {
-      margin-top: 12px;
-      padding-top: 12px;
-      border-top: 1px solid var(--border);
-    }
-
-    .result-section__title {
-      margin-bottom: 6px;
-      letter-spacing: 0.06em;
-    }
-
-    .splitter {
-      position: relative;
-      background: var(--border);
-      user-select: none;
-      z-index: 2;
-      touch-action: none;
-      overflow: visible;
-    }
-
-    .splitter::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: inherit;
-      transition: background 120ms ease;
-    }
-
-    .splitter::after {
-      content: "";
-      position: absolute;
-      background: transparent;
-    }
-
-    .splitter:hover::before,
-    .splitter.is-dragging::before { background: var(--accent); }
-
-    .splitter--vertical { cursor: col-resize; }
-
-    .splitter--vertical::after {
-      top: 0;
-      bottom: 0;
-      left: 50%;
-      width: 12px;
-      transform: translateX(-50%);
-    }
-
-    .splitter--horizontal { cursor: row-resize; }
-
-    .splitter--horizontal::after {
-      left: 0;
-      right: 0;
-      top: 50%;
-      height: 12px;
-      transform: translateY(-50%);
-    }
-
-    .empty-state--boxed { margin: 12px; }
-
-    @media (max-width: 1100px) {
-      :root {
-        --sidebar-width: 220px;
-        --problem-width: 320px;
-      }
-    }
-
-    @media (max-width: 900px) {
-      body { overflow: auto; }
-      .app { min-height: 100vh; height: auto; grid-template-rows: auto var(--statusbar-height); }
-      .workspace { grid-template-columns: 1fr; }
-      .sidebar { border-bottom: 1px solid var(--border); }
-      .problem-list { max-height: 180px; }
-      .main { grid-template-rows: auto auto; }
-      .editor-shell { grid-template-columns: 1fr; }
-      .problem-pane { border-bottom: 1px solid var(--border); }
-      .editor-surface { height: 380px; }
-      .splitter { display: none; }
-    }
-  </style>
+  <link rel="stylesheet" href="/assets/pages/student.css" />
 </head>
-<body data-app-title="Student Workspace">
+<body class="student-page" data-app-title="Student Workspace">
   <div class="app">
     <div class="workspace" id="workspace">
       <aside class="sidebar">
-        <div class="sidebar__header">
-          <div class="sidebar__title" id="lessonContextTitle">Current Lesson</div>
+        <div class="panel-header sidebar-header">
+          <div class="panel-title" id="lessonContextTitle">Current Lesson</div>
         </div>
         <div class="problem-list" id="problemList"></div>
       </aside>
 
-      <div class="splitter splitter--vertical" id="sidebarSplitter" aria-hidden="true"></div>
+      <div class="resizer resizer--vertical" id="sidebarSplitter" aria-hidden="true"></div>
 
       <main class="main" id="mainArea">
         <section class="editor-shell" id="editorShell">
           <section class="problem-pane">
-            <div class="pane-header problem-pane__header">
-              <div class="pane-title">Problem</div>
+            <div class="panel-header problem-pane__header">
+              <div class="panel-title">Problem</div>
               <div class="pane-meta" id="problemStateText">Ready</div>
             </div>
             <div class="problem-content" id="problemContent"></div>
           </section>
 
-          <div class="splitter splitter--vertical" id="problemSplitter" aria-hidden="true"></div>
+          <div class="resizer resizer--vertical" id="problemSplitter" aria-hidden="true"></div>
 
           <section class="editor-pane">
-            <div class="pane-header editor-pane__header">
-              <div class="pane-title">Editor</div>
+            <div class="panel-header editor-pane__header">
+              <div class="panel-title">Editor</div>
               <div class="editor-pane__controls">
                 <span class="pane-meta" id="modifiedLabel">Saved</span>
                 <button id="resetBtn" type="button">Reset</button>
@@ -392,11 +50,11 @@
           </section>
         </section>
 
-        <div class="splitter splitter--horizontal" id="resultSplitter" aria-hidden="true"></div>
+        <div class="resizer resizer--horizontal" id="resultSplitter" aria-hidden="true"></div>
 
         <section class="result-pane">
-          <div class="pane-header result-pane__header">
-            <div class="pane-title">Result</div>
+          <div class="panel-header result-pane__header">
+            <div class="panel-title">Result</div>
             <div class="pane-meta" id="resultMeta">No submission yet</div>
           </div>
           <div class="result-content">
@@ -423,6 +81,7 @@
   <script src="/assets/vendor/marked.min.js"></script>
   <script src="/assets/vendor/purify.min.js"></script>
   <script src="/assets/app.js"></script>
+  <script src="/assets/components.js"></script>
   <script src="/assets/student.js"></script>
 </body>
 </html>

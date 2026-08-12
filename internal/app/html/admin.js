@@ -62,12 +62,12 @@ const el = {
     'statusMiddle',
     'statusRight'
   ),
-  dividers: Array.from(document.querySelectorAll('.divider'))
+  resizers: Array.from(document.querySelectorAll('.resizer[data-resizer]'))
 };
 
 const columns = createColumnResizer({
   workspace: el.workspace,
-  dividers: el.dividers,
+  resizers: el.resizers,
   widths: state.ui.widths,
   defaultWidths: DEFAULT_WIDTHS,
   minWidths: MIN_WIDTHS,
@@ -381,8 +381,8 @@ function renderTeacherCreateDetail() {
     meta: 'Platform account',
     contentCount: 2,
     body: `
-      <div class="form-grid">
-        ${ui.loginField({
+      ${ui.formGrid([
+        ui.loginField({
           label: 'Username',
           inputAttrs: {
             id: 'teacherCreateUsername',
@@ -390,8 +390,8 @@ function renderTeacherCreateDetail() {
             value: state.ui.teacherCreateDraft.username,
             autocomplete: 'username'
           }
-        })}
-        ${ui.loginField({
+        }),
+        ui.loginField({
           label: 'Password',
           password: true,
           inputAttrs: {
@@ -400,8 +400,8 @@ function renderTeacherCreateDetail() {
             autocomplete: 'new-password',
             value: state.ui.teacherCreateDraft.password
           }
-        })}
-      </div>
+        })
+      ])}
       ${ui.inlineActions(ui.actionButton('Create Teacher', { 'data-action': 'save-new-teacher' }))}
     `
   });
@@ -433,8 +433,8 @@ function renderTeacherDetail(teacher) {
       meta: 'Username and password',
       contentCount: 3,
       body: `
-        <div class="form-grid">
-          ${ui.fieldActionRow({
+        ${ui.formGrid([
+          ui.fieldActionRow({
             label: 'Username',
             inputAttrs: {
               id: 'teacherUsernameInput',
@@ -443,8 +443,8 @@ function renderTeacherDetail(teacher) {
               autocomplete: 'username'
             },
             actionHtml: ui.actionButton('Save', { 'data-action': 'save-teacher-username' })
-          })}
-          ${ui.fieldActionRow({
+          }),
+          ui.fieldActionRow({
             label: 'Password',
             password: true,
             inputAttrs: {
@@ -454,8 +454,8 @@ function renderTeacherDetail(teacher) {
               placeholder: 'New password'
             },
             actionHtml: ui.actionButton('Reset', { 'data-action': 'reset-teacher-password' })
-          })}
-        </div>
+          })
+        ])}
         ${ui.inlineActions([
           ui.actionButton(teacher.status === 'active' ? 'Disable Teacher' : 'Enable Teacher', { 'data-action': 'toggle-teacher-status' }),
           ui.actionButton('Delete Teacher', { 'data-action': 'delete-teacher' })

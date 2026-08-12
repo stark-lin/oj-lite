@@ -78,6 +78,11 @@ jobs:
             goarch: arm64
             ext: ""
             package: tar
+          - target: mac-amd64
+            goos: darwin
+            goarch: amd64
+            ext: ""
+            package: tar
     env:
       CGO_ENABLED: "0"
       GOOS: ${{ matrix.goos }}

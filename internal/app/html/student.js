@@ -4,6 +4,7 @@
   const {
     buildLineNumbers,
     buildJudgeResultMeta,
+    bindResizablePane,
     collectElementsById,
     createApiRequest,
     deepClone: clone,
@@ -23,7 +24,7 @@
   const APP_CONFIG = {
     languageLabel: 'Lua · UTF-8',
     mobileBreakpoint: 900,
-    splitter: {
+    resizer: {
       sidebar: {
         cssVar: '--sidebar-width',
         min: 180,
@@ -306,7 +307,7 @@
   }
 
   const dom = {
-    root: document.documentElement,
+    root: document.body,
     ...collectElementsById(
       'lessonContextTitle',
       'problemList',
@@ -471,7 +472,7 @@
             <div class="problem-item__title">${escapeHtml(question.title)}</div>
             <div class="problem-item__meta">${escapeHtml(formatQuestionMeta(question))}</div>
           </span>
-          <span class="problem-item__badge">${escapeHtml(question.badgeLabel || '—')}</span>
+          <span class="pill problem-item__badge">${escapeHtml(question.badgeLabel || '—')}</span>
       `
     })).join('');
   }
@@ -880,55 +881,6 @@
     }
   }
 
-  function bindSplitter(splitterElement, axis, options) {
-    if (!splitterElement) return;
-
-    splitterElement.addEventListener('pointerdown', (event) => {
-      if (window.innerWidth <= APP_CONFIG.mobileBreakpoint) return;
-
-      event.preventDefault();
-      splitterElement.classList.add('is-dragging');
-      splitterElement.setPointerCapture(event.pointerId);
-      document.body.style.cursor = axis === 'x' ? 'col-resize' : 'row-resize';
-      document.body.style.userSelect = 'none';
-
-      const containerRect = options.container.getBoundingClientRect();
-      const startX = event.clientX;
-      const startY = event.clientY;
-      const currentValue = Number(
-        getComputedStyle(dom.root)
-          .getPropertyValue(options.cssVar)
-          .replace('px', '')
-          .trim()
-      );
-
-      function onPointerMove(moveEvent) {
-        if (axis === 'x') {
-          const delta = moveEvent.clientX - startX;
-          const nextValue = Math.min(options.max(containerRect), Math.max(options.min, currentValue + delta));
-          dom.root.style.setProperty(options.cssVar, nextValue + 'px');
-          return;
-        }
-
-        const delta = startY - moveEvent.clientY;
-        const nextValue = Math.min(options.max(containerRect), Math.max(options.min, currentValue + delta));
-        dom.root.style.setProperty(options.cssVar, nextValue + 'px');
-      }
-
-      function onPointerUp() {
-        splitterElement.classList.remove('is-dragging');
-        document.body.style.cursor = '';
-        document.body.style.userSelect = '';
-        splitterElement.releasePointerCapture(event.pointerId);
-        window.removeEventListener('pointermove', onPointerMove);
-        window.removeEventListener('pointerup', onPointerUp);
-      }
-
-      window.addEventListener('pointermove', onPointerMove);
-      window.addEventListener('pointerup', onPointerUp, { once: true });
-    });
-  }
-
   function bindEvents() {
     dom.problemList.addEventListener('click', (event) => {
       const button = event.target.closest('.problem-item');
@@ -950,19 +902,29 @@
     dom.submitBtn.addEventListener('click', submitCurrentCode);
     dom.resetBtn.addEventListener('click', resetEditor);
 
-    bindSplitter(dom.sidebarSplitter, 'x', {
-      ...APP_CONFIG.splitter.sidebar,
+    bindResizablePane(dom.sidebarSplitter, {
+      axis: 'x',
+      ...APP_CONFIG.resizer.sidebar,
       container: dom.workspace,
+      root: dom.root,
+      breakpoint: APP_CONFIG.mobileBreakpoint,
     });
 
-    bindSplitter(dom.problemSplitter, 'x', {
-      ...APP_CONFIG.splitter.problem,
+    bindResizablePane(dom.problemSplitter, {
+      axis: 'x',
+      ...APP_CONFIG.resizer.problem,
       container: dom.editorShell,
+      root: dom.root,
+      breakpoint: APP_CONFIG.mobileBreakpoint,
     });
 
-    bindSplitter(dom.resultSplitter, 'y', {
-      ...APP_CONFIG.splitter.result,
+    bindResizablePane(dom.resultSplitter, {
+      axis: 'y',
+      ...APP_CONFIG.resizer.result,
       container: dom.mainArea,
+      root: dom.root,
+      direction: -1,
+      breakpoint: APP_CONFIG.mobileBreakpoint,
     });
   }
 
