@@ -5,7 +5,7 @@ package app
 import "embed"
 
 var (
-	//go:embed html/*.css html/*.html html/*.js
+	//go:embed html/*.html html/*.js html/pages/*.css html/ui/*.css html/ui/*.js html/vendor/*.js
 	htmlFS embed.FS
 )
 

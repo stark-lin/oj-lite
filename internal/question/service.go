@@ -24,14 +24,9 @@ func newService(log *logger.Logger, repo *repo) *service {
 
 func (service *service) CreateQuestion(
 	ctx context.Context,
-	title, starterCode, referenceCode string,
-	description, testCases json.RawMessage,
+	title, description, starterCode, referenceCode string,
+	testCases json.RawMessage,
 ) (Question, error) {
-	normalizedDescription, err := normalizeJSONObject(description, errInvalidDescription)
-	if err != nil {
-		return Question{}, errs.Unavailable(err)
-	}
-
 	normalizedTestCases, err := normalizeJSON(testCases, errInvalidTestCases)
 	if err != nil {
 		return Question{}, errs.Unavailable(err)
@@ -40,7 +35,7 @@ func (service *service) CreateQuestion(
 	return service.repo.CreateQuestion(
 		ctx,
 		title,
-		normalizedDescription,
+		description,
 		starterCode,
 		referenceCode,
 		normalizedTestCases,

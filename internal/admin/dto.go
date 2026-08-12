@@ -36,7 +36,7 @@ type lessonRequest struct {
 type lessonQuestionRequest struct {
 	ID            int64           `json:"id"`
 	Title         string          `json:"title"`
-	Description   json.RawMessage `json:"description"`
+	Description   string          `json:"description"`
 	StarterCode   string          `json:"starter_code"`
 	ReferenceCode string          `json:"reference_code"`
 	TestCases     json.RawMessage `json:"test_cases"`
@@ -56,7 +56,7 @@ type lessonQuestionDTO struct {
 	LessonQuestionID int64           `json:"lesson_question_id"`
 	ID               int64           `json:"id"`
 	Title            string          `json:"title"`
-	Description      json.RawMessage `json:"description"`
+	Description      string          `json:"description"`
 	StarterCode      string          `json:"starter_code"`
 	ReferenceCode    string          `json:"reference_code"`
 	TestCases        json.RawMessage `json:"test_cases"`
@@ -95,7 +95,7 @@ func newLessonQuestionDTO(question LessonQuestion) lessonQuestionDTO {
 		LessonQuestionID: question.LessonQuestionID,
 		ID:               question.ID,
 		Title:            question.Title,
-		Description:      marshalJSONObjectString(question.Description, "Description"),
+		Description:      question.Description,
 		StarterCode:      question.StarterCode,
 		ReferenceCode:    question.ReferenceCode,
 		TestCases:        json.RawMessage(question.TestCases),

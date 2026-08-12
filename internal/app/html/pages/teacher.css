@@ -1,0 +1,35 @@
+.teacher-page {
+  --detail-grid-columns: 3;
+  --form-label-width: 88px;
+}
+
+.column__body--scope {
+  overflow-y: auto;
+  overflow-x: hidden;
+  grid-auto-rows: max-content;
+  align-content: start;
+}
+
+#studentManagementEntry {
+  gap: 8px;
+  padding: 12px;
+}
+
+#detailTitle { color: var(--text-muted); }
+
+#detailMeta {
+  font-size: var(--text-md);
+  color: var(--text);
+  font-weight: var(--weight-semibold);
+}
+
+.teacher-page #detailBody {
+  grid-auto-rows: max-content;
+  align-items: start;
+  overflow: auto;
+}
+
+.question-code-section .code-surface,
+.question-code-section .code-highlight {
+  overflow: visible;
+}

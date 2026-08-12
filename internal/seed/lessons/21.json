@@ -5,14 +5,7 @@
   "questions": [
     {
       "title": "Insert a New Score into the Correct Position Like Organizing Playing Cards",
-      "description": {
-        "difficulty": "Simple",
-        "background": "The scores array has already been sorted from small to large. The teacher receives a new score newScore and needs to put it into the correct position while keeping the array sorted.",
-        "task": "Generate the sorted array after inserting the new score.",
-        "input": "One sorted array scores, one number n, and one number newScore.",
-        "output": "Return the new array after insertion.",
-        "hint": "Find where the new score should go, then put the other scores into the new array in order."
-      },
+      "description": "## Difficulty\n\nSimple\n\n## Background\n\nThe scores array has already been sorted from small to large. The teacher receives a new score newScore and needs to put it into the correct position while keeping the array sorted.\n\n## Task\n\nGenerate the sorted array after inserting the new score.\n\n## Input\n\nOne sorted array scores, one number n, and one number newScore.\n\n## Output\n\nReturn the new array after insertion.\n\n## Hint\n\nFind where the new score should go, then put the other scores into the new array in order.",
       "starter_code": "function solution(scores, n, newScore)\n    local result = {}\n    return result\nend",
       "reference_code": "function solution(scores, n, newScore)\n    local result = {}\n    local inserted = false\n    local r = 1\n\n    for i = 1, n do\n        if inserted == false and newScore <= scores[i] then\n            result[r] = newScore\n            r = r + 1\n            inserted = true\n        end\n        result[r] = scores[i]\n        r = r + 1\n    end\n\n    if inserted == false then\n        result[r] = newScore\n    end\n\n    return result\nend",
       "test_cases": [
@@ -46,14 +39,7 @@
     },
     {
       "title": "Find the Middle Score in a Sorted Score Sheet",
-      "description": {
-        "difficulty": "Simple",
-        "background": "The scores array has already been sorted from small to large, and the number of students n is odd. The teacher wants to find the score exactly in the middle.",
-        "task": "Return the middle score in the sorted score sheet.",
-        "input": "One sorted array scores and one odd number n.",
-        "output": "Return the score at the middle position.",
-        "hint": "The middle position depends on the array length."
-      },
+      "description": "## Difficulty\n\nSimple\n\n## Background\n\nThe scores array has already been sorted from small to large, and the number of students n is odd. The teacher wants to find the score exactly in the middle.\n\n## Task\n\nReturn the middle score in the sorted score sheet.\n\n## Input\n\nOne sorted array scores and one odd number n.\n\n## Output\n\nReturn the score at the middle position.\n\n## Hint\n\nThe middle position depends on the array length.",
       "starter_code": "function solution(scores, n)\n    return 0\nend",
       "reference_code": "function solution(scores, n)\n    local mid = (n + 1) / 2\n    return scores[mid]\nend",
       "test_cases": [
@@ -86,14 +72,7 @@
     },
     {
       "title": "Count Adjacent Equal Scores After Sorting",
-      "description": {
-        "difficulty": "Simple",
-        "background": "The scores array has already been sorted from small to large. Equal scores will be next to each other, and the teacher wants to know how many times adjacent scores are equal.",
-        "task": "Count how many adjacent positions have the same score.",
-        "input": "One sorted array scores and one number n.",
-        "output": "Return the number of adjacent-equal occurrences.",
-        "hint": "You only need to compare the current position with the next position."
-      },
+      "description": "## Difficulty\n\nSimple\n\n## Background\n\nThe scores array has already been sorted from small to large. Equal scores will be next to each other, and the teacher wants to know how many times adjacent scores are equal.\n\n## Task\n\nCount how many adjacent positions have the same score.\n\n## Input\n\nOne sorted array scores and one number n.\n\n## Output\n\nReturn the number of adjacent-equal occurrences.\n\n## Hint\n\nYou only need to compare the current position with the next position.",
       "starter_code": "function solution(scores, n)\n    return 0\nend",
       "reference_code": "function solution(scores, n)\n    local count = 0\n\n    for i = 1, n - 1 do\n        if scores[i] == scores[i + 1] then\n            count = count + 1\n        end\n    end\n\n    return count\nend",
       "test_cases": [
@@ -127,14 +106,7 @@
     },
     {
       "title": "Use Insertion Sort to Organize Game Scores",
-      "description": {
-        "difficulty": "Normal",
-        "background": "Player scores are stored in the array scores. The teacher wants to simulate the process of organizing playing cards with insertion sort and sort the scores from small to large.",
-        "task": "Use insertion sort to organize scores.",
-        "input": "One array scores and one number n.",
-        "output": "Return the scores array sorted from small to large.",
-        "hint": "Each time, insert the current data into the already sorted part before it."
-      },
+      "description": "## Difficulty\n\nNormal\n\n## Background\n\nPlayer scores are stored in the array scores. The teacher wants to simulate the process of organizing playing cards with insertion sort and sort the scores from small to large.\n\n## Task\n\nUse insertion sort to organize scores.\n\n## Input\n\nOne array scores and one number n.\n\n## Output\n\nReturn the scores array sorted from small to large.\n\n## Hint\n\nEach time, insert the current data into the already sorted part before it.",
       "starter_code": "function solution(scores, n)\n    return scores\nend",
       "reference_code": "function solution(scores, n)\n    for i = 2, n do\n        local key = scores[i]\n        local j = i - 1\n\n        while j >= 1 and scores[j] > key do\n            scores[j + 1] = scores[j]\n            j = j - 1\n        end\n\n        scores[j + 1] = key\n    end\n\n    return scores\nend",
       "test_cases": [
@@ -167,14 +139,7 @@
     },
     {
       "title": "Merge Two Already Sorted Score Sheets",
-      "description": {
-        "difficulty": "Normal",
-        "background": "The score sheets classA and classB for two classes are both already sorted from small to large. The teacher wants to merge them into one new sorted score sheet.",
-        "task": "Merge the two sorted arrays while keeping small-to-large order.",
-        "input": "Two sorted arrays classA and classB, and two numbers n and m.",
-        "output": "Return the merged sorted array.",
-        "hint": "You can record the current comparison position in each array separately."
-      },
+      "description": "## Difficulty\n\nNormal\n\n## Background\n\nThe score sheets classA and classB for two classes are both already sorted from small to large. The teacher wants to merge them into one new sorted score sheet.\n\n## Task\n\nMerge the two sorted arrays while keeping small-to-large order.\n\n## Input\n\nTwo sorted arrays classA and classB, and two numbers n and m.\n\n## Output\n\nReturn the merged sorted array.\n\n## Hint\n\nYou can record the current comparison position in each array separately.",
       "starter_code": "function solution(classA, n, classB, m)\n    local result = {}\n    return result\nend",
       "reference_code": "function solution(classA, n, classB, m)\n    local result = {}\n    local i = 1\n    local j = 1\n    local r = 1\n\n    while i <= n and j <= m do\n        if classA[i] <= classB[j] then\n            result[r] = classA[i]\n            i = i + 1\n        else\n            result[r] = classB[j]\n            j = j + 1\n        end\n        r = r + 1\n    end\n\n    while i <= n do\n        result[r] = classA[i]\n        i = i + 1\n        r = r + 1\n    end\n\n    while j <= m do\n        result[r] = classB[j]\n        j = j + 1\n        r = r + 1\n    end\n\n    return result\nend",
       "test_cases": [
@@ -219,14 +184,7 @@
     },
     {
       "title": "Sort Scores and Count How Many Different Scores There Are",
-      "description": {
-        "difficulty": "Normal",
-        "background": "The score array scores is originally unordered. The teacher needs to sort it first, then count how many different score values it contains.",
-        "task": "Sort scores from small to large first, then count the number of distinct scores.",
-        "input": "One array scores and one number n.",
-        "output": "Return the number of distinct scores.",
-        "hint": "After sorting, equal scores will be next to each other."
-      },
+      "description": "## Difficulty\n\nNormal\n\n## Background\n\nThe score array scores is originally unordered. The teacher needs to sort it first, then count how many different score values it contains.\n\n## Task\n\nSort scores from small to large first, then count the number of distinct scores.\n\n## Input\n\nOne array scores and one number n.\n\n## Output\n\nReturn the number of distinct scores.\n\n## Hint\n\nAfter sorting, equal scores will be next to each other.",
       "starter_code": "function solution(scores, n)\n    return 0\nend",
       "reference_code": "function solution(scores, n)\n    for i = 2, n do\n        local key = scores[i]\n        local j = i - 1\n\n        while j >= 1 and scores[j] > key do\n            scores[j + 1] = scores[j]\n            j = j - 1\n        end\n\n        scores[j + 1] = key\n    end\n\n    if n == 0 then\n        return 0\n    end\n\n    local count = 1\n    for i = 2, n do\n        if scores[i] ~= scores[i - 1] then\n            count = count + 1\n        end\n    end\n\n    return count\nend",
       "test_cases": [
@@ -260,14 +218,7 @@
     },
     {
       "title": "Handle Tied Ranks in a Score Ranking",
-      "description": {
-        "difficulty": "Challenge",
-        "background": "A score ranking needs to be sorted from high to low. If two students have the same score, they receive the same rank; later students skip the positions already occupied. For example, scores 100, 100, 90 have ranks 1, 1, 3.",
-        "task": "Sort scores from high to low first, then generate the tied-rank array for each position.",
-        "input": "One array scores and one number n.",
-        "output": "Return the sorted scores array and the ranks array in order.",
-        "hint": "Sort first, then decide whether the rank changes based on whether adjacent scores are equal."
-      },
+      "description": "## Difficulty\n\nChallenge\n\n## Background\n\nA score ranking needs to be sorted from high to low. If two students have the same score, they receive the same rank; later students skip the positions already occupied. For example, scores 100, 100, 90 have ranks 1, 1, 3.\n\n## Task\n\nSort scores from high to low first, then generate the tied-rank array for each position.\n\n## Input\n\nOne array scores and one number n.\n\n## Output\n\nReturn the sorted scores array and the ranks array in order.\n\n## Hint\n\nSort first, then decide whether the rank changes based on whether adjacent scores are equal.",
       "starter_code": "function solution(scores, n)\n    local ranks = {}\n    return scores, ranks\nend",
       "reference_code": "function solution(scores, n)\n    for i = 1, n - 1 do\n        for j = 1, n - i do\n            if scores[j] < scores[j + 1] then\n                local temp = scores[j]\n                scores[j] = scores[j + 1]\n                scores[j + 1] = temp\n            end\n        end\n    end\n\n    local ranks = {}\n    local currentRank = 1\n\n    for i = 1, n do\n        if i == 1 then\n            currentRank = 1\n        elseif scores[i] < scores[i - 1] then\n            currentRank = i\n        end\n        ranks[i] = currentRank\n    end\n\n    return scores, ranks\nend",
       "test_cases": [
@@ -301,14 +252,7 @@
     },
     {
       "title": "Merge Two Sorted Book Number Lists, Remove Duplicates, and Keep Order",
-      "description": {
-        "difficulty": "Challenge",
-        "background": "Two libraries provide book number lists that are already sorted from small to large. The two lists may contain duplicate book numbers, and the administrator wants to merge them into one new list without duplicates.",
-        "task": "Merge the two sorted arrays, remove duplicate book numbers, and keep the order from small to large.",
-        "input": "Two sorted arrays booksA and booksB, and two numbers n and m.",
-        "output": "Return the deduplicated number array and the remaining number count in order.",
-        "hint": "You can merge in order while recording only numbers that differ from the previous recorded number."
-      },
+      "description": "## Difficulty\n\nChallenge\n\n## Background\n\nTwo libraries provide book number lists that are already sorted from small to large. The two lists may contain duplicate book numbers, and the administrator wants to merge them into one new list without duplicates.\n\n## Task\n\nMerge the two sorted arrays, remove duplicate book numbers, and keep the order from small to large.\n\n## Input\n\nTwo sorted arrays booksA and booksB, and two numbers n and m.\n\n## Output\n\nReturn the deduplicated number array and the remaining number count in order.\n\n## Hint\n\nYou can merge in order while recording only numbers that differ from the previous recorded number.",
       "starter_code": "function solution(booksA, n, booksB, m)\n    local result = {}\n    return result, 0\nend",
       "reference_code": "function solution(booksA, n, booksB, m)\n    local result = {}\n    local i = 1\n    local j = 1\n    local r = 0\n    local last = 0\n    local hasLast = false\n\n    while i <= n or j <= m do\n        local value = 0\n\n        if j > m or (i <= n and booksA[i] <= booksB[j]) then\n            value = booksA[i]\n            i = i + 1\n        else\n            value = booksB[j]\n            j = j + 1\n        end\n\n        if hasLast == false or value ~= last then\n            r = r + 1\n            result[r] = value\n            last = value\n            hasLast = true\n        end\n    end\n\n    return result, r\nend",
       "test_cases": [
@@ -354,14 +298,7 @@
     },
     {
       "title": "Find the Top Three After Sorting and Check Whether a New Score Enters the Top Three",
-      "description": {
-        "difficulty": "Challenge",
-        "background": "A game leaderboard needs to sort scores from high to low first, then take the top three. Now there is a new score newScore, and the system also needs to decide whether it can enter the top three.",
-        "task": "Sort scores, return the top three scores, and decide whether newScore can enter the top three.",
-        "input": "One array scores, one number n, and one number newScore. n is guaranteed to be at least 3.",
-        "output": "Return first place, second place, third place, and whether newScore can enter the top three in order.",
-        "hint": "Find the current top three first, then compare the new score with third place."
-      },
+      "description": "## Difficulty\n\nChallenge\n\n## Background\n\nA game leaderboard needs to sort scores from high to low first, then take the top three. Now there is a new score newScore, and the system also needs to decide whether it can enter the top three.\n\n## Task\n\nSort scores, return the top three scores, and decide whether newScore can enter the top three.\n\n## Input\n\nOne array scores, one number n, and one number newScore. n is guaranteed to be at least 3.\n\n## Output\n\nReturn first place, second place, third place, and whether newScore can enter the top three in order.\n\n## Hint\n\nFind the current top three first, then compare the new score with third place.",
       "starter_code": "function solution(scores, n, newScore)\n    return 0, 0, 0, false\nend",
       "reference_code": "function solution(scores, n, newScore)\n    for i = 2, n do\n        local key = scores[i]\n        local j = i - 1\n\n        while j >= 1 and scores[j] < key do\n            scores[j + 1] = scores[j]\n            j = j - 1\n        end\n\n        scores[j + 1] = key\n    end\n\n    local canEnter = false\n    if newScore >= scores[3] then\n        canEnter = true\n    end\n\n    return scores[1], scores[2], scores[3], canEnter\nend",
       "test_cases": [

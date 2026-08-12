@@ -129,11 +129,6 @@ func normalizeEmbeddedLesson(name string, raw lessonFile, expectedSortOrder int)
 		}
 		seenSortOrders[item.SortOrder] = struct{}{}
 
-		description, err := compactJSONObject(item.Description)
-		if err != nil {
-			return lessonSeed{}, fmt.Errorf("embedded lesson %q question %d description: %w", name, index+1, err)
-		}
-
 		testCases, err := compactJSON(item.TestCases)
 		if err != nil {
 			return lessonSeed{}, fmt.Errorf("embedded lesson %q question %d test_cases: %w", name, index+1, err)
@@ -141,7 +136,7 @@ func normalizeEmbeddedLesson(name string, raw lessonFile, expectedSortOrder int)
 
 		questions = append(questions, lessonQuestionSeed{
 			Title:         questionTitle,
-			Description:   description,
+			Description:   item.Description,
 			StarterCode:   item.StarterCode,
 			ReferenceCode: item.ReferenceCode,
 			TestCases:     testCases,
@@ -169,18 +164,4 @@ func compactJSON(raw json.RawMessage) (string, error) {
 	}
 
 	return buffer.String(), nil
-}
-
-func compactJSONObject(raw json.RawMessage) (string, error) {
-	normalized, err := compactJSON(raw)
-	if err != nil {
-		return "", err
-	}
-
-	var object map[string]any
-	if err := json.Unmarshal([]byte(normalized), &object); err != nil || object == nil {
-		return "", fmt.Errorf("must be a JSON object")
-	}
-
-	return normalized, nil
 }

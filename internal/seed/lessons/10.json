@@ -5,14 +5,7 @@
   "questions": [
     {
       "title": "判断一个编号是否是另一个编号的倍数",
-      "description": {
-        "难度": "Simple",
-        "背景": "学校活动中，部分编号需要按固定间隔分组。如果一个编号能被 base 整除，就说明它是 base 的倍数。",
-        "任务": "请判断 number 是否是 base 的倍数。",
-        "输入": "两个数字：number 和 base。",
-        "输出": "如果 number 是 base 的倍数，返回 true；否则返回 false。",
-        "提示": "可以观察相除后的余数。"
-      },
+      "description": "## 难度\n\nSimple\n\n## 背景\n\n学校活动中，部分编号需要按固定间隔分组。如果一个编号能被 base 整除，就说明它是 base 的倍数。\n\n## 任务\n\n请判断 number 是否是 base 的倍数。\n\n## 输入\n\n两个数字：number 和 base。\n\n## 输出\n\n如果 number 是 base 的倍数，返回 true；否则返回 false。\n\n## 提示\n\n可以观察相除后的余数。",
       "starter_code": "function solution(number, base)\n    return false\nend",
       "reference_code": "function solution(number, base)\n    if number % base == 0 then\n        return true\n    end\n    return false\nend",
       "test_cases": [
@@ -24,14 +17,7 @@
     },
     {
       "title": "判断队伍人数能不能平均分组",
-      "description": {
-        "难度": "Simple",
-        "背景": "体育课上有 people 名学生，老师想把他们平均分成每组 groupSize 人的小组。",
-        "任务": "请判断这些学生能否刚好平均分组。",
-        "输入": "两个数字：people 和 groupSize。",
-        "输出": "如果可以平均分组，返回 true；否则返回 false。",
-        "提示": "平均分组时不能有人剩下。"
-      },
+      "description": "## 难度\n\nSimple\n\n## 背景\n\n体育课上有 people 名学生，老师想把他们平均分成每组 groupSize 人的小组。\n\n## 任务\n\n请判断这些学生能否刚好平均分组。\n\n## 输入\n\n两个数字：people 和 groupSize。\n\n## 输出\n\n如果可以平均分组，返回 true；否则返回 false。\n\n## 提示\n\n平均分组时不能有人剩下。",
       "starter_code": "function solution(people, groupSize)\n    return false\nend",
       "reference_code": "function solution(people, groupSize)\n    if people % groupSize == 0 then\n        return true\n    end\n    return false\nend",
       "test_cases": [
@@ -43,14 +29,7 @@
     },
     {
       "title": "统计 1 到 n 中有多少个目标数的倍数",
-      "description": {
-        "难度": "Simple",
-        "背景": "老师给出一个目标数 k，让同学们从 1 到 n 中找出所有 k 的倍数。",
-        "任务": "请统计 1 到 n 中有多少个数字是 k 的倍数。",
-        "输入": "两个数字：n 和 k。",
-        "输出": "返回 k 的倍数数量。",
-        "提示": "逐个检查数字是否符合倍数规则。"
-      },
+      "description": "## 难度\n\nSimple\n\n## 背景\n\n老师给出一个目标数 k，让同学们从 1 到 n 中找出所有 k 的倍数。\n\n## 任务\n\n请统计 1 到 n 中有多少个数字是 k 的倍数。\n\n## 输入\n\n两个数字：n 和 k。\n\n## 输出\n\n返回 k 的倍数数量。\n\n## 提示\n\n逐个检查数字是否符合倍数规则。",
       "starter_code": "function solution(n, k)\n    return 0\nend",
       "reference_code": "function solution(n, k)\n    local count = 0\n\n    for i = 1, n do\n        if i % k == 0 then\n            count = count + 1\n        end\n    end\n\n    return count\nend",
       "test_cases": [
@@ -62,14 +41,7 @@
     },
     {
       "title": "找出一个拼图块数有多少种平均分法",
-      "description": {
-        "难度": "Normal",
-        "背景": "一盒拼图有 blocks 块。老师想知道如果把这些拼图平均分给若干个小组，一共有多少种不同的小组数量可以刚好分完。",
-        "任务": "请统计 blocks 的因数数量。",
-        "输入": "一个正整数：blocks。",
-        "输出": "返回可以平均分完的小组数量种数。",
-        "提示": "可以把可能的小组数量一个个试过去。"
-      },
+      "description": "## 难度\n\nNormal\n\n## 背景\n\n一盒拼图有 blocks 块。老师想知道如果把这些拼图平均分给若干个小组，一共有多少种不同的小组数量可以刚好分完。\n\n## 任务\n\n请统计 blocks 的因数数量。\n\n## 输入\n\n一个正整数：blocks。\n\n## 输出\n\n返回可以平均分完的小组数量种数。\n\n## 提示\n\n可以把可能的小组数量一个个试过去。",
       "starter_code": "function solution(blocks)\n    return 0\nend",
       "reference_code": "function solution(blocks)\n    local count = 0\n\n    for i = 1, blocks do\n        if blocks % i == 0 then\n            count = count + 1\n        end\n    end\n\n    return count\nend",
       "test_cases": [
@@ -81,14 +53,7 @@
     },
     {
       "title": "统计一个特殊编号有多少个因数",
-      "description": {
-        "难度": "Normal",
-        "背景": "游戏中有一种特殊编号，系统需要知道它能被多少个正整数整除。",
-        "任务": "请统计 number 的因数数量。",
-        "输入": "一个正整数：number。",
-        "输出": "返回 number 的因数数量。",
-        "提示": "因数一定能把原数字整除。"
-      },
+      "description": "## 难度\n\nNormal\n\n## 背景\n\n游戏中有一种特殊编号，系统需要知道它能被多少个正整数整除。\n\n## 任务\n\n请统计 number 的因数数量。\n\n## 输入\n\n一个正整数：number。\n\n## 输出\n\n返回 number 的因数数量。\n\n## 提示\n\n因数一定能把原数字整除。",
       "starter_code": "function solution(number)\n    return 0\nend",
       "reference_code": "function solution(number)\n    local count = 0\n\n    for i = 1, number do\n        if number % i == 0 then\n            count = count + 1\n        end\n    end\n\n    return count\nend",
       "test_cases": [
@@ -100,14 +65,7 @@
     },
     {
       "title": "计算一个编号所有因数的数量和总和",
-      "description": {
-        "难度": "Normal",
-        "背景": "老师不仅想知道一个编号有多少个因数，还想知道这些因数加起来是多少。",
-        "任务": "请统计 number 的因数数量，并计算所有因数的总和。",
-        "输入": "一个正整数：number。",
-        "输出": "依次返回因数数量和因数总和。",
-        "提示": "找到一个因数后，可以同时更新数量和总和。"
-      },
+      "description": "## 难度\n\nNormal\n\n## 背景\n\n老师不仅想知道一个编号有多少个因数，还想知道这些因数加起来是多少。\n\n## 任务\n\n请统计 number 的因数数量，并计算所有因数的总和。\n\n## 输入\n\n一个正整数：number。\n\n## 输出\n\n依次返回因数数量和因数总和。\n\n## 提示\n\n找到一个因数后，可以同时更新数量和总和。",
       "starter_code": "function solution(number)\n    return 0, 0\nend",
       "reference_code": "function solution(number)\n    local count = 0\n    local sum = 0\n\n    for i = 1, number do\n        if number % i == 0 then\n            count = count + 1\n            sum = sum + i\n        end\n    end\n\n    return count, sum\nend",
       "test_cases": [
@@ -119,14 +77,7 @@
     },
     {
       "title": "判断一个特殊编号是不是质数编号",
-      "description": {
-        "难度": "Challenge",
-        "背景": "游戏里有一种质数编号，只有正好有两个因数的编号才算质数编号。",
-        "任务": "请判断 number 是否是质数。",
-        "输入": "一个正整数：number。",
-        "输出": "如果是质数，返回 true；否则返回 false。",
-        "提示": "可以先统计因数数量，再根据数量判断编号类型。"
-      },
+      "description": "## 难度\n\nChallenge\n\n## 背景\n\n游戏里有一种质数编号，只有正好有两个因数的编号才算质数编号。\n\n## 任务\n\n请判断 number 是否是质数。\n\n## 输入\n\n一个正整数：number。\n\n## 输出\n\n如果是质数，返回 true；否则返回 false。\n\n## 提示\n\n可以先统计因数数量，再根据数量判断编号类型。",
       "starter_code": "function solution(number)\n    return false\nend",
       "reference_code": "function solution(number)\n    local factorCount = 0\n\n    for i = 1, number do\n        if number % i == 0 then\n            factorCount = factorCount + 1\n        end\n    end\n\n    if factorCount == 2 then\n        return true\n    end\n    return false\nend",
       "test_cases": [
@@ -139,14 +90,7 @@
     },
     {
       "title": "找出两个班人数的最大公共分组人数",
-      "description": {
-        "难度": "Challenge",
-        "背景": "两个班分别有 classA 和 classB 名学生。老师想把两个班都平均分组，并希望每组人数尽可能多。",
-        "任务": "请找出 classA 和 classB 的最大公因数。",
-        "输入": "两个正整数：classA 和 classB。",
-        "输出": "返回最大公共分组人数。",
-        "提示": "可以尝试所有可能的分组人数，并保留目前找到的最大可行值。"
-      },
+      "description": "## 难度\n\nChallenge\n\n## 背景\n\n两个班分别有 classA 和 classB 名学生。老师想把两个班都平均分组，并希望每组人数尽可能多。\n\n## 任务\n\n请找出 classA 和 classB 的最大公因数。\n\n## 输入\n\n两个正整数：classA 和 classB。\n\n## 输出\n\n返回最大公共分组人数。\n\n## 提示\n\n可以尝试所有可能的分组人数，并保留目前找到的最大可行值。",
       "starter_code": "function solution(classA, classB)\n    return 0\nend",
       "reference_code": "function solution(classA, classB)\n    local best = 1\n\n    for i = 1, classA do\n        if classA % i == 0 and classB % i == 0 then\n            best = i\n        end\n    end\n\n    return best\nend",
       "test_cases": [
@@ -158,14 +102,7 @@
     },
     {
       "title": "找出两个闹钟第一次同时响起的分钟数",
-      "description": {
-        "难度": "Challenge",
-        "背景": "两个闹钟从同一时间开始计时。第一个每 a 分钟响一次，第二个每 b 分钟响一次。现在要找出它们第一次同时响起的时间。",
-        "任务": "请找出 a 和 b 的最小公倍数。",
-        "输入": "两个正整数：a 和 b。",
-        "输出": "返回两个闹钟第一次同时响起的分钟数。",
-        "提示": "从较小的时间开始尝试，找到第一个能同时符合两个周期的时间。"
-      },
+      "description": "## 难度\n\nChallenge\n\n## 背景\n\n两个闹钟从同一时间开始计时。第一个每 a 分钟响一次，第二个每 b 分钟响一次。现在要找出它们第一次同时响起的时间。\n\n## 任务\n\n请找出 a 和 b 的最小公倍数。\n\n## 输入\n\n两个正整数：a 和 b。\n\n## 输出\n\n返回两个闹钟第一次同时响起的分钟数。\n\n## 提示\n\n从较小的时间开始尝试，找到第一个能同时符合两个周期的时间。",
       "starter_code": "function solution(a, b)\n    return 0\nend",
       "reference_code": "function solution(a, b)\n    local answer = 0\n\n    for i = 1, a * b do\n        if answer == 0 and i % a == 0 and i % b == 0 then\n            answer = i\n        end\n    end\n\n    return answer\nend",
       "test_cases": [

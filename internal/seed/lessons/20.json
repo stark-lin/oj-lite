@@ -5,14 +5,7 @@
   "questions": [
     {
       "title": "交换两个顺序错误的身高数据",
-      "description": {
-        "难度": "Simple",
-        "背景": "一排学生的身高保存在 heights 数组中。老师发现第 index 个和第 index + 1 个学生可能顺序错误。如果前一个比后一个高，就需要交换它们。",
-        "任务": "请检查相邻两个身高，如果顺序错误就交换。",
-        "输入": "一个数组 heights 和一个数字 index。",
-        "输出": "返回处理后的 heights 数组。",
-        "提示": "只需要比较两个相邻位置。"
-      },
+      "description": "## 难度\n\nSimple\n\n## 背景\n\n一排学生的身高保存在 heights 数组中。老师发现第 index 个和第 index + 1 个学生可能顺序错误。如果前一个比后一个高，就需要交换它们。\n\n## 任务\n\n请检查相邻两个身高，如果顺序错误就交换。\n\n## 输入\n\n一个数组 heights 和一个数字 index。\n\n## 输出\n\n返回处理后的 heights 数组。\n\n## 提示\n\n只需要比较两个相邻位置。",
       "starter_code": "function solution(heights, index)\n    return heights\nend",
       "reference_code": "function solution(heights, index)\n    if heights[index] > heights[index + 1] then\n        local temp = heights[index]\n        heights[index] = heights[index + 1]\n        heights[index + 1] = temp\n    end\n\n    return heights\nend",
       "test_cases": [
@@ -33,14 +26,7 @@
     },
     {
       "title": "找出一组分数中最小值的位置",
-      "description": {
-        "难度": "Simple",
-        "背景": "选择排序的第一步通常需要在一组数据中找到最小值的位置。",
-        "任务": "请在 scores 数组中找到最小分数的位置。",
-        "输入": "一个数组 scores 和一个数字 n。",
-        "输出": "返回最小值所在位置。",
-        "提示": "可以先假设第一个位置最小，再逐个比较。"
-      },
+      "description": "## 难度\n\nSimple\n\n## 背景\n\n选择排序的第一步通常需要在一组数据中找到最小值的位置。\n\n## 任务\n\n请在 scores 数组中找到最小分数的位置。\n\n## 输入\n\n一个数组 scores 和一个数字 n。\n\n## 输出\n\n返回最小值所在位置。\n\n## 提示\n\n可以先假设第一个位置最小，再逐个比较。",
       "starter_code": "function solution(scores, n)\n    return 0\nend",
       "reference_code": "function solution(scores, n)\n    local minIndex = 1\n\n    for i = 2, n do\n        if scores[i] < scores[minIndex] then\n            minIndex = i\n        end\n    end\n\n    return minIndex\nend",
       "test_cases": [
@@ -61,14 +47,7 @@
     },
     {
       "title": "完成选择排序的第一轮整理",
-      "description": {
-        "难度": "Simple",
-        "背景": "选择排序每一轮会从剩余数据中找出最小值，并把它放到当前最前面的位置。",
-        "任务": "请完成选择排序的第一轮，把最小值交换到第 1 个位置。",
-        "输入": "一个数组 numbers 和一个数字 n。",
-        "输出": "返回完成第一轮后的 numbers 数组。",
-        "提示": "先找到最小值位置，再和第一个位置交换。"
-      },
+      "description": "## 难度\n\nSimple\n\n## 背景\n\n选择排序每一轮会从剩余数据中找出最小值，并把它放到当前最前面的位置。\n\n## 任务\n\n请完成选择排序的第一轮，把最小值交换到第 1 个位置。\n\n## 输入\n\n一个数组 numbers 和一个数字 n。\n\n## 输出\n\n返回完成第一轮后的 numbers 数组。\n\n## 提示\n\n先找到最小值位置，再和第一个位置交换。",
       "starter_code": "function solution(numbers, n)\n    return numbers\nend",
       "reference_code": "function solution(numbers, n)\n    local minIndex = 1\n\n    for i = 2, n do\n        if numbers[i] < numbers[minIndex] then\n            minIndex = i\n        end\n    end\n\n    local temp = numbers[1]\n    numbers[1] = numbers[minIndex]\n    numbers[minIndex] = temp\n\n    return numbers\nend",
       "test_cases": [
@@ -89,14 +68,7 @@
     },
     {
       "title": "用选择排序整理游戏分数排行榜",
-      "description": {
-        "难度": "Normal",
-        "背景": "游戏分数保存在 scores 数组中。系统需要把分数从低到高整理，方便查看排行榜底部到顶部的变化。",
-        "任务": "请使用选择排序把 scores 从小到大排序。",
-        "输入": "一个数组 scores 和一个数字 n。",
-        "输出": "返回排序后的 scores 数组。",
-        "提示": "每一轮都把剩余数据中的最小值放到当前前面。"
-      },
+      "description": "## 难度\n\nNormal\n\n## 背景\n\n游戏分数保存在 scores 数组中。系统需要把分数从低到高整理，方便查看排行榜底部到顶部的变化。\n\n## 任务\n\n请使用选择排序把 scores 从小到大排序。\n\n## 输入\n\n一个数组 scores 和一个数字 n。\n\n## 输出\n\n返回排序后的 scores 数组。\n\n## 提示\n\n每一轮都把剩余数据中的最小值放到当前前面。",
       "starter_code": "function solution(scores, n)\n    return scores\nend",
       "reference_code": "function solution(scores, n)\n    for i = 1, n - 1 do\n        local minIndex = i\n\n        for j = i + 1, n do\n            if scores[j] < scores[minIndex] then\n                minIndex = j\n            end\n        end\n\n        local temp = scores[i]\n        scores[i] = scores[minIndex]\n        scores[minIndex] = temp\n    end\n\n    return scores\nend",
       "test_cases": [
@@ -117,14 +89,7 @@
     },
     {
       "title": "用选择排序给图书编号从小到大排序",
-      "description": {
-        "难度": "Normal",
-        "背景": "图书馆收到一批新书，编号顺序比较混乱。管理员需要把图书编号从小到大整理好。",
-        "任务": "请使用选择排序整理 books 数组。",
-        "输入": "一个数组 books 和一个数字 n。",
-        "输出": "返回从小到大排序后的 books 数组。",
-        "提示": "排序过程需要多次查找当前范围内的最小编号。"
-      },
+      "description": "## 难度\n\nNormal\n\n## 背景\n\n图书馆收到一批新书，编号顺序比较混乱。管理员需要把图书编号从小到大整理好。\n\n## 任务\n\n请使用选择排序整理 books 数组。\n\n## 输入\n\n一个数组 books 和一个数字 n。\n\n## 输出\n\n返回从小到大排序后的 books 数组。\n\n## 提示\n\n排序过程需要多次查找当前范围内的最小编号。",
       "starter_code": "function solution(books, n)\n    return books\nend",
       "reference_code": "function solution(books, n)\n    for i = 1, n - 1 do\n        local minIndex = i\n\n        for j = i + 1, n do\n            if books[j] < books[minIndex] then\n                minIndex = j\n            end\n        end\n\n        local temp = books[i]\n        books[i] = books[minIndex]\n        books[minIndex] = temp\n    end\n\n    return books\nend",
       "test_cases": [
@@ -145,14 +110,7 @@
     },
     {
       "title": "用冒泡排序完成一轮相邻交换",
-      "description": {
-        "难度": "Normal",
-        "背景": "冒泡排序会不断比较相邻数据，如果顺序错误就交换。完成一轮后，较大的数据会向后移动。",
-        "任务": "请对 numbers 数组完成一轮从左到右的冒泡处理，并统计本轮交换次数。",
-        "输入": "一个数组 numbers 和一个数字 n。",
-        "输出": "依次返回处理后的 numbers 数组和交换次数。",
-        "提示": "只做一轮相邻比较，不需要完整排序。"
-      },
+      "description": "## 难度\n\nNormal\n\n## 背景\n\n冒泡排序会不断比较相邻数据，如果顺序错误就交换。完成一轮后，较大的数据会向后移动。\n\n## 任务\n\n请对 numbers 数组完成一轮从左到右的冒泡处理，并统计本轮交换次数。\n\n## 输入\n\n一个数组 numbers 和一个数字 n。\n\n## 输出\n\n依次返回处理后的 numbers 数组和交换次数。\n\n## 提示\n\n只做一轮相邻比较，不需要完整排序。",
       "starter_code": "function solution(numbers, n)\n    return numbers, 0\nend",
       "reference_code": "function solution(numbers, n)\n    local swaps = 0\n\n    for i = 1, n - 1 do\n        if numbers[i] > numbers[i + 1] then\n            local temp = numbers[i]\n            numbers[i] = numbers[i + 1]\n            numbers[i + 1] = temp\n            swaps = swaps + 1\n        end\n    end\n\n    return numbers, swaps\nend",
       "test_cases": [
@@ -173,14 +131,7 @@
     },
     {
       "title": "用冒泡排序把成绩从高到低排列",
-      "description": {
-        "难度": "Challenge",
-        "背景": "比赛成绩保存在 scores 数组中。排行榜需要从高分到低分显示。",
-        "任务": "请使用冒泡排序把 scores 从大到小排序。",
-        "输入": "一个数组 scores 和一个数字 n。",
-        "输出": "返回从高到低排序后的 scores 数组。",
-        "提示": "相邻比较时，较大的分数应该向前移动。"
-      },
+      "description": "## 难度\n\nChallenge\n\n## 背景\n\n比赛成绩保存在 scores 数组中。排行榜需要从高分到低分显示。\n\n## 任务\n\n请使用冒泡排序把 scores 从大到小排序。\n\n## 输入\n\n一个数组 scores 和一个数字 n。\n\n## 输出\n\n返回从高到低排序后的 scores 数组。\n\n## 提示\n\n相邻比较时，较大的分数应该向前移动。",
       "starter_code": "function solution(scores, n)\n    return scores\nend",
       "reference_code": "function solution(scores, n)\n    for i = 1, n - 1 do\n        for j = 1, n - i do\n            if scores[j] < scores[j + 1] then\n                local temp = scores[j]\n                scores[j] = scores[j + 1]\n                scores[j + 1] = temp\n            end\n        end\n    end\n\n    return scores\nend",
       "test_cases": [
@@ -201,14 +152,7 @@
     },
     {
       "title": "统计冒泡排序整理座位表时发生了多少次交换",
-      "description": {
-        "难度": "Challenge",
-        "背景": "座位编号保存在 seats 数组中。老师要用冒泡排序把编号从小到大整理，同时想知道一共交换了多少次座位。",
-        "任务": "请使用冒泡排序整理 seats，并统计总交换次数。",
-        "输入": "一个数组 seats 和一个数字 n。",
-        "输出": "依次返回排序后的 seats 数组和交换次数。",
-        "提示": "每次真的发生相邻交换时，才增加交换次数。"
-      },
+      "description": "## 难度\n\nChallenge\n\n## 背景\n\n座位编号保存在 seats 数组中。老师要用冒泡排序把编号从小到大整理，同时想知道一共交换了多少次座位。\n\n## 任务\n\n请使用冒泡排序整理 seats，并统计总交换次数。\n\n## 输入\n\n一个数组 seats 和一个数字 n。\n\n## 输出\n\n依次返回排序后的 seats 数组和交换次数。\n\n## 提示\n\n每次真的发生相邻交换时，才增加交换次数。",
       "starter_code": "function solution(seats, n)\n    return seats, 0\nend",
       "reference_code": "function solution(seats, n)\n    local swaps = 0\n\n    for i = 1, n - 1 do\n        for j = 1, n - i do\n            if seats[j] > seats[j + 1] then\n                local temp = seats[j]\n                seats[j] = seats[j + 1]\n                seats[j + 1] = temp\n                swaps = swaps + 1\n            end\n        end\n    end\n\n    return seats, swaps\nend",
       "test_cases": [
@@ -229,14 +173,7 @@
     },
     {
       "title": "比较选择排序和冒泡排序整理同一组数据的交换次数",
-      "description": {
-        "难度": "Challenge",
-        "背景": "同一组数据可以用选择排序整理，也可以用冒泡排序整理。老师想比较这两种排序方法在同一组数据上分别交换了多少次。",
-        "任务": "请复制原数组，分别用选择排序和冒泡排序从小到大排序，并返回两种方法的交换次数。",
-        "输入": "一个数组 numbers 和一个数字 n。",
-        "输出": "依次返回选择排序交换次数和冒泡排序交换次数。",
-        "提示": "两种排序要分别操作自己的数组，不能互相影响。"
-      },
+      "description": "## 难度\n\nChallenge\n\n## 背景\n\n同一组数据可以用选择排序整理，也可以用冒泡排序整理。老师想比较这两种排序方法在同一组数据上分别交换了多少次。\n\n## 任务\n\n请复制原数组，分别用选择排序和冒泡排序从小到大排序，并返回两种方法的交换次数。\n\n## 输入\n\n一个数组 numbers 和一个数字 n。\n\n## 输出\n\n依次返回选择排序交换次数和冒泡排序交换次数。\n\n## 提示\n\n两种排序要分别操作自己的数组，不能互相影响。",
       "starter_code": "function solution(numbers, n)\n    return 0, 0\nend",
       "reference_code": "function solution(numbers, n)\n    local a = {}\n    local b = {}\n\n    for i = 1, n do\n        a[i] = numbers[i]\n        b[i] = numbers[i]\n    end\n\n    local selectionSwaps = 0\n    for i = 1, n - 1 do\n        local minIndex = i\n        for j = i + 1, n do\n            if a[j] < a[minIndex] then\n                minIndex = j\n            end\n        end\n\n        if minIndex ~= i then\n            local temp = a[i]\n            a[i] = a[minIndex]\n            a[minIndex] = temp\n            selectionSwaps = selectionSwaps + 1\n        end\n    end\n\n    local bubbleSwaps = 0\n    for i = 1, n - 1 do\n        for j = 1, n - i do\n            if b[j] > b[j + 1] then\n                local temp = b[j]\n                b[j] = b[j + 1]\n                b[j + 1] = temp\n                bubbleSwaps = bubbleSwaps + 1\n            end\n        end\n    end\n\n    return selectionSwaps, bubbleSwaps\nend",
       "test_cases": [

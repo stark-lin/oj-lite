@@ -5,14 +5,7 @@
   "questions": [
     {
       "title": "Count Ways to Buy total Candies from Two Candy Types",
-      "description": {
-        "difficulty": "Simple",
-        "background": "A student can buy two kinds of candy: fruit candy and chocolate candy. Only whether the two candy counts add up to total matters.",
-        "task": "Count the number of purchase plans where the two candy counts add up exactly to total.",
-        "input": "One number: total.",
-        "output": "Return the number of purchase plans.",
-        "hint": "You can try the quantities of the first candy and the second candy separately."
-      },
+      "description": "## Difficulty\n\nSimple\n\n## Background\n\nA student can buy two kinds of candy: fruit candy and chocolate candy. Only whether the two candy counts add up to total matters.\n\n## Task\n\nCount the number of purchase plans where the two candy counts add up exactly to total.\n\n## Input\n\nOne number: total.\n\n## Output\n\nReturn the number of purchase plans.\n\n## Hint\n\nYou can try the quantities of the first candy and the second candy separately.",
       "starter_code": "function solution(total)\n    return 0\nend",
       "reference_code": "function solution(total)\n    local count = 0\n\n    for a = 0, total do\n        for b = 0, total do\n            if a + b == total then\n                count = count + 1\n            end\n        end\n    end\n\n    return count\nend",
       "test_cases": [
@@ -30,14 +23,7 @@
     },
     {
       "title": "Count Outcomes Where Two Dice Sum to the Target",
-      "description": {
-        "difficulty": "Simple",
-        "background": "Two ordinary dice each have values from 1 to 6. A player wants to know how many possible outcomes have a sum equal to target.",
-        "task": "Count the number of cases where the two dice values sum to target.",
-        "input": "One number: target.",
-        "output": "Return the number of possible cases.",
-        "hint": "Both the first die and the second die need to be enumerated."
-      },
+      "description": "## Difficulty\n\nSimple\n\n## Background\n\nTwo ordinary dice each have values from 1 to 6. A player wants to know how many possible outcomes have a sum equal to target.\n\n## Task\n\nCount the number of cases where the two dice values sum to target.\n\n## Input\n\nOne number: target.\n\n## Output\n\nReturn the number of possible cases.\n\n## Hint\n\nBoth the first die and the second die need to be enumerated.",
       "starter_code": "function solution(target)\n    return 0\nend",
       "reference_code": "function solution(target)\n    local count = 0\n\n    for a = 1, 6 do\n        for b = 1, 6 do\n            if a + b == target then\n                count = count + 1\n            end\n        end\n    end\n\n    return count\nend",
       "test_cases": [
@@ -58,14 +44,7 @@
     },
     {
       "title": "Count Length-Width Pairs for a Fixed Rectangle Perimeter",
-      "description": {
-        "difficulty": "Simple",
-        "background": "A rectangle has positive integer length and width. Given perimeter, the teacher wants to know how many length-width pairs can make this perimeter.",
-        "task": "Count the length-width pairs whose perimeter equals perimeter.",
-        "input": "One number: perimeter.",
-        "output": "Return the number of length-width pairs.",
-        "hint": "Length and width can both be tried one by one."
-      },
+      "description": "## Difficulty\n\nSimple\n\n## Background\n\nA rectangle has positive integer length and width. Given perimeter, the teacher wants to know how many length-width pairs can make this perimeter.\n\n## Task\n\nCount the length-width pairs whose perimeter equals perimeter.\n\n## Input\n\nOne number: perimeter.\n\n## Output\n\nReturn the number of length-width pairs.\n\n## Hint\n\nLength and width can both be tried one by one.",
       "starter_code": "function solution(perimeter)\n    return 0\nend",
       "reference_code": "function solution(perimeter)\n    local count = 0\n\n    for length = 1, perimeter do\n        for width = 1, perimeter do\n            if 2 * (length + width) == perimeter then\n                count = count + 1\n            end\n        end\n    end\n\n    return count\nend",
       "test_cases": [
@@ -83,14 +62,7 @@
     },
     {
       "title": "Count Stationery Plans That Spend a Fixed Budget on Pencils and Erasers",
-      "description": {
-        "difficulty": "Normal",
-        "background": "At a stationery store, each pencil costs pencilPrice and each eraser costs eraserPrice. A student wants to spend exactly budget.",
-        "task": "Count the purchase plans for pencils and erasers that spend the budget exactly.",
-        "input": "Three numbers: budget, pencilPrice, and eraserPrice.",
-        "output": "Return the number of plans that spend the budget exactly.",
-        "hint": "Each quantity combination needs its total price calculated before it is checked."
-      },
+      "description": "## Difficulty\n\nNormal\n\n## Background\n\nAt a stationery store, each pencil costs pencilPrice and each eraser costs eraserPrice. A student wants to spend exactly budget.\n\n## Task\n\nCount the purchase plans for pencils and erasers that spend the budget exactly.\n\n## Input\n\nThree numbers: budget, pencilPrice, and eraserPrice.\n\n## Output\n\nReturn the number of plans that spend the budget exactly.\n\n## Hint\n\nEach quantity combination needs its total price calculated before it is checked.",
       "starter_code": "function solution(budget, pencilPrice, eraserPrice)\n    return 0\nend",
       "reference_code": "function solution(budget, pencilPrice, eraserPrice)\n    local count = 0\n\n    for pencil = 0, budget do\n        for eraser = 0, budget do\n            local total = pencil * pencilPrice + eraser * eraserPrice\n            if total == budget then\n                count = count + 1\n            end\n        end\n    end\n\n    return count\nend",
       "test_cases": [
@@ -114,14 +86,7 @@
     },
     {
       "title": "Count Game Shop Plans That Spend All Coins on Potions and Shields",
-      "description": {
-        "difficulty": "Normal",
-        "background": "In a game shop, each potion costs potionPrice coins and each shield costs shieldPrice coins. The player has coins coins and wants to spend them exactly.",
-        "task": "Count the number of plans for buying potions and shields that spend all coins exactly.",
-        "input": "Three numbers: coins, potionPrice, and shieldPrice.",
-        "output": "Return the number of plans that spend all coins exactly.",
-        "hint": "Different item quantity combinations may produce the same or different total costs."
-      },
+      "description": "## Difficulty\n\nNormal\n\n## Background\n\nIn a game shop, each potion costs potionPrice coins and each shield costs shieldPrice coins. The player has coins coins and wants to spend them exactly.\n\n## Task\n\nCount the number of plans for buying potions and shields that spend all coins exactly.\n\n## Input\n\nThree numbers: coins, potionPrice, and shieldPrice.\n\n## Output\n\nReturn the number of plans that spend all coins exactly.\n\n## Hint\n\nDifferent item quantity combinations may produce the same or different total costs.",
       "starter_code": "function solution(coins, potionPrice, shieldPrice)\n    return 0\nend",
       "reference_code": "function solution(coins, potionPrice, shieldPrice)\n    local count = 0\n\n    for potion = 0, coins do\n        for shield = 0, coins do\n            local total = potion * potionPrice + shield * shieldPrice\n            if total == coins then\n                count = count + 1\n            end\n        end\n    end\n\n    return count\nend",
       "test_cases": [
@@ -145,14 +110,7 @@
     },
     {
       "title": "Find the Length and Width with Maximum Area for a Fixed Perimeter",
-      "description": {
-        "difficulty": "Normal",
-        "background": "A rectangle has a fixed perimeter. The teacher wants to know which integer length-width pair has the largest area.",
-        "task": "Find the length and width with the largest area, then return that maximum area.",
-        "input": "One number: perimeter.",
-        "output": "Return the best length, best width, and maximum area in order.",
-        "hint": "Enumerate all valid pairs and keep updating the current best answer."
-      },
+      "description": "## Difficulty\n\nNormal\n\n## Background\n\nA rectangle has a fixed perimeter. The teacher wants to know which integer length-width pair has the largest area.\n\n## Task\n\nFind the length and width with the largest area, then return that maximum area.\n\n## Input\n\nOne number: perimeter.\n\n## Output\n\nReturn the best length, best width, and maximum area in order.\n\n## Hint\n\nEnumerate all valid pairs and keep updating the current best answer.",
       "starter_code": "function solution(perimeter)\n    return 0, 0, 0\nend",
       "reference_code": "function solution(perimeter)\n    local bestLength = 0\n    local bestWidth = 0\n    local bestArea = 0\n\n    for length = 1, perimeter do\n        for width = 1, perimeter do\n            if 2 * (length + width) == perimeter then\n                local area = length * width\n                if area > bestArea then\n                    bestArea = area\n                    bestLength = length\n                    bestWidth = width\n                end\n            end\n        end\n    end\n\n    return bestLength, bestWidth, bestArea\nend",
       "test_cases": [
@@ -170,14 +128,7 @@
     },
     {
       "title": "Chicken and Rabbit Cage: Find Animal Counts from Heads and Legs",
-      "description": {
-        "difficulty": "Challenge",
-        "background": "A cage contains chickens and rabbits. Chickens have 2 legs, and rabbits have 4 legs. Given the total heads and total legs, we need to find how many chickens and rabbits there are.",
-        "task": "Enumerate possible chicken and rabbit counts and find the answer that satisfies the conditions.",
-        "input": "Two numbers: heads and legs.",
-        "output": "If an answer is found, return the chicken count and rabbit count in order; if no answer exists, return -1 and -1.",
-        "hint": "Both counts are changing, and they must satisfy the head count and leg count at the same time."
-      },
+      "description": "## Difficulty\n\nChallenge\n\n## Background\n\nA cage contains chickens and rabbits. Chickens have 2 legs, and rabbits have 4 legs. Given the total heads and total legs, we need to find how many chickens and rabbits there are.\n\n## Task\n\nEnumerate possible chicken and rabbit counts and find the answer that satisfies the conditions.\n\n## Input\n\nTwo numbers: heads and legs.\n\n## Output\n\nIf an answer is found, return the chicken count and rabbit count in order; if no answer exists, return -1 and -1.\n\n## Hint\n\nBoth counts are changing, and they must satisfy the head count and leg count at the same time.",
       "starter_code": "function solution(heads, legs)\n    return -1, -1\nend",
       "reference_code": "function solution(heads, legs)\n    for chickens = 0, heads do\n        for rabbits = 0, heads do\n            if chickens + rabbits == heads and chickens * 2 + rabbits * 4 == legs then\n                return chickens, rabbits\n            end\n        end\n    end\n\n    return -1, -1\nend",
       "test_cases": [
@@ -198,14 +149,7 @@
     },
     {
       "title": "Spend the Exact Budget on Children's and Adult Tickets",
-      "description": {
-        "difficulty": "Challenge",
-        "background": "At an amusement park, each child ticket costs childPrice and each adult ticket costs adultPrice. There is budget money, and the goal is to spend it exactly.",
-        "task": "Count the purchase plans for child and adult tickets, and find the plan with the largest total ticket count.",
-        "input": "Three numbers: budget, childPrice, and adultPrice.",
-        "output": "Return the plan count, the child ticket count in the largest-ticket plan, and the adult ticket count in that plan.",
-        "hint": "First decide whether a plan is valid, then decide whether it is better than the currently recorded plan."
-      },
+      "description": "## Difficulty\n\nChallenge\n\n## Background\n\nAt an amusement park, each child ticket costs childPrice and each adult ticket costs adultPrice. There is budget money, and the goal is to spend it exactly.\n\n## Task\n\nCount the purchase plans for child and adult tickets, and find the plan with the largest total ticket count.\n\n## Input\n\nThree numbers: budget, childPrice, and adultPrice.\n\n## Output\n\nReturn the plan count, the child ticket count in the largest-ticket plan, and the adult ticket count in that plan.\n\n## Hint\n\nFirst decide whether a plan is valid, then decide whether it is better than the currently recorded plan.",
       "starter_code": "function solution(budget, childPrice, adultPrice)\n    return 0, 0, 0\nend",
       "reference_code": "function solution(budget, childPrice, adultPrice)\n    local count = 0\n    local bestChild = 0\n    local bestAdult = 0\n    local bestTickets = -1\n\n    for child = 0, budget do\n        for adult = 0, budget do\n            local total = child * childPrice + adult * adultPrice\n            if total == budget then\n                count = count + 1\n                local tickets = child + adult\n                if tickets > bestTickets then\n                    bestTickets = tickets\n                    bestChild = child\n                    bestAdult = adult\n                end\n            end\n        end\n    end\n\n    return count, bestChild, bestAdult\nend",
       "test_cases": [
@@ -229,14 +173,7 @@
     },
     {
       "title": "Buy Two Products Within Budget and Maximize Quantity with Minimum Leftover",
-      "description": {
-        "difficulty": "Challenge",
-        "background": "A store sells two products, with prices priceA and priceB. A student has budget money. The budget does not have to be spent exactly, but the student wants to buy as many items as possible; if the item count is tied, the student wants the least leftover money.",
-        "task": "Find the best purchase plan.",
-        "input": "Three numbers: priceA, priceB, and budget.",
-        "output": "Return the product A count, product B count, and leftover money in order.",
-        "hint": "Split the problem into enumerating plans, checking validity, and updating the best answer."
-      },
+      "description": "## Difficulty\n\nChallenge\n\n## Background\n\nA store sells two products, with prices priceA and priceB. A student has budget money. The budget does not have to be spent exactly, but the student wants to buy as many items as possible; if the item count is tied, the student wants the least leftover money.\n\n## Task\n\nFind the best purchase plan.\n\n## Input\n\nThree numbers: priceA, priceB, and budget.\n\n## Output\n\nReturn the product A count, product B count, and leftover money in order.\n\n## Hint\n\nSplit the problem into enumerating plans, checking validity, and updating the best answer.",
       "starter_code": "function solution(priceA, priceB, budget)\n    return 0, 0, budget\nend",
       "reference_code": "function solution(priceA, priceB, budget)\n    local bestA = 0\n    local bestB = 0\n    local bestCount = -1\n    local bestLeft = budget\n\n    for a = 0, budget do\n        for b = 0, budget do\n            local cost = a * priceA + b * priceB\n            if cost <= budget then\n                local count = a + b\n                local left = budget - cost\n\n                if count > bestCount then\n                    bestCount = count\n                    bestLeft = left\n                    bestA = a\n                    bestB = b\n                elseif count == bestCount and left < bestLeft then\n                    bestLeft = left\n                    bestA = a\n                    bestB = b\n                end\n            end\n        end\n    end\n\n    return bestA, bestB, bestLeft\nend",
       "test_cases": [

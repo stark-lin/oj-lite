@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"path/filepath"
+	"strings"
 	"testing"
 	"time"
 
@@ -116,6 +117,9 @@ func TestEmbeddedLessonReferenceCodeRuns(t *testing.T) {
 	engine := judge.New(logger.NewLogger("seed-test"))
 	for _, lesson := range lessons {
 		for _, question := range lesson.Questions {
+			if !strings.HasPrefix(question.Description, "## ") {
+				t.Fatalf("question %q description is not Markdown: %q", question.Title, question.Description)
+			}
 			report, err := engine.Run(context.Background(), judge.Request{
 				SourceCode:    question.ReferenceCode,
 				ReferenceCode: question.ReferenceCode,

@@ -5,14 +5,7 @@
   "questions": [
     {
       "title": "Check Whether an Exam Score Reaches the Passing Line",
-      "description": {
-        "difficulty": "Simple",
-        "background": "After grading an exam, a teacher needs to quickly check whether a student's score reaches the passing line. The school rule says that a score of 60 or above is passing, while a score below 60 is not passing.",
-        "task": "Use the input exam score to decide whether this student passes, then return the result.",
-        "input": "One number: score.",
-        "output": "Return true when score reaches the passing line; otherwise return false.",
-        "hint": "Check whether the score reaches the passing line first, then return the matching result."
-      },
+      "description": "## Difficulty\n\nSimple\n\n## Background\n\nAfter grading an exam, a teacher needs to quickly check whether a student's score reaches the passing line. The school rule says that a score of 60 or above is passing, while a score below 60 is not passing.\n\n## Task\n\nUse the input exam score to decide whether this student passes, then return the result.\n\n## Input\n\nOne number: score.\n\n## Output\n\nReturn true when score reaches the passing line; otherwise return false.\n\n## Hint\n\nCheck whether the score reaches the passing line first, then return the matching result.",
       "starter_code": "function solution(score)\n    return false\nend",
       "reference_code": "function solution(score)\n    if score >= 60 then\n        return true\n    end\n    return false\nend",
       "test_cases": [
@@ -30,14 +23,7 @@
     },
     {
       "title": "Check Whether a Student Number Is Odd or Even",
-      "description": {
-        "difficulty": "Simple",
-        "background": "In PE class, the teacher wants students to line up in two columns by number. Students with odd numbers stand in one column, and students with even numbers stand in the other column.",
-        "task": "Determine whether the input student number is odd or even, then return the corresponding English result.",
-        "input": "One number: number.",
-        "output": "Return \"odd\" for an odd number and \"even\" for an even number.",
-        "hint": "You can observe the remainder after dividing the number by 2."
-      },
+      "description": "## Difficulty\n\nSimple\n\n## Background\n\nIn PE class, the teacher wants students to line up in two columns by number. Students with odd numbers stand in one column, and students with even numbers stand in the other column.\n\n## Task\n\nDetermine whether the input student number is odd or even, then return the corresponding English result.\n\n## Input\n\nOne number: number.\n\n## Output\n\nReturn \"odd\" for an odd number and \"even\" for an even number.\n\n## Hint\n\nYou can observe the remainder after dividing the number by 2.",
       "starter_code": "function solution(number)\n    return \"\"\nend",
       "reference_code": "function solution(number)\n    if number % 2 == 0 then\n        return \"even\"\n    end\n    return \"odd\"\nend",
       "test_cases": [
@@ -55,14 +41,7 @@
     },
     {
       "title": "Use a Loop to Count All Numbers from 1 to n",
-      "description": {
-        "difficulty": "Simple",
-        "background": "The teacher asks students to count numbers in order starting from 1 and continuing to n. To check whether the loop is correct, the final number counted needs to be known.",
-        "task": "Use a loop to count from 1 to n, then return the last number counted.",
-        "input": "One positive integer: n.",
-        "output": "Return the last number counted when the loop ends.",
-        "hint": "You can use a variable to record the current number being counted."
-      },
+      "description": "## Difficulty\n\nSimple\n\n## Background\n\nThe teacher asks students to count numbers in order starting from 1 and continuing to n. To check whether the loop is correct, the final number counted needs to be known.\n\n## Task\n\nUse a loop to count from 1 to n, then return the last number counted.\n\n## Input\n\nOne positive integer: n.\n\n## Output\n\nReturn the last number counted when the loop ends.\n\n## Hint\n\nYou can use a variable to record the current number being counted.",
       "starter_code": "function solution(n)\n    return 0\nend",
       "reference_code": "function solution(n)\n    local current = 0\n    for i = 1, n do\n        current = i\n    end\n    return current\nend",
       "test_cases": [
@@ -80,14 +59,7 @@
     },
     {
       "title": "Check Whether a Game Character Is Still Alive After an Attack",
-      "description": {
-        "difficulty": "Normal",
-        "background": "A game character starts with hp health and loses damage health after one attack. The system needs to decide whether the character is still alive from the health after the attack.",
-        "task": "First calculate the character's remaining health after the attack, then decide whether the character is still alive.",
-        "input": "Two numbers: hp and damage.",
-        "output": "Return true if health after the attack is greater than 0; otherwise return false.",
-        "hint": "Update the health first, then check the updated state."
-      },
+      "description": "## Difficulty\n\nNormal\n\n## Background\n\nA game character starts with hp health and loses damage health after one attack. The system needs to decide whether the character is still alive from the health after the attack.\n\n## Task\n\nFirst calculate the character's remaining health after the attack, then decide whether the character is still alive.\n\n## Input\n\nTwo numbers: hp and damage.\n\n## Output\n\nReturn true if health after the attack is greater than 0; otherwise return false.\n\n## Hint\n\nUpdate the health first, then check the updated state.",
       "starter_code": "function solution(hp, damage)\n    return false\nend",
       "reference_code": "function solution(hp, damage)\n    local remainHp = hp - damage\n    if remainHp > 0 then\n        return true\n    end\n    return false\nend",
       "test_cases": [
@@ -108,14 +80,7 @@
     },
     {
       "title": "Calculate How Many Rounds Until a Monster Is Defeated",
-      "description": {
-        "difficulty": "Normal",
-        "background": "A player is fighting a monster. The monster starts with hp health, and the player deals damage each round. As long as the monster's health is greater than 0, the battle continues.",
-        "task": "Calculate how many attack rounds the player needs to defeat the monster.",
-        "input": "Two numbers: hp and damage.",
-        "output": "Return the number of rounds needed to defeat the monster.",
-        "hint": "Update the monster's health each round and record how many rounds have been played."
-      },
+      "description": "## Difficulty\n\nNormal\n\n## Background\n\nA player is fighting a monster. The monster starts with hp health, and the player deals damage each round. As long as the monster's health is greater than 0, the battle continues.\n\n## Task\n\nCalculate how many attack rounds the player needs to defeat the monster.\n\n## Input\n\nTwo numbers: hp and damage.\n\n## Output\n\nReturn the number of rounds needed to defeat the monster.\n\n## Hint\n\nUpdate the monster's health each round and record how many rounds have been played.",
       "starter_code": "function solution(hp, damage)\n    return 0\nend",
       "reference_code": "function solution(hp, damage)\n    local currentHp = hp\n    local rounds = 0\n\n    while currentHp > 0 do\n        currentHp = currentHp - damage\n        rounds = rounds + 1\n    end\n\n    return rounds\nend",
       "test_cases": [
@@ -136,14 +101,7 @@
     },
     {
       "title": "Check Whether an Eraser Can Still Be Bought After Shopping",
-      "description": {
-        "difficulty": "Normal",
-        "background": "A student brings money to a stationery store and first buys count pencils, each costing pencilPrice. After buying pencils, the student wants to know whether the remaining money is enough to buy one eraser that costs eraserPrice.",
-        "task": "Calculate the remaining money after buying pencils, then decide whether an eraser can still be bought.",
-        "input": "Four numbers: money, pencilPrice, count, and eraserPrice.",
-        "output": "Return true if the remaining money is enough to buy the eraser; otherwise return false.",
-        "hint": "Calculate the money already spent first, then use the remaining money for the check."
-      },
+      "description": "## Difficulty\n\nNormal\n\n## Background\n\nA student brings money to a stationery store and first buys count pencils, each costing pencilPrice. After buying pencils, the student wants to know whether the remaining money is enough to buy one eraser that costs eraserPrice.\n\n## Task\n\nCalculate the remaining money after buying pencils, then decide whether an eraser can still be bought.\n\n## Input\n\nFour numbers: money, pencilPrice, count, and eraserPrice.\n\n## Output\n\nReturn true if the remaining money is enough to buy the eraser; otherwise return false.\n\n## Hint\n\nCalculate the money already spent first, then use the remaining money for the check.",
       "starter_code": "function solution(money, pencilPrice, count, eraserPrice)\n    return false\nend",
       "reference_code": "function solution(money, pencilPrice, count, eraserPrice)\n    local cost = pencilPrice * count\n    local leftMoney = money - cost\n\n    if leftMoney >= eraserPrice then\n        return true\n    end\n    return false\nend",
       "test_cases": [
@@ -170,14 +128,7 @@
     },
     {
       "title": "Rating Settlement After Consecutive Game Battles",
-      "description": {
-        "difficulty": "Challenge",
-        "background": "A game character goes through rounds consecutive battle rounds. The character starts with hp health. At the start of each round, the monster deals damage. If the round number is a multiple of 3, the character also takes trapDamage trap damage; if the round number is even, the character restores heal health at the end of that round. After battle ends, the system rates the character by final health.",
-        "task": "Simulate the full battle process, then return the rating based on final health.",
-        "input": "Five numbers: hp, damage, trapDamage, heal, and rounds.",
-        "output": "Return \"great\" if final health is at least 80; return \"survive\" if final health is greater than 0 but less than 80; return \"defeated\" if final health is 0 or less.",
-        "hint": "Split each round into normal damage, special damage, healing, and final rating steps."
-      },
+      "description": "## Difficulty\n\nChallenge\n\n## Background\n\nA game character goes through rounds consecutive battle rounds. The character starts with hp health. At the start of each round, the monster deals damage. If the round number is a multiple of 3, the character also takes trapDamage trap damage; if the round number is even, the character restores heal health at the end of that round. After battle ends, the system rates the character by final health.\n\n## Task\n\nSimulate the full battle process, then return the rating based on final health.\n\n## Input\n\nFive numbers: hp, damage, trapDamage, heal, and rounds.\n\n## Output\n\nReturn \"great\" if final health is at least 80; return \"survive\" if final health is greater than 0 but less than 80; return \"defeated\" if final health is 0 or less.\n\n## Hint\n\nSplit each round into normal damage, special damage, healing, and final rating steps.",
       "starter_code": "function solution(hp, damage, trapDamage, heal, rounds)\n    return \"\"\nend",
       "reference_code": "function solution(hp, damage, trapDamage, heal, rounds)\n    local currentHp = hp\n\n    for i = 1, rounds do\n        currentHp = currentHp - damage\n\n        if i % 3 == 0 then\n            currentHp = currentHp - trapDamage\n        end\n\n        if i % 2 == 0 then\n            currentHp = currentHp + heal\n        end\n    end\n\n    if currentHp >= 80 then\n        return \"great\"\n    elseif currentHp > 0 then\n        return \"survive\"\n    end\n\n    return \"defeated\"\nend",
       "test_cases": [
@@ -214,14 +165,7 @@
     },
     {
       "title": "Final Result After Consecutive Vending Machine Purchases",
-      "description": {
-        "difficulty": "Challenge",
-        "background": "A student inserts money into a vending machine. Each drink costs price. The student wants to buy at most want drinks, but the machine sells one drink at a time until there is not enough money or the desired count has been bought. The system then needs to classify the purchase result.",
-        "task": "Simulate the consecutive purchase process and return the final purchase status.",
-        "input": "Three numbers: money, price, and want.",
-        "output": "Return \"exact\" if want drinks were bought and all money was spent; return \"enough\" if want drinks were bought with money left; return \"partial\" if fewer than want drinks were bought but at least one was bought; return \"none\" if no drink can be bought.",
-        "hint": "Use a loop to simulate each purchase, then classify by the number bought and the remaining money."
-      },
+      "description": "## Difficulty\n\nChallenge\n\n## Background\n\nA student inserts money into a vending machine. Each drink costs price. The student wants to buy at most want drinks, but the machine sells one drink at a time until there is not enough money or the desired count has been bought. The system then needs to classify the purchase result.\n\n## Task\n\nSimulate the consecutive purchase process and return the final purchase status.\n\n## Input\n\nThree numbers: money, price, and want.\n\n## Output\n\nReturn \"exact\" if want drinks were bought and all money was spent; return \"enough\" if want drinks were bought with money left; return \"partial\" if fewer than want drinks were bought but at least one was bought; return \"none\" if no drink can be bought.\n\n## Hint\n\nUse a loop to simulate each purchase, then classify by the number bought and the remaining money.",
       "starter_code": "function solution(money, price, want)\n    return \"\"\nend",
       "reference_code": "function solution(money, price, want)\n    local leftMoney = money\n    local bought = 0\n\n    while leftMoney >= price and bought < want do\n        leftMoney = leftMoney - price\n        bought = bought + 1\n    end\n\n    if bought == want and leftMoney == 0 then\n        return \"exact\"\n    elseif bought == want then\n        return \"enough\"\n    elseif bought > 0 then\n        return \"partial\"\n    end\n\n    return \"none\"\nend",
       "test_cases": [
@@ -250,14 +194,7 @@
     },
     {
       "title": "Star Rating After Consecutive Game Level Scores",
-      "description": {
-        "difficulty": "Challenge",
-        "background": "A player completes levels small levels in a row. Each level has baseScore base points. If the level number is even, the player gains evenBonus extra points; if the level number is a multiple of 5, the player gains hiddenBonus more points from a hidden task. After all levels end, the system gives a star rating by total score and average score.",
-        "task": "Calculate the player's total score and average score, then return the final star rating.",
-        "input": "Four numbers: levels, baseScore, evenBonus, and hiddenBonus.",
-        "output": "Return 3 if the average is at least 90 and the total is at least 300; return 2 if the average is at least 70; return 1 if the total is greater than 0; otherwise return 0.",
-        "hint": "Accumulate each level's score in the loop, then judge the star rating from total and average after the loop."
-      },
+      "description": "## Difficulty\n\nChallenge\n\n## Background\n\nA player completes levels small levels in a row. Each level has baseScore base points. If the level number is even, the player gains evenBonus extra points; if the level number is a multiple of 5, the player gains hiddenBonus more points from a hidden task. After all levels end, the system gives a star rating by total score and average score.\n\n## Task\n\nCalculate the player's total score and average score, then return the final star rating.\n\n## Input\n\nFour numbers: levels, baseScore, evenBonus, and hiddenBonus.\n\n## Output\n\nReturn 3 if the average is at least 90 and the total is at least 300; return 2 if the average is at least 70; return 1 if the total is greater than 0; otherwise return 0.\n\n## Hint\n\nAccumulate each level's score in the loop, then judge the star rating from total and average after the loop.",
       "starter_code": "function solution(levels, baseScore, evenBonus, hiddenBonus)\n    return 0\nend",
       "reference_code": "function solution(levels, baseScore, evenBonus, hiddenBonus)\n    local total = 0\n\n    for i = 1, levels do\n        local score = baseScore\n\n        if i % 2 == 0 then\n            score = score + evenBonus\n        end\n\n        if i % 5 == 0 then\n            score = score + hiddenBonus\n        end\n\n        total = total + score\n    end\n\n    local average = 0\n    if levels > 0 then\n        average = total / levels\n    end\n\n    if average >= 90 and total >= 300 then\n        return 3\n    elseif average >= 70 then\n        return 2\n    elseif total > 0 then\n        return 1\n    end\n\n    return 0\nend",
       "test_cases": [

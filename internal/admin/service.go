@@ -26,7 +26,6 @@ var (
 	errQuestionSortOrderInvalid = errors.New("question sort_order must be greater than 0")
 	errQuestionMissingTitle     = errors.New("question title is required")
 	errQuestionDuplicateID      = errors.New("question id is duplicated in request")
-	errInvalidDescription       = errors.New("invalid description JSON")
 	errInvalidTestCases         = errors.New("invalid test_cases JSON")
 )
 
@@ -236,11 +235,6 @@ func (service *service) normalizeLessonWrite(request lessonRequest) (lessonWrite
 			seenQuestionIDs[item.ID] = struct{}{}
 		}
 
-		description, err := normalizeJSONObject(item.Description, errInvalidDescription)
-		if err != nil {
-			return lessonWrite{}, errs.Unavailable(err)
-		}
-
 		testCases, err := normalizeJSON(item.TestCases, errInvalidTestCases)
 		if err != nil {
 			return lessonWrite{}, errs.Unavailable(err)
@@ -249,7 +243,7 @@ func (service *service) normalizeLessonWrite(request lessonRequest) (lessonWrite
 		questions = append(questions, lessonQuestionWrite{
 			ID:            item.ID,
 			Title:         questionTitle,
-			Description:   description,
+			Description:   item.Description,
 			StarterCode:   item.StarterCode,
 			ReferenceCode: item.ReferenceCode,
 			TestCases:     testCases,

@@ -34,7 +34,7 @@ func TestAdminPageRoute(t *testing.T) {
 	}
 
 	body := response.Body.String()
-	if !bytes.Contains([]byte(body), []byte("Admin")) || !bytes.Contains([]byte(body), []byte("Teacher Management")) {
+	if !bytes.Contains([]byte(body), []byte("Admin")) || !bytes.Contains([]byte(body), []byte(`/assets/admin.js`)) {
 		t.Fatalf("GET /admin body missing expected markers: %s", body)
 	}
 }
@@ -152,7 +152,7 @@ func TestAdminLessonRoutes(t *testing.T) {
 		"questions":[
 			{
 				"title":"Question A",
-				"description":{"statement":"A"},
+				"description":"## Statement\n\nA",
 				"starter_code":"function solution() return 0 end",
 				"reference_code":"function solution() return 1 end",
 				"test_cases":[{"input":[1]}],
@@ -160,7 +160,7 @@ func TestAdminLessonRoutes(t *testing.T) {
 			},
 			{
 				"title":"Question B",
-				"description":{"statement":"B"},
+				"description":"## Statement\n\nB",
 				"starter_code":"function solution() return 2 end",
 				"reference_code":"function solution() return 3 end",
 				"test_cases":[{"input":[2]}],
@@ -240,7 +240,7 @@ func TestAdminLessonRoutes(t *testing.T) {
 			{
 				"id":`+itoa(firstQuestionID)+`,
 				"title":"Question A Updated",
-				"description":{"statement":"A+"},
+				"description":"## Statement\n\nA+",
 				"starter_code":"function solution() return 4 end",
 				"reference_code":"function solution() return 5 end",
 				"test_cases":[{"input":[4]}],
@@ -248,7 +248,7 @@ func TestAdminLessonRoutes(t *testing.T) {
 			},
 			{
 				"title":"Question C",
-				"description":{"statement":"C"},
+				"description":"## Statement\n\nC",
 				"starter_code":"function solution() return 6 end",
 				"reference_code":"function solution() return 7 end",
 				"test_cases":[{"input":[6]}],
@@ -300,6 +300,28 @@ func TestAdminLessonRoutes(t *testing.T) {
 	getDeletedLesson := performRequest(t, app, http.MethodGet, "/admin/lessons/"+itoa(createLessonEnvelope.Data.Lesson.ID), nil, nil)
 	if getDeletedLesson.Code != http.StatusNotFound {
 		t.Fatalf("GET deleted /admin/lessons/:lessonId status = %d, want %d body=%s", getDeletedLesson.Code, http.StatusNotFound, getDeletedLesson.Body.String())
+	}
+}
+
+func TestAdminLessonRejectsObjectQuestionDescription(t *testing.T) {
+	app := newTestApp(t)
+	defer shutdownTestApp(t, app)
+
+	response := performRequest(t, app, http.MethodPost, "/admin/lessons", []byte(`{
+		"title":"Invalid Description Lesson",
+		"description":"",
+		"sort_order":1,
+		"questions":[{
+			"title":"Question",
+			"description":{"statement":"legacy object"},
+			"starter_code":"function solution() end",
+			"reference_code":"function solution() end",
+			"test_cases":[],
+			"sort_order":1
+		}]
+	}`), nil)
+	if response.Code != http.StatusBadRequest {
+		t.Fatalf("POST /admin/lessons with object description status = %d, want %d body=%s", response.Code, http.StatusBadRequest, response.Body.String())
 	}
 }
 

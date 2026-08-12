@@ -1,5 +1,9 @@
 .arch-go/
 
+# Local agent skills
+/.agents/
+/skills-lock.json
+
 # =========================
 # Go build outputs
 # =========================

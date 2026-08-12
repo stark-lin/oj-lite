@@ -36,7 +36,7 @@ function solution(...)
 end
 ```
 
-Each question stores `description`, `starter_code`, `reference_code`, and `test_cases`. During judging, the student and reference functions are executed independently for each test case and their return values are compared.
+Each question stores a Markdown `description` together with `starter_code`, `reference_code`, and `test_cases`. The Markdown parser and HTML sanitizer are bundled locally, so rendering does not depend on a CDN at runtime. During judging, the student and reference functions are executed independently for each test case and their return values are compared.
 
 Student and reference code are not executed in a full Lua runtime. Each invocation runs in a fresh restricted Lua state with no standard libraries opened, a judge-provided `print` function, and a fixed 2-second execution timeout. See [docs/JUDGE_MODEL.md](docs/JUDGE_MODEL.md) for the exact scheduler and sandbox model.
 
@@ -103,7 +103,7 @@ The repository includes a GitHub Actions workflow at [`.github/workflows/ci-cd.y
 - `go vet ./...`.
 - `go test ./...`.
 
-After the checks pass on a push to `main`, the workflow builds packaged single-binary artifacts for Windows amd64, Linux amd64, Linux arm64, and macOS arm64. It publishes those artifacts in a generated `main-<run_number>-<run_attempt>` GitHub Release.
+After the checks pass on a push to `main`, the workflow builds packaged single-binary artifacts for Windows amd64, Linux amd64, Linux arm64, macOS amd64, and macOS arm64. It publishes those artifacts in a generated `main-<run_number>-<run_attempt>` GitHub Release.
 
 These are main-branch build releases. The repository does not currently define a separate semver/tag release policy or publish checksums/version metadata.
 
@@ -121,7 +121,7 @@ Start the service:
 go run ./cmd/server
 ```
 
-On first startup, the service creates `config.json` if it does not exist. By default, it listens on `0.0.0.0:8080` and stores data at `oj-lite.db` in the current working directory.
+On first startup, the service creates `config.json` if it does not exist. By default, it listens on `0.0.0.0:8080` and stores data at `oj-lite.db` in the current working directory. Once the HTTP listener is ready, the startup log prints an `access_urls` list containing the local URL and the detected network URLs that other users can open. Network access still depends on the host firewall allowing the configured port.
 
 Start without demo seed data:
 
@@ -201,6 +201,8 @@ The service reads settings from `config.json`. If the file is missing, startup w
 
 Notes:
 
+- `app.name` controls the name shown in browser page titles and on the login page. The browser reads it from `/healthz` at runtime; if that request fails, no application name is shown.
+- Restart the service after changing `config.json`, then reload the page.
 - Database initialization currently supports creating the final schema only from an empty database.
 - If an existing local `oj-lite.db` uses an incompatible old schema, delete it and start the service again.
 
@@ -303,7 +305,7 @@ function solution(...)
 end
 ```
 
-题目保存 `description`、`starter_code`、`reference_code` 和 `test_cases`，判题时会针对每个测试用例分别独立执行学生实现和参考实现，并比较两者的返回值。
+题目的 `description` 使用 Markdown，并同时保存 `starter_code`、`reference_code` 和 `test_cases`。Markdown 解析器与 HTML 清洗器均随程序本地提供，运行时不依赖 CDN。判题时会针对每个测试用例分别独立执行学生实现和参考实现，并比较两者的返回值。
 
 学生代码与参考代码不会运行在完整 Lua runtime 中。每次执行都会创建一个新的受限 Lua state，不打开标准库，只注入判题器提供的 `print` 函数，并应用固定的单次执行 2 秒超时。完整的调度与 sandbox 模型见 [docs/JUDGE_MODEL.md](docs/JUDGE_MODEL.md)。
 
@@ -370,7 +372,7 @@ end
 - `go vet ./...`。
 - `go test ./...`。
 
-推送到 `main` 且检查通过后，workflow 会为 Windows amd64、Linux amd64、Linux arm64 和 macOS arm64 构建并打包单二进制产物，并将产物发布到自动生成的 `main-<run_number>-<run_attempt>` GitHub Release。
+推送到 `main` 且检查通过后，workflow 会为 Windows amd64、Linux amd64、Linux arm64、macOS amd64 和 macOS arm64 构建并打包单二进制产物，并将产物发布到自动生成的 `main-<run_number>-<run_attempt>` GitHub Release。
 
 这些 release 表示主线构建产物；仓库当前尚未定义单独的 semver/tag 正式发布策略，也未发布 checksum 或 version metadata。
 
@@ -388,7 +390,7 @@ end
 go run ./cmd/server
 ```
 
-首次启动时，如果当前运行目录下没有 `config.json`，服务会先写入默认配置文件。默认监听 `0.0.0.0:8080`，默认数据库路径为当前运行目录下的 `oj-lite.db`。
+首次启动时，如果当前运行目录下没有 `config.json`，服务会先写入默认配置文件。默认监听 `0.0.0.0:8080`，默认数据库路径为当前运行目录下的 `oj-lite.db`。HTTP 端口监听成功后，启动日志的 `access_urls` 会列出本机地址和检测到的局域网地址，其他用户可以直接打开其中的局域网地址；是否能从其他设备访问仍取决于主机防火墙是否放行配置的端口。
 
 启动后可以访问：
 
@@ -452,6 +454,8 @@ go test ./...
 
 说明：
 
+- `app.name` 控制浏览器页面标题和登录页显示的系统名称。浏览器会在运行时通过 `/healthz` 获取；请求失败时不显示系统名称。
+- 修改 `config.json` 后需要重启服务并刷新页面。
 - 当前数据库初始化只支持空库直接创建最终 schema，不支持旧 schema 的增量迁移。
 - 如果本地已有不兼容的旧版 `oj-lite.db`，需要删除后重新启动。
 

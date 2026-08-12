@@ -5,14 +5,7 @@
   "questions": [
     {
       "title": "Class Score Analysis System: Total, Average, and Passing Count",
-      "description": {
-        "difficulty": "Simple",
-        "background": "The teacher stores class scores in the array scores. Now a basic score analysis is needed.",
-        "task": "Calculate the total score, average score, and number of passing students.",
-        "input": "One array scores and one number n.",
-        "output": "Return the total score, average score, and passing count in order.",
-        "hint": "One traversal can complete both summation and counting."
-      },
+      "description": "## Difficulty\n\nSimple\n\n## Background\n\nThe teacher stores class scores in the array scores. Now a basic score analysis is needed.\n\n## Task\n\nCalculate the total score, average score, and number of passing students.\n\n## Input\n\nOne array scores and one number n.\n\n## Output\n\nReturn the total score, average score, and passing count in order.\n\n## Hint\n\nOne traversal can complete both summation and counting.",
       "starter_code": "function solution(scores, n)\n    return 0, 0, 0\nend",
       "reference_code": "function solution(scores, n)\n    local sum = 0\n    local passCount = 0\n\n    for i = 1, n do\n        sum = sum + scores[i]\n        if scores[i] >= 60 then\n            passCount = passCount + 1\n        end\n    end\n\n    local average = sum / n\n    return sum, average, passCount\nend",
       "test_cases": [
@@ -48,14 +41,7 @@
     },
     {
       "title": "Game Points Analysis System: Highest, Lowest, and Average",
-      "description": {
-        "difficulty": "Simple",
-        "background": "A player's points from multiple games are stored in the array points. The system needs to analyze the highest score, lowest score, and average score.",
-        "task": "Calculate the highest score, lowest score, and average score.",
-        "input": "One array points and one number n.",
-        "output": "Return the highest score, lowest score, and average score in order.",
-        "hint": "The maximum and minimum can be updated in the same traversal."
-      },
+      "description": "## Difficulty\n\nSimple\n\n## Background\n\nA player's points from multiple games are stored in the array points. The system needs to analyze the highest score, lowest score, and average score.\n\n## Task\n\nCalculate the highest score, lowest score, and average score.\n\n## Input\n\nOne array points and one number n.\n\n## Output\n\nReturn the highest score, lowest score, and average score in order.\n\n## Hint\n\nThe maximum and minimum can be updated in the same traversal.",
       "starter_code": "function solution(points, n)\n    return 0, 0, 0\nend",
       "reference_code": "function solution(points, n)\n    local maxValue = points[1]\n    local minValue = points[1]\n    local sum = 0\n\n    for i = 1, n do\n        sum = sum + points[i]\n\n        if points[i] > maxValue then\n            maxValue = points[i]\n        end\n\n        if points[i] < minValue then\n            minValue = points[i]\n        end\n    end\n\n    return maxValue, minValue, sum / n\nend",
       "test_cases": [
@@ -88,14 +74,7 @@
     },
     {
       "title": "Daily Savings Record System: Total, Highest Day, and Goal Check",
-      "description": {
-        "difficulty": "Simple",
-        "background": "A student's daily savings are stored in the array savings. The student wants to know the total saved, the highest single-day saving amount, and whether the target amount has been reached.",
-        "task": "Calculate the total savings, highest single-day saving, and whether the target is reached.",
-        "input": "One array savings, one number n, and one number target.",
-        "output": "Return the total amount, highest single-day saving, and whether the target is reached in order.",
-        "hint": "Accumulating the total and finding the maximum can be done at the same time."
-      },
+      "description": "## Difficulty\n\nSimple\n\n## Background\n\nA student's daily savings are stored in the array savings. The student wants to know the total saved, the highest single-day saving amount, and whether the target amount has been reached.\n\n## Task\n\nCalculate the total savings, highest single-day saving, and whether the target is reached.\n\n## Input\n\nOne array savings, one number n, and one number target.\n\n## Output\n\nReturn the total amount, highest single-day saving, and whether the target is reached in order.\n\n## Hint\n\nAccumulating the total and finding the maximum can be done at the same time.",
       "starter_code": "function solution(savings, n, target)\n    return 0, 0, false\nend",
       "reference_code": "function solution(savings, n, target)\n    local total = 0\n    local maxDay = savings[1]\n\n    for i = 1, n do\n        total = total + savings[i]\n\n        if savings[i] > maxDay then\n            maxDay = savings[i]\n        end\n    end\n\n    local reached = false\n    if total >= target then\n        reached = true\n    end\n\n    return total, maxDay, reached\nend",
       "test_cases": [
@@ -130,14 +109,7 @@
     },
     {
       "title": "Game Leaderboard System: Sorting, Top Three, and Entry Check",
-      "description": {
-        "difficulty": "Normal",
-        "background": "A game leaderboard stores existing player scores in scores. The system needs to sort the scores from high to low, take the top three, and decide whether newScore can enter the top three.",
-        "task": "Complete leaderboard sorting, top-three extraction, and new-score entry checking.",
-        "input": "One array scores, one number n, and one number newScore. n is guaranteed to be at least 3.",
-        "output": "Return first place, second place, third place, and whether newScore can enter the top three in order.",
-        "hint": "After sorting, third place is the key boundary for entry."
-      },
+      "description": "## Difficulty\n\nNormal\n\n## Background\n\nA game leaderboard stores existing player scores in scores. The system needs to sort the scores from high to low, take the top three, and decide whether newScore can enter the top three.\n\n## Task\n\nComplete leaderboard sorting, top-three extraction, and new-score entry checking.\n\n## Input\n\nOne array scores, one number n, and one number newScore. n is guaranteed to be at least 3.\n\n## Output\n\nReturn first place, second place, third place, and whether newScore can enter the top three in order.\n\n## Hint\n\nAfter sorting, third place is the key boundary for entry.",
       "starter_code": "function solution(scores, n, newScore)\n    return 0, 0, 0, false\nend",
       "reference_code": "function solution(scores, n, newScore)\n    for i = 1, n - 1 do\n        local maxIndex = i\n\n        for j = i + 1, n do\n            if scores[j] > scores[maxIndex] then\n                maxIndex = j\n            end\n        end\n\n        local temp = scores[i]\n        scores[i] = scores[maxIndex]\n        scores[maxIndex] = temp\n    end\n\n    local canEnter = false\n    if newScore >= scores[3] then\n        canEnter = true\n    end\n\n    return scores[1], scores[2], scores[3], canEnter\nend",
       "test_cases": [
@@ -176,14 +148,7 @@
     },
     {
       "title": "Book Number Management System: Search, Sorting, and Classification",
-      "description": {
-        "difficulty": "Normal",
-        "background": "Book numbers in books are originally unordered. The administrator wants to know whether target originally exists, sort the numbers, and count how many numbers are odd and even.",
-        "task": "Find the original position of target, count odd and even numbers, and sort books from small to large.",
-        "input": "One array books, one number n, and one number target.",
-        "output": "Return the original target position, odd count, even count, and sorted books array in order. If target is not found, return 0 for the position.",
-        "hint": "Search and classification can be done first, and sorting can be done afterward."
-      },
+      "description": "## Difficulty\n\nNormal\n\n## Background\n\nBook numbers in books are originally unordered. The administrator wants to know whether target originally exists, sort the numbers, and count how many numbers are odd and even.\n\n## Task\n\nFind the original position of target, count odd and even numbers, and sort books from small to large.\n\n## Input\n\nOne array books, one number n, and one number target.\n\n## Output\n\nReturn the original target position, odd count, even count, and sorted books array in order. If target is not found, return 0 for the position.\n\n## Hint\n\nSearch and classification can be done first, and sorting can be done afterward.",
       "starter_code": "function solution(books, n, target)\n    return 0, 0, 0, books\nend",
       "reference_code": "function solution(books, n, target)\n    local position = 0\n    local oddCount = 0\n    local evenCount = 0\n\n    for i = 1, n do\n        if books[i] == target and position == 0 then\n            position = i\n        end\n\n        if books[i] % 2 == 0 then\n            evenCount = evenCount + 1\n        else\n            oddCount = oddCount + 1\n        end\n    end\n\n    for i = 1, n - 1 do\n        local minIndex = i\n\n        for j = i + 1, n do\n            if books[j] < books[minIndex] then\n                minIndex = j\n            end\n        end\n\n        local temp = books[i]\n        books[i] = books[minIndex]\n        books[minIndex] = temp\n    end\n\n    return position, oddCount, evenCount, books\nend",
       "test_cases": [
@@ -221,14 +186,7 @@
     },
     {
       "title": "Sports Day Results System: Best Result, Ranking, and Range Statistics",
-      "description": {
-        "difficulty": "Normal",
-        "background": "Sports day results are stored in the array scores. Higher scores rank earlier. The teacher wants to know the highest score, the rank of targetScore, and how many students are in the high, middle, and needs-improvement ranges.",
-        "task": "Count the range groups, sort scores from high to low, and find the first rank of targetScore.",
-        "input": "One array scores, one number n, and one number targetScore.",
-        "output": "Return the highest score, targetScore rank, high-score count, middle-score count, and needs-improvement count in order. If targetScore is not found, return 0 for the rank.",
-        "hint": "You can classify first, then sort and search for the rank."
-      },
+      "description": "## Difficulty\n\nNormal\n\n## Background\n\nSports day results are stored in the array scores. Higher scores rank earlier. The teacher wants to know the highest score, the rank of targetScore, and how many students are in the high, middle, and needs-improvement ranges.\n\n## Task\n\nCount the range groups, sort scores from high to low, and find the first rank of targetScore.\n\n## Input\n\nOne array scores, one number n, and one number targetScore.\n\n## Output\n\nReturn the highest score, targetScore rank, high-score count, middle-score count, and needs-improvement count in order. If targetScore is not found, return 0 for the rank.\n\n## Hint\n\nYou can classify first, then sort and search for the rank.",
       "starter_code": "function solution(scores, n, targetScore)\n    return 0, 0, 0, 0, 0\nend",
       "reference_code": "function solution(scores, n, targetScore)\n    local high = 0\n    local middle = 0\n    local low = 0\n\n    for i = 1, n do\n        if scores[i] >= 90 then\n            high = high + 1\n        elseif scores[i] >= 60 then\n            middle = middle + 1\n        else\n            low = low + 1\n        end\n    end\n\n    for i = 1, n - 1 do\n        for j = 1, n - i do\n            if scores[j] < scores[j + 1] then\n                local temp = scores[j]\n                scores[j] = scores[j + 1]\n                scores[j + 1] = temp\n            end\n        end\n    end\n\n    local best = scores[1]\n    local rank = 0\n\n    for i = 1, n do\n        if scores[i] == targetScore and rank == 0 then\n            rank = i\n        end\n    end\n\n    return best, rank, high, middle, low\nend",
       "test_cases": [
@@ -267,14 +225,7 @@
     },
     {
       "title": "Shopping Plan System: Find the Most Items Within Budget with the Least Leftover",
-      "description": {
-        "difficulty": "Challenge",
-        "background": "A store sells two products with prices priceA and priceB. A student has budget money and wants to buy as many total items as possible; if the total item count is tied, the student wants the smallest leftover money.",
-        "task": "Enumerate all purchase plans that do not exceed the budget and find the best plan.",
-        "input": "Three numbers: priceA, priceB, and budget.",
-        "output": "Return product A count, product B count, total item count, and leftover money in order.",
-        "hint": "Split the problem into enumerating plans, checking the budget, comparing quantity, and comparing leftover money."
-      },
+      "description": "## Difficulty\n\nChallenge\n\n## Background\n\nA store sells two products with prices priceA and priceB. A student has budget money and wants to buy as many total items as possible; if the total item count is tied, the student wants the smallest leftover money.\n\n## Task\n\nEnumerate all purchase plans that do not exceed the budget and find the best plan.\n\n## Input\n\nThree numbers: priceA, priceB, and budget.\n\n## Output\n\nReturn product A count, product B count, total item count, and leftover money in order.\n\n## Hint\n\nSplit the problem into enumerating plans, checking the budget, comparing quantity, and comparing leftover money.",
       "starter_code": "function solution(priceA, priceB, budget)\n    return 0, 0, 0, budget\nend",
       "reference_code": "function solution(priceA, priceB, budget)\n    local bestA = 0\n    local bestB = 0\n    local bestCount = 0\n    local bestLeft = budget\n\n    for a = 0, budget do\n        for b = 0, budget do\n            local cost = a * priceA + b * priceB\n\n            if cost <= budget then\n                local count = a + b\n                local left = budget - cost\n\n                if count > bestCount then\n                    bestCount = count\n                    bestLeft = left\n                    bestA = a\n                    bestB = b\n                elseif count == bestCount and left < bestLeft then\n                    bestLeft = left\n                    bestA = a\n                    bestB = b\n                end\n            end\n        end\n    end\n\n    return bestA, bestB, bestCount, bestLeft\nend",
       "test_cases": [
@@ -298,14 +249,7 @@
     },
     {
       "title": "Dice Possibility System: Count All Sums and Find the Most Frequent Result",
-      "description": {
-        "difficulty": "Challenge",
-        "background": "Two dice both have values from 1 to diceMax. The system needs to count how many times each possible sum appears and find the sum that appears most often.",
-        "task": "Enumerate all outcomes of the two dice, count each sum, and return the most frequent sum and its count.",
-        "input": "One number: diceMax.",
-        "output": "Return the most frequent sum and the number of times that sum appears, in order.",
-        "hint": "You can use an array to record how many times each sum appears, then find the largest count."
-      },
+      "description": "## Difficulty\n\nChallenge\n\n## Background\n\nTwo dice both have values from 1 to diceMax. The system needs to count how many times each possible sum appears and find the sum that appears most often.\n\n## Task\n\nEnumerate all outcomes of the two dice, count each sum, and return the most frequent sum and its count.\n\n## Input\n\nOne number: diceMax.\n\n## Output\n\nReturn the most frequent sum and the number of times that sum appears, in order.\n\n## Hint\n\nYou can use an array to record how many times each sum appears, then find the largest count.",
       "starter_code": "function solution(diceMax)\n    return 0, 0\nend",
       "reference_code": "function solution(diceMax)\n    local counts = {}\n\n    for sum = 2, diceMax * 2 do\n        counts[sum] = 0\n    end\n\n    for a = 1, diceMax do\n        for b = 1, diceMax do\n            local sum = a + b\n            counts[sum] = counts[sum] + 1\n        end\n    end\n\n    local bestSum = 2\n    local bestCount = counts[2]\n\n    for sum = 3, diceMax * 2 do\n        if counts[sum] > bestCount then\n            bestCount = counts[sum]\n            bestSum = sum\n        end\n    end\n\n    return bestSum, bestCount\nend",
       "test_cases": [
@@ -323,14 +267,7 @@
     },
     {
       "title": "Integrated Score Ranking System: Sorting, Tied Ranking, and Student Rank Search",
-      "description": {
-        "difficulty": "Challenge",
-        "background": "Each student in a class has an ID in ids and a score in scores. The teacher needs to sort students by score from high to low; if scores are equal, students share the same rank. Finally, the teacher needs to find the target student's score and rank.",
-        "task": "Sort student IDs and scores together, handle tied ranks, and return the target student's score and rank.",
-        "input": "One student ID array ids, one score array scores, one number n, and one number targetId.",
-        "output": "If the target student is found, return the target student's score and rank in order; if not found, return 0 and 0.",
-        "hint": "When sorting scores, the matching student IDs must be swapped with them. After sorting, calculate tied ranks from adjacent scores."
-      },
+      "description": "## Difficulty\n\nChallenge\n\n## Background\n\nEach student in a class has an ID in ids and a score in scores. The teacher needs to sort students by score from high to low; if scores are equal, students share the same rank. Finally, the teacher needs to find the target student's score and rank.\n\n## Task\n\nSort student IDs and scores together, handle tied ranks, and return the target student's score and rank.\n\n## Input\n\nOne student ID array ids, one score array scores, one number n, and one number targetId.\n\n## Output\n\nIf the target student is found, return the target student's score and rank in order; if not found, return 0 and 0.\n\n## Hint\n\nWhen sorting scores, the matching student IDs must be swapped with them. After sorting, calculate tied ranks from adjacent scores.",
       "starter_code": "function solution(ids, scores, n, targetId)\n    return 0, 0\nend",
       "reference_code": "function solution(ids, scores, n, targetId)\n    for i = 1, n - 1 do\n        local maxIndex = i\n\n        for j = i + 1, n do\n            if scores[j] > scores[maxIndex] then\n                maxIndex = j\n            end\n        end\n\n        local tempScore = scores[i]\n        scores[i] = scores[maxIndex]\n        scores[maxIndex] = tempScore\n\n        local tempId = ids[i]\n        ids[i] = ids[maxIndex]\n        ids[maxIndex] = tempId\n    end\n\n    local currentRank = 1\n\n    for i = 1, n do\n        if i == 1 then\n            currentRank = 1\n        elseif scores[i] < scores[i - 1] then\n            currentRank = i\n        end\n\n        if ids[i] == targetId then\n            return scores[i], currentRank\n        end\n    end\n\n    return 0, 0\nend",
       "test_cases": [

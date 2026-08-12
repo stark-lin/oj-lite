@@ -396,9 +396,6 @@ func handleLessonError(c *gin.Context, err error) bool {
 	case errors.Is(err, errQuestionDuplicateID):
 		httpx.AbortValidation(c, "question id must be unique within lesson", gin.H{"field": "questions[].id"})
 		return true
-	case errors.Is(err, errInvalidDescription):
-		httpx.AbortValidation(c, "description must be a valid JSON object", gin.H{"field": "questions[].description"})
-		return true
 	case errors.Is(err, errInvalidTestCases):
 		httpx.AbortValidation(c, "test_cases must be valid JSON", gin.H{"field": "questions[].test_cases"})
 		return true

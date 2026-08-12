@@ -91,8 +91,11 @@ Public login and local admin APIs:
 - `GET /admin`: local admin page; loopback only.
 - `GET /teacher`: teacher page; requires a valid teacher session, otherwise redirects to `/`.
 - `GET /student`: student page; requires a valid student session, otherwise redirects to `/`.
-- `GET /assets/app.css`: embedded page stylesheet.
-- `GET /assets/app.js`: embedded page script.
+- `GET /assets/app.css`: embedded shared design tokens, base styles, and component styles.
+- `GET /assets/app.js`: embedded shared page script.
+- `GET /assets/components.js`: embedded shared UI renderers and resizer interactions; pages load it after `app.js`.
+- `GET /assets/pages/{admin,login,student,teacher}.css`: page-specific layout and responsive styles.
+- `GET /assets/{admin,login,student,teacher}.js`: embedded page-specific scripts.
 
 ## Auth API
 
@@ -350,11 +353,7 @@ Admin is the only current write entry point for lessons and questions. A lesson 
     {
       "id": 10,
       "title": "Sum",
-      "description": {
-        "statement": "Return the sum of two numbers.",
-        "input": "Two numbers a and b.",
-        "output": "a + b"
-      },
+      "description": "## Statement\n\nReturn the sum of two numbers.\n\n## Input\n\nTwo numbers a and b.\n\n## Output\n\na + b",
       "starter_code": "function solution(a, b)\n    return 0\nend",
       "reference_code": "function solution(a, b)\n    return a + b\nend",
       "test_cases": [
@@ -373,7 +372,7 @@ Notes:
 - Omit `id` or send `0` when creating a new question.
 - When replacing a lesson, any question with an `id` must already belong to that lesson.
 - When replacing a lesson, old questions missing from the request are removed from that lesson. If a removed question is no longer used by any lesson, it is deleted from `question`.
-- Question `description` must be a JSON object.
+- Question `description` is a Markdown string.
 - `test_cases` must be valid JSON. The judge supports array cases, `{"input":[...]}`, `{"args":[...]}`, and scalar single-value cases.
 
 Validation:
@@ -401,9 +400,7 @@ Validation:
           "lesson_question_id": 100,
           "id": 10,
           "title": "Sum",
-          "description": {
-            "statement": "Return the sum of two numbers."
-          },
+          "description": "## Statement\n\nReturn the sum of two numbers.",
           "starter_code": "function solution(a, b)\n    return 0\nend",
           "reference_code": "function solution(a, b)\n    return a + b\nend",
           "test_cases": [
@@ -798,9 +795,7 @@ Description: read one question in the current lesson. Only student-visible field
       "id": 10,
       "lesson_question_id": 100,
       "title": "Sum",
-      "description": {
-        "statement": "Return the sum of two numbers."
-      },
+      "description": "## Statement\n\nReturn the sum of two numbers.",
       "starter_code": "function solution(a, b)\n    return 0\nend",
       "sort_order": 1,
       "created_at": "2026-04-19T00:00:00.000Z"
